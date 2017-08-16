@@ -10,6 +10,8 @@
 
 Report generation using jasper reports from PHP.  
 
+> EARLY ALPHA WORK !!! DO NOT USE YET
+
 ## Features
 
 
