@@ -1,0 +1,69 @@
+site_name: 'soluble-jasper'
+site_description: 'Jasper reports in PHP'
+site_author: 'Sébastien Vanvelthem'
+site_url: http://docs.soluble.io/soluble-jasper/
+
+# Repository
+repo_name: 'soluble-jasper'
+repo_url: 'https://github.com/belgattitude/soluble-jasper'
+
+# Copyright
+copyright: 'Copyright &copy; 2017 Sébastien Vanvelthem'
+
+docs_dir: doc
+site_dir: build/doc
+pages:
+    - { 'Introduction': index.md }
+
+
+# Documentation and theme
+theme: 'material'
+
+# Options
+extra:
+  logo: 'images/logo.svg'
+  palette:
+    primary: 'deep-orange'
+    accent: 'light blue'
+  font:
+    text: 'Roboto'
+    code: 'Roboto Mono'
+  # If extra_css defined here ->
+  # -> WARNING -  Config value: 'extra_css'.
+  #    This behavior is deprecated. In version 1.0 and later they will need to be explicitly listed in the 'extra_css' config setting.
+  #extra_css:
+  #  - 'stylesheets/extra.css'
+  #  - 'stylesheets/monokai.css'
+  # Has been modev out of 'extra' section, see extra_css below
+  social:
+    - type: 'github'
+      link: 'https://github.com/belgattitude/soluble-jasper'
+
+extra_css:
+  - 'assets/extra.css'
+  - 'assets/monokai.css'
+
+google_analytics:
+  - 'UA-92890300-1'
+  - 'auto'
+
+# Extensions
+markdown_extensions:
+  - markdown.extensions.admonition
+  - markdown.extensions.codehilite(guess_lang=false)
+  - markdown.extensions.footnotes
+  - markdown.extensions.meta
+  - markdown.extensions.toc(permalink=true)
+  - pymdownx.arithmatex
+  - pymdownx.betterem(smart_enable=all)
+  - pymdownx.caret
+  - pymdownx.critic
+  - pymdownx.emoji:
+      emoji_generator: !!python/name:pymdownx.emoji.to_svg
+  - pymdownx.inlinehilite
+  - pymdownx.magiclink
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.superfences
+  - pymdownx.tasklist(custom_checkbox=true)
+  - pymdownx.tilde

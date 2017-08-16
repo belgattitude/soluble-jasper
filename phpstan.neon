@@ -1,0 +1,7 @@
+parameters:
+	fileExtensions:
+		- php
+		- dist
+	#reportUnmatchedIgnoredErrors: true
+	#ignoreErrors:
+	#	- '#Undefined variable: \$app#'
