@@ -25,4 +25,4 @@ script:
 after_script:
   - if [[ $SEND_COVERAGE == true ]]; then wget https://scrutinizer-ci.com/ocular.phar; fi
   - if [[ $SEND_COVERAGE == true ]]; then php ocular.phar code-coverage:upload --format=php-clover coverage.xml; fi
-  #- if [[ $SEND_COVERAGE == true ]]; then bash <(curl -s https://codecov.io/bash); fi
+  - if [[ $SEND_COVERAGE == true ]]; then bash <(curl -s https://codecov.io/bash); fi
