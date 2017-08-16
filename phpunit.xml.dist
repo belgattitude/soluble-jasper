@@ -11,11 +11,9 @@
 
 
     <testsuites>
-
         <testsuite name="jasper">
             <directory>./tests/JasperTest</directory>
         </testsuite>
-
     </testsuites>
 
     <filter>

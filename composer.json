@@ -53,7 +53,7 @@
         "test": "vendor/bin/phpunit",
         "cs-check": "vendor/bin/php-cs-fixer --diff --dry-run -v fix",
         "cs-fix": "vendor/bin/php-cs-fixer -v fix",
-        "phpstan": "vendor/bin/phpstan analyse -l max -c phpstan.neon src",
+        "phpstan": "vendor/bin/phpstan analyse -l max -c phpstan.neon src tests/JasperTest",
         "phpds": "vendor/bin/pds-skeleton validate",
         "build-doc": "mkdocs build"
     },
@@ -61,6 +61,6 @@
         "monolog/monolog": "PSR-3 comptatible logger"
     },
     "archive": {
-        "exclude": [".sami.php", "phpstan.neon", "test", "doc", ".travis", ".travis.yml", ".codeclimate.yml", ".coveralls.yml", ".scrutinizer.yml", ".php_cs", ".gitignore", "phpcs.xml"]
+        "exclude": [".sami.php", "phpstan.neon", "tests", "docs", ".travis", ".travis.yml", ".codeclimate.yml", ".coveralls.yml", ".scrutinizer.yml", ".php_cs", ".gitignore", "phpcs.xml"]
     }
 }
