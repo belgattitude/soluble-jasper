@@ -1,10 +1,12 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Soluble\Jasper;
 
-class JasperReport {
-
-    public function __construct() {
-
+class JasperReport
+{
+    public function __construct()
+    {
     }
 }
