@@ -1,0 +1,28 @@
+language: php
+sudo: required
+dist: trusty
+group: edge
+
+matrix:
+  include:
+    - php: 7.1
+      env:
+        - EXECUTE_TEST_COVERALLS=true
+        - SEND_COVERAGE=true
+
+before_script:
+  - java -version
+  - mkdir build
+  - mkdir -p build/logs
+  - mkdir -p test/logs
+  - composer install
+    
+script:
+  - ./vendor/bin/phpunit -v --coverage-clover=coverage.xml
+  - ./vendor/bin/php-cs-fixer --diff --dry-run -v fix
+  - composer phpstan
+
+after_script:
+  - if [[ $SEND_COVERAGE == true ]]; then wget https://scrutinizer-ci.com/ocular.phar; fi
+  - if [[ $SEND_COVERAGE == true ]]; then php ocular.phar code-coverage:upload --format=php-clover coverage.xml; fi
+  - if [[ $SEND_COVERAGE == true ]]; then bash <(curl -s https://codecov.io/bash); fi
