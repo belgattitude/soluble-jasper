@@ -41,7 +41,8 @@
         "monolog/monolog": "^1.21.0",
         "phpstan/phpstan": "^0.8.2",
         "roave/security-advisories": "dev-master",
-        "pds/skeleton": "@dev"
+        "pds/skeleton": "@dev",
+        "smalot/pdfparser": "^0.10.0"
     },
     "scripts": {
         "check": [
