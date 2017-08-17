@@ -2,6 +2,7 @@ parameters:
 	fileExtensions:
 		- php
 		- dist
-	#reportUnmatchedIgnoredErrors: true
-	#ignoreErrors:
-	#	- '#Undefined variable: \$app#'
+	reportUnmatchedIgnoredErrors: true
+	ignoreErrors:
+		- '#Call to an undefined method Soluble\\Japha\\Interfaces\\JavaClass#'
+		- '#Call to an undefined method Soluble\\Japha\\Interfaces\\JavaObject#'

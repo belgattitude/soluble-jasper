@@ -1,0 +1,57 @@
+/**
+ * Gradle init script build jasper reports servlet on Travis
+ *
+ * @author Vanvelthem Sébastien
+ */
+
+initscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+    }
+}
+
+allprojects {
+    apply plugin: 'java'
+    repositories {
+        mavenCentral()
+        maven {
+            url 'http://jaspersoft.artifactoryonline.com/jaspersoft/third-party-ce-artifacts/'
+        }
+        maven {
+            url 'https://jaspersoft.artifactoryonline.com/jaspersoft/jr-ce-releases'
+        }
+    }
+    dependencies {
+        /**
+         * Jasper report base (required)
+         */
+        compile 'net.sf.jasperreports:jasperreports:6.+'
+        runtime 'net.sf.jasperreports:jasperreports-fonts:6.+'
+        runtime 'net.sf.jasperreports:jasperreports-functions:6.+'
+
+        /**
+         * Jasper report complements (feel free to comment)
+         */
+        runtime 'net.sourceforge.barbecue:barbecue:1.5-beta1'
+        runtime 'net.sf.barcode4j:barcode4j:2.1'
+        runtime 'org.apache.poi:poi:3.+'
+        runtime 'org.apache.poi:poi-ooxml:3.16'
+
+        /**
+         * Jasper report language support (feel free to comment)
+         *   Note that groovy is a must for jasper... where javascript
+         *   (rhino) can be removed if not used
+         */
+        runtime 'org.codehaus.groovy:groovy-all:2.4.+'
+        runtime 'org.mozilla:rhino:1.7+'
+
+        /**
+         * Other helpful libraries oy might need
+         * Add as needed
+         */
+        runtime 'mysql:mysql-connector-java:6+'
+
+    }
+}

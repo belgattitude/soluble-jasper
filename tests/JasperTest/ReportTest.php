@@ -1,0 +1,81 @@
+<?php
+
+declare(strict_types=1);
+
+namespace JasperTest;
+
+use Soluble\Jasper\Engine\JasperCompileManagerProxy;
+use Soluble\Jasper\Report;
+use PHPUnit\Framework\TestCase;
+use Soluble\Jasper\ReportRunnerJapha;
+
+class ReportTest extends TestCase
+{
+    /**
+     * @var string
+     */
+    protected $report;
+
+    public function setUp()
+    {
+        $this->report = \JasperTestsContainer::getReportBaseDir() . '/MyReports/01_report_test_wavebook_cover.jrxml';
+    }
+
+    public function testGetReportFile()
+    {
+        $report = new Report($this->report);
+        $this->assertFileEquals($this->report, $report->getReportFile());
+    }
+
+    public function testTemp()
+    {
+        $ba = \JasperTestsContainer::getJavaBridgeAdapter();
+        $report = new Report($this->report);
+
+        //$runner = new ReportRunnerJapha($ba);
+        //$compiled = $runner->compileReport($report);
+        //echo $ba->getDriver()->inspect($compiled);
+
+        $reportFile = $report->getReportFile();
+
+        $compileManager = new JasperCompileManagerProxy($ba);
+        $compiled = $compileManager->compileReport($reportFile);
+
+        // params
+        $params = $ba->java('java.util.HashMap', []);
+
+        // class Loader
+        $jpath = $ba->java('java.io.File', dirname($report->getReportFile()));
+        $url = $jpath->toUrl(); // Java.net.URL
+        $urls = [$url];
+
+        $classLoader = $ba->java('java.net.URLClassLoader', $urls);
+        $params->put('REPORT_CLASS_LOADER', $classLoader);
+
+        // Setting the class loader for the resource bundle
+        // Assuming they are in the same directory as
+        // the report file.
+        /*
+        $report_resource_bundle = $report->getResourceBundle();
+        if ($report_resource_bundle != '') {
+            $ResourceBundle = new JavaClass('java.util.ResourceBundle');
+            $rb = $ResourceBundle->getBundle($report_resource_bundle, $locale, $classLoader);
+            $this->params->put('REPORT_RESOURCE_BUNDLE', $rb);
+        }*/
+
+        $fillManager = $ba->javaClass('net.sf.jasperreports.engine.JasperFillManager');
+        $emptyDataSource = $ba->java('net.sf.jasperreports.engine.JREmptyDataSource');
+        $filled = $fillManager->fillReport($compiled, $params, $emptyDataSource);
+
+        $exportManager = $ba->javaClass('net.sf.jasperreports.engine.JasperExportManager');
+
+        $output_pdf = \JasperTestsContainer::getOutputDir() . '/test.pdf';
+        if (file_exists($output_pdf)) {
+            unlink($output_pdf);
+        }
+
+        $exportManager->exportReportToPdfFile($filled, $output_pdf);
+        @chmod($output_pdf, 0666);
+        $this->assertFileExists($output_pdf);
+    }
+}

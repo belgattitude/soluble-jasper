@@ -1,4 +1,4 @@
-<phpunit bootstrap="./vendor/autoload.php"
+<phpunit bootstrap="../vendor/autoload.php"
              backupGlobals="false"
              backupStaticAttributes="false"
              colors="true"
@@ -12,7 +12,7 @@
 
     <testsuites>
         <testsuite name="jasper">
-            <directory>./tests/JasperTest</directory>
+            <directory>../tests/JasperTest</directory>
         </testsuite>
     </testsuites>
 
@@ -27,20 +27,18 @@
         <!--
         PHPJavaBridge servlet url
         -->
-        <server name="JAVABRIDGE_URL" value="http://127.0.0.1:8080/JasperReports/servlet.phpjavabridge" />
-        <!--
         <server name="JAVABRIDGE_URL" value="http://127.0.0.1:8083/servlet.phpjavabridge" />
-        -->
+
 
     </php>
 
 
     <logging>
-        <log type="tap" target="build/report.tap"/>
-        <log type="junit" target="build/report.junit.xml"/>
-        <log type="coverage-html" target="build/coverage" charset="UTF-8" yui="true" highlight="true"/>
-        <log type="coverage-text" target="build/coverage.txt"/>
-        <log type="coverage-clover" target="build/logs/clover.xml"/>
+        <log type="tap" target="../build/report.tap"/>
+        <log type="junit" target="../build/report.junit.xml"/>
+        <log type="coverage-html" target="../build/coverage" charset="UTF-8" yui="true" highlight="true"/>
+        <log type="coverage-text" target="../build/coverage.txt"/>
+        <log type="coverage-clover" target="../build/logs/clover.xml"/>
     </logging>
 
 </phpunit>

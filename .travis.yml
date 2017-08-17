@@ -11,14 +11,21 @@ matrix:
         - SEND_COVERAGE=true
 
 before_script:
-  - java -version
-  - mkdir build
+  # Step 1: somme needed directories
   - mkdir -p build/logs
   - mkdir -p test/logs
+  # Step 2: regular composer install
   - composer install
+  # Step 3: Ensure a javabridge server is working
+  # Step 3.1: Build a servlet (war) with jasper/mysql/javabridge...
+  - .travis/build_javabridge_jasper_war.sh
+  # Step 3.2: Run the servlet
+  - .travis/run_javabridge_jasper.sh
+
+
     
 script:
-  - ./vendor/bin/phpunit -v --coverage-clover=coverage.xml
+  - ./vendor/bin/phpunit -v -c .travis/phpunit.travis.xml --coverage-clover=coverage.xml
   - ./vendor/bin/php-cs-fixer --diff --dry-run -v fix
   - composer phpstan
 

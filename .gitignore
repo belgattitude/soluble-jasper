@@ -12,7 +12,12 @@ composer.lock
 /nbproject
 /build
 /cache
+/tests/output
+/tests/reports/.metadata
 .travis/downloads
 .travis/target
+.travis/*.war
+.travis/*.jar
 .travis/*.log
 .travis/*.pid
+
