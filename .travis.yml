@@ -22,7 +22,7 @@ before_script:
   # Step 3.2: Run the servlet
   - .travis/run_javabridge_jasper.sh
   # Step 3.3: sleep a bit to let the server starts
-  - sleep(5)
+  - sleep 5
   - ls -la .travis/
   - cat .travis/*.log
   - cat .travis/*.pid
