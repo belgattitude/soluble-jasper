@@ -14,7 +14,8 @@ composer.lock
 /cache
 /tests/output
 /tests/reports/.metadata
-.travis/downloads
+/tests/reports/MyReports/.classpath
+.travis/downloads/*
 .travis/target
 .travis/*.war
 .travis/*.jar
