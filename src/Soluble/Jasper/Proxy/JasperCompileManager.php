@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Soluble\Jasper\Engine;
+namespace Soluble\Jasper\Proxy;
 
 use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
 use Soluble\Japha\Interfaces\JavaObject;
 
-class JasperCompileManagerProxy
+class JasperCompileManager implements RemoteJavaObjectProxyInterface
 {
     /**
      * @var BridgeAdapter
@@ -35,5 +35,10 @@ class JasperCompileManagerProxy
         $compiledReport = $this->compileManager->compileReport($reportFile);
 
         return $compiledReport;
+    }
+
+    public function getJavaProxiedObject(): JavaObject
+    {
+        return $this->compileManager;
     }
 }

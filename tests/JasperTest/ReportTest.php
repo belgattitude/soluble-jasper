@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace JasperTest;
 
-use Soluble\Jasper\Engine\JasperCompileManagerProxy;
+use Soluble\Jasper\Proxy\JasperCompileManager;
 use Soluble\Jasper\Report;
 use PHPUnit\Framework\TestCase;
 use Soluble\Jasper\ReportRunnerJapha;
@@ -38,7 +38,7 @@ class ReportTest extends TestCase
 
         $reportFile = $report->getReportFile();
 
-        $compileManager = new JasperCompileManagerProxy($ba);
+        $compileManager = new JasperCompileManager($ba);
         $compiled = $compileManager->compileReport($reportFile);
 
         // params
@@ -83,9 +83,9 @@ class ReportTest extends TestCase
 
         // open the pdf and check for text
         $parser = new \Smalot\PdfParser\Parser();
-        $pdf    = $parser->parseFile($output_pdf);
+        $pdf = $parser->parseFile($output_pdf);
 
-        $pages  = $pdf->getPages();
+        $pages = $pdf->getPages();
 
         $text = '';
         // Loop over each page to extract text.
@@ -93,8 +93,7 @@ class ReportTest extends TestCase
             $text .= $page->getText();
         }
 
-        $this->assertContains("Soluble Jasper", $text);
-        $this->assertContains("Generated from unit tests", $text);
-
+        $this->assertContains('Soluble Jasper', $text);
+        $this->assertContains('Generated from unit tests', $text);
     }
 }

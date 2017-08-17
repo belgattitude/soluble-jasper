@@ -46,8 +46,7 @@ runJavaBridgeServerInBackground() {
     CMD="${JAVA_BIN} -jar ${WEBAPP_RUNNER_JAR} ${JASPER_BRIDGE_WAR} --port ${WEBAPP_RUNNER_PORT}";
 
     # Starting in background
-    #eval "${CMD} >${WEBAPP_RUNNER_LOGFILE} 2>&1 &disown; echo \$! > $WEBAPP_RUNNER_PIDFILE"
-    eval "${CMD}"
+    eval "${CMD} >${WEBAPP_RUNNER_LOGFILE} 2>&1 &disown; echo \$! > $WEBAPP_RUNNER_PIDFILE"
 
     SERVER_PID=`cat $WEBAPP_RUNNER_PIDFILE`;
 
