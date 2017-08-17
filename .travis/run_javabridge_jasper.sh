@@ -33,10 +33,21 @@ runJavaBridgeServerInBackground() {
 
     echo "[*] Starting JavaBridge server with webapp-runner (in background)";
 
+    if [ ! -f $JASPER_BRIDGE_WAR ]; then
+        echo "[*] Error: ${JASPER_BRIDGE_WAR} not present";
+        exit 10;
+    fi;
+
+    if [ ! -f $WEBAPP_RUNNER_JAR ]; then
+        echo "[*] Error: ${WEBAPP_RUNNER_JAR} not present";
+        exit 11;
+    fi;
+
     CMD="${JAVA_BIN} -jar ${WEBAPP_RUNNER_JAR} ${JASPER_BRIDGE_WAR} --port ${WEBAPP_RUNNER_PORT}";
 
     # Starting in background
-    eval "${CMD} >${WEBAPP_RUNNER_LOGFILE} 2>&1 &disown; echo \$! > $WEBAPP_RUNNER_PIDFILE"
+    #eval "${CMD} >${WEBAPP_RUNNER_LOGFILE} 2>&1 &disown; echo \$! > $WEBAPP_RUNNER_PIDFILE"
+    eval "${CMD}"
 
     SERVER_PID=`cat $WEBAPP_RUNNER_PIDFILE`;
 

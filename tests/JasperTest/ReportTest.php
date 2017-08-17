@@ -52,6 +52,9 @@ class ReportTest extends TestCase
         $classLoader = $ba->java('java.net.URLClassLoader', $urls);
         $params->put('REPORT_CLASS_LOADER', $classLoader);
 
+        $params->put('BookTitle', 'Soluble Jasper');
+        $params->put('BookSubTitle', 'Generated from unit tests');
+
         // Setting the class loader for the resource bundle
         // Assuming they are in the same directory as
         // the report file.
@@ -77,5 +80,21 @@ class ReportTest extends TestCase
         $exportManager->exportReportToPdfFile($filled, $output_pdf);
         @chmod($output_pdf, 0666);
         $this->assertFileExists($output_pdf);
+
+        // open the pdf and check for text
+        $parser = new \Smalot\PdfParser\Parser();
+        $pdf    = $parser->parseFile($output_pdf);
+
+        $pages  = $pdf->getPages();
+
+        $text = '';
+        // Loop over each page to extract text.
+        foreach ($pages as $page) {
+            $text .= $page->getText();
+        }
+
+        $this->assertContains("Soluble Jasper", $text);
+        $this->assertContains("Generated from unit tests", $text);
+
     }
 }
