@@ -1,0 +1,7 @@
+downloads/*
+!downloads/.gitkeep
+target
+*.war
+*.jar
+*.log
+*.pid

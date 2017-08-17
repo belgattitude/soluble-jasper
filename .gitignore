@@ -15,10 +15,4 @@ composer.lock
 /tests/output
 /tests/reports/.metadata
 /tests/reports/MyReports/.classpath
-.travis/downloads/*
-.travis/target
-.travis/*.war
-.travis/*.jar
-.travis/*.log
-.travis/*.pid
 
