@@ -1,4 +1,7 @@
 composer.lock
+/vendor
+# For various tools
+.php_cs.cache
 .buildpath
 .DS_Store
 .*.sw*
@@ -6,13 +9,20 @@ composer.lock
 .project
 .settings/
 .idea
-.php_cs.cache
-/phpunit*.xml
-/vendor
 /nbproject
+# For PHPUnit
 /build
-/cache
-/tests/output
+/phpunit*.xml
+# For Tests
+/tests/output/*
+!/tests/output/.gitkeep
 /tests/reports/.metadata
 /tests/reports/MyReports/.classpath
+# For Travis
+.travis/downloads/*
+!.travis/downloads/.gitkeep
+.travis/target
+.travis/*.war
+.travis/*.log
+.travis/*.pid
 
