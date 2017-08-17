@@ -7,7 +7,7 @@ namespace Soluble\Jasper\Proxy;
 use Soluble\Japha\Interfaces\JavaObject;
 use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
 
-class JREmptyDataSource implements JRDataSourceInterface
+class JasperReport implements RemoteJavaObjectProxyInterface
 {
     /**
      * @var BridgeAdapter
@@ -17,16 +17,16 @@ class JREmptyDataSource implements JRDataSourceInterface
     /**
      * @var \Soluble\Japha\Interfaces\JavaObject
      */
-    protected $jrEmptyDataSource;
+    protected $jasperReport;
 
     public function __construct(BridgeAdapter $bridgeAdapter)
     {
         $this->ba = $bridgeAdapter;
-        $this->jrEmptyDataSource = $this->ba->java('net.sf.jasperreports.engine.JREmptyDataSource');
+        $this->jasperReport = $this->ba->java('net.sf.jasperreports.engine.JasperReport');
     }
 
     public function getJavaProxiedObject(): JavaObject
     {
-        return $this->jrEmptyDataSource;
+        return $this->jasperReport;
     }
 }

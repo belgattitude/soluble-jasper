@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace JasperTest;
 
 use Soluble\Jasper\Proxy\JasperCompileManager;
+use Soluble\Jasper\Proxy\JasperFillManager;
+use Soluble\Jasper\Proxy\JREmptyDataSource;
 use Soluble\Jasper\Report;
 use PHPUnit\Framework\TestCase;
 use Soluble\Jasper\ReportRunnerJapha;
@@ -66,8 +68,9 @@ class ReportTest extends TestCase
             $this->params->put('REPORT_RESOURCE_BUNDLE', $rb);
         }*/
 
-        $fillManager = $ba->javaClass('net.sf.jasperreports.engine.JasperFillManager');
-        $emptyDataSource = $ba->java('net.sf.jasperreports.engine.JREmptyDataSource');
+        $fillManager = new JasperFillManager($ba);
+        $emptyDataSource = new JREmptyDataSource($ba);
+
         $filled = $fillManager->fillReport($compiled, $params, $emptyDataSource);
 
         $exportManager = $ba->javaClass('net.sf.jasperreports.engine.JasperExportManager');
