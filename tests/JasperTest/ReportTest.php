@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace JasperTest;
 
-use Soluble\Jasper\Exception\MissingReportFileException;
+use Soluble\Jasper\Exception\ReportFileNotFoundException;
 use Soluble\Jasper\Proxy\V6\JasperCompileManager;
 use Soluble\Jasper\Proxy\V6\JasperFillManager;
 use Soluble\Jasper\Proxy\V6\JREmptyDataSource;
@@ -25,7 +25,7 @@ class ReportTest extends TestCase
 
     public function testConstructThrowsMissingReportFileException()
     {
-        $this->expectException(MissingReportFileException::class);
+        $this->expectException(ReportFileNotFoundException::class);
         new Report('/sdkfjlksdjf/sdfsdfs.jrxml');
     }
 

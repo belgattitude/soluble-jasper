@@ -49,4 +49,9 @@ class JasperTestsFactories
     {
         return self::getReportBaseDir() . DIRECTORY_SEPARATOR . self::defaultReportTestFile;
     }
+
+    public static function getBrokenXMLReportFile(): string
+    {
+        return self::getReportBaseDir() . DIRECTORY_SEPARATOR . '02_report_test_invalid_broken_xml.jrxml';
+    }
 }

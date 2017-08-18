@@ -22,6 +22,12 @@ class ReportRunnerFactoryTest extends TestCase
         $this->bridgeAdapter = \JasperTestsFactories::getJavaBridgeAdapter();
     }
 
+    public function testGetJasperReportRunner()
+    {
+        $jasperRunner = ReportRunnerFactory::getJasperReportRunner($this->bridgeAdapter);
+        $this->assertTrue(true);
+    }
+
     public function testInvoke()
     {
         $reportRunner = (new ReportRunnerFactory())($this->bridgeAdapter);

@@ -7,6 +7,7 @@ namespace Soluble\Jasper\ReportRunner;
 use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
 use Soluble\Japha\Interfaces\JavaObject;
 use Soluble\Jasper\Report;
+use Soluble\Jasper\Proxy\V6 as Proxy;
 
 class JasperReportRunner implements ReportRunnerInterface
 {
@@ -27,9 +28,12 @@ class JasperReportRunner implements ReportRunnerInterface
      */
     public function compileReport(Report $report): JavaObject
     {
-        $reportFile = $report->getReportFile();
-        $compileManager = $this->ba->javaClass('net.sf.jasperreports.engine.JasperCompileManager');
-        $compiledReport = $compileManager->compileReport($reportFile);
+        $compileManager = new Proxy\JasperCompileManager($this->ba);
+        try {
+            $compiledReport = $compileManager->compileReport($report->getReportFile());
+        } catch (\Exception $e) {
+            throw $e;
+        }
 
         return $compiledReport;
     }

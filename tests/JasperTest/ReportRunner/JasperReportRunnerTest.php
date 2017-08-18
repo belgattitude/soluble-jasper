@@ -31,7 +31,6 @@ class JasperReportRunnerTest extends TestCase
     public function testCompile()
     {
         $jasperRunner = new JasperReportRunner($this->bridgeAdapter);
-
         $compiled = $jasperRunner->compileReport($this->report);
         $this->assertInstanceOf(JavaObject::class, $compiled);
     }
