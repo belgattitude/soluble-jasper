@@ -5,14 +5,37 @@ declare(strict_types=1);
 namespace Soluble\Jasper;
 
 use ArrayObject;
+use Soluble\Jasper\Exception\InvalidArgumentException;
 
 class ReportParams implements \ArrayAccess
 {
+    /**
+     * @var ArrayObject
+     */
     protected $params;
 
-    public function __construct()
+    /**
+     * ReportParams constructor.
+     *
+     * @param iterable $params
+     *
+     * @throws \Soluble\Jasper\Exception\InvalidArgumentException
+     */
+    public function __construct(iterable $params = [])
     {
         $this->params = new ArrayObject();
+        $current_key = '';
+        try {
+            foreach ($params as $key => $value) {
+                $current_key = $key;
+                $this->offsetSet($key, $value);
+            }
+        } catch (InvalidArgumentException $e) {
+            throw new InvalidArgumentException(sprintf(
+                'Cannot construct ReportParams from provided $params, all keys must be non-empty strings (key: %s)',
+                $current_key
+            ));
+        }
     }
 
     /**
@@ -65,8 +88,9 @@ class ReportParams implements \ArrayAccess
         if (!is_string($offset)) {
             throw new Exception\InvalidArgumentException(
                 sprintf(
-                    'Report parameters must be a string (type: %s)',
-                    gettype($offset)
+                    'Report parameters must be a string (type: %s%s)',
+                    gettype($offset),
+                    is_scalar($offset) ? ', value:' . (string) $offset : ''
                 )
             );
         } elseif (trim($offset) === '') {

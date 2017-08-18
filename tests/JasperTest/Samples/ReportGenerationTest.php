@@ -10,9 +10,10 @@ use Soluble\Jasper\Proxy\V6\JREmptyDataSource;
 use Soluble\Jasper\Report;
 use PHPUnit\Framework\TestCase;
 use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
+use Soluble\Jasper\ReportParams;
 use Soluble\Jasper\ReportRunnerFactory;
 
-class ReportGeneration extends TestCase
+class ReportGenerationTest extends TestCase
 {
     /**
      * @var BridgeAdapter
@@ -33,6 +34,8 @@ class ReportGeneration extends TestCase
 
         // Step 1: Compile
         $compiled = $runner->compileReport($report);
+
+        $reportParams = new ReportParams();
 
         // Step 2: Prepare report params
         $params = $this->ba->java('java.util.HashMap', []);

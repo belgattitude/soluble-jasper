@@ -14,6 +14,12 @@ class ReportParamsTest extends TestCase
     {
     }
 
+    public function testContructorThrowsInvalidArgumentException()
+    {
+        $this->expectException(InvalidArgumentException::class);
+        new ReportParams(['cool', 'hello', 'test' => 'help']);
+    }
+
     public function testArrayAccess()
     {
         $p = new ReportParams();
