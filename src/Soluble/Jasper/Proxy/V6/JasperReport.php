@@ -26,6 +26,9 @@ class JasperReport implements RemoteJavaObjectProxyInterface
         $this->jasperReport = $this->ba->java('net.sf.jasperreports.engine.JasperReport');
     }
 
+    /**
+     * @return JavaObject Java('net.sf.jasperreports.engine.JasperReport')
+     */
     public function getJavaProxiedObject(): JavaObject
     {
         return $this->jasperReport;

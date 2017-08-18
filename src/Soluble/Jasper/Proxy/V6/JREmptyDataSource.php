@@ -25,6 +25,9 @@ class JREmptyDataSource implements JRDataSourceInterface
         $this->jrEmptyDataSource = $this->ba->java('net.sf.jasperreports.engine.JREmptyDataSource');
     }
 
+    /**
+     * @return JavaObject Java('net.sf.jasperreports.engine.JREmptyDataSource')
+     */
     public function getJavaProxiedObject(): JavaObject
     {
         return $this->jrEmptyDataSource;

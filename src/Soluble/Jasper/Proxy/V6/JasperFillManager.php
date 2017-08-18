@@ -31,6 +31,9 @@ class JasperFillManager implements RemoteJavaObjectProxyInterface
         return $this->jasperFillManager->fillReport($compiled, $params, $datasource->getJavaProxiedObject());
     }
 
+    /**
+     * @return JavaObject Java('net.sf.jasperreports.engine.JasperFillManager')
+     */
     public function getJavaProxiedObject(): JavaObject
     {
         return $this->jasperFillManager;

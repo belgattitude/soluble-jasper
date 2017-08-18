@@ -93,7 +93,6 @@ class JasperCompileManagerTest extends TestCase
 
     public function testGetJavaProxiedObject()
     {
-        $reportFile = \JasperTestsFactories::getDefaultReportFile();
         $compileManager = new JasperCompileManager($this->bridgeAdapter);
         $this->assertEquals(
             'net.sf.jasperreports.engine.JasperCompileManager',
