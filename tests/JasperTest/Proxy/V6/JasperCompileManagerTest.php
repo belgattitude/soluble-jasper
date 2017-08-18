@@ -31,7 +31,7 @@ class JasperCompileManagerTest extends TestCase
         $this->assertInstanceOf(JavaObject::class, $compiled);
     }
 
-    public function testCompileWithMissingFileShouldThrowException()
+    public function testCompileWithMissingFileShouldThrowReportNotFoundException()
     {
         $reportFile = '/tmp/invalid_file_not_exists.jrxml';
 
@@ -45,7 +45,7 @@ class JasperCompileManagerTest extends TestCase
         $compileManager->compileReport($reportFile);
     }
 
-    public function testCompileWithBrokenXmlFileShouldThrowException()
+    public function testCompileWithBrokenXmlFileShouldThrowBrokenXMLException()
     {
         $reportFile = \JasperTestsFactories::getBrokenXMLReportFile();
 
@@ -53,7 +53,22 @@ class JasperCompileManagerTest extends TestCase
         $this->expectExceptionMessageRegExp(
             sprintf(
                 //'/The report file "%s" cannot be parsed./',
-                '#The report file "%s" cannot be parsed#',
+                '#The report file "%s" cannot be parsed or not in jasper format#',
+                $reportFile
+            )
+        );
+        $compileManager = new JasperCompileManager($this->bridgeAdapter);
+        $compileManager->compileReport($reportFile);
+    }
+
+    public function testCompileWithNonJasperXmlFileShouldThrowException()
+    {
+        $reportFile = \JasperTestsFactories::getNonJasperXMLReportFile();
+
+        $this->expectException(BrokenXMLReportFileException::class);
+        $this->expectExceptionMessageRegExp(
+            sprintf(
+                '#The report file "%s" cannot be parsed or not in jasper format#',
                 $reportFile
             )
         );

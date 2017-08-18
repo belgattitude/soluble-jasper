@@ -61,7 +61,7 @@ class JasperCompileManager implements RemoteJavaObjectProxyInterface
                         ));
                     } elseif (strpos($cause, 'org.xml.sax.SAXParseException') !== false) {
                         throw new Exception\BrokenXMLReportFileException(sprintf(
-                            'The report file "%s" cannot be parsed. (XML error cause: %s)',
+                            'The report file "%s" cannot be parsed or not in jasper format (XML error cause: %s)',
                             $reportFile,
                             $cause
                         ));
