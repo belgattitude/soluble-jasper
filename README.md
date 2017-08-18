@@ -57,12 +57,20 @@ $exportManager->savePdf('/path/my_report_output.pdf');
 
 ### Benchmarks
 
-Early simple benchmarks:
+Early simple benchmarks for internal operations:
+
+
 
 | Benchmark name |  x1 | x5 | x10 | Average | Memory |
 |----| ----:|----:|----:|-------:|----:| 
 | 01_report_test_default.jrxml (compile) | 31.83ms| 138.85ms| 284.88ms| 28.47ms| 37.59Kb|
 | 01_report_test_default.jrxml (fill) | 4.18ms| 11.52ms| 19.74ms| 2.21ms| 29.04Kb|
+
+
+For full saving a PDF
+
+| Benchmark name |  x1 | x5 | x10 | Average | Memory |
+|----| ----:|----:|----:|-------:|----:| 
 | 01_report_test_default.jrxml (savePDF) | 339.41ms| 1,555.24ms| 3,009.04ms| 306.48ms| 0.79Kb|
 
   
