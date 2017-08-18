@@ -2,10 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Soluble\Jasper\Proxy;
+namespace Soluble\Jasper\Proxy\V6;
 
 use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
 use Soluble\Japha\Interfaces\JavaObject;
+use Soluble\Jasper\Proxy\RemoteJavaObjectProxyInterface;
 
 class JasperCompileManager implements RemoteJavaObjectProxyInterface
 {

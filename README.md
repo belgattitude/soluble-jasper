@@ -22,7 +22,21 @@ Report generation using jasper reports from PHP.
 
 ## Use cases 
 
+## Basics
 
+### Creating a new report
+
+```php
+<?php declare(strict_types=1);
+
+use Soluble\Jasper\Report;
+
+$report = new Report('./reports/my_report.jrxml');
+
+
+
+
+```
   
 ## Coding standards and interop
 

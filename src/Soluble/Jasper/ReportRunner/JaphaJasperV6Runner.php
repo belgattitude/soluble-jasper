@@ -2,12 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Soluble\Jasper;
+namespace Soluble\Jasper\ReportRunner;
 
 use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
 use Soluble\Japha\Interfaces\JavaObject;
+use Soluble\Jasper\Report;
 
-class ReportRunnerJapha
+class JaphaJasperV6Runner implements ReportRunnerInterface
 {
     /**
      * @var BridgeAdapter
@@ -31,9 +32,5 @@ class ReportRunnerJapha
         $compiledReport = $compileManager->compileReport($reportFile);
 
         return $compiledReport;
-    }
-
-    public function export()
-    {
     }
 }

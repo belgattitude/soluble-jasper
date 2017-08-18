@@ -4,12 +4,11 @@ declare(strict_types=1);
 
 namespace JasperTest;
 
-use Soluble\Jasper\Proxy\JasperCompileManager;
-use Soluble\Jasper\Proxy\JasperFillManager;
-use Soluble\Jasper\Proxy\JREmptyDataSource;
+use Soluble\Jasper\Proxy\V6\JasperCompileManager;
+use Soluble\Jasper\Proxy\V6\JasperFillManager;
+use Soluble\Jasper\Proxy\V6\JREmptyDataSource;
 use Soluble\Jasper\Report;
 use PHPUnit\Framework\TestCase;
-use Soluble\Jasper\ReportRunnerJapha;
 
 class ReportTest extends TestCase
 {
