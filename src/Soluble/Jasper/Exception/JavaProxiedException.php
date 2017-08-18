@@ -6,7 +6,7 @@ namespace Soluble\Jasper\Exception;
 
 use Soluble\Japha\Bridge\Exception\JavaException;
 
-class JavaProxiedException extends RuntimeException
+class JavaProxiedException extends RuntimeException implements JavaProxiedExceptionInterface
 {
     /**
      * @var JavaException

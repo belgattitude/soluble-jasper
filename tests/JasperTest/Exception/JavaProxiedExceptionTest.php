@@ -38,6 +38,8 @@ class JavaProxiedExceptionTest extends TestCase
             $pe = new JavaProxiedException($e, 'coucou', 10);
             $msg = $pe->getMessage();
             $this->assertContains('coucou', $msg);
+            $this->assertContains('java.lang.NumberFormatException', $msg);
+            $this->assertEquals(10, $pe->getCode());
             $je = $pe->getJavaException();
             $this->assertInstanceOf(JavaException::class, $je);
         }
