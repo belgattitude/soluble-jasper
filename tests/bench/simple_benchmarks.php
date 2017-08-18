@@ -36,8 +36,8 @@ $connection_time = $bm->getFormattedTimeMs($start_connection_time, $end_connecti
 
 $reportRunner = ReportRunnerFactory::getBridgedJasperReportRunner($ba);
 
-$report = new Report(
-    __DIR__ . '/../reports/01_report_test_default.jrxml',
+$miniReport = new Report(
+    __DIR__ . '/../reports/00_report_test_mini.jrxml',
     new ReportParams([
         'BookTitle'    => 'Soluble Jasper',
         'BookSubTitle' => 'Generated on JVM with Jasper reports'
@@ -49,28 +49,54 @@ $report = new Report(
     )*/
 );
 
+$imgMiniReport = new Report(
+    __DIR__ . '/../reports/01_report_test_default.jrxml',
+    new ReportParams([
+        'BookTitle'    => 'Soluble Jasper',
+        'BookSubTitle' => 'Generated on JVM with Jasper reports'
+    ])
+);
+
+echo "\n### Internal usage based on a very simple report\n\n";
+
+$bm->printTableHeader();
+
 $bm->time(
-    basename($report->getReportFile()) . ' (compile)',
-    function ($iterations) use ($reportRunner, $report) {
+    basename($miniReport->getReportFile()) . ' (compile)',
+    function ($iterations) use ($reportRunner, $miniReport) {
         for ($i = 0; $i < $iterations; ++$i) {
-            $reportRunner->compileReport($report);
+            $reportRunner->compileReport($miniReport);
         }
     }
 );
 
-$compiledReport = $reportRunner->compileReport($report);
+$compiledReport = $reportRunner->compileReport($miniReport);
 $bm->time(
-    basename($report->getReportFile()) . ' (fill)',
-    function ($iterations) use ($reportRunner, $compiledReport, $report) {
+    basename($miniReport->getReportFile()) . ' (fill)',
+    function ($iterations) use ($reportRunner, $compiledReport, $miniReport) {
         for ($i = 0; $i < $iterations; ++$i) {
-            $reportRunner->fillReport($compiledReport, $report->getReportParams());
+            $reportRunner->fillReport($compiledReport, $miniReport->getReportParams());
         }
     }
 );
 
-$exportManager = $reportRunner->getExportManager($report);
+echo "\n\n### PDF exports\n\n";
+
+$bm->printTableHeader();
+
+$exportManager = $reportRunner->getExportManager($miniReport);
 $bm->time(
-    basename($report->getReportFile()) . ' (savePDF)',
+    basename($miniReport->getReportFile()) . ' (text only)',
+    function ($iterations) use ($exportManager) {
+        for ($i = 0; $i < $iterations; ++$i) {
+            $exportManager->savePdf('/tmp/my_report_output.pdf');
+        }
+    }
+);
+
+$exportManager = $reportRunner->getExportManager($imgMiniReport);
+$bm->time(
+    basename($imgMiniReport->getReportFile()) . ' (text + png)',
     function ($iterations) use ($exportManager) {
         for ($i = 0; $i < $iterations; ++$i) {
             $exportManager->savePdf('/tmp/my_report_output.pdf');
@@ -102,22 +128,22 @@ class Benchmark
     {
     }
 
+    public function printTableHeader()
+    {
+        echo '| Benchmark name | ' . implode('|', array_map(function ($iter) {
+            return " x$iter ";
+        }, $this->iterations)) . '| Average | Memory |' . PHP_EOL;
+        echo '|----| ' . implode('|', array_map(function ($iter) {
+            return '----:';
+        }, $this->iterations)) . '|-------:|----:| ' . PHP_EOL;
+    }
+
     /**
      * @param string   $name
      * @param callable $fn
      */
     public function time($name, callable $fn)
     {
-        if (!$this->tableHeaderPrinted) {
-            echo '| Benchmark name | ' . implode('|', array_map(function ($iter) {
-                return " x$iter ";
-            }, $this->iterations)) . '| Average | Memory |' . PHP_EOL;
-            echo '|----| ' . implode('|', array_map(function ($iter) {
-                return '----:';
-            }, $this->iterations)) . '|-------:|----:| ' . PHP_EOL;
-            $this->tableHeaderPrinted = true;
-        }
-
         $times = [];
 
         $start_memory = memory_get_usage(false);

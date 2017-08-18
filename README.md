@@ -55,24 +55,23 @@ $exportManager->savePdf('/path/my_report_output.pdf');
 
 ```
 
-### Benchmarks
-
-Early simple benchmarks for internal operations:
+## Benchmarks
 
 
-
-| Benchmark name |  x1 | x5 | x10 | Average | Memory |
-|----| ----:|----:|----:|-------:|----:| 
-| 01_report_test_default.jrxml (compile) | 31.83ms| 138.85ms| 284.88ms| 28.47ms| 37.59Kb|
-| 01_report_test_default.jrxml (fill) | 4.18ms| 11.52ms| 19.74ms| 2.21ms| 29.04Kb|
-
-
-For full saving a PDF
+### Internal usage based on a very simple report
 
 | Benchmark name |  x1 | x5 | x10 | Average | Memory |
 |----| ----:|----:|----:|-------:|----:| 
-| 01_report_test_default.jrxml (savePDF) | 339.41ms| 1,555.24ms| 3,009.04ms| 306.48ms| 0.79Kb|
+| 00_report_test_mini.jrxml (compile) | 39.93ms| 182.45ms| 353.10ms| 35.97ms| 19.27Kb|
+| 00_report_test_mini.jrxml (fill) | 4.92ms| 9.98ms| 15.70ms| 1.91ms| 11.75Kb|
 
+
+### PDF exports
+
+| Benchmark name |  x1 | x5 | x10 | Average | Memory |
+|----| ----:|----:|----:|-------:|----:| 
+| 00_report_test_mini.jrxml (text only) | 41.50ms| 6.81ms| 15.94ms| 4.02ms| 0.79Kb|
+| 01_report_test_default.jrxml (text + png) | 386.94ms| 1,831.89ms| 3,411.44ms| 351.89ms| 0.75Kb|
   
 ## Coding standards and interop
 
