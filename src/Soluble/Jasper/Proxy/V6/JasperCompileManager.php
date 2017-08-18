@@ -18,7 +18,7 @@ class JasperCompileManager implements RemoteJavaObjectProxyInterface
     protected $ba;
 
     /**
-     * @var \Soluble\Japha\Interfaces\JavaClass
+     * @var \Soluble\Japha\Interfaces\JavaClass Java('net.sf.jasperreports.engine.JasperCompileManager')
      */
     protected $compileManager;
 

@@ -6,9 +6,13 @@ namespace Soluble\Jasper\ReportRunner;
 
 use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
 use Soluble\Japha\Interfaces\JavaObject;
-use Soluble\Jasper\Report;
-use Soluble\Jasper\Proxy\V6 as Proxy;
 use Soluble\Jasper\Proxy\V6\CompiledJasperReport;
+use Soluble\Jasper\Proxy\V6\FilledJasperReport;
+use Soluble\Jasper\Proxy\V6\JasperCompileManager;
+use Soluble\Jasper\Proxy\V6\JasperExportManager;
+use Soluble\Jasper\Proxy\V6\JasperFillManager;
+use Soluble\Jasper\Proxy\V6\JREmptyDataSource;
+use Soluble\Jasper\Report;
 use Soluble\Jasper\ReportParams;
 
 class JasperReportRunner implements ReportRunnerInterface
@@ -19,14 +23,19 @@ class JasperReportRunner implements ReportRunnerInterface
     protected $ba;
 
     /**
-     * @var Proxy\JasperCompileManager
+     * @var JasperCompileManager
      */
     protected $compileManager;
 
     /**
-     * @var Proxy\JasperFillManager
+     * @var JasperFillManager
      */
     protected $fillManager;
+
+    /**
+     * @var JasperExportManager
+     */
+    protected $exportManager;
 
     /**
      * JasperReportRunner constructor.
@@ -46,7 +55,7 @@ class JasperReportRunner implements ReportRunnerInterface
     public function compileReport(Report $report): CompiledJasperReport
     {
         if ($this->compileManager === null) {
-            $this->compileManager = new Proxy\JasperCompileManager($this->ba);
+            $this->compileManager = new JasperCompileManager($this->ba);
         }
         try {
             $compiledReport = $this->compileManager->compileReport($report->getReportFile());
@@ -57,14 +66,14 @@ class JasperReportRunner implements ReportRunnerInterface
         return new CompiledJasperReport($compiledReport, $report);
     }
 
-    public function fillReport(CompiledJasperReport $compiledReport, ReportParams $reportParams = null, $datasource = null): Proxy\FilledJasperReport
+    public function fillReport(CompiledJasperReport $compiledReport, ReportParams $reportParams = null, $datasource = null): FilledJasperReport
     {
         if ($this->fillManager === null) {
-            $this->fillManager = new Proxy\JasperFillManager($this->ba);
+            $this->fillManager = new JasperFillManager($this->ba);
         }
 
         if ($datasource === null) {
-            $datasource = new Proxy\JREmptyDataSource($this->ba);
+            $datasource = new JREmptyDataSource($this->ba);
         }
 
         $reportParams = $this->getReportParamsWithDefaults(
@@ -80,7 +89,16 @@ class JasperReportRunner implements ReportRunnerInterface
                                 $datasource
         );
 
-        return new Proxy\FilledJasperReport($filledReport);
+        return new FilledJasperReport($filledReport);
+    }
+
+    public function exportReportToPdfFile(FilledJasperReport $filledReport, string $outputFile): void
+    {
+        if ($this->exportManager === null) {
+            $this->exportManager = new JasperExportManager($this->ba);
+        }
+
+        $this->exportManager->exportReportToPdfFile($filledReport->getJavaProxiedObject(), $outputFile);
     }
 
     /**
