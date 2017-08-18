@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace JasperTest\Proxy\V6;
+namespace JasperTest\Runner\Bridged\Proxy;
 
 use PHPUnit\Framework\TestCase;
 use Soluble\Japha\Interfaces\JavaObject;
 use Soluble\Jasper\Exception\BrokenXMLReportFileException;
 use Soluble\Jasper\Exception\ReportCompileException;
 use Soluble\Jasper\Exception\ReportFileNotFoundException;
-use Soluble\Jasper\Proxy\V6\JasperCompileManager;
+use Soluble\Jasper\Runner\Bridged\Proxy\JasperCompileManager;
 use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
 
 class JasperCompileManagerTest extends TestCase

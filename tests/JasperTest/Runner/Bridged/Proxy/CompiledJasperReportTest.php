@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace JasperTest\Proxy\V6;
+namespace JasperTest\Runner\Bridged\Proxy;
 
 use JasperTestsFactories;
 use PHPUnit\Framework\TestCase;
 use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
-use Soluble\Jasper\Proxy\V6\CompiledJasperReport;
+use Soluble\Jasper\Runner\Bridged\Proxy\CompiledJasperReport;
 use Soluble\Jasper\Report;
-use Soluble\Jasper\Report\ReportInterface;
+use Soluble\Jasper\ReportInterface;
 
 class CompiledJasperReportTest extends TestCase
 {

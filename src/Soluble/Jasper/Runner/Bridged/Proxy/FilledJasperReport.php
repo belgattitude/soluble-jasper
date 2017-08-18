@@ -2,19 +2,19 @@
 
 declare(strict_types=1);
 
-namespace Soluble\Jasper\Proxy\V6;
+namespace Soluble\Jasper\Runner\Bridged\Proxy;
 
 use Soluble\Japha\Interfaces\JavaObject;
-use Soluble\Jasper\Proxy\RemoteJavaObjectProxyInterface;
 use Soluble\Jasper\Report;
-use Soluble\Jasper\Report\ReportInterface;
+use Soluble\Jasper\ReportInterface;
+use Soluble\Jasper\Runner\Bridged\RemoteJavaObjectProxyInterface;
 
-class CompiledJasperReport implements RemoteJavaObjectProxyInterface, ReportInterface
+class FilledJasperReport implements RemoteJavaObjectProxyInterface, ReportInterface
 {
     /**
      * @var JavaObject Java('net.sf.jasperreports.engine.JasperReport')
      */
-    protected $compiledReport;
+    protected $filledReport;
 
     /**
      * @var Report
@@ -23,11 +23,10 @@ class CompiledJasperReport implements RemoteJavaObjectProxyInterface, ReportInte
 
     /**
      * @param JavaObject $compiledReport Java('net.sf.jasperreports.engine.JasperReport')
-     * @param Report     $report         original report
      */
-    public function __construct(JavaObject $compiledReport, Report $report)
+    public function __construct(JavaObject $filledReport, Report $report)
     {
-        $this->compiledReport = $compiledReport;
+        $this->filledReport = $filledReport;
         $this->report = $report;
     }
 
@@ -41,16 +40,16 @@ class CompiledJasperReport implements RemoteJavaObjectProxyInterface, ReportInte
         return $this->report;
     }
 
-    public function getStatus(): string
-    {
-        return ReportInterface::STATUS_COMPILED;
-    }
-
     /**
      * @return JavaObject Java('net.sf.jasperreports.engine.JasperReport')
      */
     public function getJavaProxiedObject(): JavaObject
     {
-        return $this->compiledReport;
+        return $this->filledReport;
+    }
+
+    public function getStatus(): string
+    {
+        return ReportInterface::STATUS_FILLED;
     }
 }

@@ -31,7 +31,7 @@ Report generation using jasper reports from PHP.
 
 use Soluble\Jasper\Report;
 use Soluble\Jasper\DataSource;
-
+use Soluble\Jasper\Exporter;
 
 $report = new Report('./reports/my_report.jrxml');
 
@@ -44,7 +44,9 @@ $report->setDataSource(new DataSource\JDBCDataSource(
 ));
 
 
-$report->export(new Exporter\Pdf($ba, '/tmp/report.pdf'));
+
+
+$report->export(new Exporter\PdfExporter($ba));
 
 
 ```

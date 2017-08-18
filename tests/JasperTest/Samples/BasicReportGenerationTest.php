@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace JasperTest\Samples;
 
 use JasperTest\Util\PDFUtils;
-use Soluble\Jasper\Proxy\V6\JREmptyDataSource;
+use Soluble\Jasper\DataSource\JDBCDataSource;
 use Soluble\Jasper\Report;
 use PHPUnit\Framework\TestCase;
 use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
@@ -28,28 +28,26 @@ class BasicReportGenerationTest extends TestCase
     {
         $reportFile = \JasperTestsFactories::getDefaultReportFile();
 
-        $report = new Report($reportFile);
+        $reportRunner = ReportRunnerFactory::getBridgedJasperReportRunner($this->ba);
 
-        $runner = ReportRunnerFactory::getJasperReportRunner($this->ba);
+        $report = new Report(
+                    $reportFile,
+                    new ReportParams([
+                        'BookTitle'    => 'Soluble Jasper',
+                        'BookSubTitle' => 'Generated from unit tests'
+                    ])
 
-        // Step 1: Compile
-        $compiled = $runner->compileReport($report);
+                    //new JDBCDataSource(\JasperTestsFactories::getJdbcDsn())
+        );
 
-        $reportParams = new ReportParams();
-        $reportParams->put('BookTitle', 'Soluble Jasper');
-        $reportParams->put('BookSubTitle', 'Generated from unit tests');
-
-        // Step 3: Fill the report
-        //$emptyDataSource = new JREmptyDataSource($this->ba);
-
-        $filled = $runner->fillReport($compiled, $reportParams, $datasource = null);
+        $exportManager = $reportRunner->getExportManager($report);
 
         $output_pdf = \JasperTestsFactories::getOutputDir() . '/test.pdf';
         if (file_exists($output_pdf)) {
             unlink($output_pdf);
         }
 
-        $runner->exportReportToPdfFile($filled, $output_pdf);
+        $exportManager->savePdf($output_pdf);
 
         // open the pdf and check for text
 

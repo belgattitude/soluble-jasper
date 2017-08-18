@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace JasperTest\Proxy\V6;
+namespace JasperTest\Runner\Bridged\Proxy;
 
 use PHPUnit\Framework\TestCase;
 use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
-use Soluble\Jasper\Proxy\V6\JasperReport;
+use Soluble\Jasper\Runner\Bridged\Proxy\JREmptyDataSource;
 
-class JasperReportTest extends TestCase
+class JREmptyDataSourceTest extends TestCase
 {
     /**
      * @var BridgeAdapter
@@ -22,10 +22,10 @@ class JasperReportTest extends TestCase
 
     public function testGetJavaProxiedObject()
     {
-        $jasperReport = new JasperReport($this->bridgeAdapter);
+        $ds = new JREmptyDataSource($this->bridgeAdapter);
         $this->assertEquals(
-            'net.sf.jasperreports.engine.JasperReport',
-            $this->bridgeAdapter->getClassName($jasperReport->getJavaProxiedObject())
+            'net.sf.jasperreports.engine.JREmptyDataSource',
+            $this->bridgeAdapter->getClassName($ds->getJavaProxiedObject())
         );
     }
 }

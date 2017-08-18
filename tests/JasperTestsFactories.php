@@ -65,4 +65,35 @@ class JasperTestsFactories
         return isset($_SERVER['ENABLE_MYSQL_JDBC_TESTS']) &&
             $_SERVER['ENABLE_MYSQL_JDBC_TESTS'] === 'true';
     }
+
+    public static function getDatabaseConfig(): array
+    {
+        $mysql_config = [];
+        $mysql_config['hostname'] = $_SERVER['MYSQL_HOSTNAME'];
+        $mysql_config['username'] = $_SERVER['MYSQL_USERNAME'];
+        $mysql_config['password'] = $_SERVER['MYSQL_PASSWORD'];
+        $mysql_config['database'] = $_SERVER['MYSQL_DATABASE'];
+        $mysql_config['driver_options'] = [
+            PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'UTF8'",
+        ];
+        $mysql_config['options'] = [
+            'buffer_results' => true
+        ];
+        $mysql_config['charset'] = 'UTF8';
+
+        return $mysql_config;
+    }
+
+    public static function getJdbcDsn(): string
+    {
+        $config = self::getDatabaseConfig();
+        $host = $config['hostname'];
+        $db = $config['database'];
+        $user = $config['username'];
+        $password = $config['password'];
+        $serverTimezone = urlencode('GMT+1');
+        $dsn = "jdbc:mysql://$host/$db?user=$user&password=$password&serverTimezone=$serverTimezone";
+
+        return $dsn;
+    }
 }

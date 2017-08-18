@@ -2,20 +2,22 @@
 
 declare(strict_types=1);
 
-namespace Soluble\Jasper\ReportRunner;
+namespace Soluble\Jasper\Runner;
 
 use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
 use Soluble\Japha\Interfaces\JavaObject;
-use Soluble\Jasper\Proxy\V6\CompiledJasperReport;
-use Soluble\Jasper\Proxy\V6\FilledJasperReport;
-use Soluble\Jasper\Proxy\V6\JasperCompileManager;
-use Soluble\Jasper\Proxy\V6\JasperExportManager;
-use Soluble\Jasper\Proxy\V6\JasperFillManager;
-use Soluble\Jasper\Proxy\V6\JREmptyDataSource;
+use Soluble\Jasper\DataSource\DataSourceInterface;
+use Soluble\Jasper\Exporter\BridgedExportManager;
+use Soluble\Jasper\Runner\Bridged\Proxy\CompiledJasperReport;
+use Soluble\Jasper\Runner\Bridged\Proxy\FilledJasperReport;
+use Soluble\Jasper\Runner\Bridged\Proxy\JasperCompileManager;
+use Soluble\Jasper\Runner\Bridged\Proxy\JasperExportManager;
+use Soluble\Jasper\Runner\Bridged\Proxy\JasperFillManager;
+use Soluble\Jasper\Runner\Bridged\Proxy\JREmptyDataSource;
 use Soluble\Jasper\Report;
 use Soluble\Jasper\ReportParams;
 
-class JasperReportRunner implements ReportRunnerInterface
+class BridgedJasperReportRunner implements ReportRunnerInterface
 {
     /**
      * @var BridgeAdapter
@@ -66,7 +68,7 @@ class JasperReportRunner implements ReportRunnerInterface
         return new CompiledJasperReport($compiledReport, $report);
     }
 
-    public function fillReport(CompiledJasperReport $compiledReport, ReportParams $reportParams = null, $datasource = null): FilledJasperReport
+    public function fillReport(CompiledJasperReport $compiledReport, ReportParams $reportParams = null, DataSourceInterface $datasource = null): FilledJasperReport
     {
         if ($this->fillManager === null) {
             $this->fillManager = new JasperFillManager($this->ba);
@@ -92,13 +94,14 @@ class JasperReportRunner implements ReportRunnerInterface
         return new FilledJasperReport($filledReport, $compiledReport->getReport());
     }
 
-    public function exportReportToPdfFile(FilledJasperReport $filledReport, string $outputFile): void
+    public function getExportManager(Report $report): BridgedExportManager
     {
-        if ($this->exportManager === null) {
-            $this->exportManager = new JasperExportManager($this->ba);
-        }
+        return new BridgedExportManager($this, $report);
+    }
 
-        $this->exportManager->exportReportToPdfFile($filledReport->getJavaProxiedObject(), $outputFile);
+    public function getBridgeAdapter(): BridgeAdapter
+    {
+        return $this->ba;
     }
 
     /**

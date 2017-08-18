@@ -6,7 +6,7 @@ namespace Soluble\Jasper\DataSource;
 
 use Soluble\Japha\Db\DriverManager;
 
-class JDBCDataSource
+class JDBCDataSource implements DataSourceInterface
 {
     /**
      * @var string

@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace Soluble\Jasper;
 
+use Soluble\Jasper\DataSource\DataSourceInterface;
 use Soluble\Jasper\Exception\ReportFileNotFoundException;
-use Soluble\Jasper\Report\ReportInterface;
+use Soluble\Jasper\Exporter\ExportManagerInterface;
+use Soluble\Jasper\Runner\ReportRunnerInterface;
 
 class Report implements ReportInterface
 {
@@ -20,11 +22,11 @@ class Report implements ReportInterface
     protected $reportParams;
 
     /**
-     * Report constructor.
-     *
-     * @param string $reportJRXMLFile Jasper report jrxml report file
+     * @var DataSourceInterface
      */
-    public function __construct(string $reportJRXMLFile)
+    protected $dataSource;
+
+    public function __construct(string $reportJRXMLFile, ReportParams $reportParams = null, DataSourceInterface $dataSource = null)
     {
         if (!file_exists($reportJRXMLFile)) {
             throw new ReportFileNotFoundException(
@@ -34,10 +36,40 @@ class Report implements ReportInterface
                 )
             );
         }
+
+        if ($reportParams !== null) {
+            $this->setReportParams($reportParams);
+        }
+
+        if ($dataSource !== null) {
+            $this->setDataSource($dataSource);
+        }
+
         $this->reportFile = $reportJRXMLFile;
     }
 
-    // public function setReportParams(ReportParams)
+    /**
+     * @param ReportParams $reportParams
+     */
+    public function setReportParams(ReportParams $reportParams): void
+    {
+        $this->reportParams = $reportParams;
+    }
+
+    public function getReportParams(): ReportParams
+    {
+        return $this->reportParams;
+    }
+
+    public function setDataSource(DataSourceInterface $dataSource): void
+    {
+        $this->dataSource = $dataSource;
+    }
+
+    public function getDataSource(): ?DataSourceInterface
+    {
+        return $this->dataSource;
+    }
 
     /**
      * @return string current jrxml report file
@@ -45,6 +77,10 @@ class Report implements ReportInterface
     public function getReportFile(): string
     {
         return $this->reportFile;
+    }
+
+    public function export(ReportRunnerInterface $runner, ExportManagerInterface $exporter): void
+    {
     }
 
     public function getStatus(): string

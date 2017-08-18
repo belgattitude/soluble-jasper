@@ -7,7 +7,7 @@ namespace JasperTest;
 use Soluble\Jasper\Exception\ReportFileNotFoundException;
 use Soluble\Jasper\Report;
 use PHPUnit\Framework\TestCase;
-use Soluble\Jasper\Report\ReportInterface;
+use Soluble\Jasper\ReportInterface;
 
 class ReportTest extends TestCase
 {
