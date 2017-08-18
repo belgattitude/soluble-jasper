@@ -27,7 +27,7 @@ class JasperExportManager implements RemoteJavaObjectProxyInterface
     }
 
     /**
-     * @param JavaObject $filledReport
+     * @param JavaObject $filledReport Java('net.sf.jasperreports.engine.JasperPrint')
      * @param string     $outputFile
      */
     public function exportReportToPdfFile(JavaObject $filledReport, string $outputFile)
