@@ -37,6 +37,7 @@ class JasperCompileManager implements RemoteJavaObjectProxyInterface
      *
      * @throws Exception\BrokenXMLReportFileException when cannot parse the xml content or invalid xml file
      * @throws Exception\ReportFileNotFoundException  when the report file cannot be located (both php and java sides)
+     * @throws Exception\ReportCompileException       when there's an error compiling/evaluating the report
      * @throws Exception\JavaProxiedException         when the compileReport has encountered a Java error
      * @throws Exception\RuntimeException             when an unexpected problem have been encountered
      */
@@ -58,35 +59,47 @@ class JasperCompileManager implements RemoteJavaObjectProxyInterface
     /**
      * @throws Exception\BrokenXMLReportFileException when cannot parse the xml content or invalid xml file
      * @throws Exception\ReportFileNotFoundException  when the report file cannot be located (both php and java sides)
+     * @throws Exception\ReportCompileException       when there's an error compiling/evaluating the report
      * @throws Exception\JavaProxiedException         when the compileReport has encountered a Java error
      */
     protected function processCompileJavaException(JavaException $e, string $reportFile): void
     {
         $className = $e->getJavaClassName();
-        switch ($className) {
-            case 'net.sf.jasperreports.engine.JRException':
-                $cause = $e->getCause();
-                if (strpos($cause, 'java.io.FileNotFoundException') !== false) {
-                    $msg = (file_exists($reportFile)) ?
-                        'Report file "%s" exists but cannot be located from the java (servlet) side.'
-                        :
-                        'Report file "%s" cannot be found';
-                    throw new Exception\ReportFileNotFoundException(sprintf(
-                        $msg,
-                        $reportFile
-                    ));
-                } elseif (strpos($cause, 'org.xml.sax.SAXParseException') !== false) {
-                    throw new Exception\BrokenXMLReportFileException(sprintf(
-                        'The report file "%s" cannot be parsed or not in jasper format (XML error cause: %s)',
-                        $reportFile,
-                        $cause
-                    ));
-                }
-                break;
+        if ($className === 'net.sf.jasperreports.engine.JRException') {
+            $cause = $e->getCause();
+            if (strpos($cause, 'java.io.FileNotFoundException') !== false) {
+                $msg = (file_exists($reportFile)) ?
+                    'Report file "%s" exists but cannot be located from the java (servlet) side.'
+                    :
+                    'Report file "%s" cannot be found';
+                throw new Exception\ReportFileNotFoundException(sprintf(
+                    $msg,
+                    $reportFile
+                ));
+            } elseif (strpos($cause, 'org.xml.sax.SAXParseException') !== false) {
+                throw new Exception\BrokenXMLReportFileException($e, sprintf(
+                    'The report file "%s" cannot be parsed or not in jasper format',
+                    $reportFile
+                ));
+            } elseif (strpos($cause, 'Errors were encountered when compiling report expressions class file') !== false) {
+                throw new Exception\ReportCompileException($e, sprintf(
+                    'Report compilation failed for "%s"',
+                    $reportFile
+                ));
+            }
         }
-        throw new Exception\JavaProxiedException($e);
+        throw new Exception\JavaProxiedException(
+            $e,
+            sprintf(
+                'Error running report "%s"',
+                $reportFile
+            )
+        );
     }
 
+    /**
+     * @return JavaObject Java('net.sf.jasperreports.engine.JasperCompileManager')
+     */
     public function getJavaProxiedObject(): JavaObject
     {
         return $this->compileManager;

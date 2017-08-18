@@ -7,6 +7,7 @@ namespace JasperTest\Proxy\V6;
 use PHPUnit\Framework\TestCase;
 use Soluble\Japha\Interfaces\JavaObject;
 use Soluble\Jasper\Exception\BrokenXMLReportFileException;
+use Soluble\Jasper\Exception\ReportCompileException;
 use Soluble\Jasper\Exception\ReportFileNotFoundException;
 use Soluble\Jasper\Proxy\V6\JasperCompileManager;
 use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
@@ -52,7 +53,6 @@ class JasperCompileManagerTest extends TestCase
         $this->expectException(BrokenXMLReportFileException::class);
         $this->expectExceptionMessageRegExp(
             sprintf(
-                //'/The report file "%s" cannot be parsed./',
                 '#The report file "%s" cannot be parsed or not in jasper format#',
                 $reportFile
             )
@@ -74,5 +74,30 @@ class JasperCompileManagerTest extends TestCase
         );
         $compileManager = new JasperCompileManager($this->bridgeAdapter);
         $compileManager->compileReport($reportFile);
+    }
+
+    public function testCompileWithExpressionErrorShouldThrowReportCompileException()
+    {
+        $reportFile = \JasperTestsFactories::getReportBaseDir() . '/04_report_test_expression_error.jrxml';
+
+        $this->expectException(ReportCompileException::class);
+        $this->expectExceptionMessageRegExp(
+            sprintf(
+                '#Report compilation failed for "%s"#',
+                $reportFile
+            )
+        );
+        $compileManager = new JasperCompileManager($this->bridgeAdapter);
+        $compileManager->compileReport($reportFile);
+    }
+
+    public function testGetJavaProxiedObject()
+    {
+        $reportFile = \JasperTestsFactories::getDefaultReportFile();
+        $compileManager = new JasperCompileManager($this->bridgeAdapter);
+        $this->assertEquals(
+            'net.sf.jasperreports.engine.JasperCompileManager',
+            $this->bridgeAdapter->getClassName($compileManager->getJavaProxiedObject())
+        );
     }
 }

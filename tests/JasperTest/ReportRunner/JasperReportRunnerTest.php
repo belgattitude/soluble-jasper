@@ -45,7 +45,6 @@ class JasperReportRunnerTest extends TestCase
         $this->expectException(BrokenXMLReportFileException::class);
         $this->expectExceptionMessageRegExp(
             sprintf(
-            //'/The report file "%s" cannot be parsed./',
                 '#The report file "%s" cannot be parsed or not in jasper format#',
                 $reportFile
             )

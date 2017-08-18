@@ -6,17 +6,24 @@ namespace Soluble\Jasper\Exception;
 
 use Soluble\Japha\Bridge\Exception\JavaException;
 
-class JavaProxiedException extends \RuntimeException implements ExceptionInterface
+class JavaProxiedException extends RuntimeException
 {
     /**
      * @var JavaException
      */
     protected $javaException;
 
-    public function __construct(JavaException $javaException)
+    public function __construct(JavaException $javaException, ?string $msg = null, ?int $code = null)
     {
         $this->javaException = $javaException;
-        parent::__construct($javaException->getMessage(), $javaException->getCode());
+        $message = sprintf(
+            '%s[%s]: %s (%s)',
+            $msg !== null ? "$msg. " : '',
+            $javaException->getJavaClassName(),
+            $javaException->getMessage(),
+            $javaException->getCause()
+        );
+        parent::__construct($message, $code ?? $javaException->getCode());
     }
 
     /**
