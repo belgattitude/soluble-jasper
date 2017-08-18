@@ -6,13 +6,13 @@ namespace Soluble\Jasper\Runner;
 
 use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
 use Soluble\Japha\Interfaces\JavaObject;
-use Soluble\Jasper\DataSource\DataSourceInterface;
 use Soluble\Jasper\Exporter\BridgedExportManager;
 use Soluble\Jasper\Runner\Bridged\Proxy\CompiledJasperReport;
 use Soluble\Jasper\Runner\Bridged\Proxy\FilledJasperReport;
 use Soluble\Jasper\Runner\Bridged\Proxy\JasperCompileManager;
 use Soluble\Jasper\Runner\Bridged\Proxy\JasperExportManager;
 use Soluble\Jasper\Runner\Bridged\Proxy\JasperFillManager;
+use Soluble\Jasper\Runner\Bridged\Proxy\JRDataSourceInterface;
 use Soluble\Jasper\Runner\Bridged\Proxy\JREmptyDataSource;
 use Soluble\Jasper\Report;
 use Soluble\Jasper\ReportParams;
@@ -68,14 +68,14 @@ class BridgedJasperReportRunner implements ReportRunnerInterface
         return new CompiledJasperReport($compiledReport, $report);
     }
 
-    public function fillReport(CompiledJasperReport $compiledReport, ReportParams $reportParams = null, DataSourceInterface $datasource = null): FilledJasperReport
+    public function fillReport(CompiledJasperReport $compiledReport, ReportParams $reportParams = null, JRDataSourceInterface $dataSource = null): FilledJasperReport
     {
         if ($this->fillManager === null) {
             $this->fillManager = new JasperFillManager($this->ba);
         }
 
-        if ($datasource === null) {
-            $datasource = new JREmptyDataSource($this->ba);
+        if ($dataSource === null) {
+            $dataSource = new JREmptyDataSource($this->ba);
         }
 
         $reportParams = $this->getReportParamsWithDefaults(
@@ -88,7 +88,7 @@ class BridgedJasperReportRunner implements ReportRunnerInterface
         $filledReport = $this->fillManager->fillReport(
                                 $compiledReport->getJavaProxiedObject(),
                                 $reportParamsMap,
-                                $datasource
+                                $dataSource
         );
 
         return new FilledJasperReport($filledReport, $compiledReport->getReport());

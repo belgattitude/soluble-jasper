@@ -35,9 +35,8 @@ class BasicReportGenerationTest extends TestCase
                     new ReportParams([
                         'BookTitle'    => 'Soluble Jasper',
                         'BookSubTitle' => 'Generated from unit tests'
-                    ])
-
-                    //new JDBCDataSource(\JasperTestsFactories::getJdbcDsn())
+                    ]),
+            new JDBCDataSource(\JasperTestsFactories::getJdbcDsn())
         );
 
         $exportManager = $reportRunner->getExportManager($report);
