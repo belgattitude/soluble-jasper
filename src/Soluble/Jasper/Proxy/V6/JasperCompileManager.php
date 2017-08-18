@@ -37,7 +37,7 @@ class JasperCompileManager implements RemoteJavaObjectProxyInterface
      *
      * @throws Exception\BrokenXMLReportFileException when cannot parse the xml content or invalid xml file
      * @throws Exception\ReportFileNotFoundException  when the report file cannot be located (both php and java sides)
-     * @throws JavaException                          when the compileReport has encountered a Java error
+     * @throws Exception\JavaProxiedException         when the compileReport has encountered a Java error
      * @throws Exception\RuntimeException             when an unexpected problem have been encountered
      */
     public function compileReport(string $reportFile): JavaObject
@@ -58,8 +58,7 @@ class JasperCompileManager implements RemoteJavaObjectProxyInterface
     /**
      * @throws Exception\BrokenXMLReportFileException when cannot parse the xml content or invalid xml file
      * @throws Exception\ReportFileNotFoundException  when the report file cannot be located (both php and java sides)
-     * @throws JavaException                          when the compileReport has encountered a Java error
-     * @throws Exception\RuntimeException             when an unexpected problem have been encountered
+     * @throws Exception\JavaProxiedException         when the compileReport has encountered a Java error
      */
     protected function processCompileJavaException(JavaException $e, string $reportFile): void
     {
@@ -82,13 +81,10 @@ class JasperCompileManager implements RemoteJavaObjectProxyInterface
                         $reportFile,
                         $cause
                     ));
-                } else {
-                    throw $e;
                 }
                 break;
-            default:
-                throw $e;
         }
+        throw new Exception\JavaProxiedException($e);
     }
 
     public function getJavaProxiedObject(): JavaObject
