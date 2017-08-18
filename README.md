@@ -30,8 +30,22 @@ Report generation using jasper reports from PHP.
 <?php declare(strict_types=1);
 
 use Soluble\Jasper\Report;
+use Soluble\Jasper\DataSource;
 
 $report = new Report('./reports/my_report.jrxml');
+
+$report->setReportParams([
+    'Title' => 'My report title'
+]);
+
+$report->setDataSource(new DataSource\JDBCDataSource(
+        'jdbc:mysql//localhost/'
+));
+
+
+$runner = \Soluble\Jasper\ReportRunnerFactory::getJasperReportRunner($ba);
+$runner->exportReportToPdfFile($report, '/tmp/report.pdf');
+
 
 
 

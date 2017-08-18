@@ -89,7 +89,7 @@ class JasperReportRunner implements ReportRunnerInterface
                                 $datasource
         );
 
-        return new FilledJasperReport($filledReport);
+        return new FilledJasperReport($filledReport, $compiledReport->getReport());
     }
 
     public function exportReportToPdfFile(FilledJasperReport $filledReport, string $outputFile): void
@@ -123,7 +123,7 @@ class JasperReportRunner implements ReportRunnerInterface
      *
      * @return ReportParams
      */
-    public function getReportParamsWithDefaults(ReportParams $reportParams, Report $report): ReportParams
+    protected function getReportParamsWithDefaults(ReportParams $reportParams, Report $report): ReportParams
     {
         // Class loader
         $newParams = new ReportParams($reportParams);

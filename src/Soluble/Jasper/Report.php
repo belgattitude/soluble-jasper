@@ -5,8 +5,9 @@ declare(strict_types=1);
 namespace Soluble\Jasper;
 
 use Soluble\Jasper\Exception\ReportFileNotFoundException;
+use Soluble\Jasper\Report\ReportInterface;
 
-class Report
+class Report implements ReportInterface
 {
     /**
      * @var string
@@ -42,5 +43,10 @@ class Report
     public function getReportFile(): string
     {
         return $this->reportFile;
+    }
+
+    public function getStatus(): string
+    {
+        return ReportInterface::STATUS_FRESH;
     }
 }

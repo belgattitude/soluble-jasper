@@ -7,8 +7,9 @@ namespace Soluble\Jasper\Proxy\V6;
 use Soluble\Japha\Interfaces\JavaObject;
 use Soluble\Jasper\Proxy\RemoteJavaObjectProxyInterface;
 use Soluble\Jasper\Report;
+use Soluble\Jasper\Report\ReportInterface;
 
-class CompiledJasperReport implements RemoteJavaObjectProxyInterface
+class CompiledJasperReport implements RemoteJavaObjectProxyInterface, ReportInterface
 {
     /**
      * @var JavaObject Java('net.sf.jasperreports.engine.JasperReport')
@@ -38,6 +39,11 @@ class CompiledJasperReport implements RemoteJavaObjectProxyInterface
     public function getReport(): Report
     {
         return $this->report;
+    }
+
+    public function getStatus(): string
+    {
+        return ReportInterface::STATUS_COMPILED;
     }
 
     /**

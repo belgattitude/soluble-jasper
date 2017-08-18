@@ -29,6 +29,7 @@ class ReportGenerationTest extends TestCase
         $reportFile = \JasperTestsFactories::getDefaultReportFile();
 
         $report = new Report($reportFile);
+
         $runner = ReportRunnerFactory::getJasperReportRunner($this->ba);
 
         // Step 1: Compile
