@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Soluble\Jasper;
 
+use Soluble\Jasper\Exception\MissingReportFileException;
+
 class Report
 {
     /**
@@ -11,11 +13,27 @@ class Report
      */
     protected $reportFile;
 
-    public function __construct(string $reportFile)
+    /**
+     * Report constructor.
+     *
+     * @param string $reportJRXMLFile Jasper report jrxml report file
+     */
+    public function __construct(string $reportJRXMLFile)
     {
-        $this->reportFile = $reportFile;
+        if (!file_exists($reportJRXMLFile)) {
+            throw new MissingReportFileException(
+                sprintf(
+                    'The report file "%s" cannot be found.',
+                    $reportJRXMLFile
+                )
+            );
+        }
+        $this->reportFile = $reportJRXMLFile;
     }
 
+    /**
+     * @return string current jrxml report file
+     */
     public function getReportFile(): string
     {
         return $this->reportFile;

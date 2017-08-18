@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace JasperTest;
 
+use Soluble\Jasper\Exception\MissingReportFileException;
 use Soluble\Jasper\Proxy\V6\JasperCompileManager;
 use Soluble\Jasper\Proxy\V6\JasperFillManager;
 use Soluble\Jasper\Proxy\V6\JREmptyDataSource;
@@ -20,6 +21,18 @@ class ReportTest extends TestCase
     public function setUp()
     {
         $this->report = \JasperTestsFactories::getReportBaseDir() . '/MyReports/01_report_test_wavebook_cover.jrxml';
+    }
+
+    public function testConstructThrowsMissingReportFileException()
+    {
+        $this->expectException(MissingReportFileException::class);
+        new Report('/sdkfjlksdjf/sdfsdfs.jrxml');
+    }
+
+    public function testConstructWorksWithAnExistingFile()
+    {
+        new Report(\JasperTestsFactories::getDefaultReportFile());
+        $this->assertTrue(true);
     }
 
     public function testGetReportFile()
