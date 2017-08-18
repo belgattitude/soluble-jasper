@@ -12,7 +12,7 @@ use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
 use Soluble\Jasper\ReportParams;
 use Soluble\Jasper\ReportRunnerFactory;
 
-class ReportGenerationTest extends TestCase
+class BasicReportGenerationTest extends TestCase
 {
     /**
      * @var BridgeAdapter

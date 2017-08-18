@@ -37,6 +37,8 @@ class Report implements ReportInterface
         $this->reportFile = $reportJRXMLFile;
     }
 
+    // public function setReportParams(ReportParams)
+
     /**
      * @return string current jrxml report file
      */

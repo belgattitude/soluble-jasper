@@ -32,6 +32,22 @@
         <server name="JAVABRIDGE_URL" value="http://127.0.0.1:8083/servlet.phpjavabridge" />
         -->
 
+        <!--
+        ##########################################################################
+        # Configure mysql datasource tests                                       #
+        ##########################################################################
+        -->
+
+        <server name="ENABLE_MYSQL_JDBC_TESTS" value="false" />
+
+        <server name="MYSQL_DRIVER" value="Mysqli" />
+        <server name="MYSQL_HOSTNAME" value="127.0.0.1" />
+        <server name="MYSQL_USERNAME" value="root" />
+        <server name="MYSQL_PASSWORD" value="" />
+        <server name="MYSQL_DATABASE" value="phpunit_soluble_test_db" />
+
+
+
     </php>
 
 

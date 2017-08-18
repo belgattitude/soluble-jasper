@@ -11,24 +11,37 @@ matrix:
         - SEND_COVERAGE=true
 
 before_script:
-  # Step 1: somme needed directories
+  # -------------------------------------------------------------------------
+  # Step 1: Some needed directories
+  # -------------------------------------------------------------------------
   - mkdir -p build/logs
   - mkdir -p test/logs
-  # Step 2: regular composer install
+  # -------------------------------------------------------------------------
+  # Step 2: Regular composer install
   - composer install
-  # Step 3: Ensure a javabridge server is working
-  # Step 3.1: Build a servlet (war) with jasper/mysql/javabridge...
+  #
+  # -------------------------------------------------------------------------
+  # Step 3: Create and populate the test database
+  # -------------------------------------------------------------------------
+  - mysql -e "DROP DATABASE IF EXISTS phpunit_soluble_test_db;" -uroot
+  - mysql -e "create database phpunit_soluble_test_db;" -uroot
+  - zcat test/data/mysql/schema.sql.gz | mysql -uroot phpunit_soluble_test_db
+  - zcat test/data/mysql/data.sql.gz | mysql -uroot phpunit_soluble_test_db
+  # -------------------------------------------------------------------------
+  # Step 4: Create and launch the javabridge server
+  #         with jasper report dependencies.
+  # -------------------------------------------------------------------------
+  # Step 4.1: Build a servlet (war) with jasper/mysql/javabridge...
   - .travis/build_javabridge_jasper_war.sh
-  # Step 3.2: Run the servlet
+  # Step 4.2: Run the servlet
   - .travis/run_javabridge_jasper.sh
-  # Step 3.3: sleep a bit to let the server starts
+  # Step 4.3: sleep a bit to let the server starts
   - sleep 5
   - ls -la .travis/
+  # Step 4.4: some log for debugging travis in case
   - cat .travis/*.log
   - cat .travis/*.pid
 
-
-    
 script:
   - ./vendor/bin/phpunit -v -c .travis/phpunit.travis.xml --coverage-clover=coverage.xml
   - ./vendor/bin/php-cs-fixer --diff --dry-run -v fix

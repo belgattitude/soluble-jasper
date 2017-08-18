@@ -59,4 +59,10 @@ class JasperTestsFactories
     {
         return self::getReportBaseDir() . DIRECTORY_SEPARATOR . '03_report_test_invalid_nonjasper_xml.jrxml';
     }
+
+    public static function isJdbcTestsEnabled(): bool
+    {
+        return isset($_SERVER['ENABLE_MYSQL_JDBC_TESTS']) &&
+            $_SERVER['ENABLE_MYSQL_JDBC_TESTS'] === 'true';
+    }
 }
