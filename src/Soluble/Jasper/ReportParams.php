@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace Soluble\Jasper;
 
+use ArrayIterator;
 use ArrayObject;
 use Soluble\Jasper\Exception\InvalidArgumentException;
 
-class ReportParams implements \ArrayAccess
+class ReportParams implements \ArrayAccess, \IteratorAggregate
 {
     /**
      * @var ArrayObject
@@ -36,6 +37,20 @@ class ReportParams implements \ArrayAccess
                 $current_key
             ));
         }
+    }
+
+    /**
+     * @param string $param report parameter name ($P{} in jasper)
+     * @param mixed  $value
+     */
+    public function put(string $param, $value): void
+    {
+        $this->params->offsetSet($param, $value);
+    }
+
+    public function getIterator()
+    {
+        return new ArrayIterator($this->params);
     }
 
     /**

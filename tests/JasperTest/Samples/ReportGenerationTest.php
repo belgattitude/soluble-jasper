@@ -36,37 +36,15 @@ class ReportGenerationTest extends TestCase
         $compiled = $runner->compileReport($report);
 
         $reportParams = new ReportParams();
-
-        // Step 2: Prepare report params
-        $params = $this->ba->java('java.util.HashMap', []);
-
-        // class Loader
-        $jpath = $this->ba->java('java.io.File', dirname($report->getReportFile()));
-        $url = $jpath->toUrl(); // Java.net.URL
-        $urls = [$url];
-
-        $classLoader = $this->ba->java('java.net.URLClassLoader', $urls);
-        $params->put('REPORT_CLASS_LOADER', $classLoader);
-
-        $params->put('BookTitle', 'Soluble Jasper');
-        $params->put('BookSubTitle', 'Generated from unit tests');
-
-        // Setting the class loader for the resource bundle
-        // Assuming they are in the same directory as
-        // the report file.
-        /*
-        $report_resource_bundle = $report->getResourceBundle();
-        if ($report_resource_bundle != '') {
-            $ResourceBundle = new JavaClass('java.util.ResourceBundle');
-            $rb = $ResourceBundle->getBundle($report_resource_bundle, $locale, $classLoader);
-            $this->params->put('REPORT_RESOURCE_BUNDLE', $rb);
-        }*/
+        $reportParams->put('BookTitle', 'Soluble Jasper');
+        $reportParams->put('BookSubTitle', 'Generated from unit tests');
 
         // Step 3: Fill the report
         $fillManager = new JasperFillManager($this->ba);
         $emptyDataSource = new JREmptyDataSource($this->ba);
 
-        $filled = $fillManager->fillReport($compiled, $params, $emptyDataSource);
+        $filled = $runner->fillReport($compiled, $reportParams, $emptyDataSource);
+        //$filled = $fillManager->fillReport($compiled, $params, $emptyDataSource);
 
         $exportManager = $this->ba->javaClass('net.sf.jasperreports.engine.JasperExportManager');
 
@@ -75,7 +53,7 @@ class ReportGenerationTest extends TestCase
             unlink($output_pdf);
         }
 
-        $exportManager->exportReportToPdfFile($filled, $output_pdf);
+        $exportManager->exportReportToPdfFile($filled->getJavaProxiedObject(), $output_pdf);
         @chmod($output_pdf, 0666);
         $this->assertFileExists($output_pdf);
 

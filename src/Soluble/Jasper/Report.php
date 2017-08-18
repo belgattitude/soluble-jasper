@@ -14,6 +14,11 @@ class Report
     protected $reportFile;
 
     /**
+     * @var ReportParams
+     */
+    protected $reportParams;
+
+    /**
      * Report constructor.
      *
      * @param string $reportJRXMLFile Jasper report jrxml report file
