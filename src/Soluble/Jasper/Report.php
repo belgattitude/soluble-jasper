@@ -6,8 +6,6 @@ namespace Soluble\Jasper;
 
 use Soluble\Jasper\DataSource\DataSourceInterface;
 use Soluble\Jasper\Exception\ReportFileNotFoundException;
-use Soluble\Jasper\Exporter\ExportManagerInterface;
-use Soluble\Jasper\Runner\ReportRunnerInterface;
 
 class Report implements ReportInterface
 {
@@ -77,10 +75,6 @@ class Report implements ReportInterface
     public function getReportFile(): string
     {
         return $this->reportFile;
-    }
-
-    public function export(ReportRunnerInterface $runner, ExportManagerInterface $exporter): void
-    {
     }
 
     public function getStatus(): string
