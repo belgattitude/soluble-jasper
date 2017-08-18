@@ -29,25 +29,29 @@ Report generation using jasper reports from PHP.
 ```php
 <?php declare(strict_types=1);
 
+use Soluble\Jasper\ReportRunnerFactory;
 use Soluble\Jasper\Report;
-use Soluble\Jasper\DataSource;
-use Soluble\Jasper\Exporter;
-
-$report = new Report('./reports/my_report.jrxml');
-
-$report->setReportParams([
-    'Title' => 'My report title'
-]);
-
-$report->setDataSource(new DataSource\JDBCDataSource(
-    'jdbc:mysql//localhost/'
-));
+use Soluble\Jasper\ReportParams;
+use Soluble\Jasper\DataSource\JDBCDataSource;
 
 
+$reportRunner = ReportRunnerFactory::getBridgedJasperReportRunner($bridgeAdapter);
+
+$report = new Report(
+     '/path/my_report.jrxml',
+     new ReportParams([
+            'BookTitle'    => 'Soluble Jasper',
+            'BookSubTitle' => 'Generated on JVM with Jasper reports'
+     ]),
+     new JDBCDataSource(
+         'jdbc:mysql://localhost/$db?user=user&password=password&serverTimezone=UTC',
+         'com.mysql.jdbc.Driver'
+     )
+);
 
 
-$report->export(new Exporter\PdfExporter($ba));
-
+$exportManager = $reportRunner->getExportManager($report);
+$exportManager->savePdf('/path/my_report_output.pdf');
 
 ```
   
