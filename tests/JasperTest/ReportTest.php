@@ -19,7 +19,7 @@ class ReportTest extends TestCase
 
     public function setUp()
     {
-        $this->report = \JasperTestsContainer::getReportBaseDir() . '/MyReports/01_report_test_wavebook_cover.jrxml';
+        $this->report = \JasperTestsFactories::getReportBaseDir() . '/MyReports/01_report_test_wavebook_cover.jrxml';
     }
 
     public function testGetReportFile()
@@ -30,7 +30,7 @@ class ReportTest extends TestCase
 
     public function testTemp()
     {
-        $ba = \JasperTestsContainer::getJavaBridgeAdapter();
+        $ba = \JasperTestsFactories::getJavaBridgeAdapter();
         $report = new Report($this->report);
 
         //$runner = new ReportRunnerJapha($ba);
@@ -74,7 +74,7 @@ class ReportTest extends TestCase
 
         $exportManager = $ba->javaClass('net.sf.jasperreports.engine.JasperExportManager');
 
-        $output_pdf = \JasperTestsContainer::getOutputDir() . '/test.pdf';
+        $output_pdf = \JasperTestsFactories::getOutputDir() . '/test.pdf';
         if (file_exists($output_pdf)) {
             unlink($output_pdf);
         }

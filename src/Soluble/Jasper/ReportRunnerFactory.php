@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Soluble\Jasper;
 
 use Soluble\Jasper\ReportRunner\ReportRunnerInterface;
-use Soluble\Jasper\ReportRunner\JaphaJasperV6Runner;
+use Soluble\Jasper\ReportRunner\JasperReportRunner;
 use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
 
 class ReportRunnerFactory
@@ -13,7 +13,7 @@ class ReportRunnerFactory
     public const JAPHA_JASPER_V6 = 'japha_jasper_v6';
 
     public const SUPPORTED_RUNNERS = [
-        self::JAPHA_JASPER_V6 => JaphaJasperV6Runner::class
+        self::JAPHA_JASPER_V6 => JasperReportRunner::class
     ];
 
     public function __invoke(BridgeAdapter $bridgeAdapter, string $runner = self::JAPHA_JASPER_V6): ReportRunnerInterface

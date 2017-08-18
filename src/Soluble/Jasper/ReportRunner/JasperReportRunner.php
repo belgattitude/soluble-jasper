@@ -8,7 +8,7 @@ use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
 use Soluble\Japha\Interfaces\JavaObject;
 use Soluble\Jasper\Report;
 
-class JaphaJasperV6Runner implements ReportRunnerInterface
+class JasperReportRunner implements ReportRunnerInterface
 {
     /**
      * @var BridgeAdapter

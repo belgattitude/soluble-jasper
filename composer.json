@@ -27,7 +27,7 @@
         "psr-4": {
             "JasperTest\\": "tests/JasperTest"
         },
-        "files": ["tests/JasperTestsContainer.php"]
+        "files": ["tests/JasperTestsFactories.php"]
     },
     "require": {
         "php": "^7.1",

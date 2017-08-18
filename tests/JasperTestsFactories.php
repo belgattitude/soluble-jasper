@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
 
-class JasperTestsContainer
+class JasperTestsFactories
 {
+    const defaultReportTestFile = '01_report_test_default.jrxml';
+
     public static function getJavaBridgeAdapter(): BridgeAdapter
     {
         $servlet_address = $_SERVER['JAVABRIDGE_URL'] ?? null;
@@ -41,5 +43,10 @@ class JasperTestsContainer
     public static function getOutputDir(): string
     {
         return __DIR__ . '/output';
+    }
+
+    public static function getDefaultReportFile(): string
+    {
+        return self::getReportBaseDir() . DIRECTORY_SEPARATOR . self::defaultReportTestFile;
     }
 }

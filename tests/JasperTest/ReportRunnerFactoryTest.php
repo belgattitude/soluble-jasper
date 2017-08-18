@@ -19,7 +19,7 @@ class ReportRunnerFactoryTest extends TestCase
 
     public function setUp()
     {
-        $this->bridgeAdapter = \JasperTestsContainer::getJavaBridgeAdapter();
+        $this->bridgeAdapter = \JasperTestsFactories::getJavaBridgeAdapter();
     }
 
     public function testInvoke()
@@ -34,6 +34,7 @@ class ReportRunnerFactoryTest extends TestCase
     public function testInvokeThrowsUnsupportedRunnerException()
     {
         $this->expectException(UnsupportedRunnerException::class);
+        $this->expectExceptionMessage('Unsupported runner "InVALIDrUnner", must be in');
         (new ReportRunnerFactory())($this->bridgeAdapter, 'InVALIDrUnner');
     }
 }
