@@ -27,6 +27,7 @@ before_script:
   - mysql -e "create database phpunit_soluble_test_db;" -uroot
   - zcat test/data/mysql/schema.sql.gz | mysql -uroot phpunit_soluble_test_db
   - zcat test/data/mysql/data.sql.gz | mysql -uroot phpunit_soluble_test_db
+  - mysql -u root -p phpunit_soluble_test_db -e "select * from product_translation"
   # -------------------------------------------------------------------------
   # Step 4: Create and launch the javabridge server
   #         with jasper report dependencies.
