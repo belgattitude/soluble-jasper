@@ -90,25 +90,25 @@ You may used this address for the solubl-japha client connection.
 
 ## Benchmarks
 
-Early benchmarks for common operation (run on a laptop for now). See `tests/bench/simple_benchmarks.php`.
+Early benchmarks for common operation (run on a laptop for now, will do soon on digitalocean). See `tests/bench/simple_benchmarks.php`.
 
 
 ### Internal usage based on a very simple report
 
 | Benchmark name |  x1 | x5 | x10 | Average | Memory |
 |----| ----:|----:|----:|-------:|----:| 
-| 00_report_test_mini.jrxml (compile) | 55.73ms| 198.15ms| 411.82ms| 41.61ms| 37.59Kb|
-| 00_report_test_mini.jrxml (fill) | 6.34ms| 17.09ms| 29.26ms| 3.29ms| 29.29Kb|
+| 00_report_test_mini.jrxml (compile) | 42.48ms| 187.27ms| 353.88ms| 36.48ms| 37.59Kb|
+| 00_report_test_mini.jrxml (fill) | 5.61ms| 11.16ms| 19.48ms| 2.27ms| 29.29Kb|
 
 
 ### PDF exports
 
 | Benchmark name |  x1 | x5 | x10 | Average | Memory |
 |----| ----:|----:|----:|-------:|----:| 
-| 00_report_test_mini.jrxml (text-only) | 52.45ms| 8.38ms| 16.72ms| 4.85ms| 0.79Kb|
-| 01_report_test_default.jrxml (text + png) | 381.98ms| 1,635.86ms| 3,296.36ms| 332.14ms| 0.75Kb|
-| 06_report_test_barcodes.jrxml (barcodes) | 103.01ms| 314.64ms| 710.39ms| 70.50ms| 0.75Kb|
-
+| 00_report_test_mini.jrxml (text-only) | 42.78ms| 4.61ms| 7.25ms| 3.41ms| 0.79Kb|
+| 01_report_test_default.jrxml (text + png) | 378.82ms| 1,657.12ms| 3,429.01ms| 341.56ms| 0.75Kb|
+| 06_report_test_barcodes.jrxml (barcodes) | 90.90ms| 313.88ms| 660.88ms| 66.60ms| 0.75Kb|
+| 08_report_test_jdbc.jrxml (jdbc) | 39.31ms| 34.53ms| 94.66ms| 10.53ms| 17.31Kb|
 
   
 ## Coding standards and interop

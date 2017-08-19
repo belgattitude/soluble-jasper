@@ -94,8 +94,18 @@ $reports = [
             ])
         ),
     'text + png' => new Report("$reportPath/01_report_test_default.jrxml"),
-    'barcodes'   => new Report("$reportPath/06_report_test_barcodes.jrxml")
+    'barcodes'   => new Report("$reportPath/06_report_test_barcodes.jrxml"),
 ];
+
+$mysql_password = $_SERVER['argv'][1] ?? '';
+
+if ($mysql_password !== '') {
+    $reports['jdbc'] = new Report(
+        "$reportPath/08_report_test_jdbc.jrxml",
+        null,
+        new JDBCDataSource("jdbc:mysql://localhost/phpunit_soluble_test_db?user=root&password=$mysql_password&serverTimezone=UTC")
+    );
+}
 
 $idx = 0;
 foreach ($reports as $key => $report) {
