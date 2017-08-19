@@ -54,7 +54,7 @@ class Report implements ReportInterface
         $this->reportParams = $reportParams;
     }
 
-    public function getReportParams(): ReportParams
+    public function getReportParams(): ?ReportParams
     {
         return $this->reportParams;
     }

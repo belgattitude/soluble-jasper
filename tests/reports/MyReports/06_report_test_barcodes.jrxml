@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.4.0.final using JasperReports Library version 6.4.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="06_report_test_barcode4j" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2f7a0ed7-5163-4167-825b-e56e8715a408">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="52" y="28" width="298" height="30" uuid="5cb4cd56-8bac-499b-ae18-25db4ce2ddd7"/>
+				<textElement>
+					<font size="16"/>
+				</textElement>
+				<text><![CDATA[Test with barcodes]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="139" splitType="Stretch">
+			<componentElement>
+				<reportElement x="0" y="40" width="100" height="89" uuid="41e4a142-e93c-4cbc-b881-9e56c72c8c2d">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<jr:PDF417 xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" moduleWidth="12.0">
+					<jr:codeExpression><![CDATA["Hello I'm from barcode4j"]]></jr:codeExpression>
+				</jr:PDF417>
+			</componentElement>
+			<componentElement>
+				<reportElement positionType="Float" x="290" y="40" width="250" height="30" uuid="8194cb05-1f9a-4319-90a7-1594e7b6ff91">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.barHeight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.barWidth" value="pixel"/>
+				</reportElement>
+				<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="PDF417" drawText="false" checksumRequired="false" rotation="None">
+					<jr:codeExpression><![CDATA["Hello I'm from barbecue"]]></jr:codeExpression>
+				</jr:barbecue>
+			</componentElement>
+			<componentElement>
+				<reportElement x="180" y="90" width="100" height="30" uuid="7c8984c1-5d13-48f9-ba43-2821e18e8f13"/>
+				<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="EAN13" drawText="false" checksumRequired="false">
+					<jr:codeExpression><![CDATA["012345678900"]]></jr:codeExpression>
+				</jr:barbecue>
+			</componentElement>
+			<componentElement>
+				<reportElement x="387" y="96" width="100" height="30" uuid="205b0c67-77ca-4ec7-9551-e5a8c273656f"/>
+				<jr:UPCA xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<jr:codeExpression><![CDATA["12345678901"]]></jr:codeExpression>
+				</jr:UPCA>
+			</componentElement>
+			<componentElement>
+				<reportElement x="120" y="10" width="99" height="58" uuid="cca22637-bc2d-4bb8-806b-673a88a1d96b"/>
+				<jr:QRCode xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<jr:codeExpression><![CDATA["Hola this is the QRCODE"]]></jr:codeExpression>
+				</jr:QRCode>
+			</componentElement>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="128" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
