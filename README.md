@@ -110,22 +110,27 @@ echo $ba->javaClass('java.lang.System')->getProperty('java.version');
 Early benchmarks for common operation (run on a laptop for now, will do soon on digitalocean). See `tests/bench/simple_benchmarks.php`.
 
 
-### Internal usage based on a very simple report
+### Jasper compile time and filling (internal)
 
 | Benchmark name |  x1 | x5 | x10 | Average | Memory |
 |----| ----:|----:|----:|-------:|----:| 
-| 00_report_test_mini.jrxml (compile) | 42.48ms| 187.27ms| 353.88ms| 36.48ms| 37.59Kb|
-| 00_report_test_mini.jrxml (fill) | 5.61ms| 11.16ms| 19.48ms| 2.27ms| 29.29Kb|
+| 00_report_test_mini.jrxml (compile) | 48.36ms| 174.20ms| 335.05ms| 34.85ms| 37.59Kb|
+| 00_report_test_mini.jrxml (fill) | 4.71ms| 7.22ms| 14.28ms| 1.64ms| 28.92Kb|
+| 01_report_test_default.jrxml (compile) | 39.33ms| 175.99ms| 341.16ms| 34.78ms| 0.31Kb|
+| 01_report_test_default.jrxml (fill) | 3.47ms| 8.82ms| 19.70ms| 2.00ms| 0.42Kb|
 
 
 ### PDF exports
 
 | Benchmark name |  x1 | x5 | x10 | Average | Memory |
 |----| ----:|----:|----:|-------:|----:| 
-| 00_report_test_mini.jrxml (text-only) | 42.78ms| 4.61ms| 7.25ms| 3.41ms| 0.79Kb|
-| 01_report_test_default.jrxml (text + png) | 378.82ms| 1,657.12ms| 3,429.01ms| 341.56ms| 0.75Kb|
-| 06_report_test_barcodes.jrxml (barcodes) | 90.90ms| 313.88ms| 660.88ms| 66.60ms| 0.75Kb|
-| 08_report_test_jdbc.jrxml (jdbc) | 39.31ms| 34.53ms| 94.66ms| 10.53ms| 17.31Kb|
+| 00_report_test_mini.jrxml (text-only) | 43.58ms| 3.07ms| 5.70ms| 3.27ms| 0.79Kb|
+| 01_report_test_default.jrxml (text+png) | 363.00ms| 1,548.24ms| 3,121.87ms| 314.57ms| 0.75Kb|
+| 05_report_test_img_cache.jrxml (text+png+cache) | 354.85ms| 1,594.56ms| 3,094.03ms| 315.21ms| 0.75Kb|
+| 06_report_test_barcodes.jrxml (barcodes) | 86.94ms| 276.69ms| 672.70ms| 64.77ms| 0.75Kb|
+
+- Connection time: 7 ms
+- Total time     : 12430 ms
 
   
 ## Coding standards and interop

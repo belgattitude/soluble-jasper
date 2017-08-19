@@ -12,8 +12,35 @@ use Soluble\Jasper\DataSource\JDBCDataSource;
 
 ini_set('display_errors', 'true');
 
+$reportPath = __DIR__ . '/../reports';
+$reports = [
+    'text-only' => new Report(
+        "$reportPath/00_report_test_mini.jrxml",
+        new ReportParams([
+            'BookTitle'    => 'Soluble Jasper',
+            'BookSubTitle' => 'Generated on JVM with Jasper reports'
+        ])
+    ),
+    'text+png'       => new Report("$reportPath/01_report_test_default.jrxml"),
+    'text+png+cache' => new Report("$reportPath/05_report_test_img_cache.jrxml"),
+    'barcodes'       => new Report("$reportPath/06_report_test_barcodes.jrxml"),
+];
+
+$mysql_password = $_SERVER['argv'][1] ?? '';
+
+if ($mysql_password !== '') {
+    $reports['jdbc'] = new Report(
+        "$reportPath/08_report_test_jdbc.jrxml",
+        null,
+        new JDBCDataSource("jdbc:mysql://localhost/phpunit_soluble_test_db?user=root&password=$mysql_password&serverTimezone=UTC")
+    );
+}
+
 $bm = new Benchmark();
 
+//#####################
+// Benching connection
+//#####################
 $start_total_time = $bm->getTimeMs();
 
 echo '<pre>' . PHP_EOL;
@@ -36,76 +63,44 @@ $connection_time = $bm->getFormattedTimeMs($start_connection_time, $end_connecti
 
 $reportRunner = ReportRunnerFactory::getBridgedJasperReportRunner($ba);
 
-$miniReport = new Report(
-    __DIR__ . '/../reports/00_report_test_mini.jrxml',
-    new ReportParams([
-        'BookTitle'    => 'Soluble Jasper',
-        'BookSubTitle' => 'Generated on JVM with Jasper reports'
-    ])
-    /*
-    ,new JDBCDataSource(
-        'jdbc:mysql://localhost/$db?user=user&password=password&serverTimezone=UTC',
-        'com.mysql.jdbc.Driver'
-    )*/
-);
+$miniReport = $reports['text-only'];
+$imgMiniReport = $reports['text+png'];
 
-$imgMiniReport = new Report(
-    __DIR__ . '/../reports/01_report_test_default.jrxml',
-    new ReportParams([
-        'BookTitle'    => 'Soluble Jasper',
-        'BookSubTitle' => 'Generated on JVM with Jasper reports'
-    ])
-);
+//#####################
+// Benching connection
+//#####################
 
-echo "\n### Internal usage based on a very simple report\n\n";
+echo "\n### Jasper compile time and filling (internal)\n\n";
 
 $bm->printTableHeader();
 
-$bm->time(
-    basename($miniReport->getReportFile()) . ' (compile)',
-    function ($iterations) use ($reportRunner, $miniReport) {
-        for ($i = 0; $i < $iterations; ++$i) {
-            $reportRunner->compileReport($miniReport);
+foreach ([$reports['text-only'], $reports['text+png']] as $key => $report) {
+    $bm->time(
+        basename($report->getReportFile()) . ' (compile)',
+        function ($iterations) use ($reportRunner, $report) {
+            for ($i = 0; $i < $iterations; ++$i) {
+                $reportRunner->compileReport($report);
+            }
         }
-    }
-);
+    );
 
-$compiledReport = $reportRunner->compileReport($miniReport);
-$bm->time(
-    basename($miniReport->getReportFile()) . ' (fill)',
-    function ($iterations) use ($reportRunner, $compiledReport, $miniReport) {
-        for ($i = 0; $i < $iterations; ++$i) {
-            $reportRunner->fillReport($compiledReport, $miniReport->getReportParams());
+    $compiledReport = $reportRunner->compileReport($report);
+    $bm->time(
+        basename($report->getReportFile()) . ' (fill)',
+        function ($iterations) use ($reportRunner, $compiledReport, $miniReport) {
+            for ($i = 0; $i < $iterations; ++$i) {
+                $reportRunner->fillReport($compiledReport, $miniReport->getReportParams());
+            }
         }
-    }
-);
+    );
+}
 
+//#####################################
+// Benching report generation in PDF
+//######################################
 echo "\n\n### PDF exports\n\n";
 
 $bm->printTableHeader();
-
-$reportPath = __DIR__ . '/../reports';
-$reports = [
-    'text-only' => new Report(
-        "$reportPath/00_report_test_mini.jrxml",
-            new ReportParams([
-                'BookTitle'    => 'Soluble Jasper',
-                'BookSubTitle' => 'Generated on JVM with Jasper reports'
-            ])
-        ),
-    'text + png' => new Report("$reportPath/01_report_test_default.jrxml"),
-    'barcodes'   => new Report("$reportPath/06_report_test_barcodes.jrxml"),
-];
-
-$mysql_password = $_SERVER['argv'][1] ?? '';
-
-if ($mysql_password !== '') {
-    $reports['jdbc'] = new Report(
-        "$reportPath/08_report_test_jdbc.jrxml",
-        null,
-        new JDBCDataSource("jdbc:mysql://localhost/phpunit_soluble_test_db?user=root&password=$mysql_password&serverTimezone=UTC")
-    );
-}
 
 $idx = 0;
 foreach ($reports as $key => $report) {
