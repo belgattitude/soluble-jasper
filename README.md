@@ -86,6 +86,8 @@ $ sudo cp ./build/libs/JavaBridgeTemplate.war /var/lib/tomcat8/webapps/JasperRep
 Wait few seconds and point your browser to [http://localhost:8080/JasperReports](http://localhost:8080/JasperReports), you
 should see the php-java-bridge dashboard page.
 
+![](./docs/images/jasper_bridge_dashboard.png "Jasper bridge dashboard")
+
 You can this address for the soluble-japha Adapter connection.
 
 ## Benchmarks
