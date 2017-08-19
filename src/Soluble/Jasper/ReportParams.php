@@ -18,7 +18,7 @@ class ReportParams implements \ArrayAccess, \IteratorAggregate
     /**
      * ReportParams constructor.
      *
-     * @param iterable $params
+     * @param iterable $params Report parameters as array or any traversable type (IteratorAggregate, Iterator, ArrayObject...)
      *
      * @throws \Soluble\Jasper\Exception\InvalidArgumentException
      */

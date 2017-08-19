@@ -22,7 +22,7 @@ class FilledJasperReport implements RemoteJavaObjectProxyInterface, ReportInterf
     protected $report;
 
     /**
-     * @param JavaObject $compiledReport Java('net.sf.jasperreports.engine.JasperReport')
+     * @param JavaObject $filledReport Java('net.sf.jasperreports.engine.JasperReport')
      */
     public function __construct(JavaObject $filledReport, Report $report)
     {
