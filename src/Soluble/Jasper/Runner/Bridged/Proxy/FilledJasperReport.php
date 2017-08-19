@@ -12,7 +12,7 @@ use Soluble\Jasper\Runner\Bridged\RemoteJavaObjectProxyInterface;
 class FilledJasperReport implements RemoteJavaObjectProxyInterface, ReportInterface
 {
     /**
-     * @var JavaObject Java('net.sf.jasperreports.engine.JasperReport')
+     * @var JavaObject Java('net.sf.jasperreports.engine.JasperPrint')
      */
     protected $filledReport;
 
@@ -22,7 +22,7 @@ class FilledJasperReport implements RemoteJavaObjectProxyInterface, ReportInterf
     protected $report;
 
     /**
-     * @param JavaObject $filledReport Java('net.sf.jasperreports.engine.JasperReport')
+     * @param JavaObject $filledReport Java('net.sf.jasperreports.engine.JasperPrint')
      */
     public function __construct(JavaObject $filledReport, Report $report)
     {
@@ -31,17 +31,7 @@ class FilledJasperReport implements RemoteJavaObjectProxyInterface, ReportInterf
     }
 
     /**
-     * Return original report.
-     *
-     * @return string
-     */
-    public function getReport(): Report
-    {
-        return $this->report;
-    }
-
-    /**
-     * @return JavaObject Java('net.sf.jasperreports.engine.JasperReport')
+     * @return JavaObject Java('net.sf.jasperreports.engine.JasperPrint')
      */
     public function getJavaProxiedObject(): JavaObject
     {

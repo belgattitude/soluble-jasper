@@ -44,6 +44,14 @@ class ReportParamsTest extends TestCase
         $this->assertEquals($data, $newData);
     }
 
+    public function testConstructorIterable()
+    {
+        $p = new ReportParams(['test' => 'cool']);
+        $p2 = new ReportParams($p);
+
+        $this->assertEquals('cool', $p2->offsetGet('test'));
+    }
+
     public function testArrayAccess()
     {
         $p = new ReportParams();
