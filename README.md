@@ -109,28 +109,27 @@ echo $ba->javaClass('java.lang.System')->getProperty('java.version');
 
 Early benchmarks for common operation (run on a laptop for now, will do soon on digitalocean). See `tests/bench/simple_benchmarks.php`.
 
-
 ### Jasper compile time and filling (internal)
 
 | Benchmark name |  x1 | x5 | x10 | Average | Memory |
 |----| ----:|----:|----:|-------:|----:| 
-| 00_report_test_mini.jrxml (compile) | 48.36ms| 174.20ms| 335.05ms| 34.85ms| 37.59Kb|
-| 00_report_test_mini.jrxml (fill) | 4.71ms| 7.22ms| 14.28ms| 1.64ms| 28.92Kb|
-| 01_report_test_default.jrxml (compile) | 39.33ms| 175.99ms| 341.16ms| 34.78ms| 0.31Kb|
-| 01_report_test_default.jrxml (fill) | 3.47ms| 8.82ms| 19.70ms| 2.00ms| 0.42Kb|
+| 00_report_test_mini.jrxml (compile) | 47.87ms| 176.62ms| 344.27ms| 35.55ms| 37.59Kb|
+| 00_report_test_mini.jrxml (fill) | 3.77ms| 8.47ms| 12.81ms| 1.57ms| 28.92Kb|
+| 01_report_test_default.jrxml (compile) | 40.17ms| 173.92ms| 347.49ms| 35.10ms| 0.31Kb|
+| 01_report_test_default.jrxml (fill) | 3.32ms| 12.82ms| 19.77ms| 2.24ms| 0.42Kb|
 
 
 ### PDF exports
 
 | Benchmark name |  x1 | x5 | x10 | Average | Memory |
 |----| ----:|----:|----:|-------:|----:| 
-| 00_report_test_mini.jrxml (text-only) | 43.58ms| 3.07ms| 5.70ms| 3.27ms| 0.79Kb|
-| 01_report_test_default.jrxml (text+png) | 363.00ms| 1,548.24ms| 3,121.87ms| 314.57ms| 0.75Kb|
-| 05_report_test_img_cache.jrxml (text+png+cache) | 354.85ms| 1,594.56ms| 3,094.03ms| 315.21ms| 0.75Kb|
-| 06_report_test_barcodes.jrxml (barcodes) | 86.94ms| 276.69ms| 672.70ms| 64.77ms| 0.75Kb|
+| 00_report_test_mini.jrxml (text-only) | 51.82ms| 3.21ms| 6.04ms| 3.82ms| 0.79Kb|
+| 01_report_test_default.jrxml (text+png) | 373.95ms| 1,628.55ms| 3,200.64ms| 325.20ms| 0.75Kb|
+| 06_report_test_barcodes.jrxml (barcodes) | 88.93ms| 324.90ms| 689.11ms| 68.93ms| 0.75Kb|
+| 08_report_test_jdbc.jrxml (jdbc) | 32.03ms| 35.00ms| 65.28ms| 8.27ms| 17.31Kb|
 
-- Connection time: 7 ms
-- Total time     : 12430 ms
+- Connection time: 6 ms
+- Total time     : 7773 ms
 
   
 ## Coding standards and interop

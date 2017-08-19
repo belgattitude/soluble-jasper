@@ -22,7 +22,7 @@ $reports = [
         ])
     ),
     'text+png'       => new Report("$reportPath/01_report_test_default.jrxml"),
-    'text+png+cache' => new Report("$reportPath/05_report_test_img_cache.jrxml"),
+    //'text+png+cache' => new Report("$reportPath/05_report_test_img_cache.jrxml"),
     'barcodes'       => new Report("$reportPath/06_report_test_barcodes.jrxml"),
 ];
 
