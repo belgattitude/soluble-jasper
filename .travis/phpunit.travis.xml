@@ -30,7 +30,7 @@
         -->
         <server name="JAVABRIDGE_URL" value="http://127.0.0.1:8083/servlet.phpjavabridge" />
 
-        <server name="ENABLE_MYSQL_JDBC_TESTS" value="false" />
+        <server name="ENABLE_MYSQL_JDBC_TESTS" value="true" />
 
         <server name="MYSQL_DRIVER" value="Mysqli" />
         <server name="MYSQL_HOSTNAME" value="127.0.0.1" />

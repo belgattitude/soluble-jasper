@@ -3,18 +3,18 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="08_report_test_jdbc" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1a394338-e0eb-4854-aaee-411d24b45ca6">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<queryString>
-		<![CDATA[select 
-p18.product_id,
-p.reference, 
-p18.lang, 
-p18.title, 
-p18.description, 
-p18.characteristic, 
-p18.updated_at, 
-p18.created_at
-from product_translation p18 
-left outer join product p
-on p.product_id = p18.product_id and p18.lang = 'fr'
+		<![CDATA[SELECT
+`p18`.`product_id`,
+`p`.`reference`,
+`p18`.`lang`,
+`p18`.`title`,
+`p18`.`description`,
+`p18`.`characteristic`,
+`p18`.`updated_at`,
+`p18`.`created_at`
+FROM `product_translation` as `p18`
+LEFT OUTER JOIN `product` as `p`
+ON `p`.`product_id` = `p18`.`product_id` and `p18`.`lang` = "fr"
 ]]>
 	</queryString>
 	<field name="product_id" class="java.math.BigInteger"/>
