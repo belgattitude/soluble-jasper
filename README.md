@@ -88,7 +88,22 @@ should see the php-java-bridge dashboard page.
 
 ![](./docs/images/jasper_bridge_dashboard.png "Jasper bridge dashboard")
 
-You can this address for the soluble-japha Adapter connection.
+The bridge address can be used in the japha bridge adapter:
+
+```php
+<?php declare(strict_types=1);
+
+use Soluble\Japha\Bridge\Adapter;
+
+$ba = new Adapter([
+    'driver' => 'Pjb62',
+    'servlet_address' => 'localhost:8080/JasperReports/servlet.phpjavabridge'    
+]);
+
+// This should print your JVM version
+echo $ba->javaClass('java.lang.System')->getProperty('java.version');
+
+```
 
 ## Benchmarks
 
