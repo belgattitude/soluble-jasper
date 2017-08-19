@@ -57,21 +57,26 @@ $exportManager->savePdf('/path/my_report_output.pdf');
 
 ## Benchmarks
 
+Early benchmarks for common operation (run on a laptop for now). See `tests/bench/simple_benchmarks.php`.
+
 
 ### Internal usage based on a very simple report
 
 | Benchmark name |  x1 | x5 | x10 | Average | Memory |
 |----| ----:|----:|----:|-------:|----:| 
-| 00_report_test_mini.jrxml (compile) | 39.93ms| 182.45ms| 353.10ms| 35.97ms| 19.27Kb|
-| 00_report_test_mini.jrxml (fill) | 4.92ms| 9.98ms| 15.70ms| 1.91ms| 11.75Kb|
+| 00_report_test_mini.jrxml (compile) | 55.73ms| 198.15ms| 411.82ms| 41.61ms| 37.59Kb|
+| 00_report_test_mini.jrxml (fill) | 6.34ms| 17.09ms| 29.26ms| 3.29ms| 29.29Kb|
 
 
 ### PDF exports
 
 | Benchmark name |  x1 | x5 | x10 | Average | Memory |
 |----| ----:|----:|----:|-------:|----:| 
-| 00_report_test_mini.jrxml (text only) | 41.50ms| 6.81ms| 15.94ms| 4.02ms| 0.79Kb|
-| 01_report_test_default.jrxml (text + png) | 386.94ms| 1,831.89ms| 3,411.44ms| 351.89ms| 0.75Kb|
+| 00_report_test_mini.jrxml (text-only) | 52.45ms| 8.38ms| 16.72ms| 4.85ms| 0.79Kb|
+| 01_report_test_default.jrxml (text + png) | 381.98ms| 1,635.86ms| 3,296.36ms| 332.14ms| 0.75Kb|
+| 06_report_test_barcodes.jrxml (barcodes) | 103.01ms| 314.64ms| 710.39ms| 70.50ms| 0.75Kb|
+
+
   
 ## Coding standards and interop
 

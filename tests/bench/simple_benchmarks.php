@@ -82,27 +82,38 @@ $bm->time(
 
 echo "\n\n### PDF exports\n\n";
 
+
 $bm->printTableHeader();
 
-$exportManager = $reportRunner->getExportManager($miniReport);
-$bm->time(
-    basename($miniReport->getReportFile()) . ' (text only)',
-    function ($iterations) use ($exportManager) {
-        for ($i = 0; $i < $iterations; ++$i) {
-            $exportManager->savePdf('/tmp/my_report_output.pdf');
-        }
-    }
-);
+$reportPath = __DIR__ . '/../reports';
+$reports = [
+    'text-only' => new Report(
+        "$reportPath/00_report_test_mini.jrxml",
+            new ReportParams([
+                'BookTitle'    => 'Soluble Jasper',
+                'BookSubTitle' => 'Generated on JVM with Jasper reports'
+            ])
+        ),
+    'text + png' => new Report("$reportPath/01_report_test_default.jrxml"),
+    'barcodes'   => new Report("$reportPath/06_report_test_barcodes.jrxml")
 
-$exportManager = $reportRunner->getExportManager($imgMiniReport);
-$bm->time(
-    basename($imgMiniReport->getReportFile()) . ' (text + png)',
-    function ($iterations) use ($exportManager) {
-        for ($i = 0; $i < $iterations; ++$i) {
-            $exportManager->savePdf('/tmp/my_report_output.pdf');
+];
+
+
+$idx = 0;
+foreach($reports as $key => $report) {
+    $exportManager = $reportRunner->getExportManager($report);
+    $bm->time(
+        basename($report->getReportFile()) . " ($key)",
+        function ($iterations) use ($exportManager, $idx) {
+            for ($i = 0; $i < $iterations; ++$i) {
+                $exportManager->savePdf("/tmp/my_report_output_{$idx}_{$i}.pdf");
+            }
         }
-    }
-);
+    );
+    $idx++;
+}
+
 
 $end_total_time = $bm->getTimeMs();
 $total_time = $bm->getFormattedTimeMs($start_total_time, $end_total_time);
