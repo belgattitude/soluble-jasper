@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.4.0.final using JasperReports Library version 6.4.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="08_report_test_jdbc" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1a394338-e0eb-4854-aaee-411d24b45ca6">
+	<property name="net.sf.jasperreports.data.adapter" value="DataAdapter.xml"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<queryString>
+		<![CDATA[select 
+p18.product_id,
+p.reference, 
+p18.lang, 
+p18.title, 
+p18.description, 
+p18.characteristic, 
+p18.updated_at, 
+p18.created_at
+from product_translation p18 
+left outer join product p
+on p.product_id = p18.product_id and p18.lang = 'fr'
+]]>
+	</queryString>
+	<field name="product_id" class="java.math.BigInteger"/>
+	<field name="reference" class="java.lang.String"/>
+	<field name="lang" class="java.lang.String"/>
+	<field name="title" class="java.lang.String"/>
+	<field name="description" class="java.lang.String"/>
+	<field name="characteristic" class="java.lang.String"/>
+	<field name="updated_at" class="java.sql.Timestamp"/>
+	<field name="created_at" class="java.sql.Timestamp"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="87" splitType="Stretch">
+			<staticText>
+				<reportElement x="10" y="10" width="330" height="30" uuid="e23768e2-c700-4377-9d49-e6f59ee80f49"/>
+				<textElement>
+					<font size="16"/>
+				</textElement>
+				<text><![CDATA[JDBC mysql report test]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="166" y="57" width="284" height="30" uuid="360a67f8-4ea4-44bb-a5e9-5924f2dcf13c"/>
+				<text><![CDATA[based on 'phpunit_soluble_test_db']]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="93" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="41" splitType="Stretch">
+			<textField>
+				<reportElement x="150" y="5" width="80" height="16" uuid="d1833b7b-0e14-447a-9998-f192b0cc11eb"/>
+				<textFieldExpression><![CDATA[$F{title} ]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="5" width="150" height="30" uuid="14db0376-ad26-4932-9d07-81b564575d00"/>
+				<textFieldExpression><![CDATA[$F{product_id} + "/" + $F{reference}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="230" y="5" width="315" height="30" uuid="d4b3f601-0d10-415b-b57f-985d1908c13d"/>
+				<textFieldExpression><![CDATA[$F{description}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

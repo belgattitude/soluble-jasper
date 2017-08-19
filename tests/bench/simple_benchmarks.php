@@ -82,7 +82,6 @@ $bm->time(
 
 echo "\n\n### PDF exports\n\n";
 
-
 $bm->printTableHeader();
 
 $reportPath = __DIR__ . '/../reports';
@@ -96,12 +95,10 @@ $reports = [
         ),
     'text + png' => new Report("$reportPath/01_report_test_default.jrxml"),
     'barcodes'   => new Report("$reportPath/06_report_test_barcodes.jrxml")
-
 ];
 
-
 $idx = 0;
-foreach($reports as $key => $report) {
+foreach ($reports as $key => $report) {
     $exportManager = $reportRunner->getExportManager($report);
     $bm->time(
         basename($report->getReportFile()) . " ($key)",
@@ -111,9 +108,8 @@ foreach($reports as $key => $report) {
             }
         }
     );
-    $idx++;
+    ++$idx;
 }
-
 
 $end_total_time = $bm->getTimeMs();
 $total_time = $bm->getFormattedTimeMs($start_total_time, $end_total_time);
