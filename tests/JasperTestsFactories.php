@@ -18,7 +18,7 @@ class JasperTestsFactories
         }
 
         $adapter = new BridgeAdapter([
-            'driver'          => 'Pjb62',
+            //'driver'          => 'Pjb62',
             'servlet_address' => $servlet_address
         ]);
 

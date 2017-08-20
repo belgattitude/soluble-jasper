@@ -36,10 +36,9 @@ use Soluble\Jasper\ReportRunnerFactory;
 use Soluble\Jasper\Report;
 use Soluble\Jasper\ReportParams;
 use Soluble\Jasper\DataSource\JDBCDataSource;
-use Soluble\Japha\Bridge\Adapter;
+use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
 
-$bridgeAdapter = new Adapter([
-    'driver' => 'Pjb62',
+$bridgeAdapter = new BridgeAdapter([
     'servlet_address' => 'localhost:8080/JasperReports/servlet.phpjavabridge'    
 ]);
 
@@ -137,5 +136,4 @@ Early benchmarks for common operation (run on a laptop for now, will do soon on 
 * [PSR 4 Autoloader](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader.md)
 * [PSR 3 Logger interface](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-3-logger-interface.md)
 * [PSR 2 Coding Style Guide](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md)
-* [PSR 1 Coding Standards](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-1-basic-coding-standard.md)
 

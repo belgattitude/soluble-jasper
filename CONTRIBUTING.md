@@ -12,15 +12,28 @@
 ### Test
 
 Setup a local JasperBridgeServer and copy ./phpunit.xml.dist in
-./phpunit.xml (edit config as needed). Check phpunit works (`./vendor/bin/phpunit`).
+./phpunit.xml (edit config as needed). 
 
-### Contribute
+Check phpunit works by running 
+
+```shell
+$ ./vendor/bin/phpunit
+```
+
+### Source modification
 
 1. Create a new branch from master (i.e. feature/24)
-2. Modify the code... Fix or improve :)
-3. Run `composer fix` to be sure code style is ok.
-4. Run `composer check` to run style checks and phpstan. 
-5. Commit/Push your pull request. 
+2. Modify the code... Fix, improve :)
+
+### Release a P/R (pull request)
+
+1. First ensure the code is clean
+
+```shell
+$ composer fix
+$ composer check
+```
+2. Commit/Push your pull request. 
 
 Thanks !!!
    
