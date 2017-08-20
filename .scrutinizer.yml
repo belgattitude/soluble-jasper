@@ -1,10 +1,11 @@
+# language: php
 imports:
     - php
-# Temp fix to upgrade travis to scrutinizer PHP7.1 inspection
-build:
-    tests:
-        override:
-            - php-scrutinizer-run
+# Temp fix for scrutinizer PHP7.1 inspection
+#build:
+#    tests:
+#        override:
+#            - php-scrutinizer-run
 filter:
     paths: [src/*]
     excluded_paths: [tests/*, vendor/*, config/*, bin/*, docs/*]
