@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace JasperTest\Samples;
 
-use JasperTest\Util\PDFUtils;
 use Soluble\Jasper\DataSource\JDBCDataSource;
 use Soluble\Jasper\Report;
+use Soluble\Jasper\ReportParams;
 use PHPUnit\Framework\TestCase;
 use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
-use Soluble\Jasper\ReportParams;
 use Soluble\Jasper\ReportRunnerFactory;
+use JasperTest\Util\PDFUtils;
 
 class BasicReportGenerationTest extends TestCase
 {

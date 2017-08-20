@@ -32,11 +32,10 @@ Report generation using jasper reports from PHP.
 ```php
 <?php declare(strict_types=1);
 
-use Soluble\Jasper\ReportRunnerFactory;
-use Soluble\Jasper\Report;
-use Soluble\Jasper\ReportParams;
-use Soluble\Jasper\DataSource\JDBCDataSource;
 use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
+use Soluble\Jasper\{ReportRunnerFactory, Report, ReportParams};
+use Soluble\Jasper\DataSource\JDBCDataSource;
+
 
 $bridgeAdapter = new BridgeAdapter([
     'servlet_address' => 'localhost:8080/JasperReports/servlet.phpjavabridge'    
