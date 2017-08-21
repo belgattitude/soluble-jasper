@@ -37,11 +37,7 @@ use Soluble\Jasper\{ReportRunnerFactory, Report, ReportParams};
 use Soluble\Jasper\DataSource\JDBCDataSource;
 
 
-$bridgeAdapter = new BridgeAdapter([
-    'servlet_address' => 'localhost:8080/JasperReports/servlet.phpjavabridge'    
-]);
-
-$reportRunner = ReportRunnerFactory::getBridgedReportRunner($bridgeAdapter);
+// Step 1: Define your report parameters
 
 $report = new Report(
      '/path/my_report.jrxml',
@@ -56,8 +52,28 @@ $report = new Report(
 );
 
 
+// Step 2: Initialize the report runner
+
+$bridgeAdapter = new BridgeAdapter([
+    'servlet_address' => 'localhost:8080/JasperReports/servlet.phpjavabridge'    
+]);
+
+$reportRunner = ReportRunnerFactory::getBridgedReportRunner($bridgeAdapter);
+
+// Step 3: Get the export manager 
+
 $exportManager = $reportRunner->getExportManager($report);
 $exportManager->savePdf('/path/my_report_output.pdf');
+
+
+/*
+$pdfExporter = $exportManager->getPdfExporter();
+$pdfExporter->saveFile('/path/my_report_output.pdf');
+
+// Both will need to cache the report 
+$psr7Response = $pdfExporter->getPsr7Response();
+$stream       = $pdfExporter->getStream();
+*/
 
 ```
 

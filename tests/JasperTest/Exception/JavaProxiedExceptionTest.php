@@ -7,6 +7,7 @@ namespace JasperTest\Exception;
 use PHPUnit\Framework\TestCase;
 use Soluble\Japha\Bridge\Exception\JavaException;
 use Soluble\Jasper\Exception\JavaProxiedException;
+use Soluble\Jasper\Exception\RuntimeException;
 use Soluble\Jasper\Report;
 use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
 
@@ -40,6 +41,7 @@ class JavaProxiedExceptionTest extends TestCase
             $this->assertContains('coucou', $msg);
             $this->assertContains('java.lang.NumberFormatException', $msg);
             $this->assertEquals(10, $pe->getCode());
+            $this->assertInstanceOf(RuntimeException::class, $pe);
             $je = $pe->getJavaException();
             $this->assertInstanceOf(JavaException::class, $je);
 

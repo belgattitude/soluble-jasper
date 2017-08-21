@@ -50,8 +50,6 @@ class BridgedExportManager implements ExportManagerInterface
     public function savePdf(string $outputFile): void
     {
         $this->exportManager->exportReportToPdfFile($this->getFilledReport()->getJavaProxiedObject(), $outputFile);
-        // Attempt to speed up
-        //$this->exportManager->exportToPdfFile($this->report->getReportFile(), $outputFile);
     }
 
     protected function getFilledReport(): FilledJasperReport
