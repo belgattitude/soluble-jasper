@@ -36,15 +36,14 @@ use Soluble\Japha\Bridge\Adapter as JavaBridgeAdapter;
 use Soluble\Jasper\{ReportRunnerFactory, Report, ReportParams};
 use Soluble\Jasper\DataSource\JDBCDataSource;
 
-
-// Step 1: Get the report runner (should be done once in a container interface)
+// Step 1: Get the report runner
+// Good practice is to initialize once and get it from a PSR-11 compatible container
 
 $bridgeAdapter = new JavaBridgeAdapter([
     'servlet_address' => 'localhost:8080/JasperReports/servlet.phpjavabridge'    
 ]);
 
 $reportRunner = ReportRunnerFactory::getBridgedReportRunner($bridgeAdapter);
-
 
 // Step 2: Define your report parameters
 
@@ -55,12 +54,10 @@ $report = new Report(
             'BookSubTitle' => 'Generated on JVM with Jasper reports'
      ]),
      new JDBCDataSource(
-         'jdbc:mysql://localhost/$db?user=user&password=password&serverTimezone=UTC',
+         'jdbc:mysql://localhost/my_db?user=user&password=password',
          'com.mysql.jdbc.Driver'
      )
 );
-
-
 
 // Step 3: Get the export manager and choose exports
 

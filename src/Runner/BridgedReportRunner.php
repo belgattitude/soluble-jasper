@@ -75,6 +75,15 @@ class BridgedReportRunner implements ReportRunnerInterface
         return new CompiledJasperReport($compiledReport, $report);
     }
 
+    /**
+     * @param CompiledJasperReport       $compiledReport
+     * @param ReportParams|null          $reportParams
+     * @param JRDataSourceInterface|null $dataSource
+     *
+     * @return FilledJasperReport
+     *
+     * @throws Exception\JavaProxiedException
+     */
     public function fillReport(CompiledJasperReport $compiledReport, ReportParams $reportParams = null, JRDataSourceInterface $dataSource = null): FilledJasperReport
     {
         if ($this->fillManager === null) {

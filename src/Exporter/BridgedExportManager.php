@@ -11,6 +11,7 @@ use Soluble\Jasper\Runner\Bridged\JRDataSourceFactory;
 use Soluble\Jasper\Runner\Bridged\Proxy\JRDataSourceInterface;
 use Soluble\Jasper\Runner\BridgedReportRunner;
 use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
+use Soluble\Jasper\Exception;
 
 class BridgedExportManager implements ExportManagerInterface
 {
@@ -47,6 +48,12 @@ class BridgedExportManager implements ExportManagerInterface
         $this->exportManager = new JasperExportManager($this->ba);
     }
 
+    /**
+     * @throws Exception\BrokenXMLReportFileException When cannot parse the xml content or invalid xml file
+     * @throws Exception\ReportFileNotFoundException  When the report file cannot be located (both php and java sides)
+     * @throws Exception\ReportCompileException       When there's an error compiling/evaluating the report
+     * @throws Exception\JavaProxiedException         When the compileReport has encountered a Java error
+     */
     public function savePdf(string $outputFile): void
     {
         $this->exportManager->exportReportToPdfFile($this->getFilledReport()->getJavaProxiedObject(), $outputFile);

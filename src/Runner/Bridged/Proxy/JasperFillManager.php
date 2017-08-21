@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace Soluble\Jasper\Runner\Bridged\Proxy;
 
+use Soluble\Japha\Bridge\Exception\JavaException;
 use Soluble\Japha\Interfaces\JavaObject;
 use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
+use Soluble\Jasper\Exception\JavaProxiedException;
 use Soluble\Jasper\Runner\Bridged\RemoteJavaObjectProxyInterface;
 
 class JasperFillManager implements RemoteJavaObjectProxyInterface
@@ -31,11 +33,19 @@ class JasperFillManager implements RemoteJavaObjectProxyInterface
      * @param JavaObject Java('java.util.HashMap')
      * @param JRDataSourceInterface $dataSource
      *
-     * @return mixed
+     * @return JavaObject Java('net.sf.jasperreports.engine.JasperPrint')
+     *
+     * @throws JavaProxiedException
      */
-    public function fillReport(JavaObject $compiled, JavaObject $params, JRDataSourceInterface $dataSource)
+    public function fillReport(JavaObject $compiled, JavaObject $params, JRDataSourceInterface $dataSource): JavaObject
     {
-        return $this->jasperFillManager->fillReport($compiled, $params, $dataSource->getJavaProxiedObject());
+        try {
+            $filledReport = $this->jasperFillManager->fillReport($compiled, $params, $dataSource->getJavaProxiedObject());
+        } catch (JavaException $e) {
+            throw new JavaProxiedException($e);
+        }
+
+        return $filledReport;
     }
 
     /**
