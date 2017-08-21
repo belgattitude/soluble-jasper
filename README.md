@@ -41,7 +41,7 @@ $bridgeAdapter = new BridgeAdapter([
     'servlet_address' => 'localhost:8080/JasperReports/servlet.phpjavabridge'    
 ]);
 
-$reportRunner = ReportRunnerFactory::getBridgedJasperReportRunner($bridgeAdapter);
+$reportRunner = ReportRunnerFactory::getBridgedReportRunner($bridgeAdapter);
 
 $report = new Report(
      '/path/my_report.jrxml',
