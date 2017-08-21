@@ -28,11 +28,17 @@ class JavaProxiedException extends RuntimeException implements JavaProxiedExcept
 
     /**
      * Return java exception as return by the bridge server.
-     *
-     * @return JavaException
      */
     public function getJavaException(): JavaException
     {
         return $this->javaException;
+    }
+
+    /**
+     * Return the JVM exception backtrace.
+     */
+    public function getJvmStackTrace(): string
+    {
+        return $this->javaException->getStackTrace();
     }
 }

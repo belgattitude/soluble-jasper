@@ -16,6 +16,7 @@ use Soluble\Jasper\Runner\Bridged\Proxy\JRDataSourceInterface;
 use Soluble\Jasper\Runner\Bridged\Proxy\JREmptyDataSource;
 use Soluble\Jasper\Report;
 use Soluble\Jasper\ReportParams;
+use Soluble\Jasper\Exception;
 
 class BridgedReportRunner implements ReportRunnerInterface
 {
@@ -51,6 +52,12 @@ class BridgedReportRunner implements ReportRunnerInterface
 
     /**
      * @param Report $report
+     *
+     * @throws Exception\BrokenXMLReportFileException when cannot parse the xml content or invalid xml file
+     * @throws Exception\ReportFileNotFoundException  when the report file cannot be located (both php and java sides)
+     * @throws Exception\ReportCompileException       when there's an error compiling/evaluating the report
+     * @throws Exception\JavaProxiedException         when the compileReport has encountered a Java error
+     * @throws Exception\RuntimeException             when an unexpected problem have been encountered
      *
      * @return CompiledJasperReport
      */

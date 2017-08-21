@@ -61,6 +61,20 @@ $exportManager->savePdf('/path/my_report_output.pdf');
 
 ```
 
+## Exceptions
+
+When running or exporting a report, the following exception can be thrown: 
+
+Generally at compile time:
+
+|---------------------------------|--------------------------------------------------------------------------|
+| `ReportFileNotFoundException`   | When the report file cannot be opened (PHP or Java side, check perms)    |
+| `BrokenXMLReportFileException`  | When the report JRXML file cannot be parsed (xml error)                  |
+| `ReportCompileException`        | Compilation error, generally an invalid expression or missing resource   |
+| `JavaProxiedException`          | Exception on the Java side, and call `$e->getJvmStackTrace()` for debug  |  
+| `RuntimeException`              | Normally never thrown, see exception message                             |
+
+
 ## Datasources
 
 Jasper reports supports multiple datasource for filling the report.
@@ -102,7 +116,8 @@ $dataSource = new JDBCDataSource(
     $dsn = JdbcDsnFactory::createDsnFromParams($dbParams);
     
     // You should get a jdbc formatted dsn:
-    // 'jdbc:mysql://localhost/my_db?user=user&password=password&serverTimezone=UTC'
+    //   'jdbc:mysql://localhost/my_db?user=user&password=password&serverTimezone=UTC'
+    // ready to use as $dsn argument for `JdbcDataSource`
     ```
 
 ## Installation
