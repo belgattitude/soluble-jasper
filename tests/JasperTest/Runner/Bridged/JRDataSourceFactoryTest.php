@@ -8,7 +8,7 @@ use JasperTestsFactories;
 use PHPUnit\Framework\TestCase;
 use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
 use Soluble\Jasper\DataSource\DataSourceInterface;
-use Soluble\Jasper\DataSource\JDBCDataSource;
+use Soluble\Jasper\DataSource\JdbcDataSource;
 use Soluble\Jasper\Exception\UnsupportedDataSourceException;
 use Soluble\Jasper\Runner\Bridged\JRDataSourceConnection;
 use Soluble\Jasper\Runner\Bridged\JRDataSourceFactory;
@@ -28,7 +28,7 @@ class JRDataSourceFactoryTest extends TestCase
     public function testFactoryWithJDBC()
     {
         $ds = (new JRDataSourceFactory($this->bridgeAdapter))->__invoke(
-                new JDBCDataSource(
+                new JdbcDataSource(
                     JasperTestsFactories::getJdbcDsn(),
                 'com.mysql.jdbc.Driver'
                 )

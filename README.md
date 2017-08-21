@@ -61,6 +61,50 @@ $exportManager->savePdf('/path/my_report_output.pdf');
 
 ```
 
+## Datasources
+
+Jasper reports supports multiple datasource for filling the report.
+
+### JdbcDataSource
+
+```php
+<?php declare(strict_types=1);
+
+use Soluble\Jasper\DataSource\JDBCDataSource;
+
+$dataSource = new JDBCDataSource(
+     'jdbc:mysql://server_host/database?user=user&password=password',
+     'com.mysql.jdbc.Driver'
+);
+```
+
+!!! tip
+    For convenience you can also use the `JdbcDsnFactory` to convert 
+    database params. 
+
+```php
+<?php declare(strict_types=1);
+
+use Soluble\Jasper\DataSource\JdbcDsnFactory;
+
+$dbParams = [
+    'driver'    => 'mysql', // JDBC driver key.
+    'host'      => 'localhost',
+    'db'        => 'my_db',
+    'user'      => 'user',
+    'password'  => 'password',
+    // Optional extended options
+    'driverOptions'  => [
+        'serverTimezone' => 'UTC'
+    ]        
+];
+
+$dsn = JdbcDsnFactory::createDsnFromParams($dbParams);
+
+// You should get a jdbc formatted dsn:
+// 'jdbc:mysql://localhost/my_db?user=user&password=password&serverTimezone=UTC'
+```
+
 ## Installation
 
 

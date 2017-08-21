@@ -7,7 +7,7 @@ namespace JasperTest\Samples;
 use JasperTest\Util\PDFUtils;
 use PHPUnit\Framework\TestCase;
 use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
-use Soluble\Jasper\DataSource\JDBCDataSource;
+use Soluble\Jasper\DataSource\JdbcDataSource;
 use Soluble\Jasper\Report;
 use Soluble\Jasper\ReportParams;
 use Soluble\Jasper\ReportRunnerFactory;
@@ -38,7 +38,7 @@ class JDBCReportGenerationTest extends TestCase
         $report = new Report(
             $reportFile,
             new ReportParams(),
-                new JDBCDataSource(
+                new JdbcDataSource(
                     \JasperTestsFactories::getJdbcDsn(),
                 'com.mysql.jdbc.Driver'
                 )

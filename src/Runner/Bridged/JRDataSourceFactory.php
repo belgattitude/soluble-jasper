@@ -8,7 +8,7 @@ use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
 use Soluble\Japha\Db\DriverManager;
 use Soluble\Japha\Interfaces\JavaObject;
 use Soluble\Jasper\DataSource\DataSourceInterface;
-use Soluble\Jasper\DataSource\JDBCDataSource;
+use Soluble\Jasper\DataSource\JdbcDataSource;
 use Soluble\Jasper\Exception\UnsupportedDataSourceException;
 use Soluble\Jasper\Runner\Bridged\Proxy\JRDataSourceInterface;
 
@@ -33,7 +33,7 @@ class JRDataSourceFactory
     {
         $jrDataSource = null;
 
-        if ($dataSource instanceof JDBCDataSource) {
+        if ($dataSource instanceof JdbcDataSource) {
             $connection = (new DriverManager($this->ba))->createConnection(
                 $dataSource->getJdbcDsn(),
                 $dataSource->getDriverClass()
