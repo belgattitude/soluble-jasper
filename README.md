@@ -32,12 +32,21 @@ Report generation using jasper reports from PHP.
 ```php
 <?php declare(strict_types=1);
 
-use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
+use Soluble\Japha\Bridge\Adapter as JavaBridgeAdapter;
 use Soluble\Jasper\{ReportRunnerFactory, Report, ReportParams};
 use Soluble\Jasper\DataSource\JDBCDataSource;
 
 
-// Step 1: Define your report parameters
+// Step 1: Get the report runner (should be done once in a container interface)
+
+$bridgeAdapter = new JavaBridgeAdapter([
+    'servlet_address' => 'localhost:8080/JasperReports/servlet.phpjavabridge'    
+]);
+
+$reportRunner = ReportRunnerFactory::getBridgedReportRunner($bridgeAdapter);
+
+
+// Step 2: Define your report parameters
 
 $report = new Report(
      '/path/my_report.jrxml',
@@ -52,15 +61,8 @@ $report = new Report(
 );
 
 
-// Step 2: Initialize the report runner
 
-$bridgeAdapter = new BridgeAdapter([
-    'servlet_address' => 'localhost:8080/JasperReports/servlet.phpjavabridge'    
-]);
-
-$reportRunner = ReportRunnerFactory::getBridgedReportRunner($bridgeAdapter);
-
-// Step 3: Get the export manager 
+// Step 3: Get the export manager and choose exports
 
 $exportManager = $reportRunner->getExportManager($report);
 $exportManager->savePdf('/path/my_report_output.pdf');
