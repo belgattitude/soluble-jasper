@@ -67,12 +67,15 @@ When running or exporting a report, the following exception can be thrown:
 
 Generally at compile time:
 
+| Exception                       | Description                                                              |                    
 |---------------------------------|--------------------------------------------------------------------------|
 | `ReportFileNotFoundException`   | When the report file cannot be opened (PHP or Java side, check perms)    |
 | `BrokenXMLReportFileException`  | When the report JRXML file cannot be parsed (xml error)                  |
 | `ReportCompileException`        | Compilation error, generally an invalid expression or missing resource   |
 | `JavaProxiedException`          | Exception on the Java side, and call `$e->getJvmStackTrace()` for debug  |  
 | `RuntimeException`              | Normally never thrown, see exception message                             |
+
+
 
 
 ## Datasources

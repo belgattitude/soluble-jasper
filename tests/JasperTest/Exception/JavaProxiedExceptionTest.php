@@ -43,7 +43,7 @@ class JavaProxiedExceptionTest extends TestCase
             $je = $pe->getJavaException();
             $this->assertInstanceOf(JavaException::class, $je);
 
-            $this->assertEquals($pe->getStackTrace(), $je->getStackTrace());
+            $this->assertEquals($pe->getJvmStackTrace(), $je->getStackTrace());
         }
     }
 }

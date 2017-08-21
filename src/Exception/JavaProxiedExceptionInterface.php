@@ -14,4 +14,9 @@ interface JavaProxiedExceptionInterface
      * @return JavaException
      */
     public function getJavaException(): JavaException;
+
+    /**
+     * Return the JVM exception backtrace.
+     */
+    public function getJvmStackTrace(): string;
 }
