@@ -28,7 +28,7 @@ class BasicReportGenerationTest extends TestCase
     {
         $reportFile = \JasperTestsFactories::getDefaultReportFile();
 
-        $reportRunner = ReportRunnerFactory::getBridgedJasperReportRunner($this->ba);
+        $reportRunner = ReportRunnerFactory::getBridgedReportRunner($this->ba);
 
         $report = new Report(
                     $reportFile,
@@ -36,7 +36,7 @@ class BasicReportGenerationTest extends TestCase
                         'BookTitle'    => 'Soluble Jasper',
                         'BookSubTitle' => 'Generated from unit tests'
                     ]),
-            new JDBCDataSource(\JasperTestsFactories::getJdbcDsn())
+            new JDBCDataSource(\JasperTestsFactories::getJdbcDsn(), 'com.mysql.jdbc.Driver')
         );
 
         $exportManager = $reportRunner->getExportManager($report);

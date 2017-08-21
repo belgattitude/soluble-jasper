@@ -12,7 +12,7 @@ class JRDataSourceConnection implements JRDataSourceInterface
     /**
      * @var JavaObject Java('java.sql.Connection')
      */
-    protected $connection;
+    private $connection;
 
     public function __construct(JavaObject $connection)
     {

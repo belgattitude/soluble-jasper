@@ -33,7 +33,7 @@ class JDBCReportGenerationTest extends TestCase
     {
         $reportFile = \JasperTestsFactories::getReportBaseDir() . '/08_report_test_jdbc.jrxml';
 
-        $reportRunner = ReportRunnerFactory::getBridgedJasperReportRunner($this->ba);
+        $reportRunner = ReportRunnerFactory::getBridgedReportRunner($this->ba);
 
         $report = new Report(
             $reportFile,

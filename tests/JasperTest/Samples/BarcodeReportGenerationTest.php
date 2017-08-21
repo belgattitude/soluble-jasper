@@ -26,7 +26,7 @@ class BarcodeReportGenerationTest extends TestCase
     {
         $reportFile = \JasperTestsFactories::getReportBaseDir() . '/06_report_test_barcodes.jrxml';
 
-        $reportRunner = ReportRunnerFactory::getBridgedJasperReportRunner($this->ba);
+        $reportRunner = ReportRunnerFactory::getBridgedReportRunner($this->ba);
 
         $report = new Report($reportFile);
 

@@ -7,9 +7,9 @@ namespace JasperTest\Runner\Bridged\Proxy;
 use JasperTestsFactories;
 use PHPUnit\Framework\TestCase;
 use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
+use Soluble\Jasper\Report\ReportInterface;
 use Soluble\Jasper\Runner\Bridged\Proxy\FilledJasperReport;
 use Soluble\Jasper\Report;
-use Soluble\Jasper\ReportInterface;
 
 class FilledJasperReportTest extends TestCase
 {

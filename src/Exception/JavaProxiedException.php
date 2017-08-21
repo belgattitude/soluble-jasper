@@ -11,7 +11,7 @@ class JavaProxiedException extends RuntimeException implements JavaProxiedExcept
     /**
      * @var JavaException
      */
-    protected $javaException;
+    private $javaException;
 
     public function __construct(JavaException $javaException, ?string $msg = null, ?int $code = null)
     {

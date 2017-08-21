@@ -20,7 +20,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "Soluble\\Jasper\\": "src/Soluble/Jasper"
+            "Soluble\\Jasper\\": "src"
         }
     },
     "autoload-dev": {

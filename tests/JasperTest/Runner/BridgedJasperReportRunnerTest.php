@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 use Soluble\Jasper\Exception\BrokenXMLReportFileException;
 use Soluble\Jasper\Runner\Bridged\Proxy\CompiledJasperReport;
 use Soluble\Jasper\Report;
-use Soluble\Jasper\Runner\BridgedJasperReportRunner;
+use Soluble\Jasper\Runner\BridgedReportRunner;
 use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
 
 class BridgedJasperReportRunnerTest extends TestCase
@@ -31,7 +31,7 @@ class BridgedJasperReportRunnerTest extends TestCase
 
     public function testCompile()
     {
-        $jasperRunner = new BridgedJasperReportRunner($this->bridgeAdapter);
+        $jasperRunner = new BridgedReportRunner($this->bridgeAdapter);
         $compiled = $jasperRunner->compileReport($this->report);
         $this->assertInstanceOf(CompiledJasperReport::class, $compiled);
     }
@@ -50,7 +50,7 @@ class BridgedJasperReportRunnerTest extends TestCase
             )
         );
 
-        $jasperRunner = new BridgedJasperReportRunner($this->bridgeAdapter);
+        $jasperRunner = new BridgedReportRunner($this->bridgeAdapter);
         $jasperRunner->compileReport($report);
     }
 }

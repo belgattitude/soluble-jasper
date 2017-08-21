@@ -13,7 +13,7 @@ class ReportParams implements \ArrayAccess, \IteratorAggregate
     /**
      * @var ArrayObject
      */
-    protected $params;
+    private $params;
 
     /**
      * ReportParams constructor.

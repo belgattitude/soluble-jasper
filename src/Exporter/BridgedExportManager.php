@@ -9,37 +9,37 @@ use Soluble\Jasper\Runner\Bridged\Proxy\FilledJasperReport;
 use Soluble\Jasper\Runner\Bridged\Proxy\JasperExportManager;
 use Soluble\Jasper\Runner\Bridged\JRDataSourceFactory;
 use Soluble\Jasper\Runner\Bridged\Proxy\JRDataSourceInterface;
-use Soluble\Jasper\Runner\BridgedJasperReportRunner;
+use Soluble\Jasper\Runner\BridgedReportRunner;
 use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
 
 class BridgedExportManager implements ExportManagerInterface
 {
     /**
-     * @var BridgedJasperReportRunner
+     * @var BridgedReportRunner
      */
-    protected $runner;
+    private $runner;
 
     /**
      * @var Report
      */
-    protected $report;
+    private $report;
 
     /**
      * @var FilledJasperReport
      */
-    protected $filledReport;
+    private $filledReport;
 
     /**
      * @var BridgeAdapter
      */
-    protected $ba;
+    private $ba;
 
     /**
      * @var JasperExportManager
      */
-    protected $exportManager;
+    private $exportManager;
 
-    public function __construct(BridgedJasperReportRunner $runner, Report $report)
+    public function __construct(BridgedReportRunner $runner, Report $report)
     {
         $this->runner = $runner;
         $this->report = $report;

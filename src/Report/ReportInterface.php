@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Soluble\Jasper;
+namespace Soluble\Jasper\Report;
 
 interface ReportInterface
 {

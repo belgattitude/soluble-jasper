@@ -13,12 +13,12 @@ class JasperReport implements RemoteJavaObjectProxyInterface
     /**
      * @var BridgeAdapter
      */
-    protected $ba;
+    private $ba;
 
     /**
      * @var JavaObject Java('net.sf.jasperreports.engine.JasperReport')
      */
-    protected $jasperReport;
+    private $jasperReport;
 
     public function __construct(BridgeAdapter $bridgeAdapter)
     {

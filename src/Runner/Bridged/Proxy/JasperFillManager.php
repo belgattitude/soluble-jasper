@@ -13,12 +13,12 @@ class JasperFillManager implements RemoteJavaObjectProxyInterface
     /**
      * @var BridgeAdapter
      */
-    protected $ba;
+    private $ba;
 
     /**
      * @var \Soluble\Japha\Interfaces\JavaObject
      */
-    protected $jasperFillManager;
+    private $jasperFillManager;
 
     public function __construct(BridgeAdapter $bridgeAdapter)
     {

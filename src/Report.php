@@ -6,23 +6,24 @@ namespace Soluble\Jasper;
 
 use Soluble\Jasper\DataSource\DataSourceInterface;
 use Soluble\Jasper\Exception\ReportFileNotFoundException;
+use Soluble\Jasper\Report\ReportInterface;
 
 class Report implements ReportInterface
 {
     /**
      * @var string
      */
-    protected $reportFile;
+    private $reportFile;
 
     /**
      * @var ReportParams
      */
-    protected $reportParams;
+    private $reportParams;
 
     /**
      * @var DataSourceInterface
      */
-    protected $dataSource;
+    private $dataSource;
 
     public function __construct(string $reportJRXMLFile, ReportParams $reportParams = null, DataSourceInterface $dataSource = null)
     {

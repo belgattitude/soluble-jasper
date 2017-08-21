@@ -17,27 +17,27 @@ use Soluble\Jasper\Runner\Bridged\Proxy\JREmptyDataSource;
 use Soluble\Jasper\Report;
 use Soluble\Jasper\ReportParams;
 
-class BridgedJasperReportRunner implements ReportRunnerInterface
+class BridgedReportRunner implements ReportRunnerInterface
 {
     /**
      * @var BridgeAdapter
      */
-    protected $ba;
+    private $ba;
 
     /**
      * @var JasperCompileManager
      */
-    protected $compileManager;
+    private $compileManager;
 
     /**
      * @var JasperFillManager
      */
-    protected $fillManager;
+    private $fillManager;
 
     /**
      * @var JasperExportManager
      */
-    protected $exportManager;
+    private $exportManager;
 
     /**
      * JasperReportRunner constructor.

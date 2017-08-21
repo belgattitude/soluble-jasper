@@ -13,12 +13,12 @@ class JasperExportManager implements RemoteJavaObjectProxyInterface
     /**
      * @var BridgeAdapter
      */
-    protected $ba;
+    private $ba;
 
     /**
      * @var \Soluble\Japha\Interfaces\JavaClass Java(''net.sf.jasperreports.engine.JasperExportManager')
      */
-    protected $exportManager;
+    private $exportManager;
 
     public function __construct(BridgeAdapter $bridgeAdapter)
     {

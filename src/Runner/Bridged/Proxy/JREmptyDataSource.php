@@ -12,12 +12,12 @@ class JREmptyDataSource implements JRDataSourceInterface
     /**
      * @var BridgeAdapter
      */
-    protected $ba;
+    private $ba;
 
     /**
      * @var \Soluble\Japha\Interfaces\JavaObject
      */
-    protected $jrEmptyDataSource;
+    private $jrEmptyDataSource;
 
     public function __construct(BridgeAdapter $bridgeAdapter)
     {

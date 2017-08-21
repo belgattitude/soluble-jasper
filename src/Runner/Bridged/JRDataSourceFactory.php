@@ -17,7 +17,7 @@ class JRDataSourceFactory
     /**
      * @var BridgeAdapter
      */
-    protected $ba;
+    private $ba;
 
     public function __construct(BridgeAdapter $bridgeAdapter)
     {

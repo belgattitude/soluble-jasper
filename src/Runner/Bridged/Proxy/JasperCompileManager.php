@@ -15,12 +15,12 @@ class JasperCompileManager implements RemoteJavaObjectProxyInterface
     /**
      * @var BridgeAdapter
      */
-    protected $ba;
+    private $ba;
 
     /**
      * @var \Soluble\Japha\Interfaces\JavaClass Java('net.sf.jasperreports.engine.JasperCompileManager')
      */
-    protected $compileManager;
+    private $compileManager;
 
     public function __construct(BridgeAdapter $bridgeAdapter)
     {

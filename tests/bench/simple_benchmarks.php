@@ -61,7 +61,7 @@ $end_connection_time = $bm->getTimeMs();
 $connection_time = $bm->getFormattedTimeMs($start_connection_time, $end_connection_time);
 // END OF BENCHING CONNECTION
 
-$reportRunner = ReportRunnerFactory::getBridgedJasperReportRunner($ba);
+$reportRunner = ReportRunnerFactory::getBridgedReportRunner($ba);
 
 $miniReport = $reports['text-only'];
 $imgMiniReport = $reports['text+png'];

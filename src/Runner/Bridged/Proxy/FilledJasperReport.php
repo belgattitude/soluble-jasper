@@ -6,7 +6,7 @@ namespace Soluble\Jasper\Runner\Bridged\Proxy;
 
 use Soluble\Japha\Interfaces\JavaObject;
 use Soluble\Jasper\Report;
-use Soluble\Jasper\ReportInterface;
+use Soluble\Jasper\Report\ReportInterface;
 use Soluble\Jasper\Runner\Bridged\RemoteJavaObjectProxyInterface;
 
 class FilledJasperReport implements RemoteJavaObjectProxyInterface, ReportInterface
@@ -14,12 +14,12 @@ class FilledJasperReport implements RemoteJavaObjectProxyInterface, ReportInterf
     /**
      * @var JavaObject Java('net.sf.jasperreports.engine.JasperPrint')
      */
-    protected $filledReport;
+    private $filledReport;
 
     /**
      * @var Report
      */
-    protected $report;
+    private $report;
 
     /**
      * @param JavaObject $filledReport Java('net.sf.jasperreports.engine.JasperPrint')

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Soluble\Jasper;
 
 use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
-use Soluble\Jasper\Runner\BridgedJasperReportRunner;
+use Soluble\Jasper\Runner\BridgedReportRunner;
 
 class ReportRunnerFactory
 {
@@ -14,10 +14,10 @@ class ReportRunnerFactory
      *
      * @param BridgeAdapter $bridgeAdapter soluble japha bridge adapter
      *
-     * @return BridgedJasperReportRunner
+     * @return BridgedReportRunner
      */
-    public static function getBridgedJasperReportRunner(BridgeAdapter $bridgeAdapter): BridgedJasperReportRunner
+    public static function getBridgedReportRunner(BridgeAdapter $bridgeAdapter): BridgedReportRunner
     {
-        return new BridgedJasperReportRunner($bridgeAdapter);
+        return new BridgedReportRunner($bridgeAdapter);
     }
 }
