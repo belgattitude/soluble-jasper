@@ -54,8 +54,10 @@ class JsonReportGenerationTest extends TestCase
 
         $reportParams = new ReportParams();
 
+        $jsonFile = \JasperTestsFactories::getDataBaseDir() . '/northwind.json';
+
+        /*
         $dataFile = $this->ba->java('net.sf.jasperreports.data.StandardRepositoryDataLocation');
-        $jsonFile = '/web/www/soluble-jasper/tests/data/northwind.json';
         $dataFile->setLocation($jsonFile);
         echo (string) $dataFile->getLocation();
         //die();
@@ -68,7 +70,7 @@ class JsonReportGenerationTest extends TestCase
         $jsonAdapter->setDatePattern('yyyy-MM-dd');
         $jsonAdapter->setUseConnection(false);
         //$jsonAdapter->setDataFile($dataFile);
-
+*/
         $report = new Report($reportFile, $reportParams, $dataSource);
 
         /*
