@@ -7,10 +7,10 @@ namespace Soluble\Jasper\Runner\Bridged;
 use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
 use Soluble\Japha\Db\DriverManager;
 use Soluble\Japha\Interfaces\JavaObject;
-use Soluble\Jasper\DataSource\DataSourceInterface;
-use Soluble\Jasper\DataSource\JdbcDataSource;
+use Soluble\Jasper\DataSource;
 use Soluble\Jasper\Exception\UnsupportedDataSourceException;
-use Soluble\Jasper\Runner\Bridged\Proxy\JRDataSourceInterface;
+use Soluble\Jasper\Proxy\Engine\JRDataSourceInterface;
+use Soluble\Jasper\Proxy\Engine\JREmptyDataSource;
 
 class JRDataSourceFactory
 {
@@ -25,20 +25,22 @@ class JRDataSourceFactory
     }
 
     /**
-     * @param DataSourceInterface $dataSource
+     * @param DataSource\DataSourceInterface $dataSource
      *
      * @return JavaObject
      */
-    public function __invoke(DataSourceInterface $dataSource): JRDataSourceInterface
+    public function __invoke(DataSource\DataSourceInterface $dataSource): JRDataSourceInterface
     {
         $jrDataSource = null;
 
-        if ($dataSource instanceof JdbcDataSource) {
+        if ($dataSource instanceof DataSource\JdbcDataSource) {
             $connection = (new DriverManager($this->ba))->createConnection(
                 $dataSource->getJdbcDsn(),
                 $dataSource->getDriverClass()
             );
             $jrDataSource = new JRDataSourceConnection($connection);
+        } elseif ($dataSource instanceof DataSource\EmptyDataSource) {
+            $jrDataSource = new JREmptyDataSource($this->ba);
         }
 
         if ($jrDataSource === null) {

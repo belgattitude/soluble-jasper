@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Soluble\Jasper\Runner\Bridged;
 
 use Soluble\Japha\Interfaces\JavaObject;
-use Soluble\Jasper\Runner\Bridged\Proxy\JRDataSourceInterface;
+use Soluble\Jasper\Proxy\Engine\JRDataSourceInterface;
 
 class JRDataSourceConnection implements JRDataSourceInterface
 {

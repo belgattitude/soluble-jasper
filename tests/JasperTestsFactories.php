@@ -36,6 +36,16 @@ class JasperTestsFactories
     }
 
     /**
+     * Return the report base directory where data (json, xml...) stands.
+     *
+     * @return string
+     */
+    public static function getDataBaseDir(): string
+    {
+        return __DIR__ . '/data';
+    }
+
+    /**
      * Return the report output dir used for tests.
      *
      * @return string

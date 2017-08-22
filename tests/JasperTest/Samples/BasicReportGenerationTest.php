@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace JasperTest\Samples;
 
-use Soluble\Jasper\DataSource\JdbcDataSource;
 use Soluble\Jasper\Report;
 use Soluble\Jasper\ReportParams;
 use PHPUnit\Framework\TestCase;
@@ -26,7 +25,7 @@ class BasicReportGenerationTest extends TestCase
 
     public function testDefaultReport()
     {
-        $reportFile = \JasperTestsFactories::getDefaultReportFile();
+        $reportFile = \JasperTestsFactories::getReportBaseDir() . '/01_report_test_default.jrxml';
 
         $reportRunner = ReportRunnerFactory::getBridgedReportRunner($this->ba);
 
@@ -35,8 +34,7 @@ class BasicReportGenerationTest extends TestCase
                     new ReportParams([
                         'BookTitle'    => 'Soluble Jasper',
                         'BookSubTitle' => 'Generated from unit tests'
-                    ]),
-            new JdbcDataSource(\JasperTestsFactories::getJdbcDsn(), 'com.mysql.jdbc.Driver')
+                    ])
         );
 
         $exportManager = $reportRunner->getExportManager($report);

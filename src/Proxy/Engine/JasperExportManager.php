@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Soluble\Jasper\Runner\Bridged\Proxy;
+namespace Soluble\Jasper\Proxy\Engine;
 
 use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
 use Soluble\Japha\Interfaces\JavaObject;
-use Soluble\Jasper\Runner\Bridged\RemoteJavaObjectProxyInterface;
+use Soluble\Jasper\Proxy\RemoteJavaObjectProxyInterface;
 
 class JasperExportManager implements RemoteJavaObjectProxyInterface
 {
@@ -57,12 +57,12 @@ class JasperExportManager implements RemoteJavaObjectProxyInterface
     }*/
 
     /**
-     * @param JavaObject $filledReport Java('net.sf.jasperreports.engine.JasperPrint')
+     * @param JavaObject $jasperPrint Java('net.sf.jasperreports.engine.JasperPrint')
      * @param string     $outputFile
      */
-    public function exportReportToPdfFile(JavaObject $filledReport, string $outputFile): void
+    public function exportReportToPdfFile(JavaObject $jasperPrint, string $outputFile): void
     {
-        $this->exportManager->exportReportToPdfFile($filledReport, $outputFile);
+        $this->exportManager->exportReportToPdfFile($jasperPrint, $outputFile);
     }
 
     /**

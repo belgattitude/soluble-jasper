@@ -8,6 +8,7 @@ use JasperTest\Util\PDFUtils;
 use Soluble\Jasper\Report;
 use PHPUnit\Framework\TestCase;
 use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
+use Soluble\Jasper\ReportParams;
 use Soluble\Jasper\ReportRunnerFactory;
 
 class BarcodeReportGenerationTest extends TestCase
@@ -28,7 +29,10 @@ class BarcodeReportGenerationTest extends TestCase
 
         $reportRunner = ReportRunnerFactory::getBridgedReportRunner($this->ba);
 
-        $report = new Report($reportFile);
+        $report = new Report($reportFile, new ReportParams([
+            'BookTitle'    => 'Soluble Jasper',
+            'BookSubTitle' => 'Generated from unit tests'
+        ]));
 
         $exportManager = $reportRunner->getExportManager($report);
 

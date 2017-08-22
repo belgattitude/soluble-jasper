@@ -3,20 +3,20 @@
 set -e
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-PROJECT_DIR="$SCRIPT_DIR/.."
+PROJECT_DIR="${SCRIPT_DIR}/.."
 
 
 # Webapp runner properties
 WEBAPP_RUNNER_VERSION="8.5.15.1";
-WEBAPP_RUNNER_URL="http://search.maven.org/remotecontent?filepath=com/github/jsimone/webapp-runner/$WEBAPP_RUNNER_VERSION/webapp-runner-$WEBAPP_RUNNER_VERSION.jar"
-WEBAPP_RUNNER_JAR="$SCRIPT_DIR/downloads/webapp-runner.jar"
+WEBAPP_RUNNER_URL="http://central.maven.org/maven2/com/github/jsimone/webapp-runner/${WEBAPP_RUNNER_VERSION}/webapp-runner-${WEBAPP_RUNNER_VERSION}.jar"
+WEBAPP_RUNNER_JAR="${SCRIPT_DIR}/downloads/webapp-runner.jar"
 WEBAPP_RUNNER_PORT=8083
-WEBAPP_RUNNER_LOGFILE="$SCRIPT_DIR/webapp-runner.$WEBAPP_RUNNER_PORT.log"
-WEBAPP_RUNNER_PIDFILE="$SCRIPT_DIR/webapp-runner.$WEBAPP_RUNNER_PORT.pid"
+WEBAPP_RUNNER_LOGFILE="${SCRIPT_DIR}/webapp-runner.${WEBAPP_RUNNER_PORT}.log"
+WEBAPP_RUNNER_PIDFILE="${SCRIPT_DIR}/webapp-runner.${WEBAPP_RUNNER_PORT}.pid"
 
 JAVA_BIN=`which java`
 
-JASPER_BRIDGE_WAR=${SCRIPT_DIR}/jasper_report_server.war
+JASPER_BRIDGE_WAR="${SCRIPT_DIR}/jasper_report_server.war"
 
 
 cd $SCRIPT_DIR;
@@ -50,8 +50,8 @@ runJavaBridgeServerInBackground() {
 
     SERVER_PID=`cat $WEBAPP_RUNNER_PIDFILE`;
 
-    echo "[*] Server starter with PID $SERVER_PID";
-    echo "    and command: $CMD";
+    echo "[*] Server starter with PID ${SERVER_PID}";
+    echo "    and command: ${CMD}";
 }
 
 

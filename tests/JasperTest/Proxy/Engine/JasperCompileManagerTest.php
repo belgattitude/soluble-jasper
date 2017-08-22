@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace JasperTest\Runner\Bridged\Proxy;
+namespace JasperTest\Proxy\Engine;
 
 use PHPUnit\Framework\TestCase;
 use Soluble\Japha\Interfaces\JavaObject;
 use Soluble\Jasper\Exception\BrokenXMLReportFileException;
 use Soluble\Jasper\Exception\ReportCompileException;
 use Soluble\Jasper\Exception\ReportFileNotFoundException;
-use Soluble\Jasper\Runner\Bridged\Proxy\JasperCompileManager;
+use Soluble\Jasper\Proxy\Engine\JasperCompileManager;
 use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
 
 class JasperCompileManagerTest extends TestCase
@@ -28,8 +28,8 @@ class JasperCompileManagerTest extends TestCase
     {
         $reportFile = \JasperTestsFactories::getDefaultReportFile();
         $compileManager = new JasperCompileManager($this->bridgeAdapter);
-        $compiled = $compileManager->compileReport($reportFile);
-        $this->assertInstanceOf(JavaObject::class, $compiled);
+        $jasperReport = $compileManager->compileReport($reportFile);
+        $this->assertInstanceOf(JavaObject::class, $jasperReport);
     }
 
     public function testCompileWithMissingFileShouldThrowReportNotFoundException()

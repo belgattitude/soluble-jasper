@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.4.0.final using JasperReports Library version 6.4.1  -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="08_report_test_jdbc" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1a394338-e0eb-4854-aaee-411d24b45ca6">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="08_report_test_jdbc" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" whenResourceMissingType="Error" uuid="1a394338-e0eb-4854-aaee-411d24b45ca6">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DataAdapter.xml"/>
 	<queryString>
 		<![CDATA[SELECT
 `p18`.`product_id`,
@@ -14,8 +15,7 @@
 `p18`.`created_at`
 FROM `product_translation` as `p18`
 LEFT OUTER JOIN `product` as `p`
-ON `p`.`product_id` = `p18`.`product_id` and `p18`.`lang` = "fr"
-]]>
+ON `p`.`product_id` = `p18`.`product_id` and `p18`.`lang` = "fr"]]>
 	</queryString>
 	<field name="product_id" class="java.math.BigInteger"/>
 	<field name="reference" class="java.lang.String"/>
@@ -53,7 +53,7 @@ ON `p`.`product_id` = `p18`.`product_id` and `p18`.`lang` = "fr"
 		<band height="41" splitType="Stretch">
 			<textField>
 				<reportElement x="150" y="5" width="80" height="16" uuid="d1833b7b-0e14-447a-9998-f192b0cc11eb"/>
-				<textFieldExpression><![CDATA[$F{title} ]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{title}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="0" y="5" width="150" height="30" uuid="14db0376-ad26-4932-9d07-81b564575d00"/>

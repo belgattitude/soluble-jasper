@@ -36,11 +36,11 @@ class JDBCReportGenerationTest extends TestCase
         $reportRunner = ReportRunnerFactory::getBridgedReportRunner($this->ba);
 
         $report = new Report(
-            $reportFile,
-            new ReportParams(),
+                $reportFile,
+                new ReportParams(),
                 new JdbcDataSource(
-                    \JasperTestsFactories::getJdbcDsn(),
-                'com.mysql.jdbc.Driver'
+                        \JasperTestsFactories::getJdbcDsn(),
+                    'com.mysql.jdbc.Driver'
                 )
             );
 
@@ -59,5 +59,6 @@ class JDBCReportGenerationTest extends TestCase
         $text = $pdfUtils->getPDFText($output_pdf);
 
         $this->assertContains('JDBC mysql report test', $text);
+        $this->assertContains('Congas', $text);
     }
 }

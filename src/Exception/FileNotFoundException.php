@@ -4,6 +4,6 @@ declare(strict_types=1);
 
 namespace Soluble\Jasper\Exception;
 
-class ReportFileNotFoundException extends FileNotFoundException
+class FileNotFoundException extends RuntimeException
 {
 }

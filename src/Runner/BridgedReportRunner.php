@@ -7,13 +7,14 @@ namespace Soluble\Jasper\Runner;
 use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
 use Soluble\Japha\Interfaces\JavaObject;
 use Soluble\Jasper\Exporter\BridgedExportManager;
-use Soluble\Jasper\Runner\Bridged\Proxy\CompiledJasperReport;
-use Soluble\Jasper\Runner\Bridged\Proxy\FilledJasperReport;
-use Soluble\Jasper\Runner\Bridged\Proxy\JasperCompileManager;
-use Soluble\Jasper\Runner\Bridged\Proxy\JasperExportManager;
-use Soluble\Jasper\Runner\Bridged\Proxy\JasperFillManager;
-use Soluble\Jasper\Runner\Bridged\Proxy\JRDataSourceInterface;
-use Soluble\Jasper\Runner\Bridged\Proxy\JREmptyDataSource;
+use Soluble\Jasper\JRParameter;
+use Soluble\Jasper\ReportProperties;
+use Soluble\Jasper\Proxy\Engine\JasperReport;
+use Soluble\Jasper\Proxy\Engine\JasperPrint;
+use Soluble\Jasper\Proxy\Engine\JasperCompileManager;
+use Soluble\Jasper\Proxy\Engine\JasperFillManager;
+use Soluble\Jasper\Proxy\Engine\JRDataSourceInterface;
+use Soluble\Jasper\Proxy\Engine\JREmptyDataSource;
 use Soluble\Jasper\Report;
 use Soluble\Jasper\ReportParams;
 use Soluble\Jasper\Exception;
@@ -29,16 +30,6 @@ class BridgedReportRunner implements ReportRunnerInterface
      * @var JasperCompileManager
      */
     private $compileManager;
-
-    /**
-     * @var JasperFillManager
-     */
-    private $fillManager;
-
-    /**
-     * @var JasperExportManager
-     */
-    private $exportManager;
 
     /**
      * JasperReportRunner constructor.
@@ -59,55 +50,90 @@ class BridgedReportRunner implements ReportRunnerInterface
      * @throws Exception\JavaProxiedException         when the compileReport has encountered a Java error
      * @throws Exception\RuntimeException             when an unexpected problem have been encountered
      *
-     * @return CompiledJasperReport
+     * @return JasperReport
      */
-    public function compileReport(Report $report): CompiledJasperReport
+    public function compileReport(Report $report): JasperReport
     {
         if ($this->compileManager === null) {
             $this->compileManager = new JasperCompileManager($this->ba);
         }
         try {
-            $compiledReport = $this->compileManager->compileReport($report->getReportFile());
+            $jasperReport = $this->compileManager->compileReport($report->getReportFile());
         } catch (\Exception $e) {
             throw $e;
         }
 
-        return new CompiledJasperReport($compiledReport, $report);
+        return new JasperReport($jasperReport, $report);
+    }
+
+    public function getReportContext()
+    {
     }
 
     /**
-     * @param CompiledJasperReport       $compiledReport
+     * @param JasperReport               $jasperReport     The compiled version of the jasper report
      * @param ReportParams|null          $reportParams
      * @param JRDataSourceInterface|null $dataSource
+     * @param ReportProperties           $reportProperties
      *
-     * @return FilledJasperReport
+     * @return JasperPrint
      *
      * @throws Exception\JavaProxiedException
      */
-    public function fillReport(CompiledJasperReport $compiledReport, ReportParams $reportParams = null, JRDataSourceInterface $dataSource = null): FilledJasperReport
-    {
-        if ($this->fillManager === null) {
-            $this->fillManager = new JasperFillManager($this->ba);
-        }
+    public function fillReport(
+        JasperReport $jasperReport,
+                                ReportParams $reportParams = null,
+                                JRDataSourceInterface $dataSource = null,
+                                ReportProperties $reportProperties = null
+    ): JasperPrint {
+        // SetContext
+        $defaultContext = $this->ba->javaClass('net.sf.jasperreports.engine.DefaultJasperReportsContext')->getInstance();
+        $context = $this->ba->java('net.sf.jasperreports.engine.util.LocalJasperReportsContext', $defaultContext);
+
+        $reportPath = $this->ba->java('java.io.File', dirname($jasperReport->getReport()->getReportFile()));
+        $fileResolver = $this->ba->java('net.sf.jasperreports.engine.util.SimpleFileResolver', [
+                $reportPath
+            ]);
+
+        $fileResolver->setResolveAbsolutePath(true);
+        $context->setFileResolver($fileResolver);
+
+        $urlReportPath = $this->ba->java('java.io.File', $reportPath)->toUrl();
+
+        $classLoader = $this->ba->java('java.net.URLClassLoader', [
+            $urlReportPath
+        ]);
+        //$newParams->put(JRParameter::REPORT_CLASS_LOADER, $classLoader);
+        $context->setClassLoader($classLoader);
+
+        $fillManager = new JasperFillManager($this->ba, $context);
 
         if ($dataSource === null) {
             $dataSource = new JREmptyDataSource($this->ba);
         }
 
+        if ($reportProperties !== null) {
+            foreach ($reportProperties as $name => $value) {
+                $jasperReport->setProperty($name, $value);
+            }
+        }
+
         $reportParams = $this->getReportParamsWithDefaults(
             $reportParams ?? new ReportParams(),
-            $compiledReport->getReport()
+            $jasperReport->getReport()
         );
 
         $reportParamsMap = $this->buildReportParamsHashMap($reportParams);
+        $reportParamsMap->put(JRParameter::REPORT_FILE_RESOLVER, $fileResolver);
+        $reportParamsMap->put(JRParameter::REPORT_CLASS_LOADER, $classLoader);
 
-        $filledReport = $this->fillManager->fillReport(
-                                $compiledReport->getJavaProxiedObject(),
+        $jasperPrint = $fillManager->fillReport(
+                                $jasperReport->getJavaProxiedObject(),
                                 $reportParamsMap,
                                 $dataSource
         );
 
-        return new FilledJasperReport($filledReport, $compiledReport->getReport());
+        return new JasperPrint($jasperPrint, $jasperReport->getReport());
     }
 
     public function getExportManager(Report $report): BridgedExportManager
@@ -147,13 +173,15 @@ class BridgedReportRunner implements ReportRunnerInterface
         // Class loader
         $newParams = new ReportParams($reportParams);
 
-        if (!$newParams->offsetExists('REPORT_CLASS_LOADER')) {
-            $jpath = $this->ba->java('java.io.File', dirname($report->getReportFile()));
-            $url = $jpath->toUrl(); // Java.net.URL
-            $urls = [$url];
-            $classLoader = $this->ba->java('java.net.URLClassLoader', $urls);
-            $newParams->put('REPORT_CLASS_LOADER', $classLoader);
-        }
+        /*
+                if (!$newParams->offsetExists(JRParameter::REPORT_CLASS_LOADER)) {
+                    $jpath = $this->ba->java('java.io.File', dirname($report->getReportFile()));
+                    $url = $jpath->toUrl(); // Java.net.URL
+                    $urls = [$url];
+                    $classLoader = $this->ba->java('java.net.URLClassLoader', $urls);
+                    $newParams->put(JRParameter::REPORT_CLASS_LOADER, $classLoader);
+                }
+        */
 
         return $newParams;
 

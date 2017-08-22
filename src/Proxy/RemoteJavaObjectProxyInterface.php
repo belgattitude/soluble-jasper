@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Soluble\Jasper\Runner\Bridged;
+namespace Soluble\Jasper\Proxy;
 
 use Soluble\Japha\Interfaces\JavaObject;
 

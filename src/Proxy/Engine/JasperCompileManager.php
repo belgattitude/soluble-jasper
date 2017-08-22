@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Soluble\Jasper\Runner\Bridged\Proxy;
+namespace Soluble\Jasper\Proxy\Engine;
 
 use Soluble\Japha\Bridge\Exception\JavaException;
 use Soluble\Jasper\Exception;
 use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
 use Soluble\Japha\Interfaces\JavaObject;
-use Soluble\Jasper\Runner\Bridged\RemoteJavaObjectProxyInterface;
+use Soluble\Jasper\Proxy\RemoteJavaObjectProxyInterface;
 
 class JasperCompileManager implements RemoteJavaObjectProxyInterface
 {
@@ -43,17 +43,17 @@ class JasperCompileManager implements RemoteJavaObjectProxyInterface
      */
     public function compileReport(string $reportFile): JavaObject
     {
-        $compiledReport = null;
+        $jasperReport = null;
 
         try {
-            $compiledReport = $this->compileManager->compileReport($reportFile);
+            $jasperReport = $this->compileManager->compileReport($reportFile);
         } catch (JavaException $e) {
             $this->processCompileJavaException($e, $reportFile);
         } catch (\Exception $e) {
             throw new Exception\RuntimeException($e->getMessage());
         }
 
-        return $compiledReport;
+        return $jasperReport;
     }
 
     /**

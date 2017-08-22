@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace JasperTest\Runner\Bridged\Proxy;
+namespace JasperTest\Proxy\Engine;
 
 use JasperTestsFactories;
 use PHPUnit\Framework\TestCase;
 use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
 use Soluble\Jasper\Report\ReportInterface;
-use Soluble\Jasper\Runner\Bridged\Proxy\FilledJasperReport;
+use Soluble\Jasper\Proxy\Engine\JasperPrint;
 use Soluble\Jasper\Report;
 
-class FilledJasperReportTest extends TestCase
+class JasperPrintTest extends TestCase
 {
     /**
      * @var BridgeAdapter
@@ -26,10 +26,10 @@ class FilledJasperReportTest extends TestCase
     public function testGetStatus()
     {
         $report = new Report(JasperTestsFactories::getDefaultReportFile());
-        $compiled = new FilledJasperReport(
+        $jasperReport = new JasperPrint(
             $this->bridgeAdapter->java('net.sf.jasperreports.engine.JasperReport'),
             $report
         );
-        $this->assertEquals(ReportInterface::STATUS_FILLED, $compiled->getStatus());
+        $this->assertEquals(ReportInterface::STATUS_FILLED, $jasperReport->getStatus());
     }
 }

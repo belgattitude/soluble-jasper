@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace Soluble\Jasper\Exporter;
 
 use Soluble\Jasper\Report;
-use Soluble\Jasper\Runner\Bridged\Proxy\FilledJasperReport;
-use Soluble\Jasper\Runner\Bridged\Proxy\JasperExportManager;
+use Soluble\Jasper\Proxy\Engine\JasperPrint;
+use Soluble\Jasper\Proxy\Engine\JasperExportManager;
 use Soluble\Jasper\Runner\Bridged\JRDataSourceFactory;
-use Soluble\Jasper\Runner\Bridged\Proxy\JRDataSourceInterface;
+use Soluble\Jasper\Proxy\Engine\JRDataSourceInterface;
 use Soluble\Jasper\Runner\BridgedReportRunner;
 use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
 use Soluble\Jasper\Exception;
@@ -26,9 +26,9 @@ class BridgedExportManager implements ExportManagerInterface
     private $report;
 
     /**
-     * @var FilledJasperReport
+     * @var JasperPrint
      */
-    private $filledReport;
+    private $jasperPrint;
 
     /**
      * @var BridgeAdapter
@@ -56,21 +56,31 @@ class BridgedExportManager implements ExportManagerInterface
      */
     public function savePdf(string $outputFile): void
     {
+        /*
+         *
+        JRExporter exporter = new JRPdfExporter();
+        exporter.setParameter(JRExporterParameter.JASPER_PRINT, print);
+        exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, new FileOutputStream(reportName + ".pdf"));
+        exporter.exportReport();
+         */
+
         $this->exportManager->exportReportToPdfFile($this->getFilledReport()->getJavaProxiedObject(), $outputFile);
     }
 
-    protected function getFilledReport(): FilledJasperReport
+    protected function getFilledReport(): JasperPrint
     {
-        if ($this->filledReport === null) {
-            $compiledReport = $this->runner->compileReport($this->report);
-            $this->filledReport = $this->runner->fillReport(
-                                                    $compiledReport,
+        if ($this->jasperPrint === null) {
+            $jasperReport = $this->runner->compileReport($this->report);
+
+            $this->jasperPrint = $this->runner->fillReport(
+                                                    $jasperReport,
                                                     $this->report->getReportParams(),
-                                                    $this->getJRDataSource()
+                                                    $this->getJRDataSource(),
+                                                    $this->report->getReportProperties()
             );
         }
 
-        return $this->filledReport;
+        return $this->jasperPrint;
     }
 
     protected function getJRDataSource(): ?JRDataSourceInterface

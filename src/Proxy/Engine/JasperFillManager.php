@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Soluble\Jasper\Runner\Bridged\Proxy;
+namespace Soluble\Jasper\Proxy\Engine;
 
 use Soluble\Japha\Bridge\Exception\JavaException;
 use Soluble\Japha\Interfaces\JavaObject;
 use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
 use Soluble\Jasper\Exception\JavaProxiedException;
-use Soluble\Jasper\Runner\Bridged\RemoteJavaObjectProxyInterface;
+use Soluble\Jasper\Proxy\RemoteJavaObjectProxyInterface;
 
 class JasperFillManager implements RemoteJavaObjectProxyInterface
 {
@@ -18,14 +18,20 @@ class JasperFillManager implements RemoteJavaObjectProxyInterface
     private $ba;
 
     /**
-     * @var \Soluble\Japha\Interfaces\JavaObject
+     * @var JavaObject Java('net.sf.jasperreports.engine.JasperFillManager')
      */
     private $jasperFillManager;
 
-    public function __construct(BridgeAdapter $bridgeAdapter)
+    public function __construct(BridgeAdapter $bridgeAdapter, JavaObject $jasperReportsContext = null)
     {
         $this->ba = $bridgeAdapter;
-        $this->jasperFillManager = $this->ba->java('net.sf.jasperreports.engine.JasperFillManager');
+        if ($jasperReportsContext === null) {
+            $this->jasperFillManager = $this->ba->javaClass('net.sf.jasperreports.engine.JasperFillManager');
+        } else {
+            $cls = $this->ba->javaClass('net.sf.jasperreports.engine.JasperFillManager');
+
+            $this->jasperFillManager = $cls->getInstance($jasperReportsContext);
+        }
     }
 
     /**
@@ -37,15 +43,15 @@ class JasperFillManager implements RemoteJavaObjectProxyInterface
      *
      * @throws JavaProxiedException
      */
-    public function fillReport(JavaObject $compiled, JavaObject $params, JRDataSourceInterface $dataSource): JavaObject
+    public function fillReport(JavaObject $jasperReport, JavaObject $params, JRDataSourceInterface $dataSource): JavaObject
     {
         try {
-            $filledReport = $this->jasperFillManager->fillReport($compiled, $params, $dataSource->getJavaProxiedObject());
+            $jasperPrint = $this->jasperFillManager->fillReport($jasperReport, $params, $dataSource->getJavaProxiedObject());
         } catch (JavaException $e) {
             throw new JavaProxiedException($e);
         }
 
-        return $filledReport;
+        return $jasperPrint;
     }
 
     /**
