@@ -99,7 +99,7 @@ class ProgrammaticReportGenerationTest extends TestCase
         //$fillManager = $ba->javaClass('net.sf.jasperreports.engine.JasperFillManager')->getInstance($context);
 
         $params = array_merge($props, [
-            'REPORT_LOGO'  => \JasperTestsFactories::getReportBaseDir() . '/assets/wave.png',
+            'LOGO_FILE'    => \JasperTestsFactories::getReportBaseDir() . '/assets/wave.png',
             'REPORT_TITLE' => 'PHPUNIT'
         ]);
         $jasperPrint = $fillManager->fillReport(

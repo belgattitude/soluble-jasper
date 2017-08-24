@@ -45,7 +45,10 @@ class JsonReportGenerationTest extends TestCase
 
         $dataSource = new EmptyDataSource();
 
-        $reportParams = new ReportParams();
+        $reportParams = new ReportParams([
+            'LOGO_FILE'    => \JasperTestsFactories::getReportBaseDir() . '/assets/wave.png',
+            'REPORT_TITLE' => 'PHPUNIT'
+        ]);
 
         $report = new Report($reportFile, $reportParams, $dataSource);
 
@@ -67,6 +70,7 @@ class JsonReportGenerationTest extends TestCase
         $text = $pdfUtils->getPDFText($output_pdf);
 
         $this->assertContains('Customer Order List', $text);
+        $this->assertContains('PHPUNIT', $text);
         //$this->assertContains('Alfreds Futterkiste', $text);
     }
 }
