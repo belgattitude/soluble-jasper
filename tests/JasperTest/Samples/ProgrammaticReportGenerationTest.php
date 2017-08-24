@@ -112,10 +112,34 @@ class ProgrammaticReportGenerationTest extends TestCase
         // -----------------------------------------------------------------------------------
 
         $exportManager = $this->ba->javaClass('net.sf.jasperreports.engine.JasperExportManager');
+
         $exportManager->exportReportToPdfFile($jasperPrint, $outputFile);
 
         // -----------------------------------------------------------------------------------
-        // Step 6: Test output
+        // Step 6: Change permissions on outputfile
+        // -----------------------------------------------------------------------------------
+
+        $file = $ba->java('java.io.File', $outputFile);
+        if ($file->exists()) {
+            $posixPerms = $ba->javaClass('java.nio.file.attribute.PosixFilePermission');
+
+            $perms = $ba->java('java.util.HashSet');
+            $perms->add($posixPerms->OWNER_READ);
+            $perms->add($posixPerms->OWNER_WRITE);
+            $perms->add($posixPerms->GROUP_READ);
+            $perms->add($posixPerms->GROUP_WRITE);
+            $perms->add($posixPerms->OTHERS_READ);
+            $perms->add($posixPerms->OTHERS_WRITE);
+
+            $nioFiles = $ba->javaClass('java.nio.file.Files');
+            $nioPaths = $ba->javaClass('java.nio.file.Paths');
+            $paths = $nioPaths->get($file->toURI());
+
+            $nioFiles->setPosixFilePermissions($paths, $perms);
+        }
+
+        // -----------------------------------------------------------------------------------
+        // Step 7: Test output
         // -----------------------------------------------------------------------------------
         $pdfUtils = new PDFUtils();
         $text = $pdfUtils->getPDFText($outputFile);
