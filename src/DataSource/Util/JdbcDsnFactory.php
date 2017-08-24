@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Soluble\Jasper\DataSource;
+namespace Soluble\Jasper\DataSource\Util;
 
 use Soluble\Jasper\Exception\InvalidArgumentException;
 

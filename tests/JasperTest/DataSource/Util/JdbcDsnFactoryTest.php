@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace JasperTest\DataSource;
+namespace JasperTest\DataSource\Util;
 
 use PHPUnit\Framework\TestCase;
-use Soluble\Jasper\DataSource\JdbcDsnFactory;
+use Soluble\Jasper\DataSource\Util\JdbcDsnFactory;
 use Soluble\Jasper\Exception\InvalidArgumentException;
 
 class JdbcDsnFactoryTest extends TestCase
