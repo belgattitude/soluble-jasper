@@ -11,7 +11,6 @@ use Soluble\Jasper\Report;
 use PHPUnit\Framework\TestCase;
 use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
 use Soluble\Jasper\ReportParams;
-use Soluble\Jasper\ReportProperties;
 use Soluble\Jasper\ReportRunnerFactory;
 
 class JsonReportGenerationTest extends TestCase
@@ -49,16 +48,6 @@ class JsonReportGenerationTest extends TestCase
         $reportParams = new ReportParams();
 
         $report = new Report($reportFile, $reportParams, $dataSource);
-
-        $report->setReportProperties(new ReportProperties(
-            [
-                'net.sf.jasperreports.json.source'         => $jsonFile,
-                'net.sf.jasperreports.json.date.pattern'   => 'yyyy-MM-dd',
-                'net.sf.jasperreports.json.number.pattern' => '#,##0.##',
-                'net.sf.jasperreports.json.locale.code'    => 'en_GB',
-                'net.sf.jasperreports.json.timezone.id'    => 'Europe/Brussels',
-            ]
-        ));
 
         $exportManager = $reportRunner->getExportManager($report);
 

@@ -75,8 +75,7 @@ class BridgedExportManager implements ExportManagerInterface
             $this->jasperPrint = $this->runner->fillReport(
                                                     $jasperReport,
                                                     $this->report->getReportParams(),
-                                                    $this->getJRDataSource(),
-                                                    $this->report->getReportProperties()
+                                                    $this->getJRDataSource()
             );
         }
 

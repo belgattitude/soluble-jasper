@@ -8,7 +8,6 @@ use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
 use Soluble\Japha\Interfaces\JavaObject;
 use Soluble\Jasper\Exporter\BridgedExportManager;
 use Soluble\Jasper\JRParameter;
-use Soluble\Jasper\ReportProperties;
 use Soluble\Jasper\Proxy\Engine\JasperReport;
 use Soluble\Jasper\Proxy\Engine\JasperPrint;
 use Soluble\Jasper\Proxy\Engine\JasperCompileManager;
@@ -71,10 +70,9 @@ class BridgedReportRunner implements ReportRunnerInterface
     }
 
     /**
-     * @param JasperReport               $jasperReport     The compiled version of the jasper report
+     * @param JasperReport               $jasperReport The compiled version of the jasper report
      * @param ReportParams|null          $reportParams
      * @param JRDataSourceInterface|null $dataSource
-     * @param ReportProperties           $reportProperties
      *
      * @return JasperPrint
      *
@@ -83,8 +81,7 @@ class BridgedReportRunner implements ReportRunnerInterface
     public function fillReport(
         JasperReport $jasperReport,
                                 ReportParams $reportParams = null,
-                                JRDataSourceInterface $dataSource = null,
-                                ReportProperties $reportProperties = null
+                                JRDataSourceInterface $dataSource = null
     ): JasperPrint {
         // SetContext
         $defaultContext = $this->ba->javaClass('net.sf.jasperreports.engine.DefaultJasperReportsContext')->getInstance();
@@ -110,12 +107,6 @@ class BridgedReportRunner implements ReportRunnerInterface
 
         if ($dataSource === null) {
             $dataSource = new JREmptyDataSource($this->ba);
-        }
-
-        if ($reportProperties !== null) {
-            foreach ($reportProperties as $name => $value) {
-                $jasperReport->setProperty($name, $value);
-            }
         }
 
         $reportParams = $this->getReportParamsWithDefaults(

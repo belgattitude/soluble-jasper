@@ -21,16 +21,11 @@ class Report implements ReportInterface
     private $reportParams;
 
     /**
-     * @var ReportProperties
-     */
-    private $reportProperties;
-
-    /**
      * @var DataSourceInterface
      */
     private $dataSource;
 
-    public function __construct(string $reportJRXMLFile, ReportParams $reportParams = null, DataSourceInterface $dataSource = null, ReportProperties $reportProperties = null)
+    public function __construct(string $reportJRXMLFile, ReportParams $reportParams = null, DataSourceInterface $dataSource = null)
     {
         if (!file_exists($reportJRXMLFile)) {
             throw new ReportFileNotFoundException(
@@ -49,8 +44,6 @@ class Report implements ReportInterface
             $this->setDataSource($dataSource);
         }
 
-        $this->setReportProperties($reportProperties ?? new ReportProperties());
-
         $this->reportFile = $reportJRXMLFile;
     }
 
@@ -62,16 +55,6 @@ class Report implements ReportInterface
     public function getReportParams(): ?ReportParams
     {
         return $this->reportParams;
-    }
-
-    public function setReportProperties(ReportProperties $reportProperties): void
-    {
-        $this->reportProperties = $reportProperties;
-    }
-
-    public function getReportProperties(): ReportProperties
-    {
-        return $this->reportProperties;
     }
 
     public function setDataSource(DataSourceInterface $dataSource): void
