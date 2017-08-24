@@ -8,6 +8,7 @@
 	<style name="Sans_Bold_8" style="Sans_Bold" fontSize="8"/>
 	<parameter name="LOGO_FILE" class="java.lang.String">
 		<parameterDescription><![CDATA[Report logo header]]></parameterDescription>
+		<defaultValueExpression><![CDATA["/web/www/soluble-jasper/tests/reports/assets/wave.png"]]></defaultValueExpression>
 	</parameter>
 	<parameter name="REPORT_TITLE" class="java.lang.String">
 		<parameterDescription><![CDATA[]]></parameterDescription>

@@ -28,7 +28,7 @@ class ProgrammaticReportGenerationTest extends TestCase
     /**
      * An example of programmatic jasper generation.
      */
-    public function testProgrammatic()
+    public function testProgrammaticJsonReport()
     {
         $ba = $this->ba;
 
@@ -159,5 +159,16 @@ class ProgrammaticReportGenerationTest extends TestCase
             //(string) $queryExecuterFactory->JSON_LOCALE => $locale->ENGLISH
         ]));
 */
+    }
+
+    public function testProgrammaticCSVReport()
+    {
+        /*
+         * JRCsvDataSource dataSource = new JRCsvDataSource(JRLoader.getLocationInputStream("data/CsvDataSource.txt"));
+        dataSource.setRecordDelimiter("\r\n");
+        //				dataSource.setUseFirstRowAsHeader(true);
+        dataSource.setColumnNames(columnNames);
+         */
+        $this->assertTrue(true);
     }
 }

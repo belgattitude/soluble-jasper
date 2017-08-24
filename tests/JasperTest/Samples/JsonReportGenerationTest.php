@@ -25,18 +25,7 @@ class JsonReportGenerationTest extends TestCase
         $this->ba = \JasperTestsFactories::getJavaBridgeAdapter();
     }
 
-    public function testCSV()
-    {
-        /*
-         * JRCsvDataSource dataSource = new JRCsvDataSource(JRLoader.getLocationInputStream("data/CsvDataSource.txt"));
-        dataSource.setRecordDelimiter("\r\n");
-        //				dataSource.setUseFirstRowAsHeader(true);
-        dataSource.setColumnNames(columnNames);
-         */
-        $this->assertTrue(true);
-    }
-
-    public function testDefaultReport()
+    public function testJsonReport()
     {
         $reportFile = \JasperTestsFactories::getReportBaseDir() . '/10_report_test_json_northwind.jrxml';
         $jsonFile = \JasperTestsFactories::getDataBaseDir() . '/northwind.json';
