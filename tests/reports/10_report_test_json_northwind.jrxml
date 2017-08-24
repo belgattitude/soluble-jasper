@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="NorthwindOrdersReport" pageWidth="595" pageHeight="842" columnWidth="515" leftMargin="40" rightMargin="40" topMargin="50" bottomMargin="50" uuid="bbe115b5-a5a0-4b39-9b73-7092dc59ab6d">
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DataJSONAdapter.xml"/>
+<!-- Created with Jaspersoft Studio version 6.4.0.final using JasperReports Library version 6.4.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="NorthwindOrdersReport" pageWidth="595" pageHeight="842" columnWidth="515" leftMargin="40" rightMargin="40" topMargin="50" bottomMargin="50" whenResourceMissingType="Error" uuid="bbe115b5-a5a0-4b39-9b73-7092dc59ab6d">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SolubleJasperNorthwindJSON"/>
 	<style name="Sans_Normal" isDefault="true" fontName="DejaVu Sans" fontSize="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
 	<style name="Sans_Normal_8" style="Sans_Normal" fontSize="8"/>
 	<style name="Sans_Bold" fontName="DejaVu Sans" fontSize="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
 	<style name="Sans_Bold_8" style="Sans_Bold" fontSize="8"/>
 	<queryString language="jsonql">
-		<![CDATA[ ..Orders(@size > 1).* ]]>
+		<![CDATA[..Orders(@size > 1).*]]>
 	</queryString>
 	<field name="Id" class="java.lang.String">
 		<property name="net.sf.jasperreports.jsonql.field.expression" value="OrderID"/>
@@ -19,15 +20,15 @@
 	</field>
 	<field name="ShipCity" class="java.lang.String">
 		<property name="net.sf.jasperreports.jsonql.field.expression" value="^{2}.City"/>
-		<fieldDescription><![CDATA[ Go up by two levels then select City ]]></fieldDescription>
+		<fieldDescription><![CDATA[Go up by two levels then select City]]></fieldDescription>
 	</field>
 	<field name="CustomerID" class="java.lang.String">
 		<property name="net.sf.jasperreports.jsonql.field.expression" value="^{2}.CustomerID"/>
-		<fieldDescription><![CDATA[ Go up by two levels then select CustomerID ]]></fieldDescription>
+		<fieldDescription><![CDATA[Go up by two levels then select CustomerID]]></fieldDescription>
 	</field>
 	<field name="CompanyName" class="java.lang.String">
-		<propertyExpression name="net.sf.jasperreports.jsonql.field.expression"><![CDATA[ "^^[\"Company Name\"]" ]]></propertyExpression>
-		<fieldDescription><![CDATA[ Go up twice by 1 level then select CompanyName ]]></fieldDescription>
+		<propertyExpression name="net.sf.jasperreports.jsonql.field.expression"><![CDATA["^^[\"Company Name\"]"]]></propertyExpression>
+		<fieldDescription><![CDATA[Go up twice by 1 level then select CompanyName]]></fieldDescription>
 	</field>
 	<variable name="OrderNumber" class="java.lang.Integer" resetType="Group" resetGroup="CustomerIdGroup" calculation="Count">
 		<variableExpression><![CDATA[Boolean.TRUE]]></variableExpression>
@@ -54,7 +55,7 @@
 			<band height="14">
 				<frame>
 					<reportElement mode="Opaque" x="0" y="2" width="356" height="10" forecolor="#CCFFFF" backcolor="#CCFFFF" uuid="e9af134f-31eb-48be-bd9b-292188f2554f"/>
-					<staticText >
+					<staticText>
 						<reportElement style="Sans_Bold_8" mode="Opaque" x="0" y="0" width="48" height="10" backcolor="#CCFFFF" uuid="62e5e770-7b05-4ecd-a254-ab0c7f643a37"/>
 						<textElement textAlignment="Right"/>
 						<text><![CDATA[ID]]></text>

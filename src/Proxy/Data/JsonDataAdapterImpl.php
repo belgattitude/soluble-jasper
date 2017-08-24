@@ -60,7 +60,6 @@ class JsonDataAdapterImpl implements RemoteJavaObjectProxyInterface
     /**
      * Set local json filename.
      *
-     * @deprecated
      * @see self::setDataFile()
      *
      * @param string $filename
