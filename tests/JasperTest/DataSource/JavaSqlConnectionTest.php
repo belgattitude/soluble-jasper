@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace JasperTest\DataSource;
 
 use PHPUnit\Framework\TestCase;
-use Soluble\Jasper\DataSource\JdbcDataSource;
+use Soluble\Jasper\DataSource\JavaSqlConnection;
 
-class JdbcDataSourceTest extends TestCase
+class JavaSqlConnectionTest extends TestCase
 {
     public function setUp()
     {
@@ -17,7 +17,7 @@ class JdbcDataSourceTest extends TestCase
     {
         $dsn = 'jdbc:mysql://host/db?user=user&password=password';
         $driver = 'com.mysql.jdbc.Driver';
-        $ds = new JdbcDataSource($dsn, $driver);
+        $ds = new JavaSqlConnection($dsn, $driver);
         $this->assertEquals($dsn, $ds->getJdbcDsn());
         $this->assertEquals($driver, $ds->getDriverClass());
     }

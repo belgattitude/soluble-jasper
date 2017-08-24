@@ -34,7 +34,7 @@ Report generation using jasper reports from PHP.
 
 use Soluble\Japha\Bridge\Adapter as JavaBridgeAdapter;
 use Soluble\Jasper\{ReportRunnerFactory, Report, ReportParams};
-use Soluble\Jasper\DataSource\JDBCDataSource;
+use Soluble\Jasper\DataSource\JavaSqlConnection;
 
 // Step 1: Get the report runner
 // Good practice is to initialize once and get it from a PSR-11 compatible container
@@ -53,7 +53,7 @@ $report = new Report(
             'BookTitle'    => 'Soluble Jasper',
             'BookSubTitle' => 'Generated on JVM with Jasper reports'
      ]),
-     new JDBCDataSource(
+     new JavaSqlConnection(
          'jdbc:mysql://localhost/my_db?user=user&password=password',
          'com.mysql.jdbc.Driver'
      )
@@ -76,35 +76,20 @@ $stream       = $pdfExporter->getStream();
 
 ```
 
-## Exceptions
-
-When running or exporting a report, the following exception can be thrown: 
-
-Generally at compile time:
-
-| Exception                       | Description                                                              |                    
-|---------------------------------|--------------------------------------------------------------------------|
-| `ReportFileNotFoundException`   | When the report file cannot be opened (PHP or Java side, check perms)    |
-| `BrokenXMLReportFileException`  | When the report JRXML file cannot be parsed (xml error)                  |
-| `ReportCompileException`        | Compilation error, generally an invalid expression or missing resource   |
-| `JavaProxiedException`          | Exception on the Java side, and call `$e->getJvmStackTrace()` for debug  |  
-| `RuntimeException`              | Normally never thrown, see exception message                             |
-
-
-
 
 ## Datasources
 
-Jasper reports supports multiple datasource for filling the report.
 
-### JdbcDataSource
+Jasper reports supports multiple datasources for filling the report (see [JRApi](http://jasperreports.sourceforge.net/api/net/sf/jasperreports/engine/JasperFillManager.html))
+
+### JavaSqlConnection
 
 ```php
 <?php declare(strict_types=1);
 
-use Soluble\Jasper\DataSource\JDBCDataSource;
+use Soluble\Jasper\DataSource\JavaSqlConnection;
 
-$dataSource = new JDBCDataSource(
+$dataSource = new JavaSqlConnection(
      'jdbc:mysql://server_host/database?user=user&password=password',
      'com.mysql.jdbc.Driver'
 );
@@ -117,7 +102,7 @@ $dataSource = new JDBCDataSource(
     ```php
     <?php declare(strict_types=1);
     
-    use Soluble\Jasper\DataSource\JdbcDsnFactory;
+    use Soluble\Jasper\DataSource\Util\JdbcDsnFactory;
     
     $dbParams = [
         'driver'    => 'mysql', // JDBC driver key.
@@ -138,8 +123,22 @@ $dataSource = new JDBCDataSource(
     // ready to use as $dsn argument for `JdbcDataSource`
     ```
 
-## Installation
+## Exceptions
 
+When running or exporting a report, the following exception can be thrown: 
+
+Generally at compile time:
+
+| Exception                       | Description                                                              |                    
+|---------------------------------|--------------------------------------------------------------------------|
+| `ReportFileNotFoundException`   | When the report file cannot be opened (PHP or Java side, check perms)    |
+| `BrokenXMLReportFileException`  | When the report JRXML file cannot be parsed (xml error)                  |
+| `ReportCompileException`        | Compilation error, generally an invalid expression or missing resource   |
+| `JavaProxiedException`          | Exception on the Java side, and call `$e->getJvmStackTrace()` for debug  |  
+| `RuntimeException`              | Normally never thrown, see exception message                             |
+
+
+## Installation
 
 ### JasperBridge
 

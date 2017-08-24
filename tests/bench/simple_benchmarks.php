@@ -8,7 +8,7 @@ use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
 use Soluble\Jasper\ReportRunnerFactory;
 use Soluble\Jasper\Report;
 use Soluble\Jasper\ReportParams;
-use Soluble\Jasper\DataSource\JdbcDataSource;
+use Soluble\Jasper\DataSource\JavaSqlConnection;
 
 ini_set('display_errors', 'true');
 
@@ -32,7 +32,7 @@ if ($mysql_password !== '') {
     $reports['jdbc'] = new Report(
         "$reportPath/08_report_test_jdbc.jrxml",
         null,
-        new JdbcDataSource("jdbc:mysql://localhost/phpunit_soluble_test_db?user=root&password=$mysql_password&serverTimezone=UTC")
+        new JavaSqlConnection("jdbc:mysql://localhost/phpunit_soluble_test_db?user=root&password=$mysql_password&serverTimezone=UTC")
     );
 }
 

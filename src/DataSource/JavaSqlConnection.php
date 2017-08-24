@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Soluble\Jasper\DataSource;
 
-class JdbcDataSource implements DataSourceInterface
+class JavaSqlConnection implements JavaSqlConnectionInterface
 {
     /**
      * @var string

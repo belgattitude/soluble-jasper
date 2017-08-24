@@ -33,7 +33,7 @@ class JRDataSourceFactory
     {
         $jrDataSource = null;
 
-        if ($dataSource instanceof DataSource\JdbcDataSource) {
+        if ($dataSource instanceof DataSource\JavaSqlConnection) {
             $connection = (new DriverManager($this->ba))->createConnection(
                 $dataSource->getJdbcDsn(),
                 $dataSource->getDriverClass()
