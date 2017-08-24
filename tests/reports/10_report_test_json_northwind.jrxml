@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.4.0.final using JasperReports Library version 6.4.1  -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="NorthwindOrdersReport" pageWidth="595" pageHeight="842" columnWidth="515" leftMargin="40" rightMargin="40" topMargin="50" bottomMargin="50" whenResourceMissingType="Error" uuid="bbe115b5-a5a0-4b39-9b73-7092dc59ab6d">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="NorthwindOrdersReport" language="groovy" pageWidth="595" pageHeight="842" columnWidth="515" leftMargin="40" rightMargin="40" topMargin="50" bottomMargin="50" whenResourceMissingType="Error" uuid="bbe115b5-a5a0-4b39-9b73-7092dc59ab6d">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SolubleJasperNorthwindJSON"/>
 	<style name="Sans_Normal" isDefault="true" fontName="DejaVu Sans" fontSize="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
 	<style name="Sans_Normal_8" style="Sans_Normal" fontSize="8"/>
 	<style name="Sans_Bold" fontName="DejaVu Sans" fontSize="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
 	<style name="Sans_Bold_8" style="Sans_Bold" fontSize="8"/>
+	<parameter name="LOGO_FILE" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[Report logo header]]></parameterDescription>
+		<defaultValueExpression><![CDATA["/web/www/soluble-jasper/tests/reports/assets/wave.png"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="REPORT_TITLE" class="java.lang.String">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA["ERROR"]]></defaultValueExpression>
+	</parameter>
 	<queryString language="jsonql">
 		<![CDATA[..Orders(@size > 1).*]]>
 	</queryString>
@@ -101,7 +109,7 @@
 		</groupFooter>
 	</group>
 	<title>
-		<band height="50">
+		<band height="68">
 			<line>
 				<reportElement x="0" y="0" width="515" height="1" uuid="fc148b4e-50df-4a12-aa14-8505a4cfa6e1"/>
 			</line>
@@ -112,6 +120,14 @@
 				</textElement>
 				<text><![CDATA[Customer Orders Report]]></text>
 			</staticText>
+			<image>
+				<reportElement x="12" y="14" width="50" height="50" uuid="74234558-7510-4f2f-a992-3a00c1264c95"/>
+				<imageExpression><![CDATA[$P{LOGO_FILE}]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="142" y="38" width="100" height="30" uuid="ec7202d2-a3e7-4117-8b35-f5c606f4e728"/>
+				<textFieldExpression><![CDATA["Hello" + $P{REPORT_TITLE}]]></textFieldExpression>
+			</textField>
 		</band>
 	</title>
 	<pageHeader>

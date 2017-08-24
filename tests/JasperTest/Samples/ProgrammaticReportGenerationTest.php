@@ -81,11 +81,11 @@ class ProgrammaticReportGenerationTest extends TestCase
                     'net.sf.jasperreports.engine.util.LocalJasperReportsContext',
                     (new DefaultJasperReportsContext($ba))->getInstance()
                 );
-        
+
                 $context->setFileResolver($fileResolver);
                 $context->setClassLoader($classLoader);
-        
-        
+
+
                 foreach ($props as $key => $value) {
           //          $jasperPrint->setProperty($key, $value);
         //            $context->setProperty($key, $value);
@@ -98,9 +98,13 @@ class ProgrammaticReportGenerationTest extends TestCase
         $fillManager = $ba->javaClass('net.sf.jasperreports.engine.JasperFillManager');
         //$fillManager = $ba->javaClass('net.sf.jasperreports.engine.JasperFillManager')->getInstance($context);
 
+        $params = array_merge($props, [
+            'REPORT_LOGO'  => \JasperTestsFactories::getReportBaseDir() . '/assets/wave.png',
+            'REPORT_TITLE' => 'PHPUNIT'
+        ]);
         $jasperPrint = $fillManager->fillReport(
             $jasperPrint,
-            $ba->java('java.util.HashMap', $props)
+            $ba->java('java.util.HashMap', $params)
         );
 
         // -----------------------------------------------------------------------------------
@@ -118,6 +122,7 @@ class ProgrammaticReportGenerationTest extends TestCase
 
         $this->assertContains('Customer Order List', $text);
         $this->assertContains('Alfreds Futterkiste', $text);
+        $this->assertContains('PHPUNIT', $text);
 
         /*
         $queryExecuterFactory = $ba->javaClass('net.sf.jasperreports.engine.query.JsonQueryExecuterFactory');
