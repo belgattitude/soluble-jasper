@@ -84,9 +84,9 @@ class BridgedReportRunner implements ReportRunnerInterface
      * @throws Exception\JavaProxiedException
      */
     public function fillReport(
-        JasperReport $jasperReport,
-                                ReportParams $reportParams = null,
-                                DataSourceInterface $dataSource = null
+            JasperReport $jasperReport,
+            ReportParams $reportParams = null,
+            DataSourceInterface $dataSource = null
     ): JasperPrint {
         // Step 1: Get the fill manager
         $fillManager = new JasperFillManager($this->ba);

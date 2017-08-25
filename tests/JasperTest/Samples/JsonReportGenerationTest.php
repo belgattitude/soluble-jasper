@@ -48,19 +48,17 @@ class JsonReportGenerationTest extends TestCase
 
         $report = new Report($reportFile, $reportParams, $jsonDataSource);
 
-        $jasperReport = $reportRunner->compileReport($report);
-        $jasperPrint = $reportRunner->fillReport($jasperReport);
-
         $output_pdf = \JasperTestsFactories::getOutputDir() . '/test_json.pdf';
-
         if (file_exists($output_pdf)) {
             unlink($output_pdf);
         }
 
+        /*
+        $jasperReport = $reportRunner->compileReport($report);
+        $jasperPrint = $reportRunner->fillReport($jasperReport);
         $exportManager = new JasperExportManager($this->ba);
         $exportManager->exportReportToPdfFile($jasperPrint->getJavaProxiedObject(), $output_pdf);
-
-        /*
+*/
 
         $exportManager = $reportRunner->getExportManager($report);
 
@@ -72,13 +70,12 @@ class JsonReportGenerationTest extends TestCase
             //var_dump($e->getJvmStackTrace());
             throw $e;
         }
-*/
 
         $pdfUtils = new PDFUtils();
         $text = $pdfUtils->getPDFText($output_pdf);
 
         $this->assertContains('Customer Order List', $text);
         $this->assertContains('PHPUNIT', $text);
-        //$this->assertContains('Alfreds Futterkiste', $text);
+        $this->assertContains('Alfreds Futterkiste', $text);
     }
 }

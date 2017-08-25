@@ -57,6 +57,7 @@ class JsonDataSource implements JRDataSourceFromReportParamsInterface, ReportPar
 
     public function setOptions(array $options)
     {
+        $options[self::PARAM_JSON_SOURCE] = $this->jsonSource;
         $this->options = $options;
     }
 
