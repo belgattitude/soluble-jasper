@@ -84,6 +84,8 @@ Jasper reports supports multiple datasources for filling the report (see [JRApi]
 
 ### JavaSqlConnection
 
+Example using `JavaSlConnection`:
+
 ```php
 <?php declare(strict_types=1);
 
@@ -122,6 +124,40 @@ $dataSource = new JavaSqlConnection(
     //   'jdbc:mysql://localhost/my_db?user=user&password=password&serverTimezone=UTC'
     // ready to use as $dsn argument for `JdbcDataSource`
     ```
+
+### JsonDataSource
+
+Example using `JsonDataSource`:
+
+```php
+<?php declare(strict_types=1);
+
+use Soluble\Jasper\{ReportRunnerFactory, Report, ReportParams};
+use Soluble\Jasper\DataSource\JsonDataSource;
+ 
+$jsonDataSource = new JsonDataSource('/path/northwind.json');
+$jsonDataSource->setOptions([
+    JsonDataSource::PARAM_JSON_DATE_PATTERN   => 'yyyy-MM-dd',
+    JsonDataSource::PARAM_JSON_NUMBER_PATTERN => '#,##0.##',
+    JsonDataSource::PARAM_JSON_TIMEZONE_ID    => 'Europe/Brussels',
+    JsonDataSource::PARAM_JSON_LOCALE_CODE    => 'en_US'
+]);
+
+
+$report = new Report(
+                '/path/myreport.jrxml',
+                new ReportParams([
+                    'LOGO_FILE' => '/path/assets/wave.png',
+                    'TITLE'     => 'My Title'            
+                ]),  
+                $jsonDataSource);
+
+$reportRunner = ReportRunnerFactory::getBridgedReportRunner($this->ba);
+$exportManager = $reportRunner->getExportManager($report);
+
+$exportManager->savePdf($output_pdf);
+
+```
 
 ## Exceptions
 
