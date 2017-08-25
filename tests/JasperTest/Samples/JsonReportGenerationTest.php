@@ -7,6 +7,7 @@ namespace JasperTest\Samples;
 use JasperTest\Util\PDFUtils;
 use Soluble\Jasper\DataSource\JsonDataSource;
 use Soluble\Jasper\Exception\JavaProxiedException;
+use Soluble\Jasper\Proxy\Engine\JasperExportManager;
 use Soluble\Jasper\Report;
 use PHPUnit\Framework\TestCase;
 use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
@@ -47,12 +48,23 @@ class JsonReportGenerationTest extends TestCase
 
         $report = new Report($reportFile, $reportParams, $jsonDataSource);
 
-        $exportManager = $reportRunner->getExportManager($report);
+        $jasperReport = $reportRunner->compileReport($report);
+        $jasperPrint = $reportRunner->fillReport($jasperReport);
 
         $output_pdf = \JasperTestsFactories::getOutputDir() . '/test_json.pdf';
+
         if (file_exists($output_pdf)) {
             unlink($output_pdf);
         }
+
+        $exportManager = new JasperExportManager($this->ba);
+        $exportManager->exportReportToPdfFile($jasperPrint->getJavaProxiedObject(), $output_pdf);
+
+        /*
+
+        $exportManager = $reportRunner->getExportManager($report);
+
+        $output_pdf = \JasperTestsFactories::getOutputDir() . '/test_json.pdf';
 
         try {
             $exportManager->savePdf($output_pdf);
@@ -60,6 +72,7 @@ class JsonReportGenerationTest extends TestCase
             //var_dump($e->getJvmStackTrace());
             throw $e;
         }
+*/
 
         $pdfUtils = new PDFUtils();
         $text = $pdfUtils->getPDFText($output_pdf);
