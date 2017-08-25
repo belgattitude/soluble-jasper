@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace JasperTest\Samples;
 
 use JasperTest\Util\PDFUtils;
-use Soluble\Jasper\DataSource\EmptyDataSource;
+use Soluble\Jasper\DataSource\JsonDataSource;
 use Soluble\Jasper\Exception\JavaProxiedException;
 use Soluble\Jasper\Report;
 use PHPUnit\Framework\TestCase;
@@ -30,16 +30,22 @@ class JsonReportGenerationTest extends TestCase
         $reportFile = \JasperTestsFactories::getReportBaseDir() . '/10_report_test_json_northwind.jrxml';
         $jsonFile = \JasperTestsFactories::getDataBaseDir() . '/northwind.json';
 
-        $reportRunner = ReportRunnerFactory::getBridgedReportRunner($this->ba);
-
-        $dataSource = new EmptyDataSource();
+        $jsonDataSource = new JsonDataSource($jsonFile);
+        $jsonDataSource->setOptions([
+            JsonDataSource::PARAM_JSON_DATE_PATTERN   => 'yyyy-MM-dd',
+            JsonDataSource::PARAM_JSON_NUMBER_PATTERN => '#,##0.##',
+            JsonDataSource::PARAM_JSON_TIMEZONE_ID    => 'Europe/Brussels',
+            JsonDataSource::PARAM_JSON_LOCALE_CODE    => 'en_US'
+        ]);
 
         $reportParams = new ReportParams([
             'LOGO_FILE'    => \JasperTestsFactories::getReportBaseDir() . '/assets/wave.png',
             'REPORT_TITLE' => 'PHPUNIT'
         ]);
 
-        $report = new Report($reportFile, $reportParams, $dataSource);
+        $reportRunner = ReportRunnerFactory::getBridgedReportRunner($this->ba);
+
+        $report = new Report($reportFile, $reportParams, $jsonDataSource);
 
         $exportManager = $reportRunner->getExportManager($report);
 

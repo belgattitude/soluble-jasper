@@ -39,7 +39,7 @@
         "phpunit/phpunit": "^6.2",
         "friendsofphp/php-cs-fixer": "^2.5.0",
         "monolog/monolog": "^1.21.0",
-        "phpstan/phpstan": "^0.8.3",
+        "phpstan/phpstan": "^0.8.4",
         "roave/security-advisories": "dev-master",
         "pds/skeleton": "@dev",
         "smalot/pdfparser": "^0.10.0"

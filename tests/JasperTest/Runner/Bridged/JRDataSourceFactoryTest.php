@@ -7,7 +7,7 @@ namespace JasperTest\Runner\Bridged;
 use JasperTestsFactories;
 use PHPUnit\Framework\TestCase;
 use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
-use Soluble\Jasper\DataSource\DataSourceInterface;
+use Soluble\Jasper\DataSource\Contract\DataSourceInterface;
 use Soluble\Jasper\DataSource\JavaSqlConnection;
 use Soluble\Jasper\Exception\UnsupportedDataSourceException;
 use Soluble\Jasper\Runner\Bridged\JRDataSourceConnection;

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Soluble\Jasper\DataSource;
 
+use Soluble\Jasper\DataSource\Contract\JavaSqlConnectionInterface;
+
 class JavaSqlConnection implements JavaSqlConnectionInterface
 {
     /**

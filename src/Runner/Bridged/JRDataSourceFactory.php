@@ -11,6 +11,7 @@ use Soluble\Jasper\DataSource;
 use Soluble\Jasper\Exception\UnsupportedDataSourceException;
 use Soluble\Jasper\Proxy\Engine\JRDataSourceInterface;
 use Soluble\Jasper\Proxy\Engine\JREmptyDataSource;
+use Soluble\Jasper\DataSource\Contract\DataSourceInterface;
 
 class JRDataSourceFactory
 {
@@ -25,11 +26,11 @@ class JRDataSourceFactory
     }
 
     /**
-     * @param DataSource\DataSourceInterface $dataSource
+     * @param DataSourceInterface $dataSource
      *
      * @return JavaObject
      */
-    public function __invoke(DataSource\DataSourceInterface $dataSource): JRDataSourceInterface
+    public function __invoke(DataSourceInterface $dataSource): JRDataSourceInterface
     {
         $jrDataSource = null;
 

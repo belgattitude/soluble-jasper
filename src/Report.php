@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Soluble\Jasper;
 
-use Soluble\Jasper\DataSource\DataSourceInterface;
+use Soluble\Jasper\DataSource\Contract\DataSourceInterface;
 use Soluble\Jasper\Exception\ReportFileNotFoundException;
 use Soluble\Jasper\Report\ReportInterface;
 
