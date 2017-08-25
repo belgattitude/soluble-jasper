@@ -27,6 +27,37 @@ class ReportParamsTest extends TestCase
         $this->assertEquals('cool', $p['REPORT_DATE']);
     }
 
+    public function testGetArray()
+    {
+        $params = [
+            'Title'    => 'cool',
+            'SubTitle' => 'test'
+        ];
+
+        $reportParams = new ReportParams($params);
+        $array = $reportParams->toArray();
+
+        $this->assertEquals($params, $array);
+        $this->assertEquals('cool', $array['Title']);
+    }
+
+    public function testWithParams()
+    {
+        $p1 = new ReportParams([
+            'Title'    => 'cool',
+            'SubTitle' => 'test'
+        ]);
+
+        $p2 = $p1->withMergedParams(new ReportParams([
+            'Title' => 'success',
+            'Test'  => 'hello'
+        ]));
+
+        $this->assertEquals('success', $p2['Title']);
+        $this->assertEquals('hello', $p2['Test']);
+        $this->assertEquals('test', $p2['SubTitle']);
+    }
+
     public function testIterable()
     {
         $data = [

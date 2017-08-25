@@ -20,7 +20,7 @@ class JavaSqlConnection implements JavaSqlConnectionInterface
      * JDBCDataSource constructor.
      *
      * @param string $jdbcDsn     JDBC DSN, i.e.: "jdbc:mysql://localhost/database?user=X&password=Y&serverTimezone=UTC";
-     * @param string $driverClass Java driver class, i.e.: 'com.mysql.jdbc.Driver' (must be in classpath)
+     * @param string $driverClass Java driver class, i.e.: 'com.mysql.jdbc.Driver' (must be in classpath on the jvm side)
      */
     public function __construct(string $jdbcDsn, string $driverClass)
     {

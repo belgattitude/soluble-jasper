@@ -7,9 +7,8 @@ namespace JasperTest\Proxy\Engine;
 use JasperTestsFactories;
 use PHPUnit\Framework\TestCase;
 use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
-use Soluble\Jasper\Report\ReportInterface;
-use Soluble\Jasper\Proxy\Engine\JasperReport;
 use Soluble\Jasper\Report;
+use Soluble\Jasper\ReportRunnerFactory;
 
 class JasperReportTest extends TestCase
 {
@@ -23,13 +22,13 @@ class JasperReportTest extends TestCase
         $this->bridgeAdapter = \JasperTestsFactories::getJavaBridgeAdapter();
     }
 
-    public function testGetStatus()
+    public function testGetResourceBundle()
     {
         $report = new Report(JasperTestsFactories::getDefaultReportFile());
-        $jasperReport = new JasperReport(
-            $this->bridgeAdapter->java('net.sf.jasperreports.engine.JasperReport'),
-            $report
-        );
-        $this->assertEquals(ReportInterface::STATUS_COMPILED, $jasperReport->getStatus());
+
+        $reportRunner = ReportRunnerFactory::getBridgedReportRunner($this->bridgeAdapter);
+        $jasperReport = $reportRunner->compileReport($report);
+
+        $this->assertNull($jasperReport->getResourceBundle());
     }
 }

@@ -37,6 +37,9 @@ class BasicReportGenerationTest extends TestCase
                     ])
         );
 
+        $jasperReport = $reportRunner->compileReport($report);
+        $filled = $reportRunner->fillReport($jasperReport);
+
         $exportManager = $reportRunner->getExportManager($report);
 
         $output_pdf = \JasperTestsFactories::getOutputDir() . '/test.pdf';

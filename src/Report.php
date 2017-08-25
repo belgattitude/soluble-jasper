@@ -75,6 +75,11 @@ class Report implements ReportInterface
         return $this->reportFile;
     }
 
+    public function getReportPath(): string
+    {
+        return dirname($this->reportFile);
+    }
+
     public function getStatus(): string
     {
         return ReportInterface::STATUS_FRESH;

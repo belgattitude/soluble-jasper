@@ -39,6 +39,13 @@ class ReportParams implements \ArrayAccess, \IteratorAggregate
         }
     }
 
+    public function withMergedParams(ReportParams $params): ReportParams
+    {
+        $newParams = array_merge($this->toArray(), $params->toArray());
+
+        return new self($newParams);
+    }
+
     /**
      * @param string $param report parameter name ($P{} in jasper)
      * @param mixed  $value
@@ -91,6 +98,11 @@ class ReportParams implements \ArrayAccess, \IteratorAggregate
         if ($this->offsetExists($offset)) {
             $this->params->offsetUnset($offset);
         }
+    }
+
+    public function toArray(): array
+    {
+        return (array) $this->params;
     }
 
     /**
