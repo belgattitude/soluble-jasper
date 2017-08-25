@@ -155,7 +155,7 @@ $report = new Report(
 $reportRunner = ReportRunnerFactory::getBridgedReportRunner($this->ba);
 $exportManager = $reportRunner->getExportManager($report);
 
-$exportManager->savePdf($output_pdf);
+$exportManager->savePdf('/path/my_output.pdf');
 
 ```
 
