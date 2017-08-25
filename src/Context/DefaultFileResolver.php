@@ -24,11 +24,11 @@ class DefaultFileResolver
     /**
      * @return JavaObject Java('net.sf.jasperreports.engine.util.FileResolver')
      */
-    public function getReportFileResolver(Report $report): JavaObject
+    public function getReportFileResolver(Report $report, bool $resolveAbsolutePath = true): JavaObject
     {
         $reportPath = $report->getReportPath();
 
-        return $this->getFileResolver([$reportPath]);
+        return $this->getFileResolver([$reportPath], $resolveAbsolutePath);
     }
 
     /**

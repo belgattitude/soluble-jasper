@@ -8,7 +8,7 @@ use Soluble\Jasper\Proxy\Data\JsonDataAdapterImpl;
 use PHPUnit\Framework\TestCase;
 use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
 
-class JsonDataAdaptereImplTest extends TestCase
+class JsonDataAdapterImplTest extends TestCase
 {
     /**
      * @var BridgeAdapter
