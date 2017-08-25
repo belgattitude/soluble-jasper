@@ -39,6 +39,13 @@ class ReportParams implements \ArrayAccess, \IteratorAggregate
         }
     }
 
+    public function addParams(iterable $params): void
+    {
+        foreach ($params as $key => $value) {
+            $this->offsetSet($key, $value);
+        }
+    }
+
     public function withMergedParams(ReportParams $params): ReportParams
     {
         $newParams = array_merge($this->toArray(), $params->toArray());

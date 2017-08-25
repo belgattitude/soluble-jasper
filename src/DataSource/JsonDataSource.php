@@ -4,32 +4,20 @@ declare(strict_types=1);
 
 namespace Soluble\Jasper\DataSource;
 
-use Soluble\Jasper\DataSource\Contract\JRDataSourceInterface;
+use Soluble\Jasper\DataSource\Contract\JRDataSourceFromReportParamsInterface;
+use Soluble\Jasper\DataSource\Contract\JRDataSourceFromReportParamsTrait;
+use Soluble\Jasper\DataSource\Contract\ReportParametrableInterface;
+use Soluble\Jasper\ReportParams;
 
-class JsonDataSource implements JRDataSourceInterface
+class JsonDataSource implements JRDataSourceFromReportParamsInterface, ReportParametrableInterface
 {
-    /*
-     *             'net.sf.jasperreports.json.source'         => $ba->java('java.io.File', $jsonDataFile)->getAbsolutePath(),
-                'net.sf.jasperreports.json.date.pattern'   => 'yyyy-MM-dd',
-                'net.sf.jasperreports.json.number.pattern' => '#,##0.##',
-                'net.sf.jasperreports.json.locale.code'    => 'en_GB',
-                'net.sf.jasperreports.json.timezone.id'    => 'Europe/Brussels',
-    
-     */
+    use JRDataSourceFromReportParamsTrait;
 
     public const PARAM_JSON_SOURCE = 'net.sf.jasperreports.json.source';
     public const PARAM_JSON_DATE_PATTERN = 'net.sf.jasperreports.json.date.pattern';
     public const PARAM_JSON_NUMBER_PATTERN = 'net.sf.jasperreports.json.number.pattern';
     public const PARAM_JSON_LOCALE_CODE = 'net.sf.jasperreports.json.locale.code';
     public const PARAM_JSON_TIMEZONE_ID = 'net.sf.jasperreports.json.timezone.id';
-
-    /*
-    *             'net.sf.jasperreports.json.source'         => $ba->java('java.io.File', $jsonDataFile)->getAbsolutePath(),
-            'net.sf.jasperreports.json.date.pattern'   => 'yyyy-MM-dd',
-            'net.sf.jasperreports.json.number.pattern' => '#,##0.##',
-            'net.sf.jasperreports.json.locale.code'    => 'en_GB',
-            'net.sf.jasperreports.json.timezone.id'    => 'Europe/Brussels',
-*/
 
     public const DEFAULT_DATE_PATTERN = 'yyyy-MM-dd';
     public const DEFAULT_NUMBER_PATTERN = '#,##0.##';
@@ -47,8 +35,8 @@ class JsonDataSource implements JRDataSourceInterface
     private $options;
 
     /**
-     * @param string     $jsonFile
-     * @param array|null $options
+     * @param string $jsonSource  file or url for the json source
+     * @param string $datePattern
      */
     public function __construct(
         string $jsonSource,
@@ -75,5 +63,10 @@ class JsonDataSource implements JRDataSourceInterface
     public function getOptions(): array
     {
         return $this->options;
+    }
+
+    public function getDataSourceReportParams(): ReportParams
+    {
+        return new ReportParams($this->options);
     }
 }

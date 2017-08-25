@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Soluble\Jasper\DataSource;
 
+use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
+use Soluble\Japha\Db\DriverManager;
+use Soluble\Japha\Interfaces\JavaObject;
 use Soluble\Jasper\DataSource\Contract\JavaSqlConnectionInterface;
 
 class JavaSqlConnection implements JavaSqlConnectionInterface
@@ -38,5 +41,18 @@ class JavaSqlConnection implements JavaSqlConnectionInterface
     public function getJdbcDsn(): string
     {
         return $this->dsn;
+    }
+
+    /**
+     * @return JavaObject Java('java.sql.Connection')
+     */
+    public function getJasperReportSqlConnection(BridgeAdapter $bridgeAdapter): JavaObject
+    {
+        $connection = (new DriverManager($bridgeAdapter))->createConnection(
+            $this->getJdbcDsn(),
+            $this->getDriverClass()
+        );
+
+        return $connection;
     }
 }

@@ -7,8 +7,6 @@ namespace Soluble\Jasper\Exporter;
 use Soluble\Jasper\Report;
 use Soluble\Jasper\Proxy\Engine\JasperPrint;
 use Soluble\Jasper\Proxy\Engine\JasperExportManager;
-use Soluble\Jasper\Runner\Bridged\JRDataSourceFactory;
-use Soluble\Jasper\Proxy\Engine\JRDataSourceInterface;
 use Soluble\Jasper\Runner\BridgedReportRunner;
 use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
 use Soluble\Jasper\Exception;
@@ -71,23 +69,13 @@ class BridgedExportManager implements ExportManagerInterface
     {
         if ($this->jasperPrint === null) {
             $jasperReport = $this->runner->compileReport($this->report);
-
             $this->jasperPrint = $this->runner->fillReport(
                                                     $jasperReport,
                                                     $this->report->getReportParams(),
-                                                    $this->getJRDataSource()
+                                                    $this->report->getDataSource()
             );
         }
 
         return $this->jasperPrint;
-    }
-
-    protected function getJRDataSource(): ?JRDataSourceInterface
-    {
-        if ($this->report->getDataSource() === null) {
-            return null;
-        }
-
-        return (new JRDataSourceFactory($this->ba))($this->report->getDataSource());
     }
 }
