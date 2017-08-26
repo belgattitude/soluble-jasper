@@ -84,7 +84,7 @@ Jasper reports supports multiple datasources for filling the report (see [JRApi]
 
 ### JavaSqlConnection
 
-Example using `JavaSlConnection`:
+Example using `JavaSqlConnection`:
 
 ```php
 <?php declare(strict_types=1);
