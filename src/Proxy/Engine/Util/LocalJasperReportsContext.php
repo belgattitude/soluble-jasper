@@ -61,6 +61,9 @@ class LocalJasperReportsContext implements RemoteJavaObjectProxyInterface
         $this->localContext->setProperty($name, $value);
     }
 
+    /**
+     * @return mixed|null
+     */
     public function getProperty(string $name)
     {
         return $this->localContext->getProperty($name);
