@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Soluble\Jasper\Runner;
 
 use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
-use Soluble\Japha\Interfaces\JavaObject;
 use Soluble\Jasper\Context\DefaultClassLoader;
 use Soluble\Jasper\Context\DefaultFileResolver;
 use Soluble\Jasper\DataSource\Contract\DataSourceInterface;
@@ -68,10 +67,6 @@ class BridgedReportRunner implements ReportRunnerInterface
         }
 
         return new JasperReport($this->ba, $jasperReport, $report);
-    }
-
-    public function getReportContext()
-    {
     }
 
     /**
@@ -142,56 +137,5 @@ class BridgedReportRunner implements ReportRunnerInterface
     public function getBridgeAdapter(): BridgeAdapter
     {
         return $this->ba;
-    }
-
-    /**
-     * @param ReportParams $reportParams
-     *
-     * @return JavaObject Java('java.util.HashMap')
-     */
-    protected function buildReportParamsHashMap(ReportParams $reportParams): JavaObject
-    {
-        $paramsMap = $this->ba->java('java.util.HashMap', []);
-        foreach ($reportParams as $name => $value) {
-            // eventually change types here
-            $paramsMap->put($name, $value);
-        }
-
-        return $paramsMap;
-    }
-
-    /**
-     * @param ReportParams $reportParams
-     * @param Report       $report
-     *
-     * @return ReportParams
-     */
-    protected function getReportParamsWithDefaults(ReportParams $reportParams, Report $report): ReportParams
-    {
-        // Class loader
-        $newParams = new ReportParams($reportParams);
-
-        /*
-                if (!$newParams->offsetExists(JRParameter::REPORT_CLASS_LOADER)) {
-                    $jpath = $this->ba->java('java.io.File', dirname($report->getReportFile()));
-                    $url = $jpath->toUrl(); // Java.net.URL
-                    $urls = [$url];
-                    $classLoader = $this->ba->java('java.net.URLClassLoader', $urls);
-                    $newParams->put(JRParameter::REPORT_CLASS_LOADER, $classLoader);
-                }
-        */
-
-        return $newParams;
-
-        // Setting the class loader for the resource bundle
-        // Assuming they are in the same directory as
-        // the report file.
-        /*
-        $report_resource_bundle = $report->getResourceBundle();
-        if ($report_resource_bundle != '') {
-            $ResourceBundle = new JavaClass('java.util.ResourceBundle');
-            $rb = $ResourceBundle->getBundle($report_resource_bundle, $locale, $classLoader);
-            $this->params->put('REPORT_RESOURCE_BUNDLE', $rb);
-        }*/
     }
 }
