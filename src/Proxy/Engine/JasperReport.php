@@ -6,10 +6,16 @@ namespace Soluble\Jasper\Proxy\Engine;
 
 use Soluble\Japha\Interfaces\JavaObject;
 use Soluble\Jasper\Report;
+use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
 use Soluble\Jasper\Proxy\RemoteJavaObjectProxyInterface;
 
 class JasperReport implements RemoteJavaObjectProxyInterface
 {
+    /**
+     * @var BridgeAdapter
+     */
+    private $ba;
+
     /**
      * @var JavaObject Java('net.sf.jasperreports.engine.JasperReport')
      */
@@ -24,8 +30,9 @@ class JasperReport implements RemoteJavaObjectProxyInterface
      * @param JavaObject $jasperReport Java('net.sf.jasperreports.engine.JasperReport')
      * @param Report     $report       original report
      */
-    public function __construct(JavaObject $jasperReport, Report $report)
+    public function __construct(BridgeAdapter $bridgeAdapter, JavaObject $jasperReport, Report $report)
     {
+        $this->ba = $bridgeAdapter;
         $this->jasperReport = $jasperReport;
         $this->report = $report;
     }
@@ -57,7 +64,7 @@ class JasperReport implements RemoteJavaObjectProxyInterface
 
     public function getPropertyNames(): array
     {
-        return $this->jasperReport->getPropertyNames();
+        return $this->ba->values($this->jasperReport->getPropertyNames());
     }
 
     public function getResourceBundle(): ?string

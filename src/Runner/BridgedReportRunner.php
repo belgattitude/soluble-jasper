@@ -67,7 +67,7 @@ class BridgedReportRunner implements ReportRunnerInterface
             throw $e;
         }
 
-        return new JasperReport($jasperReport, $report);
+        return new JasperReport($this->ba, $jasperReport, $report);
     }
 
     public function getReportContext()

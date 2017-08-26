@@ -11,6 +11,7 @@ use Soluble\Jasper\Exception\ReportCompileException;
 use Soluble\Jasper\Exception\ReportFileNotFoundException;
 use Soluble\Jasper\Proxy\Engine\JasperCompileManager;
 use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
+use Soluble\Jasper\Report;
 
 class JasperCompileManagerTest extends TestCase
 {

@@ -31,4 +31,20 @@ class JasperReportTest extends TestCase
 
         $this->assertNull($jasperReport->getResourceBundle());
     }
+
+    public function testProperties()
+    {
+        $report = new Report(JasperTestsFactories::getDefaultReportFile());
+        $reportRunner = ReportRunnerFactory::getBridgedReportRunner($this->bridgeAdapter);
+        $jasperReport = $reportRunner->compileReport($report);
+        $jasperReport->setProperty('COOL', 'test');
+        $this->assertEquals('test', $jasperReport->getJavaProxiedObject()->getProperty('COOL'));
+        $this->assertEquals('test', $jasperReport->getProperty('COOL'));
+
+        $this->assertTrue(in_array('COOL', $jasperReport->getPropertyNames()));
+
+        $jasperReport->removeProperty('COOL');
+
+        $this->assertFalse(in_array('COOL', $jasperReport->getPropertyNames()));
+    }
 }
