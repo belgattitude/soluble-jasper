@@ -23,7 +23,7 @@ class DefaultResourceBundle
     public function getResourceBundle(JasperReport $jasperReport, JavaObject $locale, JavaObject $classLoader): ?JavaObject
     {
         $reportBundle = $jasperReport->getResourceBundle();
-        if ($reportBundle != '') {
+        if ($reportBundle !== '') {
             $resourceBundle = $this->ba->javaClass('java.util.ResourceBundle');
             $resourceBundle->getBundle($reportBundle, $locale, $classLoader);
 
