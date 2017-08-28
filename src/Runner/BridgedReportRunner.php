@@ -77,6 +77,7 @@ class BridgedReportRunner implements ReportRunnerInterface
      * @return JasperPrint
      *
      * @throws Exception\JavaProxiedException
+     * @throws Exception\BrokenJsonDataSourceException
      */
     public function fillReport(
             JasperReport $jasperReport,
@@ -123,7 +124,8 @@ class BridgedReportRunner implements ReportRunnerInterface
         $jasperPrint = $fillManager->fillReport(
             $jasperReport->getJavaProxiedObject(),
             $paramsHashMap,
-            $javaDataSource
+            $javaDataSource,
+            $jasperReport->getReport()->getReportFile()
         );
 
         return new JasperPrint($jasperPrint, $jasperReport->getReport());
