@@ -77,10 +77,6 @@ class JsonDataAdapterImpl implements RemoteJavaObjectProxyInterface
         $this->jsonAdapter->setFileName($filename);
     }
 
-    public function setDataFile($dataFile)
-    {
-    }
-
     public function setLanguage(string $language)
     {
         $jsonExpressionLanguageEnum = $this->ba->javaClass('net.sf.jasperreports.data.json.JsonExpressionLanguageEnum');
