@@ -174,6 +174,15 @@ Generally at compile time:
 | `RuntimeException`              | Normally never thrown, see exception message                             |
 
 
+At filling time:
+
+| Exception                       | Description                                                              |                    
+|---------------------------------|--------------------------------------------------------------------------|
+| `BrokenJsonDataSourceException` | When the json datasource cannot be parsed                                |
+| `JavaProxiedException`          | Exception on the Java side, and call `$e->getJvmStackTrace()` for debug  |  
+
+
+
 ## Installation
 
 ### JasperBridge
