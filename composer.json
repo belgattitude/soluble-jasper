@@ -42,7 +42,8 @@
         "phpstan/phpstan": "^0.8.4",
         "roave/security-advisories": "dev-master",
         "pds/skeleton": "@dev",
-        "smalot/pdfparser": "^0.10.0"
+        "smalot/pdfparser": "^0.10.0",
+        "mikey179/vfsStream": "^1.6"
     },
     "scripts": {
         "check": [
