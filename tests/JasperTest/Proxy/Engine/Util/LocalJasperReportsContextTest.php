@@ -6,6 +6,8 @@ namespace JasperTest\Proxy\Engine\Util;
 
 use PHPUnit\Framework\TestCase;
 use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
+use Soluble\Jasper\Context\DefaultClassLoader;
+use Soluble\Jasper\Context\DefaultFileResolver;
 use Soluble\Jasper\Proxy\Engine\DefaultJasperReportsContext;
 use Soluble\Jasper\Proxy\Engine\Util\LocalJasperReportsContext;
 
@@ -45,5 +47,29 @@ class LocalJasperReportsContextTest extends TestCase
 
         $proxied = $context->getJavaProxiedObject();
         $this->assertEquals('net.sf.jasperreports.engine.util.LocalJasperReportsContext', $this->bridgeAdapter->getClassName($proxied));
+    }
+
+    public function testSetClassLoader()
+    {
+        $context = new LocalJasperReportsContext($this->bridgeAdapter);
+        $context->setClassLoader(
+            (new DefaultClassLoader($this->bridgeAdapter))
+                ->getClassLoader(
+                    [\JasperTestsFactories::getReportBaseDir()]
+                )
+        );
+        $this->assertTrue(true);
+    }
+
+    public function testSetFileResolver()
+    {
+        $context = new LocalJasperReportsContext($this->bridgeAdapter);
+        $context->setFileResolver(
+            (new DefaultFileResolver($this->bridgeAdapter))
+                ->getFileResolver(
+                    [\JasperTestsFactories::getReportBaseDir()]
+                )
+        );
+        $this->assertTrue(true);
     }
 }

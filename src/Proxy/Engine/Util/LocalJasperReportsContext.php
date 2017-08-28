@@ -41,6 +41,9 @@ class LocalJasperReportsContext implements RemoteJavaObjectProxyInterface
         $this->localContext->setFileResolver($fileResolver);
     }
 
+    /**
+     * @param JavaObject $classLoader Java('java.lang.ClassLoader')
+     */
     public function setClassLoader(JavaObject $classLoader): void
     {
         $this->localContext->setClassLoader($classLoader);
