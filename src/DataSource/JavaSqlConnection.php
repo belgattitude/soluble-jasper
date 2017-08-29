@@ -5,9 +5,11 @@ declare(strict_types=1);
 namespace Soluble\Jasper\DataSource;
 
 use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
+use Soluble\Japha\Bridge\Exception\JavaException;
 use Soluble\Japha\Db\DriverManager;
 use Soluble\Japha\Interfaces\JavaObject;
 use Soluble\Jasper\DataSource\Contract\JavaSqlConnectionInterface;
+use Soluble\Jasper\Exception\JavaProxiedException;
 
 class JavaSqlConnection implements JavaSqlConnectionInterface
 {
@@ -45,13 +47,25 @@ class JavaSqlConnection implements JavaSqlConnectionInterface
 
     /**
      * @return JavaObject Java('java.sql.Connection')
+     *
+     * @throws JavaProxiedException when the sql connection cannot be initialized
      */
     public function getJasperReportSqlConnection(BridgeAdapter $bridgeAdapter): JavaObject
     {
-        $connection = (new DriverManager($bridgeAdapter))->createConnection(
-            $this->getJdbcDsn(),
-            $this->getDriverClass()
-        );
+        try {
+            $connection = (new DriverManager($bridgeAdapter))->createConnection(
+                $this->getJdbcDsn(),
+                $this->getDriverClass()
+            );
+        } catch (JavaException $e) {
+            throw new JavaProxiedException(
+                $e,
+                sprintf(
+                'Error getting sql connection: %s',
+                $e->getMessage()
+            )
+            );
+        }
 
         return $connection;
     }
