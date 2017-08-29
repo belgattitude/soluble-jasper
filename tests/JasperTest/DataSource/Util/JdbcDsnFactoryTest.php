@@ -62,7 +62,23 @@ class JdbcDsnFactoryTest extends TestCase
             'host' => 'localhost',
         ];
 
-        $dsn = JdbcDsnFactory::createDsnFromParams($params);
+        JdbcDsnFactory::createDsnFromParams($params);
+    }
+
+    public function testCreateDsnFromParamsThrowsInvalidArgumentException()
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Invalid type, "driverOptions" must be an array.');
+        $params = [
+            'driver'        => 'mysql',
+            'db'            => 'my_db',
+            'host'          => 'localhost',
+            'user'          => 'username',
+            'password'      => 'password',
+            'driverOptions' => 1
+        ];
+
+        JdbcDsnFactory::createDsnFromParams($params);
     }
 
     public function testCreateDsnFromParamsThrowsExceptionMissingDb()
@@ -74,7 +90,7 @@ class JdbcDsnFactoryTest extends TestCase
             'host'   => 'localhost',
         ];
 
-        $dsn = JdbcDsnFactory::createDsnFromParams($params);
+        JdbcDsnFactory::createDsnFromParams($params);
     }
 
     public function testCreateDsnFromParamsThrowsExceptionMissingHost()
@@ -85,7 +101,6 @@ class JdbcDsnFactoryTest extends TestCase
             'driver' => 'mysql',
             'db'     => 'database',
         ];
-
-        $dsn = JdbcDsnFactory::createDsnFromParams($params);
+        JdbcDsnFactory::createDsnFromParams($params);
     }
 }

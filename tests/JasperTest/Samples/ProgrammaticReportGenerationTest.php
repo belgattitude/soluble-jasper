@@ -6,8 +6,6 @@ namespace JasperTest\Samples;
 
 use JasperTest\Util\PDFUtils;
 use Soluble\Jasper\JRParameter;
-use Soluble\Jasper\Proxy\Engine\DefaultJasperReportsContext;
-use Soluble\Jasper\Proxy\Engine\Util\LocalJasperReportsContext;
 use Soluble\Jasper\Report;
 use PHPUnit\Framework\TestCase;
 use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
@@ -76,21 +74,6 @@ class ProgrammaticReportGenerationTest extends TestCase
             JRParameter::REPORT_CLASS_LOADER                  => $classLoader
         ];
 
-        /*
-                $context = $ba->java(
-                    'net.sf.jasperreports.engine.util.LocalJasperReportsContext',
-                    (new DefaultJasperReportsContext($ba))->getInstance()
-                );
-
-                $context->setFileResolver($fileResolver);
-                $context->setClassLoader($classLoader);
-
-
-                foreach ($props as $key => $value) {
-          //          $jasperPrint->setProperty($key, $value);
-        //            $context->setProperty($key, $value);
-                }
-        */
         // ------------------------------------------------------------------------------------
         // Step 4: filling report
         // ------------------------------------------------------------------------------------
