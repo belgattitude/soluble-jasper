@@ -1,0 +1,630 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.4.0.final using JasperReports Library version 6.4.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Order sample" pageWidth="595" pageHeight="842" whenNoDataType="NoDataSection" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" isFloatColumnFooter="true" resourceBundle="lang/order_i18n" uuid="1cee5d6c-f34c-479b-9f6f-012af82c3e82">
+	<property name="ireport.zoom" value="3.0"/>
+	<property name="ireport.x" value="679"/>
+	<property name="ireport.y" value="849"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="net.sf.jasperreports.print.create.bookmarks" value="false"/>
+	<style name="summary_field">
+		<box leftPadding="5">
+			<pen lineWidth="0.5" lineColor="#CDD3DD"/>
+			<topPen lineWidth="0.5" lineColor="#CDD3DD"/>
+			<leftPen lineWidth="0.0" lineColor="#CDD3DD"/>
+			<bottomPen lineWidth="0.0" lineColor="#CDD3DD"/>
+			<rightPen lineWidth="0.0" lineColor="#CDD3DD"/>
+		</box>
+	</style>
+	<style name="summary_title">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#CDD3DD"/>
+		</box>
+	</style>
+	<style name="summary_title_pl">
+		<box leftPadding="20">
+			<topPen lineWidth="0.5" lineColor="#CDD3DD"/>
+		</box>
+	</style>
+	<style name="summary_field_tw" fill="Solid">
+		<box leftPadding="5">
+			<pen lineWidth="0.5" lineColor="#CDD3DD"/>
+			<topPen lineWidth="0.5" lineColor="#CDD3DD"/>
+			<leftPen lineWidth="0.0" lineColor="#CDD3DD"/>
+			<bottomPen lineWidth="0.5" lineColor="#CDD3DD"/>
+			<rightPen lineWidth="0.0" lineColor="#CDD3DD"/>
+		</box>
+	</style>
+	<style name="summary_title_pl_pbt">
+		<box leftPadding="20">
+			<topPen lineWidth="0.5" lineColor="#CDD3DD"/>
+			<bottomPen lineWidth="0.5" lineColor="#CDD3DD"/>
+		</box>
+	</style>
+	<style name="blue_bb">
+		<box>
+			<bottomPen lineWidth="0.5" lineColor="#CDD3DD"/>
+		</box>
+	</style>
+	<style name="empty_shopcart">
+		<box>
+			<topPen lineWidth="2.0" lineColor="#CDD3DD"/>
+			<leftPen lineWidth="2.0" lineColor="#CDD3DD"/>
+			<bottomPen lineWidth="2.0" lineColor="#CDD3DD"/>
+			<rightPen lineWidth="2.0" lineColor="#CDD3DD"/>
+		</box>
+	</style>
+	<parameter name="PICTURE_URL" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA["https://www.emdmusic.com/akilia2/www/images/catalog/product/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SHOPCART_ID" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[751]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LANG" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["en"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     base_customer.`id` AS base_customer_id,
+     base_customer.`name` AS base_customer_name,
+     base_customer.`street` AS base_customer_street,
+     base_customer.`zipcode` AS base_customer_zipcode,
+     base_customer.`city` AS base_customer_city,
+     base_customer.`country_id` AS base_customer_country_id,
+     base_country.`iso_3166_1` AS base_country_iso_3166_1,
+     sal_shopcart.`id` AS sal_shopcart_id,
+     sal_shopcart.`comment` AS sal_shopcart_comment,
+     sal_shopcart_status_translation.`title` AS sal_shopcart_status_translation_title,
+     base_pricelist.`name` AS base_pricelist_name,
+     sal_shopcart_line.`quantity` AS quantity,
+     sal_shopcart_line.`quantity`*base_product_price.`price_sale` AS price_total_sale_net,
+     base_product_price.`price_sale` AS base_product_price_price_sale,
+     base_product.`volume` AS volume,
+     base_product.`weight` AS weight,
+     base_product_brand.`name` AS base_product_brand_name,
+     base_product_translation.`invoice_title` AS base_product_translation_invoice_title,
+     base_product_translation.`commercial_title` AS base_product_translation_commercial_title,
+     base_product_translation.`commercial_characteristic` AS base_product_translation_commercial_characteristic,
+     base_product.`reference` AS base_product_reference,
+     sal_shopcart.`created_at` AS sal_shopcart_created_at,
+     sal_shopcart.`updated_at` AS sal_shopcart_updated_at,
+     auth_user.`username` AS auth_user_username,
+     sal_shopcart.`status_id` AS sal_shopcart_status_id,
+     sal_shopcart_line.`product_id` AS sal_shopcart_line_product_id
+FROM
+     `sal_shopcart` sal_shopcart INNER JOIN `base_customer` base_customer ON sal_shopcart.`customer_id` = base_customer.`id`
+     INNER JOIN `base_country` base_country ON base_customer.`country_id` = base_country.`id`
+     INNER JOIN `auth_user` auth_user ON sal_shopcart.`user_id` = auth_user.`id`
+     INNER JOIN `sal_shopcart_status` sal_shopcart_status ON sal_shopcart.`status_id` = sal_shopcart_status.`id`
+     INNER JOIN `base_pricelist` base_pricelist ON sal_shopcart.`pricelist_id` = base_pricelist.`id`
+     INNER JOIN `sal_shopcart_line` sal_shopcart_line ON sal_shopcart.`id` = sal_shopcart_line.`shopcart_id`
+     INNER JOIN `base_product` base_product ON sal_shopcart_line.`product_id` = base_product.`id`
+     INNER JOIN `base_product_price` base_product_price ON base_product.`id` = base_product_price.`product_id`
+     INNER JOIN `base_product_brand` base_product_brand ON base_product.`brand_id` = base_product_brand.`id`
+     INNER JOIN `base_product_translation` base_product_translation ON base_product.`id` = base_product_translation.`id`
+     LEFT OUTER JOIN `sal_shopcart_status_translation` sal_shopcart_status_translation ON sal_shopcart_status.`id` = sal_shopcart_status_translation.`id`
+WHERE
+     sal_shopcart.`id` = $P{SHOPCART_ID}
+ AND sal_shopcart_status_translation.`lang` = $P{LANG}
+ AND base_product_translation.`lang` = $P{LANG}
+ AND base_product_price.`pricelist_id` = sal_shopcart.`pricelist_id`]]>
+	</queryString>
+	<field name="base_customer_id" class="java.math.BigInteger"/>
+	<field name="base_customer_name" class="java.lang.String"/>
+	<field name="base_customer_street" class="java.lang.String"/>
+	<field name="base_customer_zipcode" class="java.lang.String"/>
+	<field name="base_customer_city" class="java.lang.String"/>
+	<field name="base_customer_country_id" class="java.math.BigInteger"/>
+	<field name="base_country_iso_3166_1" class="java.lang.String"/>
+	<field name="sal_shopcart_id" class="java.math.BigInteger"/>
+	<field name="sal_shopcart_comment" class="java.lang.String"/>
+	<field name="sal_shopcart_status_translation_title" class="java.lang.String"/>
+	<field name="base_pricelist_name" class="java.lang.String"/>
+	<field name="quantity" class="java.math.BigDecimal"/>
+	<field name="price_total_sale_net" class="java.math.BigDecimal"/>
+	<field name="base_product_price_price_sale" class="java.math.BigDecimal"/>
+	<field name="volume" class="java.math.BigDecimal"/>
+	<field name="weight" class="java.math.BigDecimal"/>
+	<field name="base_product_brand_name" class="java.lang.String"/>
+	<field name="base_product_translation_invoice_title" class="java.lang.String"/>
+	<field name="base_product_translation_commercial_title" class="java.lang.String"/>
+	<field name="base_product_translation_commercial_characteristic" class="java.lang.String"/>
+	<field name="base_product_reference" class="java.lang.String"/>
+	<field name="sal_shopcart_created_at" class="java.sql.Timestamp"/>
+	<field name="sal_shopcart_updated_at" class="java.sql.Timestamp"/>
+	<field name="auth_user_username" class="java.lang.String"/>
+	<field name="sal_shopcart_status_id" class="java.lang.Long"/>
+	<field name="sal_shopcart_line_product_id" class="java.math.BigInteger"/>
+	<sortField name="base_product_reference"/>
+	<variable name="total_quantity" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{quantity}]]></variableExpression>
+		<initialValueExpression><![CDATA[new java.math.BigDecimal(0)]]></initialValueExpression>
+	</variable>
+	<variable name="total_volume" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{volume}.multiply($F{quantity})]]></variableExpression>
+		<initialValueExpression><![CDATA[new java.math.BigDecimal(0)]]></initialValueExpression>
+	</variable>
+	<variable name="total_weight" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{weight} .multiply($F{quantity})]]></variableExpression>
+		<initialValueExpression><![CDATA[new java.math.BigDecimal(0)]]></initialValueExpression>
+	</variable>
+	<variable name="order_total_price_sale_net" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{price_total_sale_net}]]></variableExpression>
+		<initialValueExpression><![CDATA[new java.math.BigDecimal(0)]]></initialValueExpression>
+	</variable>
+	<title>
+		<band height="348" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="0" y="106" width="595" height="90" backcolor="#91A1BE" uuid="04f76443-fcaa-4c83-bba2-5dda4337c02f"/>
+				<textField>
+					<reportElement x="58" y="14" width="504" height="20" forecolor="#FFFFFF" uuid="09a01a06-23a6-43be-b211-c30507408b13"/>
+					<textElement>
+						<font fontName="tahoma" size="14" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{base_customer_name} + " (" + $F{base_customer_id} + ")"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="68" y="43" width="187" height="20" forecolor="#FFFFFF" uuid="a093bbc4-a3a9-46f7-9562-d37f257a230a"/>
+					<textElement>
+						<font fontName="tahoma" size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{base_customer_street}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="68" y="63" width="187" height="20" forecolor="#FFFFFF" uuid="0a6da123-19b6-4df7-8255-4780fae25ddf"/>
+					<textElement>
+						<font fontName="tahoma" size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{base_customer_zipcode} + " - " + $F{base_customer_city} + " (" + $F{base_country_iso_3166_1} + ")"]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="420" y="24" width="28" height="59" forecolor="#FFFFFF" uuid="2ca565b5-ff20-438c-bf8f-f8bf90df9377"/>
+					<textElement>
+						<font fontName="Courier New" size="50"/>
+					</textElement>
+					<text><![CDATA[[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="530" y="24" width="28" height="59" forecolor="#FFFFFF" uuid="e62704db-b4de-4425-a6de-7b587f52059c"/>
+					<textElement>
+						<font fontName="Courier New" size="50"/>
+					</textElement>
+					<text><![CDATA[]]]></text>
+				</staticText>
+				<textField>
+					<reportElement mode="Transparent" x="450" y="37" width="85" height="9" forecolor="#FFFFFF" backcolor="#FFFFFF" uuid="e45e69ce-8931-43a7-9649-c18361faae54"/>
+					<textElement textAlignment="Center" verticalAlignment="Top" rotation="None" markup="none">
+						<font fontName="SansSerif" size="7" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$R{text.delivery_address}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<textField>
+				<reportElement style="summary_title" mode="Opaque" x="93" y="241" width="83" height="16" backcolor="#CDD3DD" uuid="e440a160-def5-4329-b035-48b1c80189cb"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$R{text.shopcart_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="summary_title" mode="Opaque" x="93" y="258" width="83" height="16" backcolor="#CDD3DD" uuid="7ac9240b-481c-454d-bab0-e5279c6ccb87"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$R{text.pricelist_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="summary_title" mode="Opaque" x="93" y="275" width="83" height="16" backcolor="#CDD3DD" uuid="18b9bb56-8e58-45ec-af9b-89ed07291f9b"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$R{text.shopcart_status}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="summary_field" x="176" y="241" width="190" height="16" uuid="64c77b7a-cb97-4ec8-a48f-00ebae11416d"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sal_shopcart_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="summary_field" x="176" y="258" width="190" height="16" uuid="c36bb749-65a1-4e1d-81dd-f100a787b769"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{base_pricelist_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="summary_field" x="176" y="275" width="190" height="16" uuid="dfa77368-22d8-46db-a397-98ecf5c73f8a"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sal_shopcart_status_translation_title}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="summary_title" mode="Opaque" x="0" y="224" width="93" height="16" backcolor="#CDD3DD" uuid="456d32fa-78d8-4409-a289-8a26ec286f9e"/>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="summary_title" mode="Opaque" x="0" y="241" width="93" height="16" backcolor="#CDD3DD" uuid="3ae0e4fd-d425-4e53-b272-1121ebbf70ef"/>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="summary_title" mode="Opaque" x="0" y="258" width="93" height="16" backcolor="#CDD3DD" uuid="ffcf69dc-fdaf-48fe-be0e-faf34fec5456"/>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="summary_title_pl_pbt" mode="Opaque" x="0" y="275" width="93" height="16" backcolor="#CDD3DD" uuid="8876af2b-cced-463a-b57e-8fc550d4ecb1"/>
+				<box leftPadding="0">
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<textField>
+				<reportElement style="summary_title_pl" mode="Opaque" x="366" y="224" width="98" height="16" backcolor="#CDD3DD" uuid="bb49bd64-23f1-433c-bd55-653817b3421b"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$R{text.total_quantity}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="summary_title_pl" mode="Opaque" x="366" y="241" width="98" height="16" backcolor="#CDD3DD" uuid="5cd24e79-8f0d-4027-88eb-64b9d3094070"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$R{text.total_price}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="summary_title_pl" mode="Opaque" x="366" y="258" width="98" height="16" backcolor="#CDD3DD" uuid="b47b3932-007d-44b1-bdf9-29e662e01686"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$R{text.total_volume}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="summary_title_pl_pbt" mode="Opaque" x="366" y="275" width="98" height="16" backcolor="#CDD3DD" uuid="d9cd11c4-2c89-47a3-aa05-952d13f899e4"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$R{text.total_weight}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="summary_title_pl_pbt" mode="Opaque" x="562" y="224" width="33" height="100" backcolor="#CDD3DD" uuid="c3983ebc-178b-44cf-af35-253ed6331f1d"/>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<textField evaluationTime="Report">
+				<reportElement style="summary_field" x="463" y="224" width="98" height="16" uuid="a23461b3-b1e4-4c42-9770-f301be3deba0"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph rightIndent="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{total_quantity}.intValue() + " pcs"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report" pattern="" isBlankWhenNull="false">
+				<reportElement style="summary_field" mode="Transparent" x="463" y="241" width="98" height="16" forecolor="#000000" backcolor="#FFFFFF" uuid="e89346ca-ca54-47ee-b682-80c26b37b153"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single" rightIndent="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new Formatter($P{REPORT_LOCALE}).format("%9.2f", $V{order_total_price_sale_net}.floatValue()).toString() + " USD"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report" pattern="" isBlankWhenNull="false">
+				<reportElement style="summary_field" mode="Transparent" x="463" y="258" width="98" height="16" forecolor="#000000" backcolor="#FFFFFF" uuid="5bc44f4d-0885-4ead-8d9d-dda50bf84e76"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" markup="html">
+					<font fontName="SansSerif" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single" rightIndent="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new Formatter($P{REPORT_LOCALE}).format("%9.4f", $V{total_volume}.floatValue()).toString() + " m<sup>3</sup>"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report" pattern="" isBlankWhenNull="false">
+				<reportElement style="summary_field_tw" mode="Transparent" x="463" y="275" width="98" height="16" forecolor="#000000" backcolor="#FFFFFF" uuid="763ea7ec-7dfc-47b5-9c05-1a45af8a623d"/>
+				<box leftPadding="5">
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single" rightIndent="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new Formatter($P{REPORT_LOCALE}).format("%9.2f", $V{total_weight}.floatValue()).toString() + " Kg"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="58" y="208" width="141" height="10" forecolor="#5B5B5B" uuid="e3d9866f-18d4-42a6-9fd5-bd5b6c48d502"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$R{text.order_summary}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="58" y="332" width="141" height="10" forecolor="#5B5B5B" backcolor="#FFFFFF" uuid="ee742817-ac9a-459b-920c-90ef2ea29cd1"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$R{text.order_detail}]]></textFieldExpression>
+			</textField>
+			<frame>
+				<reportElement mode="Opaque" x="0" y="0" width="595" height="105" backcolor="#FFFFFF" uuid="ebac7162-ebc8-4ab8-b0a7-e63ff8bfc482"/>
+				<image scaleImage="FillFrame">
+					<reportElement x="0" y="0" width="595" height="105" uuid="4e5af600-ccc8-42e3-8d8c-33ce6a1ead8e"/>
+					<imageExpression><![CDATA["./images/header-gradient.jpg"]]></imageExpression>
+				</image>
+				<textField pattern="">
+					<reportElement x="134" y="50" width="314" height="22" forecolor="#002C5F" uuid="951795fc-45b5-4cfc-9109-915827f75ab1"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="tahoma" size="16" isBold="false" isPdfEmbedded="false"/>
+						<paragraph lineSpacing="Fixed"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$R{text.foshan_order_summary}.toUpperCase()]]></textFieldExpression>
+				</textField>
+				<image>
+					<reportElement x="16" y="12" width="103" height="83" uuid="233c7647-7825-45f6-90ae-e2c885307d13"/>
+					<imageExpression><![CDATA["./images/logo.svg"]]></imageExpression>
+				</image>
+				<image>
+					<reportElement x="485" y="28" width="75" height="50" uuid="236c3cbb-05e8-4317-a154-ab9569a00c8d">
+						<printWhenExpression><![CDATA[$F{sal_shopcart_status_id}.intValue() == 0]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA["./images/draft-icon.png"]]></imageExpression>
+				</image>
+			</frame>
+			<textField>
+				<reportElement style="summary_field" x="176" y="224" width="190" height="16" uuid="04b8bbd6-66f3-48d2-88bd-aa1b87292bc2"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[""+DateFormat.getDateInstance(DateFormat.FULL,$P{REPORT_LOCALE}).format($F{sal_shopcart_updated_at})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="summary_title" mode="Opaque" x="93" y="224" width="83" height="16" backcolor="#CDD3DD" uuid="b2bebc4d-23b9-407e-acd7-2fcd1b72a6a9"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$R{text.date}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="summary_title_pl_pbt" mode="Opaque" x="0" y="292" width="93" height="16" backcolor="#CDD3DD" uuid="96c0fbc8-0fc3-4526-b8cf-7f02afbe610e"/>
+				<box leftPadding="0">
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<textField>
+				<reportElement style="summary_title" mode="Opaque" x="93" y="292" width="83" height="16" backcolor="#CDD3DD" uuid="c719f745-b507-42da-923e-bb94a299377f"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Comment"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement style="summary_field" x="176" y="292" width="385" height="32" uuid="1717a9e6-cc58-4c02-a36d-dcf660dbf08e"/>
+				<box topPadding="3" leftPadding="5"/>
+				<textElement verticalAlignment="Top">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sal_shopcart_comment}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="16" splitType="Stretch">
+			<staticText>
+				<reportElement style="summary_title" mode="Opaque" x="0" y="0" width="93" height="16" backcolor="#CDD3DD" uuid="46513389-d6b2-4bfa-9041-1e912363a1c9"/>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement style="summary_title" mode="Opaque" x="92" y="0" width="58" height="16" forecolor="#000000" backcolor="#CDD3DD" uuid="de6638f2-16ab-4d20-bcfd-9d9887f10046"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$R{text.reference}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement style="summary_title" mode="Opaque" x="150" y="0" width="265" height="16" forecolor="#000000" backcolor="#CDD3DD" uuid="e47252ef-cce9-4f59-af47-69a8d735f4c2"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$R{text.description}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement style="summary_title" mode="Opaque" x="414" y="0" width="61" height="16" forecolor="#000000" backcolor="#CDD3DD" uuid="4e1abf96-a638-4f38-be0a-df16c5bb08bb"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$R{text.price_sale}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement style="summary_title" mode="Opaque" x="519" y="0" width="76" height="16" forecolor="#000000" backcolor="#CDD3DD" uuid="72a6a948-6408-4309-83b5-5fb635cf4286"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$R{text.total_price}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement style="summary_title" mode="Opaque" x="474" y="0" width="45" height="16" forecolor="#000000" backcolor="#CDD3DD" uuid="2f965ee9-0bfe-4b94-8076-0cdf5e535a65"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$R{text.quantity}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement style="summary_title" mode="Opaque" x="0" y="1" width="38" height="34" backcolor="#CDD3DD" uuid="281737d5-1715-426f-b14a-2fad576f7b08"/>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="summary_title" stretchType="RelativeToBandHeight" mode="Opaque" x="557" y="1" width="38" height="34" backcolor="#CDD3DD" uuid="5c44151b-25c1-454a-a4c7-876c3537ec6e"/>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<textField pattern="#,##0" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="471" y="5" width="38" height="30" forecolor="#404040" backcolor="#FFFFFF" uuid="6f42efe5-4b4b-4004-a43a-0ed2562ed6b4"/>
+				<textElement textAlignment="Center" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="6" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{quantity}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="509" y="5" width="43" height="30" forecolor="#404040" backcolor="#FFFFFF" uuid="69afabf1-4441-40df-bc46-dcfc4a89dbf3"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="6" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new Formatter($P{REPORT_LOCALE}).format("%9.2f", $F{price_total_sale_net}.floatValue()).toString() + " USD"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="92" y="5" width="58" height="30" uuid="68d60d94-8272-40ff-b097-c3199e79d4ce"/>
+				<textElement>
+					<font fontName="tahoma" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{base_product_reference}]]></textFieldExpression>
+			</textField>
+			<textField pattern="">
+				<reportElement x="150" y="5" width="265" height="13" forecolor="#293E6B" uuid="c88e524c-46c4-49b3-93a9-16c2ad58ebce"/>
+				<textElement>
+					<font fontName="tahoma" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{base_product_translation_invoice_title}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="160" y="18" width="255" height="17" isPrintWhenDetailOverflows="true" forecolor="#2A6EBB" uuid="f5730dac-8d6f-4496-89bf-e4b2bbccd623"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{base_product_brand_name}+", "+$F{base_product_translation_invoice_title} +" "+ $F{base_product_translation_commercial_characteristic}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="415" y="5" width="38" height="30" forecolor="#404040" backcolor="#FFFFFF" uuid="420c6065-6aba-4fa3-b5ba-69cf1c0fa771"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="6" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new Formatter($P{REPORT_LOCALE}).format("%9.2f", $F{base_product_price_price_sale}.floatValue()).toString() + " USD"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="blue_bb" x="0" y="34" width="595" height="1" uuid="3c9fdd78-4a73-40ef-ba24-7d54bfbd7335"/>
+				<text><![CDATA[Static text]]></text>
+			</staticText>
+			<image hAlign="Center" vAlign="Middle" onErrorType="Blank" hyperlinkType="Reference">
+				<reportElement x="48" y="3" width="28" height="28" uuid="25ce8c09-1dae-4ae0-a5e2-c1c759d1226a"/>
+				<imageExpression><![CDATA[new java.net.URL($P{PICTURE_URL}+$F{sal_shopcart_line_product_id}+"-120x120_90.jpg")]]></imageExpression>
+				<hyperlinkReferenceExpression><![CDATA[$P{PICTURE_URL}+$F{sal_shopcart_line_product_id}+"-800x800.jpg"]]></hyperlinkReferenceExpression>
+			</image>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="32" splitType="Stretch">
+			<staticText>
+				<reportElement style="summary_title" mode="Opaque" x="0" y="0" width="595" height="15" backcolor="#CDD3DD" uuid="f1c112c3-8dd9-4f45-8a37-6b870eadf953"/>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="0" y="18" width="595" height="12" forecolor="#5B5B5B" backcolor="#FFFFFF" uuid="29c0298b-3b51-4878-b9d3-4deff7b0b406">
+					<printWhenExpression><![CDATA[$F{sal_shopcart_status_id}.intValue() == 0]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$R{text.message_draft_order}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="15" splitType="Stretch">
+			<staticText>
+				<reportElement style="summary_title" mode="Opaque" x="0" y="0" width="497" height="15" backcolor="#CDD3DD" uuid="ee342459-9273-49ca-8d22-d88806525822"/>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="557" y="0" width="38" height="15" backcolor="#CDD3DD" uuid="0ecce0a4-14b8-4145-938a-bb83963b15e9"/>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="508" y="0" width="38" height="15" uuid="25a7d750-70e7-4774-a293-a518862b9b41"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$R{text.page}+" "+$V{PAGE_NUMBER}+" /"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="539" y="0" width="20" height="15" uuid="6d97639c-43c1-41a0-bf6e-5fbcd31d0bc5"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<lastPageFooter>
+		<band height="71">
+			<textField>
+				<reportElement x="32" y="7" width="62" height="15" forecolor="#6E6E6E" uuid="7ef1717a-6a35-4bae-9199-c22f4f4fad84"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$R{text.created_by}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="92" y="7" width="272" height="15" uuid="73ea664f-282a-4e73-b246-8d1db1c97fb7"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{auth_user_username} + "  [ "+DateFormat.getDateInstance(DateFormat.FULL,$P{REPORT_LOCALE}).format($F{sal_shopcart_created_at}) + " ]"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="557" y="2" width="38" height="34" backcolor="#CDD3DD" uuid="5afea555-20c5-488b-b5fe-329d28371499"/>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="summary_title" mode="Transparent" x="0" y="37" width="595" height="34" backcolor="#CDD3DD" uuid="27baec69-1157-4673-b2df-c528a170c8c0"/>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="summary_title" mode="Opaque" x="0" y="22" width="497" height="14" backcolor="#CDD3DD" uuid="0ad2f8f0-0b92-49f6-8ff7-afa7a2c7a9d8"/>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="0" width="595" height="1" forecolor="#CDD3DD" uuid="adc0b79e-9ab2-4720-b957-799e7d653032"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="508" y="21" width="38" height="15" uuid="bd66927f-d23e-4562-b04a-f5cebe5ade75"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$R{text.page}+" "+$V{PAGE_NUMBER}+" /"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="539" y="21" width="20" height="15" uuid="07d67c58-67c5-4cae-8b83-9ef2fb806080"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</lastPageFooter>
+	<noData>
+		<band height="150">
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement style="empty_shopcart" mode="Transparent" x="66" y="88" width="464" height="39" forecolor="#002C5F" backcolor="#FFFFFF" uuid="ab1fd0ca-4c3d-4cd8-ae11-7e5913f054a9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="25" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$R{text.empty_shopcart}]]></textFieldExpression>
+			</textField>
+		</band>
+	</noData>
+</jasperReport>
