@@ -17,8 +17,6 @@ composer.lock
 /tests/output/*
 !/tests/output/.gitkeep
 /tests/reports/.metadata
-/tests/reports/MyReports/.classpath
-/tests/reports/MyReports/*Adapter.xml
 # For Travis
 .travis/downloads/*
 !.travis/downloads/.gitkeep

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Soluble\Jasper;
 
+use Psr\Log\LoggerInterface;
 use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
 use Soluble\Jasper\Runner\BridgedReportRunner;
 
@@ -16,8 +17,8 @@ class ReportRunnerFactory
      *
      * @return BridgedReportRunner
      */
-    public static function getBridgedReportRunner(BridgeAdapter $bridgeAdapter): BridgedReportRunner
+    public static function getBridgedReportRunner(BridgeAdapter $bridgeAdapter, LoggerInterface $logger = null): BridgedReportRunner
     {
-        return new BridgedReportRunner($bridgeAdapter);
+        return new BridgedReportRunner($bridgeAdapter, $logger);
     }
 }

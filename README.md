@@ -159,6 +159,34 @@ $exportManager->savePdf('/path/my_output.pdf');
 
 ```
 
+## Logging
+
+You can enable any `psr/log` compatible logger. Here's a basic example with [monolog](https://github.com/Seldaek/monolog):
+
+```php
+<?php
+
+use Soluble\Japha\Bridge\Adapter as JavaBridgeAdapter;
+use Soluble\Jasper\{ReportRunnerFactory, Report, ReportParams};
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
+
+$logger = new Logger('soluble-japha-logger');
+$logger->pushHandler(new StreamHandler('path/to/your.log', Logger::WARNING));
+
+$bridgeAdapter = new JavaBridgeAdapter([
+    'servlet_address' => 'localhost:8080/JasperReports/servlet.phpjavabridge'    
+]);
+
+$reportRunner = ReportRunnerFactory::getBridgedReportRunner($bridgeAdapter, $logger);
+
+$report = new Report('/path/my_report.jrxml', new ReportParams());
+
+// Any exception during report compilation, filling or exporting will
+// be logged ;)
+
+```
+
 ## Exceptions
 
 When running or exporting a report, the following exception can be thrown: 

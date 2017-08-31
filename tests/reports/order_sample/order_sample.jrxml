@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.4.0.final using JasperReports Library version 6.4.1  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Order sample" pageWidth="595" pageHeight="842" whenNoDataType="NoDataSection" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" isFloatColumnFooter="true" resourceBundle="lang/order_i18n" uuid="1cee5d6c-f34c-479b-9f6f-012af82c3e82">
-	<property name="ireport.zoom" value="3.0"/>
-	<property name="ireport.x" value="679"/>
-	<property name="ireport.y" value="849"/>
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="visionXmlOrder"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="net.sf.jasperreports.print.create.bookmarks" value="false"/>
 	<style name="summary_field">
@@ -54,6 +51,12 @@
 			<rightPen lineWidth="2.0" lineColor="#CDD3DD"/>
 		</box>
 	</style>
+	<subDataset name="OrderLines" uuid="5ace29e9-3fb5-4c6b-96eb-0d2d01d75b24">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="visionXmlOrder"/>
+		<queryString>
+			<![CDATA[]]>
+		</queryString>
+	</subDataset>
 	<parameter name="PICTURE_URL" class="java.lang.String" isForPrompting="false">
 		<parameterDescription><![CDATA[]]></parameterDescription>
 		<defaultValueExpression><![CDATA["https://www.emdmusic.com/akilia2/www/images/catalog/product/"]]></defaultValueExpression>
@@ -64,79 +67,75 @@
 	<parameter name="LANG" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["en"]]></defaultValueExpression>
 	</parameter>
-	<queryString>
-		<![CDATA[SELECT
-     base_customer.`id` AS base_customer_id,
-     base_customer.`name` AS base_customer_name,
-     base_customer.`street` AS base_customer_street,
-     base_customer.`zipcode` AS base_customer_zipcode,
-     base_customer.`city` AS base_customer_city,
-     base_customer.`country_id` AS base_customer_country_id,
-     base_country.`iso_3166_1` AS base_country_iso_3166_1,
-     sal_shopcart.`id` AS sal_shopcart_id,
-     sal_shopcart.`comment` AS sal_shopcart_comment,
-     sal_shopcart_status_translation.`title` AS sal_shopcart_status_translation_title,
-     base_pricelist.`name` AS base_pricelist_name,
-     sal_shopcart_line.`quantity` AS quantity,
-     sal_shopcart_line.`quantity`*base_product_price.`price_sale` AS price_total_sale_net,
-     base_product_price.`price_sale` AS base_product_price_price_sale,
-     base_product.`volume` AS volume,
-     base_product.`weight` AS weight,
-     base_product_brand.`name` AS base_product_brand_name,
-     base_product_translation.`invoice_title` AS base_product_translation_invoice_title,
-     base_product_translation.`commercial_title` AS base_product_translation_commercial_title,
-     base_product_translation.`commercial_characteristic` AS base_product_translation_commercial_characteristic,
-     base_product.`reference` AS base_product_reference,
-     sal_shopcart.`created_at` AS sal_shopcart_created_at,
-     sal_shopcart.`updated_at` AS sal_shopcart_updated_at,
-     auth_user.`username` AS auth_user_username,
-     sal_shopcart.`status_id` AS sal_shopcart_status_id,
-     sal_shopcart_line.`product_id` AS sal_shopcart_line_product_id
-FROM
-     `sal_shopcart` sal_shopcart INNER JOIN `base_customer` base_customer ON sal_shopcart.`customer_id` = base_customer.`id`
-     INNER JOIN `base_country` base_country ON base_customer.`country_id` = base_country.`id`
-     INNER JOIN `auth_user` auth_user ON sal_shopcart.`user_id` = auth_user.`id`
-     INNER JOIN `sal_shopcart_status` sal_shopcart_status ON sal_shopcart.`status_id` = sal_shopcart_status.`id`
-     INNER JOIN `base_pricelist` base_pricelist ON sal_shopcart.`pricelist_id` = base_pricelist.`id`
-     INNER JOIN `sal_shopcart_line` sal_shopcart_line ON sal_shopcart.`id` = sal_shopcart_line.`shopcart_id`
-     INNER JOIN `base_product` base_product ON sal_shopcart_line.`product_id` = base_product.`id`
-     INNER JOIN `base_product_price` base_product_price ON base_product.`id` = base_product_price.`product_id`
-     INNER JOIN `base_product_brand` base_product_brand ON base_product.`brand_id` = base_product_brand.`id`
-     INNER JOIN `base_product_translation` base_product_translation ON base_product.`id` = base_product_translation.`id`
-     LEFT OUTER JOIN `sal_shopcart_status_translation` sal_shopcart_status_translation ON sal_shopcart_status.`id` = sal_shopcart_status_translation.`id`
-WHERE
-     sal_shopcart.`id` = $P{SHOPCART_ID}
- AND sal_shopcart_status_translation.`lang` = $P{LANG}
- AND base_product_translation.`lang` = $P{LANG}
- AND base_product_price.`pricelist_id` = sal_shopcart.`pricelist_id`]]>
+	<queryString language="XPath">
+		<![CDATA[/Order/header]]>
 	</queryString>
-	<field name="base_customer_id" class="java.math.BigInteger"/>
-	<field name="base_customer_name" class="java.lang.String"/>
-	<field name="base_customer_street" class="java.lang.String"/>
-	<field name="base_customer_zipcode" class="java.lang.String"/>
-	<field name="base_customer_city" class="java.lang.String"/>
-	<field name="base_customer_country_id" class="java.math.BigInteger"/>
-	<field name="base_country_iso_3166_1" class="java.lang.String"/>
-	<field name="sal_shopcart_id" class="java.math.BigInteger"/>
-	<field name="sal_shopcart_comment" class="java.lang.String"/>
-	<field name="sal_shopcart_status_translation_title" class="java.lang.String"/>
-	<field name="base_pricelist_name" class="java.lang.String"/>
-	<field name="quantity" class="java.math.BigDecimal"/>
-	<field name="price_total_sale_net" class="java.math.BigDecimal"/>
-	<field name="base_product_price_price_sale" class="java.math.BigDecimal"/>
-	<field name="volume" class="java.math.BigDecimal"/>
-	<field name="weight" class="java.math.BigDecimal"/>
-	<field name="base_product_brand_name" class="java.lang.String"/>
-	<field name="base_product_translation_invoice_title" class="java.lang.String"/>
-	<field name="base_product_translation_commercial_title" class="java.lang.String"/>
-	<field name="base_product_translation_commercial_characteristic" class="java.lang.String"/>
-	<field name="base_product_reference" class="java.lang.String"/>
-	<field name="sal_shopcart_created_at" class="java.sql.Timestamp"/>
-	<field name="sal_shopcart_updated_at" class="java.sql.Timestamp"/>
-	<field name="auth_user_username" class="java.lang.String"/>
-	<field name="sal_shopcart_status_id" class="java.lang.Long"/>
-	<field name="sal_shopcart_line_product_id" class="java.math.BigInteger"/>
-	<sortField name="base_product_reference"/>
+	<field name="order_id" class="java.lang.String">
+		<fieldDescription><![CDATA[order_id]]></fieldDescription>
+	</field>
+	<field name="created_at" class="java.lang.String">
+		<fieldDescription><![CDATA[created_at]]></fieldDescription>
+	</field>
+	<field name="updated_at" class="java.lang.String">
+		<fieldDescription><![CDATA[updated_at]]></fieldDescription>
+	</field>
+	<field name="last_price_calculation" class="java.lang.String">
+		<fieldDescription><![CDATA[last_price_calculation]]></fieldDescription>
+	</field>
+	<field name="date_document" class="java.lang.String">
+		<fieldDescription><![CDATA[date_document]]></fieldDescription>
+	</field>
+	<field name="type_id" class="java.lang.String">
+		<fieldDescription><![CDATA[type_id]]></fieldDescription>
+	</field>
+	<field name="status" class="java.lang.String">
+		<fieldDescription><![CDATA[status]]></fieldDescription>
+	</field>
+	<field name="created_by" class="java.lang.String">
+		<fieldDescription><![CDATA[created_by]]></fieldDescription>
+	</field>
+	<field name="usertype" class="java.lang.String">
+		<fieldDescription><![CDATA[usertype]]></fieldDescription>
+	</field>
+	<field name="company_id" class="java.lang.String">
+		<fieldDescription><![CDATA[company_id]]></fieldDescription>
+	</field>
+	<field name="currency" class="java.lang.String">
+		<fieldDescription><![CDATA[currency]]></fieldDescription>
+	</field>
+	<field name="pricelist" class="java.lang.String">
+		<fieldDescription><![CDATA[pricelist]]></fieldDescription>
+	</field>
+	<field name="customer_id" class="java.lang.String">
+		<fieldDescription><![CDATA[customer_id]]></fieldDescription>
+	</field>
+	<field name="discount_category" class="java.lang.String">
+		<fieldDescription><![CDATA[discount_category]]></fieldDescription>
+	</field>
+	<field name="customer_name" class="java.lang.String">
+		<fieldDescription><![CDATA[customer_name]]></fieldDescription>
+	</field>
+	<field name="customer_country" class="java.lang.String">
+		<fieldDescription><![CDATA[customer_country]]></fieldDescription>
+	</field>
+	<field name="customer_street" class="java.lang.String">
+		<fieldDescription><![CDATA[customer_street]]></fieldDescription>
+	</field>
+	<field name="customer_city" class="java.lang.String">
+		<fieldDescription><![CDATA[customer_city]]></fieldDescription>
+	</field>
+	<field name="customer_zipcode" class="java.lang.String">
+		<fieldDescription><![CDATA[customer_zipcode]]></fieldDescription>
+	</field>
+	<field name="total_price_net" class="java.lang.String">
+		<fieldDescription><![CDATA[total_price_net]]></fieldDescription>
+	</field>
+	<field name="total_volume" class="java.lang.String">
+		<fieldDescription><![CDATA[total_volume]]></fieldDescription>
+	</field>
+	<field name="total_weight" class="java.lang.String">
+		<fieldDescription><![CDATA[total_weight]]></fieldDescription>
+	</field>
 	<variable name="total_quantity" class="java.math.BigDecimal" calculation="Sum">
 		<variableExpression><![CDATA[$F{quantity}]]></variableExpression>
 		<initialValueExpression><![CDATA[new java.math.BigDecimal(0)]]></initialValueExpression>
@@ -146,7 +145,7 @@ WHERE
 		<initialValueExpression><![CDATA[new java.math.BigDecimal(0)]]></initialValueExpression>
 	</variable>
 	<variable name="total_weight" class="java.math.BigDecimal" calculation="Sum">
-		<variableExpression><![CDATA[$F{weight} .multiply($F{quantity})]]></variableExpression>
+		<variableExpression><![CDATA[$F{weight}.multiply($F{quantity})]]></variableExpression>
 		<initialValueExpression><![CDATA[new java.math.BigDecimal(0)]]></initialValueExpression>
 	</variable>
 	<variable name="order_total_price_sale_net" class="java.math.BigDecimal" calculation="Sum">
@@ -162,21 +161,21 @@ WHERE
 					<textElement>
 						<font fontName="tahoma" size="14" isBold="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{base_customer_name} + " (" + $F{base_customer_id} + ")"]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{customer_name} + " (" + $F{customer_id} + ")"]]></textFieldExpression>
 				</textField>
 				<textField>
 					<reportElement x="68" y="43" width="187" height="20" forecolor="#FFFFFF" uuid="a093bbc4-a3a9-46f7-9562-d37f257a230a"/>
 					<textElement>
 						<font fontName="tahoma" size="12"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{base_customer_street}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{customer_street}]]></textFieldExpression>
 				</textField>
 				<textField>
 					<reportElement x="68" y="63" width="187" height="20" forecolor="#FFFFFF" uuid="0a6da123-19b6-4df7-8255-4780fae25ddf"/>
 					<textElement>
 						<font fontName="tahoma" size="12"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{base_customer_zipcode} + " - " + $F{base_customer_city} + " (" + $F{base_country_iso_3166_1} + ")"]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{customer_zipcode} + " - " + $F{customer_city} + " (" + $F{customer_country} + ")"]]></textFieldExpression>
 				</textField>
 				<staticText>
 					<reportElement x="420" y="24" width="28" height="59" forecolor="#FFFFFF" uuid="2ca565b5-ff20-438c-bf8f-f8bf90df9377"/>
@@ -192,14 +191,6 @@ WHERE
 					</textElement>
 					<text><![CDATA[]]]></text>
 				</staticText>
-				<textField>
-					<reportElement mode="Transparent" x="450" y="37" width="85" height="9" forecolor="#FFFFFF" backcolor="#FFFFFF" uuid="e45e69ce-8931-43a7-9649-c18361faae54"/>
-					<textElement textAlignment="Center" verticalAlignment="Top" rotation="None" markup="none">
-						<font fontName="SansSerif" size="7" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
-						<paragraph lineSpacing="Single"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$R{text.delivery_address}]]></textFieldExpression>
-				</textField>
 			</frame>
 			<textField>
 				<reportElement style="summary_title" mode="Opaque" x="93" y="241" width="83" height="16" backcolor="#CDD3DD" uuid="e440a160-def5-4329-b035-48b1c80189cb"/>
@@ -227,21 +218,21 @@ WHERE
 				<textElement verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{sal_shopcart_id}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{order_id}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement style="summary_field" x="176" y="258" width="190" height="16" uuid="c36bb749-65a1-4e1d-81dd-f100a787b769"/>
 				<textElement verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{base_pricelist_name}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{pricelist}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement style="summary_field" x="176" y="275" width="190" height="16" uuid="dfa77368-22d8-46db-a397-98ecf5c73f8a"/>
 				<textElement verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{sal_shopcart_status_translation_title}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{status}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement style="summary_title" mode="Opaque" x="0" y="224" width="93" height="16" backcolor="#CDD3DD" uuid="456d32fa-78d8-4409-a289-8a26ec286f9e"/>
@@ -308,7 +299,7 @@ WHERE
 					<font fontName="SansSerif" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 					<paragraph lineSpacing="Single" rightIndent="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[new Formatter($P{REPORT_LOCALE}).format("%9.2f", $V{order_total_price_sale_net}.floatValue()).toString() + " USD"]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new Formatter($P{REPORT_LOCALE}).format("%9.2f", $F{total_price_net}.floatValue()).toString() + " USD"]]></textFieldExpression>
 			</textField>
 			<textField evaluationTime="Report" pattern="" isBlankWhenNull="false">
 				<reportElement style="summary_field" mode="Transparent" x="463" y="258" width="98" height="16" forecolor="#000000" backcolor="#FFFFFF" uuid="5bc44f4d-0885-4ead-8d9d-dda50bf84e76"/>
@@ -316,7 +307,7 @@ WHERE
 					<font fontName="SansSerif" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 					<paragraph lineSpacing="Single" rightIndent="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[new Formatter($P{REPORT_LOCALE}).format("%9.4f", $V{total_volume}.floatValue()).toString() + " m<sup>3</sup>"]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new Formatter($P{REPORT_LOCALE}).format("%9.4f", $F{total_volume}.floatValue()).toString() + " m<sup>3</sup>"]]></textFieldExpression>
 			</textField>
 			<textField evaluationTime="Report" pattern="" isBlankWhenNull="false">
 				<reportElement style="summary_field_tw" mode="Transparent" x="463" y="275" width="98" height="16" forecolor="#000000" backcolor="#FFFFFF" uuid="763ea7ec-7dfc-47b5-9c05-1a45af8a623d"/>
@@ -327,7 +318,7 @@ WHERE
 					<font fontName="SansSerif" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 					<paragraph lineSpacing="Single" rightIndent="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[new Formatter($P{REPORT_LOCALE}).format("%9.2f", $V{total_weight}.floatValue()).toString() + " Kg"]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new Formatter($P{REPORT_LOCALE}).format("%9.2f", $P{total_weight}.floatValue()).toString() + " Kg"]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="58" y="208" width="141" height="10" forecolor="#5B5B5B" uuid="e3d9866f-18d4-42a6-9fd5-bd5b6c48d502"/>
@@ -342,7 +333,7 @@ WHERE
 					<font fontName="SansSerif" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$R{text.order_detail}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{comment}]]></textFieldExpression>
 			</textField>
 			<frame>
 				<reportElement mode="Opaque" x="0" y="0" width="595" height="105" backcolor="#FFFFFF" uuid="ebac7162-ebc8-4ab8-b0a7-e63ff8bfc482"/>
@@ -356,7 +347,7 @@ WHERE
 						<font fontName="tahoma" size="16" isBold="false" isPdfEmbedded="false"/>
 						<paragraph lineSpacing="Fixed"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$R{text.foshan_order_summary}.toUpperCase()]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$R{text.order_title}.toUpperCase()]]></textFieldExpression>
 				</textField>
 				<image>
 					<reportElement x="16" y="12" width="103" height="83" uuid="233c7647-7825-45f6-90ae-e2c885307d13"/>
@@ -403,7 +394,7 @@ WHERE
 				<textElement verticalAlignment="Top">
 					<font size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{sal_shopcart_comment}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{comment}]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>

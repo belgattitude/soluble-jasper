@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace JasperTest\Samples;
+namespace JasperTest\Functionnal;
 
 use Soluble\Jasper\Report;
 use Soluble\Jasper\ReportParams;

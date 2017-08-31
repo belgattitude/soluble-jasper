@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Soluble\Jasper\Runner;
 
+use Psr\Log\LoggerInterface;
 use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
 use Soluble\Jasper\Context\DefaultClassLoader;
 use Soluble\Jasper\Context\DefaultFileResolver;
@@ -21,6 +22,7 @@ use Soluble\Jasper\Proxy\Engine\JasperFillManager;
 use Soluble\Jasper\Report;
 use Soluble\Jasper\ReportParams;
 use Soluble\Jasper\Exception;
+use Psr\Log\NullLogger;
 
 class BridgedReportRunner implements ReportRunnerInterface
 {
@@ -35,13 +37,17 @@ class BridgedReportRunner implements ReportRunnerInterface
     private $compileManager;
 
     /**
-     * JasperReportRunner constructor.
-     *
-     * @param BridgeAdapter $bridgeAdapter
+     * @var LoggerInterface
      */
-    public function __construct(BridgeAdapter $bridgeAdapter)
+    private $logger;
+
+    public function __construct(BridgeAdapter $bridgeAdapter, LoggerInterface $logger = null)
     {
         $this->ba = $bridgeAdapter;
+        if ($logger === null) {
+            $logger = new NullLogger();
+        }
+        $this->logger = $logger;
     }
 
     /**
@@ -57,12 +63,20 @@ class BridgedReportRunner implements ReportRunnerInterface
      */
     public function compileReport(Report $report): JasperReport
     {
-        if ($this->compileManager === null) {
-            $this->compileManager = new JasperCompileManager($this->ba);
-        }
         try {
+            if ($this->compileManager === null) {
+                $this->compileManager = new JasperCompileManager($this->ba);
+            }
             $jasperReport = $this->compileManager->compileReport($report->getReportFile());
         } catch (\Exception $e) {
+            $this->logger->error(
+                sprintf(
+                "Compilation of report '%s' failed with '%s' (%s)",
+                    basename($report->getReportFile()),
+                    (new \ReflectionClass($e))->getShortName(),
+                    $e->getMessage()
+                )
+            );
             throw $e;
         }
 
@@ -84,51 +98,63 @@ class BridgedReportRunner implements ReportRunnerInterface
             ReportParams $reportParams = null,
             DataSourceInterface $dataSource = null
     ): JasperPrint {
-        // Step 1: Get the fill manager
-        $fillManager = new JasperFillManager($this->ba);
+        try {
+            // Step 1: Get the fill manager
+            $fillManager = new JasperFillManager($this->ba);
 
-        // Step 2: get the datasource
-        if ($dataSource === null) {
-            $dataSource = $jasperReport->getReport()->getDataSource() ?? new EmptyDataSource();
+            // Step 2: get the datasource
+            if ($dataSource === null) {
+                $dataSource = $jasperReport->getReport()->getDataSource() ?? new EmptyDataSource();
+            }
+
+            // Step 2: Assigning reportParams
+
+            $originalReportParams = $jasperReport->getReport()->getReportParams() ?? new ReportParams();
+            $reportParams = $originalReportParams->withMergedParams($reportParams ?? new ReportParams());
+
+            // Step 3: Getting some defaults
+
+            $reportPath = $jasperReport->getReport()->getReportPath();
+            $fileResolver = (new DefaultFileResolver($this->ba))->getFileResolver([$reportPath]);
+            $classLoader = (new DefaultClassLoader($this->ba))->getClassLoader([$reportPath]);
+            //$resourceBundle = (new DefaultResourceBundle($this->>ba))->getResourceBundle();
+            $reportParams->addParams([
+                JRParameter::REPORT_FILE_RESOLVER => $fileResolver,
+                JRParameter::REPORT_CLASS_LOADER  => $classLoader
+            ]);
+
+            // Step 4: Assign parameters from datasource or set the JrDatasource
+
+            $javaDataSource = null;
+            if ($dataSource instanceof JRDataSourceFromReportParamsInterface) {
+                $dataSource->assignDataSourceReportParams($reportParams);
+            } elseif ($dataSource instanceof JRDataSourceFromDataSourceInterface) {
+                $javaDataSource = $dataSource->getJRDataSource($this->ba);
+            } elseif ($dataSource instanceof JavaSqlConnectionInterface) {
+                $javaDataSource = $dataSource->getJasperReportSqlConnection($this->ba);
+            }
+
+            $paramsHashMap = $this->ba->java('java.util.HashMap', $reportParams->toArray());
+
+            $jasperPrint = $fillManager->fillReport(
+                $jasperReport->getJavaProxiedObject(),
+                $paramsHashMap,
+                $javaDataSource,
+                $jasperReport->getReport()->getReportFile()
+            );
+
+            return new JasperPrint($jasperPrint, $jasperReport->getReport());
+        } catch (\Exception $e) {
+            $this->logger->error(
+                sprintf(
+                    "Filling report '%s' failed with '%s' (%s)",
+                    basename($jasperReport->getReport()->getReportFile()),
+                    (new \ReflectionClass($e))->getShortName(),
+                    $e->getMessage()
+                )
+            );
+            throw $e;
         }
-
-        // Step 2: Assigning reportParams
-
-        $originalReportParams = $jasperReport->getReport()->getReportParams() ?? new ReportParams();
-        $reportParams = $originalReportParams->withMergedParams($reportParams ?? new ReportParams());
-
-        // Step 3: Getting some defaults
-
-        $reportPath = $jasperReport->getReport()->getReportPath();
-        $fileResolver = (new DefaultFileResolver($this->ba))->getFileResolver([$reportPath]);
-        $classLoader = (new DefaultClassLoader($this->ba))->getClassLoader([$reportPath]);
-        //$resourceBundle = (new DefaultResourceBundle($this->>ba))->getResourceBundle();
-        $reportParams->addParams([
-            JRParameter::REPORT_FILE_RESOLVER => $fileResolver,
-            JRParameter::REPORT_CLASS_LOADER  => $classLoader
-        ]);
-
-        // Step 4: Assign parameters from datasource or set the JrDatasource
-
-        $javaDataSource = null;
-        if ($dataSource instanceof JRDataSourceFromReportParamsInterface) {
-            $dataSource->assignDataSourceReportParams($reportParams);
-        } elseif ($dataSource instanceof JRDataSourceFromDataSourceInterface) {
-            $javaDataSource = $dataSource->getJRDataSource($this->ba);
-        } elseif ($dataSource instanceof JavaSqlConnectionInterface) {
-            $javaDataSource = $dataSource->getJasperReportSqlConnection($this->ba);
-        }
-
-        $paramsHashMap = $this->ba->java('java.util.HashMap', $reportParams->toArray());
-
-        $jasperPrint = $fillManager->fillReport(
-            $jasperReport->getJavaProxiedObject(),
-            $paramsHashMap,
-            $javaDataSource,
-            $jasperReport->getReport()->getReportFile()
-        );
-
-        return new JasperPrint($jasperPrint, $jasperReport->getReport());
     }
 
     public function getExportManager(Report $report): BridgedExportManager

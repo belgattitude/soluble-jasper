@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace JasperTest\Samples;
+namespace JasperTest\Functionnal;
 
 use JasperTest\Util\PDFUtils;
 use Soluble\Jasper\DataSource\JsonDataSource;
