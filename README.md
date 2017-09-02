@@ -258,8 +258,6 @@ Early benchmarks for common operation (run on a laptop for now, will do soon on 
 
 ### Jasper compile time and filling (internal)
 
-### Jasper compile time and filling (internal)
-
 | Benchmark name |  x1 | x5 | x10 | Average | Memory |
 |----| ----:|----:|----:|-------:|----:| 
 | 00_report_mini.jrxml (compile) | 43.03ms| 179.05ms| 347.55ms| 35.60ms| 18.97Kb|
