@@ -76,7 +76,7 @@ class ErrorLoggingReportGenerationTest extends TestCase
 
     public function testFillLoggingError()
     {
-        $reportFile = \JasperTestsFactories::getReportBaseDir() . '/10_report_test_json_northwind.jrxml';
+        $reportFile = \JasperTestsFactories::getReportBaseDir() . '/10_report_json_northwind.jrxml';
         $jsonFile = \JasperTestsFactories::getDataBaseDir() . '/invalid_json.json';
 
         $jsonDataSource = new JsonDataSource($jsonFile);

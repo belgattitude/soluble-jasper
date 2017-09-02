@@ -258,25 +258,33 @@ Early benchmarks for common operation (run on a laptop for now, will do soon on 
 
 ### Jasper compile time and filling (internal)
 
+### Jasper compile time and filling (internal)
+
 | Benchmark name |  x1 | x5 | x10 | Average | Memory |
 |----| ----:|----:|----:|-------:|----:| 
-| 00_report_test_mini.jrxml (compile) | 47.87ms| 176.62ms| 344.27ms| 35.55ms| 37.59Kb|
-| 00_report_test_mini.jrxml (fill) | 3.77ms| 8.47ms| 12.81ms| 1.57ms| 28.92Kb|
-| 01_report_test_default.jrxml (compile) | 40.17ms| 173.92ms| 347.49ms| 35.10ms| 0.31Kb|
-| 01_report_test_default.jrxml (fill) | 3.32ms| 12.82ms| 19.77ms| 2.24ms| 0.42Kb|
+| 00_report_mini.jrxml (compile) | 43.03ms| 179.05ms| 347.55ms| 35.60ms| 18.97Kb|
+| 00_report_mini.jrxml (fill) | 3.19ms| 9.15ms| 18.58ms| 1.93ms| 14.27Kb|
+| 01_report_default.jrxml (compile) | 39.24ms| 192.41ms| 338.65ms| 35.64ms| 0.31Kb|
+| 01_report_default.jrxml (fill) | 3.70ms| 11.22ms| 22.75ms| 2.35ms| 0.44Kb|
 
 
 ### PDF exports
 
 | Benchmark name |  x1 | x5 | x10 | Average | Memory |
 |----| ----:|----:|----:|-------:|----:| 
-| 00_report_test_mini.jrxml (text-only) | 51.82ms| 3.21ms| 6.04ms| 3.82ms| 0.79Kb|
-| 01_report_test_default.jrxml (text+png) | 373.95ms| 1,628.55ms| 3,200.64ms| 325.20ms| 0.75Kb|
-| 06_report_test_barcodes.jrxml (barcodes) | 88.93ms| 324.90ms| 689.11ms| 68.93ms| 0.75Kb|
-| 08_report_test_jdbc.jrxml (jdbc) | 32.03ms| 35.00ms| 65.28ms| 8.27ms| 17.31Kb|
+| 00_report_mini.jrxml (text-only) | 38.74ms| 3.76ms| 8.58ms| 3.19ms| 0.79Kb|
+| 01_report_default.jrxml (text+png) | 318.68ms| 1,365.02ms| 2,709.56ms| 274.58ms| 0.75Kb|
+| 12_report_jpg.jrxml (text+jpg) | 35.17ms| 6.75ms| 8.89ms| 3.18ms| 0.75Kb|
+| 06_report_barcodes.jrxml (barcodes) | 123.81ms| 323.71ms| 630.51ms| 67.38ms| 0.75Kb|
 
-- Connection time: 6 ms
-- Total time     : 7773 ms
+- Connection time: 3 ms
+- Total time     : 6860 ms
+
+!!! tip
+    For best performances: when exporting in PDF, *PNG images* in PDF are much slower than equivalent *JPG*.
+    
+     
+     
 
   
 ## Coding standards and interop

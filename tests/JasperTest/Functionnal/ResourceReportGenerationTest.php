@@ -26,7 +26,7 @@ class ResourceReportGenerationTest extends TestCase
 
     public function testWithResourceFR()
     {
-        $reportFile = \JasperTestsFactories::getReportBaseDir() . '/11_report_test_resource.jrxml';
+        $reportFile = \JasperTestsFactories::getReportBaseDir() . '/11_report_resource.jrxml';
 
         $reportRunner = ReportRunnerFactory::getBridgedReportRunner($this->ba);
 
@@ -60,7 +60,7 @@ class ResourceReportGenerationTest extends TestCase
 
     public function testWithResourceMissingZH()
     {
-        $reportFile = \JasperTestsFactories::getReportBaseDir() . '/11_report_test_resource.jrxml';
+        $reportFile = \JasperTestsFactories::getReportBaseDir() . '/11_report_resource.jrxml';
 
         $reportRunner = ReportRunnerFactory::getBridgedReportRunner($this->ba);
 

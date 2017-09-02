@@ -106,7 +106,7 @@ class JasperCompileManagerTest extends TestCase
 
     public function testCompileWithExpressionErrorShouldThrowReportCompileException()
     {
-        $reportFile = \JasperTestsFactories::getReportBaseDir() . '/04_report_test_expression_error.jrxml';
+        $reportFile = \JasperTestsFactories::getReportBaseDir() . '/04_report_expression_error.jrxml';
 
         $this->expectException(ReportCompileException::class);
         $this->expectExceptionMessageRegExp(

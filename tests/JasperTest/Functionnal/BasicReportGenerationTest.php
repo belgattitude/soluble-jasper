@@ -25,7 +25,7 @@ class BasicReportGenerationTest extends TestCase
 
     public function testDefaultReport()
     {
-        $reportFile = \JasperTestsFactories::getReportBaseDir() . '/01_report_test_default.jrxml';
+        $reportFile = \JasperTestsFactories::getReportBaseDir() . '/01_report_default.jrxml';
 
         $reportRunner = ReportRunnerFactory::getBridgedReportRunner($this->ba);
 

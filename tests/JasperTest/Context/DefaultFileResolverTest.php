@@ -35,7 +35,7 @@ class DefaultFileResolverTest extends TestCase
         $fileResolver = new DefaultFileResolver($ba);
 
         $paths = [
-            dirname(\JasperTestsFactories::getReportBaseDir() . '/01_report_test_default.jrxml')
+            dirname(\JasperTestsFactories::getReportBaseDir() . '/01_report_default.jrxml')
         ];
 
         $fileResolver = $fileResolver->getFileResolver($paths);
@@ -47,7 +47,7 @@ class DefaultFileResolverTest extends TestCase
     {
         $ba = $this->ba;
 
-        $file = \JasperTestsFactories::getReportBaseDir() . '/01_report_test_default.jrxml';
+        $file = \JasperTestsFactories::getReportBaseDir() . '/01_report_default.jrxml';
         $report = new Report($file);
 
         $fileResolver = new DefaultFileResolver($ba);

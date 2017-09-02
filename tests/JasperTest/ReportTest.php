@@ -18,7 +18,7 @@ class ReportTest extends TestCase
 
     public function setUp()
     {
-        $this->reportFile = \JasperTestsFactories::getReportBaseDir() . '/01_report_test_default.jrxml';
+        $this->reportFile = \JasperTestsFactories::getReportBaseDir() . '/01_report_default.jrxml';
     }
 
     public function testConstructThrowsMissingReportFileException()

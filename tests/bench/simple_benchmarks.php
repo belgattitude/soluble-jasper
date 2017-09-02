@@ -15,22 +15,23 @@ ini_set('display_errors', 'true');
 $reportPath = __DIR__ . '/../reports';
 $reports = [
     'text-only' => new Report(
-        "$reportPath/00_report_test_mini.jrxml",
+        "$reportPath/00_report_mini.jrxml",
         new ReportParams([
             'BookTitle'    => 'Soluble Jasper',
             'BookSubTitle' => 'Generated on JVM with Jasper reports'
         ])
     ),
-    'text+png'       => new Report("$reportPath/01_report_test_default.jrxml"),
-    //'text+png+cache' => new Report("$reportPath/05_report_test_img_cache.jrxml"),
-    'barcodes'       => new Report("$reportPath/06_report_test_barcodes.jrxml"),
+    'text+png'       => new Report("$reportPath/01_report_default.jrxml"),
+    'text+jpg'       => new Report("$reportPath/12_report_jpg.jrxml"),
+    //'text+png+cache' => new Report("$reportPath/05_report_img_cache.jrxml"),
+    'barcodes'       => new Report("$reportPath/06_report_barcodes.jrxml"),
 ];
 
 $mysql_password = $_SERVER['argv'][1] ?? '';
 
 if ($mysql_password !== '') {
     $reports['jdbc'] = new Report(
-        "$reportPath/08_report_test_jdbc.jrxml",
+        "$reportPath/08_report_jdbc.jrxml",
         null,
         new JavaSqlConnection("jdbc:mysql://localhost/phpunit_soluble_test_db?user=root&password=$mysql_password&serverTimezone=UTC")
     );

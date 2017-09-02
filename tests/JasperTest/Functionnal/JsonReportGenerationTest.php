@@ -28,7 +28,7 @@ class JsonReportGenerationTest extends TestCase
 
     public function testJsonReport()
     {
-        $reportFile = \JasperTestsFactories::getReportBaseDir() . '/10_report_test_json_northwind.jrxml';
+        $reportFile = \JasperTestsFactories::getReportBaseDir() . '/10_report_json_northwind.jrxml';
         $jsonFile = \JasperTestsFactories::getDataBaseDir() . '/northwind.json';
 
         $jsonDataSource = new JsonDataSource($jsonFile);

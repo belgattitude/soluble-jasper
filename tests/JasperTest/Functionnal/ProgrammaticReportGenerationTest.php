@@ -31,7 +31,7 @@ class ProgrammaticReportGenerationTest extends TestCase
         $ba = $this->ba;
 
         // Variables
-        $reportFile = \JasperTestsFactories::getReportBaseDir() . '/10_report_test_json_northwind.jrxml';
+        $reportFile = \JasperTestsFactories::getReportBaseDir() . '/10_report_json_northwind.jrxml';
         $jsonDataFile = \JasperTestsFactories::getDataBaseDir() . '/northwind.json';
         $outputFile = \JasperTestsFactories::getOutputDir() . '/programmatic.pdf';
 

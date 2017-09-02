@@ -6,7 +6,7 @@ use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
 
 class JasperTestsFactories
 {
-    const defaultReportTestFile = '01_report_test_default.jrxml';
+    const defaultReportTestFile = '01_report_default.jrxml';
 
     public static function getJavaBridgeAdapter(): BridgeAdapter
     {
@@ -62,12 +62,12 @@ class JasperTestsFactories
 
     public static function getBrokenXMLReportFile(): string
     {
-        return self::getReportBaseDir() . DIRECTORY_SEPARATOR . '02_report_test_invalid_broken_xml.jrxml';
+        return self::getReportBaseDir() . DIRECTORY_SEPARATOR . '02_report_invalid_broken_xml.jrxml';
     }
 
     public static function getNonJasperXMLReportFile(): string
     {
-        return self::getReportBaseDir() . DIRECTORY_SEPARATOR . '03_report_test_invalid_nonjasper_xml.jrxml';
+        return self::getReportBaseDir() . DIRECTORY_SEPARATOR . '03_report_invalid_nonjasper_xml.jrxml';
     }
 
     public static function isJdbcTestsEnabled(): bool

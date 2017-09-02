@@ -60,7 +60,7 @@ class BridgedJasperReportRunnerTest extends TestCase
 
     public function testFillWithInvalidJsonDataShouldThrowException()
     {
-        $reportFile = \JasperTestsFactories::getReportBaseDir() . '/10_report_test_json_northwind.jrxml';
+        $reportFile = \JasperTestsFactories::getReportBaseDir() . '/10_report_json_northwind.jrxml';
         $jsonFile = \JasperTestsFactories::getDataBaseDir() . '/invalid_json.json';
 
         $this->expectException(BrokenJsonDataSourceException::class);
