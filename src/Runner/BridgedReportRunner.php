@@ -68,7 +68,7 @@ class BridgedReportRunner implements ReportRunnerInterface
                 $this->compileManager = new JasperCompileManager($this->ba);
             }
             $jasperReport = $this->compileManager->compileReport($report->getReportFile());
-        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
             $this->logger->error(
                 sprintf(
                 "Compilation of report '%s' failed with '%s' (%s)",
@@ -144,7 +144,7 @@ class BridgedReportRunner implements ReportRunnerInterface
             );
 
             return new JasperPrint($jasperPrint, $jasperReport->getReport());
-        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
             $this->logger->error(
                 sprintf(
                     "Filling report '%s' failed with '%s' (%s)",

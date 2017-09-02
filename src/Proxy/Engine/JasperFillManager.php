@@ -61,7 +61,7 @@ class JasperFillManager implements RemoteJavaObjectProxyInterface
         } catch (JavaException $e) {
             $this->processFillJavaException($e, $jasperReport, $params, $reportFile);
             throw $e;
-        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
             throw new Exception\RuntimeException($e->getMessage());
         }
 
