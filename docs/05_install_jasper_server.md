@@ -1,8 +1,7 @@
 # Jasper install
 
-### JasperBridge
+## Creating the war file
 
-Build a war file
 
 ```shell
 # Example based on php-java-bridge master
@@ -11,16 +10,23 @@ $ cd php-java-bridge
 $ ./gradlew war -I init-scripts/init.jasperreports.gradle -I init-scripts/init.mysql.gradle 
 ```
 
+## Deploy 
+
 Deploy on Tomcat (example on ubuntu)
 
 ```shell
 $ sudo cp ./build/libs/JavaBridgeTemplate.war /var/lib/tomcat8/webapps/JasperReports.war
 ```
 
-Wait few seconds and point your browser to [http://localhost:8080/JasperReports](http://localhost:8080/JasperReports), you
+### Check the bridge 
+
+Point your browser to [http://localhost:8080/JasperReports](http://localhost:8080/JasperReports), you
 should see the php-java-bridge dashboard page.
 
 ![](./images/jasper_bridge_dashboard.png "Jasper bridge dashboard")
+
+
+## Test
 
 The bridge address can be used in the japha bridge adapter:
 
@@ -38,4 +44,5 @@ $ba = new Adapter([
 echo $ba->javaClass('java.lang.System')->getProperty('java.version');
 
 ```
+
 
