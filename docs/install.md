@@ -6,7 +6,7 @@ $ composer require soluble/jasper
 
 ## Jasper server
 
-## Creating the war file
+### Creating the war file
 
 
 ```bash
@@ -16,7 +16,7 @@ $ cd php-java-bridge
 $ ./gradlew war -I init-scripts/init.jasperreports.gradle -I init-scripts/init.mysql.gradle 
 ```
 
-## Deploy 
+### Deploy 
 
 Deploy on Tomcat (example on ubuntu)
 
@@ -32,7 +32,7 @@ should see the php-java-bridge dashboard page.
 ![](assets/images/jasper_bridge_dashboard.png "Jasper bridge dashboard")
 
 
-## Test
+### Test
 
 The bridge address can be used in the japha bridge adapter:
 

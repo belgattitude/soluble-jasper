@@ -14,18 +14,10 @@ Report generation using jasper reports from PHP.
 
 ## Features
 
+- [x] PDF report generation
 
-## Requirements
 
-- PHP 7.1+
-- PHPJasperBridge (see install)
-- Java
-
-## Dependencies
-
-- [soluble-japha](https://github.com/belgattitude/soluble-japha) client for communication with the jasper bridge
-
-## Examples
+## Basic example
 
 ### Creating a new report
 
@@ -37,7 +29,6 @@ use Soluble\Jasper\{ReportRunnerFactory, Report, ReportParams};
 use Soluble\Jasper\DataSource\JavaSqlConnection;
 
 // Step 1: Get the report runner
-// Good practice is to initialize once and get it from a PSR-11 compatible container
 
 $bridgeAdapter = new JavaBridgeAdapter([
     'servlet_address' => 'localhost:8080/JasperReports/servlet.phpjavabridge'    
@@ -76,88 +67,9 @@ $stream       = $pdfExporter->getStream();
 
 ```
 
-
-## Datasources
-
-
-Jasper reports supports multiple datasources for filling the report (see [JRApi](http://jasperreports.sourceforge.net/api/net/sf/jasperreports/engine/JasperFillManager.html))
-
-### JavaSqlConnection
-
-Example using `JavaSqlConnection`:
-
-```php
-<?php declare(strict_types=1);
-
-use Soluble\Jasper\DataSource\JavaSqlConnection;
-
-$dataSource = new JavaSqlConnection(
-     'jdbc:mysql://server_host/database?user=user&password=password',
-     'com.mysql.jdbc.Driver'
-);
-```
-
 !!! tip
-    For convenience you can also use the `JdbcDsnFactory` to convert 
-    database params. 
+    Use a psr11 container
 
-    ```php
-    <?php declare(strict_types=1);
-    
-    use Soluble\Jasper\DataSource\Util\JdbcDsnFactory;
-    
-    $dbParams = [
-        'driver'    => 'mysql', // JDBC driver key.
-        'host'      => 'localhost',
-        'db'        => 'my_db',
-        'user'      => 'user',
-        'password'  => 'password',
-        // Optional extended options
-        'driverOptions'  => [
-            'serverTimezone' => 'UTC'
-        ]        
-    ];
-    
-    $dsn = JdbcDsnFactory::createDsnFromParams($dbParams);
-    
-    // You should get a jdbc formatted dsn:
-    //   'jdbc:mysql://localhost/my_db?user=user&password=password&serverTimezone=UTC'
-    // ready to use as $dsn argument for `JdbcDataSource`
-    ```
-
-### JsonDataSource
-
-Example using `JsonDataSource`:
-
-```php
-<?php declare(strict_types=1);
-
-use Soluble\Jasper\{ReportRunnerFactory, Report, ReportParams};
-use Soluble\Jasper\DataSource\JsonDataSource;
- 
-$jsonDataSource = new JsonDataSource('/path/northwind.json');
-$jsonDataSource->setOptions([
-    JsonDataSource::PARAM_JSON_DATE_PATTERN   => 'yyyy-MM-dd',
-    JsonDataSource::PARAM_JSON_NUMBER_PATTERN => '#,##0.##',
-    JsonDataSource::PARAM_JSON_TIMEZONE_ID    => 'Europe/Brussels',
-    JsonDataSource::PARAM_JSON_LOCALE_CODE    => 'en_US'
-]);
-
-
-$report = new Report(
-                '/path/myreport.jrxml',
-                new ReportParams([
-                    'LOGO_FILE' => '/path/assets/wave.png',
-                    'TITLE'     => 'My Title'            
-                ]),  
-                $jsonDataSource);
-
-$reportRunner = ReportRunnerFactory::getBridgedReportRunner($this->ba);
-$exportManager = $reportRunner->getExportManager($report);
-
-$exportManager->savePdf('/path/my_output.pdf');
-
-```
 
 ## Logging
 
@@ -211,47 +123,6 @@ At filling time:
 
 
 
-## Installation
-
-### JasperBridge
-
-Build a war file
-
-```shell
-# Example based on php-java-bridge master
-$ git clone https://github.com/belgattitude/php-java-bridge.git
-$ cd php-java-bridge
-$ ./gradlew war -I init-scripts/init.jasperreports.gradle -I init-scripts/init.mysql.gradle 
-```
-
-Deploy on Tomcat (example on ubuntu)
-
-```shell
-$ sudo cp ./build/libs/JavaBridgeTemplate.war /var/lib/tomcat8/webapps/JasperReports.war
-```
-
-Wait few seconds and point your browser to [http://localhost:8080/JasperReports](http://localhost:8080/JasperReports), you
-should see the php-java-bridge dashboard page.
-
-![](./docs/images/jasper_bridge_dashboard.png "Jasper bridge dashboard")
-
-The bridge address can be used in the japha bridge adapter:
-
-```php
-<?php declare(strict_types=1);
-
-use Soluble\Japha\Bridge\Adapter;
-
-$ba = new Adapter([
-    'driver' => 'Pjb62',
-    'servlet_address' => 'localhost:8080/JasperReports/servlet.phpjavabridge'    
-]);
-
-// This should print your JVM version
-echo $ba->javaClass('java.lang.System')->getProperty('java.version');
-
-```
-
 ## Benchmarks
 
 Early benchmarks for common operation (run on a laptop for now, will do soon on digitalocean). See `tests/bench/simple_benchmarks.php`.
@@ -280,14 +151,4 @@ Early benchmarks for common operation (run on a laptop for now, will do soon on 
 
 !!! tip
     For best performances: when exporting in PDF, *PNG images* in PDF are much slower than equivalent *JPG*.
-    
-     
-     
-
-  
-## Coding standards and interop
-
-* [PSR 4 Autoloader](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader.md)
-* [PSR 3 Logger interface](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-3-logger-interface.md)
-* [PSR 2 Coding Style Guide](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md)
-
+         
