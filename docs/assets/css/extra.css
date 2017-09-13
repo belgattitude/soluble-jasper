@@ -4,8 +4,20 @@ a.md-logo
     padding-right: 0;
 }
 
+.md-sidebar {
+    padding-top: 1rem;
+}
+
+.md-main__inner {
+    padding-top: 0.5rem;
+}
+
+.md-content__inner {
+    padding-top: 0.5rem;
+}
+
 span.md-header-nav__title {
-    padding-left: 0.1 em;
+    padding-left: 0.1rem;
 }
 .md-typeset h1 {
     margin: 0 0 0 0;

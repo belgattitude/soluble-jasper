@@ -15,6 +15,7 @@ site_dir: build/docs
 
 pages:
     - { 'Introduction': index.md }
+    - { 'Installation': install.md }
     - { 'Usage': [
           { 'Datasources': datasources.md }
         ]
@@ -33,7 +34,8 @@ extra:
     primary: 'pink'
     accent: 'light blue'
   font:
-    text: 'Source Sans Pro'
+    #text: 'Source Sans Pro'
+    text: 'Roboto'
     code: 'Roboto Mono'
   # If extra_css defined here ->
   # -> WARNING -  Config value: 'extra_css'.
