@@ -24,7 +24,7 @@ class ReportParamsTest extends TestCase
     {
         $p = new ReportParams();
         $p->put('REPORT_DATE', 'cool');
-        $this->assertEquals('cool', $p['REPORT_DATE']);
+        self::assertEquals('cool', $p['REPORT_DATE']);
     }
 
     public function testGetArray(): void
@@ -37,8 +37,8 @@ class ReportParamsTest extends TestCase
         $reportParams = new ReportParams($params);
         $array = $reportParams->toArray();
 
-        $this->assertEquals($params, $array);
-        $this->assertEquals('cool', $array['Title']);
+        self::assertEquals($params, $array);
+        self::assertEquals('cool', $array['Title']);
     }
 
     public function testWithParams(): void
@@ -53,9 +53,9 @@ class ReportParamsTest extends TestCase
             'Test'  => 'hello'
         ]));
 
-        $this->assertEquals('success', $p2['Title']);
-        $this->assertEquals('hello', $p2['Test']);
-        $this->assertEquals('test', $p2['SubTitle']);
+        self::assertEquals('success', $p2['Title']);
+        self::assertEquals('hello', $p2['Test']);
+        self::assertEquals('test', $p2['SubTitle']);
     }
 
     public function testIterable(): void
@@ -72,7 +72,7 @@ class ReportParamsTest extends TestCase
         foreach ($p as $key => $value) {
             $newData[$key] = $value;
         }
-        $this->assertEquals($data, $newData);
+        self::assertEquals($data, $newData);
     }
 
     public function testConstructorIterable(): void
@@ -80,50 +80,50 @@ class ReportParamsTest extends TestCase
         $p = new ReportParams(['test' => 'cool']);
         $p2 = new ReportParams($p);
 
-        $this->assertEquals('cool', $p2->offsetGet('test'));
+        self::assertEquals('cool', $p2->offsetGet('test'));
     }
 
     public function testArrayAccess(): void
     {
         $p = new ReportParams();
         $p['cool'] = 'test';
-        $this->assertEquals('test', $p['cool']);
+        self::assertEquals('test', $p['cool']);
         unset($p['cool']);
-        $this->assertFalse(isset($p['cool']));
+        self::assertFalse(isset($p['cool']));
 
         try {
             $p->offsetSet(1, 'cool');
-            $this->assertTrue(false, 'Should reject non-string offsets');
+            self::assertTrue(false, 'Should reject non-string offsets');
         } catch (InvalidArgumentException $e) {
-            $this->assertTrue(true);
+            self::assertTrue(true);
         }
 
         try {
             $p->offsetSet('   ', 'cool');
-            $this->assertTrue(false, 'Should reject blank string offsets');
+            self::assertTrue(false, 'Should reject blank string offsets');
         } catch (InvalidArgumentException $e) {
-            $this->assertTrue(true);
+            self::assertTrue(true);
         }
 
         try {
             $p->offsetUnset(1);
-            $this->assertTrue(false, 'Should reject non-string offsets');
+            self::assertTrue(false, 'Should reject non-string offsets');
         } catch (InvalidArgumentException $e) {
-            $this->assertTrue(true);
+            self::assertTrue(true);
         }
 
         try {
             $p->offsetGet(1);
-            $this->assertTrue(false, 'Should reject non-string offsets');
+            self::assertTrue(false, 'Should reject non-string offsets');
         } catch (InvalidArgumentException $e) {
-            $this->assertTrue(true);
+            self::assertTrue(true);
         }
 
         try {
             $p->offsetExists(1);
-            $this->assertTrue(false, 'Should reject non-string offsets');
+            self::assertTrue(false, 'Should reject non-string offsets');
         } catch (InvalidArgumentException $e) {
-            $this->assertTrue(true);
+            self::assertTrue(true);
         }
     }
 }

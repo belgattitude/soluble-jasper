@@ -30,6 +30,6 @@ class JasperPrintTest extends TestCase
             $this->bridgeAdapter->java('net.sf.jasperreports.engine.JasperReport'),
             $report
         );
-        $this->assertEquals(ReportInterface::STATUS_FILLED, $jasperReport->getStatus());
+        self::assertEquals(ReportInterface::STATUS_FILLED, $jasperReport->getStatus());
     }
 }

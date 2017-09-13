@@ -40,7 +40,7 @@ class DefaultFileResolverTest extends TestCase
 
         $fileResolver = $fileResolver->getFileResolver($paths);
 
-        $this->assertEquals('net.sf.jasperreports.engine.util.SimpleFileResolver', $ba->getClassName($fileResolver));
+        self::assertEquals('net.sf.jasperreports.engine.util.SimpleFileResolver', $ba->getClassName($fileResolver));
     }
 
     public function testGetClassLoaderFromReport(): void
@@ -54,6 +54,6 @@ class DefaultFileResolverTest extends TestCase
 
         $fileResolver = $fileResolver->getReportFileResolver($report);
 
-        $this->assertEquals('net.sf.jasperreports.engine.util.SimpleFileResolver', $ba->getClassName($fileResolver));
+        self::assertEquals('net.sf.jasperreports.engine.util.SimpleFileResolver', $ba->getClassName($fileResolver));
     }
 }

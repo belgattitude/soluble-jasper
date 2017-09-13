@@ -17,7 +17,7 @@ class JdbcDsnFactoryTest extends TestCase
     public function testCreateDsn(): void
     {
         $dsn = JdbcDsnFactory::createDsn('mysql', 'db', 'host', 'user', 'password', []);
-        $this->assertEquals('jdbc:mysql://host/db?user=user&password=password', $dsn);
+        self::assertEquals('jdbc:mysql://host/db?user=user&password=password', $dsn);
     }
 
     public function testCreateDsnDriverOptions(): void
@@ -30,7 +30,7 @@ class JdbcDsnFactoryTest extends TestCase
         $dsn = JdbcDsnFactory::createDsn('mysql', 'db', 'host', 'user', 'password', $driverOptions);
 
         $expected = 'jdbc:mysql://host/db?user=user&password=password&param1=Hello&param2=%C3%A9%C3%A0%26AA';
-        $this->assertEquals($expected, $dsn);
+        self::assertEquals($expected, $dsn);
     }
 
     public function testCreateDsnFromParamsWithDriverOptions(): void
@@ -50,7 +50,7 @@ class JdbcDsnFactoryTest extends TestCase
         $dsn = JdbcDsnFactory::createDsnFromParams($params);
 
         $expected = 'jdbc:mysql://localhost/my_db?user=username&password=password&param1=Hello&param2=%C3%A9%C3%A0%26AA';
-        $this->assertEquals($expected, $dsn);
+        self::assertEquals($expected, $dsn);
     }
 
     public function testCreateDsnFromParamsThrowsExceptionMissingDriver(): void

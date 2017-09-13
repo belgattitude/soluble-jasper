@@ -45,7 +45,7 @@ class JasperCompileManagerTest extends TestCase
         $reportFile = \JasperTestsFactories::getDefaultReportFile();
         $compileManager = new JasperCompileManager($this->bridgeAdapter);
         $jasperReport = $compileManager->compileReport($reportFile);
-        $this->assertInstanceOf(JavaObject::class, $jasperReport);
+        self::assertInstanceOf(JavaObject::class, $jasperReport);
     }
 
     public function testCompileWithMissingFileShouldThrowReportNotFoundException(): void
@@ -122,7 +122,7 @@ class JasperCompileManagerTest extends TestCase
     public function testGetJavaProxiedObject(): void
     {
         $compileManager = new JasperCompileManager($this->bridgeAdapter);
-        $this->assertEquals(
+        self::assertEquals(
             'net.sf.jasperreports.engine.JasperCompileManager',
             $this->bridgeAdapter->getClassName($compileManager->getJavaProxiedObject())
         );

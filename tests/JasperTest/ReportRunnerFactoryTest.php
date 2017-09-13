@@ -25,6 +25,6 @@ class ReportRunnerFactoryTest extends TestCase
     {
         $jasperRunner = ReportRunnerFactory::getBridgedReportRunner($this->bridgeAdapter);
 
-        $this->assertInstanceOf(BridgedReportRunner::class, $jasperRunner);
+        self::assertInstanceOf(BridgedReportRunner::class, $jasperRunner);
     }
 }

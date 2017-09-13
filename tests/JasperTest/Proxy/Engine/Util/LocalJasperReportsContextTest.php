@@ -27,15 +27,15 @@ class LocalJasperReportsContextTest extends TestCase
     {
         $context = new LocalJasperReportsContext($this->bridgeAdapter);
         $context->setProperty('cool', 'test');
-        $this->assertEquals('test', $context->getProperty('cool'));
+        self::assertEquals('test', $context->getProperty('cool'));
 
         $context->setPropertiesMap(['prop1' => '1', 'prop2' => 2]);
-        $this->assertEquals('1', $context->getProperty('prop1'));
+        self::assertEquals('1', $context->getProperty('prop1'));
         // @todo
-        //$this->assertEquals(2,  $context->getProperty('prop2')->intValue());
+        //self::assertEquals(2,  $context->getProperty('prop2')->intValue());
 
         $context->removeProperty('cool');
-        $this->assertNull($context->getProperty('cool'));
+        self::assertNull($context->getProperty('cool'));
     }
 
     public function testGetProxiedObject(): void
@@ -46,7 +46,7 @@ class LocalJasperReportsContextTest extends TestCase
         );
 
         $proxied = $context->getJavaProxiedObject();
-        $this->assertEquals('net.sf.jasperreports.engine.util.LocalJasperReportsContext', $this->bridgeAdapter->getClassName($proxied));
+        self::assertEquals('net.sf.jasperreports.engine.util.LocalJasperReportsContext', $this->bridgeAdapter->getClassName($proxied));
     }
 
     public function testSetClassLoader(): void
@@ -58,7 +58,7 @@ class LocalJasperReportsContextTest extends TestCase
                     [\JasperTestsFactories::getReportBaseDir()]
                 )
         );
-        $this->assertTrue(true);
+        self::assertTrue(true);
     }
 
     public function testSetFileResolver(): void
@@ -70,6 +70,6 @@ class LocalJasperReportsContextTest extends TestCase
                     [\JasperTestsFactories::getReportBaseDir()]
                 )
         );
-        $this->assertTrue(true);
+        self::assertTrue(true);
     }
 }

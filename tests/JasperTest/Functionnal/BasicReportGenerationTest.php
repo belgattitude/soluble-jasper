@@ -54,7 +54,7 @@ class BasicReportGenerationTest extends TestCase
         $pdfUtils = new PDFUtils();
         $text = $pdfUtils->getPDFText($output_pdf);
 
-        $this->assertContains('Soluble Jasper', $text);
-        $this->assertContains('Generated from unit tests', $text);
+        self::assertContains('Soluble Jasper', $text);
+        self::assertContains('Generated from unit tests', $text);
     }
 }

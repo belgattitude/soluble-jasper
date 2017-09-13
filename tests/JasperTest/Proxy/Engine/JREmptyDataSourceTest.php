@@ -23,7 +23,7 @@ class JREmptyDataSourceTest extends TestCase
     public function testGetJavaProxiedObject(): void
     {
         $ds = new JREmptyDataSource($this->bridgeAdapter);
-        $this->assertEquals(
+        self::assertEquals(
             'net.sf.jasperreports.engine.JREmptyDataSource',
             $this->bridgeAdapter->getClassName($ds->getJavaProxiedObject())
         );

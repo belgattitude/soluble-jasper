@@ -74,8 +74,8 @@ class JsonReportGenerationTest extends TestCase
         $pdfUtils = new PDFUtils();
         $text = $pdfUtils->getPDFText($output_pdf);
 
-        $this->assertContains('Customer Order List', $text);
-        $this->assertContains('PHPUNIT', $text);
-        $this->assertContains('Alfreds Futterkiste', $text);
+        self::assertContains('Customer Order List', $text);
+        self::assertContains('PHPUNIT', $text);
+        self::assertContains('Alfreds Futterkiste', $text);
     }
 }

@@ -23,7 +23,7 @@ class DefaultJasperReportsContextTest extends TestCase
     public function testGetInstance(): void
     {
         $context = (new DefaultJasperReportsContext($this->bridgeAdapter))->getInstance();
-        $this->assertEquals(
+        self::assertEquals(
             'net.sf.jasperreports.engine.DefaultJasperReportsContext',
             $this->bridgeAdapter->getClassName($context)
         );

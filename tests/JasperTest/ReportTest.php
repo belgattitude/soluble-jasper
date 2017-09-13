@@ -30,12 +30,12 @@ class ReportTest extends TestCase
     public function testGetReportFile(): void
     {
         $report = new Report($this->reportFile);
-        $this->assertFileEquals($this->reportFile, $report->getReportFile());
+        self::assertFileEquals($this->reportFile, $report->getReportFile());
     }
 
     public function testGetStatus(): void
     {
         $report = new Report($this->reportFile);
-        $this->assertEquals(ReportInterface::STATUS_FRESH, $report->getStatus());
+        self::assertEquals(ReportInterface::STATUS_FRESH, $report->getStatus());
     }
 }

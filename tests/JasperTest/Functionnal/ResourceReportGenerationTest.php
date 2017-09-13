@@ -54,8 +54,8 @@ class ResourceReportGenerationTest extends TestCase
         $pdfUtils = new PDFUtils();
         $text = $pdfUtils->getPDFText($output_pdf);
 
-        $this->assertContains('TestResources.fr', $text);
-        $this->assertContains('subtitle fr', $text);
+        self::assertContains('TestResources.fr', $text);
+        self::assertContains('subtitle fr', $text);
     }
 
     public function testWithResourceMissingZH(): void
@@ -88,7 +88,7 @@ class ResourceReportGenerationTest extends TestCase
         $pdfUtils = new PDFUtils();
         $text = $pdfUtils->getPDFText($output_pdf);
 
-        $this->assertContains('TestResources.default', $text);
-        $this->assertContains('Subtitle default', $text);
+        self::assertContains('TestResources.default', $text);
+        self::assertContains('Subtitle default', $text);
     }
 }

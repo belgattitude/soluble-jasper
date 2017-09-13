@@ -23,7 +23,7 @@ class JasperExportManagerTest extends TestCase
     public function testGetJavaProxiedObject(): void
     {
         $em = new JasperExportManager($this->bridgeAdapter);
-        $this->assertEquals(
+        self::assertEquals(
             'net.sf.jasperreports.engine.JasperExportManager',
             $this->bridgeAdapter->getClassName($em->getJavaProxiedObject())
         );

@@ -60,14 +60,14 @@ class ErrorLoggingReportGenerationTest extends TestCase
         } catch (\Exception $e) {
             $logged = true;
             $logMsgs = $this->loggerTestHandler->getRecords() ?? [];
-            $this->assertCount(1, $logMsgs);
+            self::assertCount(1, $logMsgs);
             $logMsg = $logMsgs[0]['message'] ?? '<nothing in the log>';
-            $this->assertContains('BrokenXMLReportFileException', $logMsg);
-            $this->assertContains('JasperCompileManager', $logMsg);
-            $this->assertContains(basename($reportFile), $logMsg);
+            self::assertContains('BrokenXMLReportFileException', $logMsg);
+            self::assertContains('JasperCompileManager', $logMsg);
+            self::assertContains(basename($reportFile), $logMsg);
         }
         if (!$logged) {
-            $this->assertFalse(true, sprintf(
+            self::assertFalse(true, sprintf(
                 'Logger should log compilation error, found: %s',
                 $this->loggerTestHandler->getRecords()[0]['message'] ?? '<nothing in the log>'
             ));
@@ -103,14 +103,14 @@ class ErrorLoggingReportGenerationTest extends TestCase
         } catch (\Exception $e) {
             $logged = true;
             $logMsgs = $this->loggerTestHandler->getRecords() ?? [];
-            $this->assertCount(1, $logMsgs);
+            self::assertCount(1, $logMsgs);
             $logMsg = $logMsgs[0]['message'] ?? '<nothing in the log>';
-            $this->assertContains('BrokenJsonDataSourceException', $logMsg);
-            $this->assertContains('JasperFillManager', $logMsg);
-            $this->assertContains(basename($reportFile), $logMsg);
+            self::assertContains('BrokenJsonDataSourceException', $logMsg);
+            self::assertContains('JasperFillManager', $logMsg);
+            self::assertContains(basename($reportFile), $logMsg);
         }
         if (!$logged) {
-            $this->assertFalse(true, sprintf(
+            self::assertFalse(true, sprintf(
                 'Logger should log filling error, found: %s',
                 $this->loggerTestHandler->getRecords()[0]['message'] ?? '<nothing in the log>'
             ));

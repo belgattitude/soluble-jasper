@@ -27,10 +27,10 @@ class JsonDataSourceTest extends TestCase
 
         $options = $jsonDataSource->getOptions();
 
-        $this->assertEquals($jsonFile, $options[JsonDataSource::PARAM_JSON_SOURCE]);
-        $this->assertEquals('en_US', $options[JsonDataSource::PARAM_JSON_LOCALE_CODE]);
-        $this->assertEquals('Europe/Brussels', $options[JsonDataSource::PARAM_JSON_TIMEZONE_ID]);
-        $this->assertEquals('#,##0.##', $options[JsonDataSource::PARAM_JSON_NUMBER_PATTERN]);
-        $this->assertEquals('yyyy-MM-dd', $options[JsonDataSource::PARAM_JSON_DATE_PATTERN]);
+        self::assertEquals($jsonFile, $options[JsonDataSource::PARAM_JSON_SOURCE]);
+        self::assertEquals('en_US', $options[JsonDataSource::PARAM_JSON_LOCALE_CODE]);
+        self::assertEquals('Europe/Brussels', $options[JsonDataSource::PARAM_JSON_TIMEZONE_ID]);
+        self::assertEquals('#,##0.##', $options[JsonDataSource::PARAM_JSON_NUMBER_PATTERN]);
+        self::assertEquals('yyyy-MM-dd', $options[JsonDataSource::PARAM_JSON_DATE_PATTERN]);
     }
 }

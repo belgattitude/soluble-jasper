@@ -40,13 +40,13 @@ class DefaultClassLoaderTest extends TestCase
 
         $javaClassLoader = $classLoader->getClassLoader($paths);
 
-        $this->assertEquals('java.net.URLClassLoader', $ba->getClassName($javaClassLoader));
+        self::assertEquals('java.net.URLClassLoader', $ba->getClassName($javaClassLoader));
 
         $javaUrls = $javaClassLoader->getUrls();
 
-        $this->assertContains($paths[0], (string) $javaUrls[0]);
-        $this->assertContains('class [Ljava', $ba->getDriver()->inspect($javaUrls));
-        $this->assertEquals('java.net.URL', $ba->getClassName($javaUrls[0]));
+        self::assertContains($paths[0], (string) $javaUrls[0]);
+        self::assertContains('class [Ljava', $ba->getDriver()->inspect($javaUrls));
+        self::assertEquals('java.net.URL', $ba->getClassName($javaUrls[0]));
     }
 
     public function testGetClassLoaderFromReport(): void
@@ -60,11 +60,11 @@ class DefaultClassLoaderTest extends TestCase
 
         $javaClassLoader = $classLoader->getReportClassLoader($report);
 
-        $this->assertEquals('java.net.URLClassLoader', $ba->getClassName($javaClassLoader));
+        self::assertEquals('java.net.URLClassLoader', $ba->getClassName($javaClassLoader));
 
         $javaUrls = $javaClassLoader->getUrls();
 
-        $this->assertContains(dirname($file), (string) $javaUrls[0]);
-        $this->assertEquals('java.net.URL', $ba->getClassName($javaUrls[0]));
+        self::assertContains(dirname($file), (string) $javaUrls[0]);
+        self::assertEquals('java.net.URL', $ba->getClassName($javaUrls[0]));
     }
 }

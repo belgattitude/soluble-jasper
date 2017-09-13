@@ -127,9 +127,9 @@ class ProgrammaticReportGenerationTest extends TestCase
         $pdfUtils = new PDFUtils();
         $text = $pdfUtils->getPDFText($outputFile);
 
-        $this->assertContains('Customer Order List', $text);
-        $this->assertContains('Alfreds Futterkiste', $text);
-        $this->assertContains('PHPUNIT', $text);
+        self::assertContains('Customer Order List', $text);
+        self::assertContains('Alfreds Futterkiste', $text);
+        self::assertContains('PHPUNIT', $text);
 
         /*
         $queryExecuterFactory = $ba->javaClass('net.sf.jasperreports.engine.query.JsonQueryExecuterFactory');
@@ -152,6 +152,6 @@ class ProgrammaticReportGenerationTest extends TestCase
         //				dataSource.setUseFirstRowAsHeader(true);
         dataSource.setColumnNames(columnNames);
          */
-        $this->assertTrue(true);
+        self::assertTrue(true);
     }
 }

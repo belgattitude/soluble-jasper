@@ -24,7 +24,7 @@ class JasperFillManagerTest extends TestCase
     public function testGetJavaProxiedObject(): void
     {
         $fm = new JasperFillManager($this->bridgeAdapter);
-        $this->assertEquals(
+        self::assertEquals(
             'net.sf.jasperreports.engine.JasperFillManager',
             $this->bridgeAdapter->getClassName($fm->getJavaProxiedObject())
         );
@@ -34,7 +34,7 @@ class JasperFillManagerTest extends TestCase
     {
         $context = new LocalJasperReportsContext($this->bridgeAdapter);
         $fm = new JasperFillManager($this->bridgeAdapter, $context->getJavaProxiedObject());
-        $this->assertEquals(
+        self::assertEquals(
             'net.sf.jasperreports.engine.JasperFillManager',
             $this->bridgeAdapter->getClassName($fm->getJavaProxiedObject())
         );

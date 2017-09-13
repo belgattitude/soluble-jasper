@@ -21,11 +21,10 @@ class PDFUtils
     public function getPDFText(string $pdfFile): string
     {
         $text = '';
-
         $pdf = $this->parser->parseFile($pdfFile);
+
         $pages = $pdf->getPages();
 
-        // Loop over each page to extract text.
         foreach ($pages as $page) {
             $text .= $page->getText();
         }

@@ -26,8 +26,8 @@ class JavaSqlConnectionTest extends TestCase
         $dsn = 'jdbc:mysql://host/db?user=user&password=password';
         $driver = 'com.mysql.jdbc.Driver';
         $ds = new JavaSqlConnection($dsn, $driver);
-        $this->assertEquals($dsn, $ds->getJdbcDsn());
-        $this->assertEquals($driver, $ds->getDriverClass());
+        self::assertEquals($dsn, $ds->getJdbcDsn());
+        self::assertEquals($driver, $ds->getDriverClass());
     }
 
     public function testGetJasperReportSqlConnectionThrowsException(): void

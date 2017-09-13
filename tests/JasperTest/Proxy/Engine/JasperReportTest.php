@@ -29,7 +29,7 @@ class JasperReportTest extends TestCase
         $reportRunner = ReportRunnerFactory::getBridgedReportRunner($this->bridgeAdapter);
         $jasperReport = $reportRunner->compileReport($report);
 
-        $this->assertNull($jasperReport->getResourceBundle());
+        self::assertNull($jasperReport->getResourceBundle());
     }
 
     public function testProperties(): void
@@ -38,13 +38,13 @@ class JasperReportTest extends TestCase
         $reportRunner = ReportRunnerFactory::getBridgedReportRunner($this->bridgeAdapter);
         $jasperReport = $reportRunner->compileReport($report);
         $jasperReport->setProperty('COOL', 'test');
-        $this->assertEquals('test', $jasperReport->getJavaProxiedObject()->getProperty('COOL'));
-        $this->assertEquals('test', $jasperReport->getProperty('COOL'));
+        self::assertEquals('test', $jasperReport->getJavaProxiedObject()->getProperty('COOL'));
+        self::assertEquals('test', $jasperReport->getProperty('COOL'));
 
-        $this->assertTrue(in_array('COOL', $jasperReport->getPropertyNames()));
+        self::assertTrue(in_array('COOL', $jasperReport->getPropertyNames()));
 
         $jasperReport->removeProperty('COOL');
 
-        $this->assertFalse(in_array('COOL', $jasperReport->getPropertyNames()));
+        self::assertFalse(in_array('COOL', $jasperReport->getPropertyNames()));
     }
 }

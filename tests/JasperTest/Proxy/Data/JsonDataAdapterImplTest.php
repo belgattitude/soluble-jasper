@@ -33,14 +33,14 @@ class JsonDataAdapterImplTest extends TestCase
 
         $javaObject = $jsonAdapter->getJavaProxiedObject();
 
-        $this->assertEquals('#,##0.##', (string) $javaObject->getNumberPattern());
-        $this->assertEquals('yyyy-MM-dd', (string) $javaObject->getDatePattern());
-        $this->assertEquals('en_gb', strtolower((string) $javaObject->getLocale()));
-        $this->assertEquals(JsonDataAdapterImpl::LANGUAGE_JSONQL, (string) $javaObject->getLanguage());
-        $this->assertEquals(false, $javaObject->isUseConnection());
+        self::assertEquals('#,##0.##', (string) $javaObject->getNumberPattern());
+        self::assertEquals('yyyy-MM-dd', (string) $javaObject->getDatePattern());
+        self::assertEquals('en_gb', strtolower((string) $javaObject->getLocale()));
+        self::assertEquals(JsonDataAdapterImpl::LANGUAGE_JSONQL, (string) $javaObject->getLanguage());
+        self::assertEquals(false, $javaObject->isUseConnection());
 
         $jsonAdapter->setLanguage(JsonDataAdapterImpl::LANGUAGE_JSON);
-        $this->assertEquals(JsonDataAdapterImpl::LANGUAGE_JSON, (string) $javaObject->getLanguage());
+        self::assertEquals(JsonDataAdapterImpl::LANGUAGE_JSON, (string) $javaObject->getLanguage());
     }
 
     public function testSetFileName(): void
@@ -49,7 +49,7 @@ class JsonDataAdapterImplTest extends TestCase
         $jsonAdapter = new JsonDataAdapterImpl($this->ba);
         $jsonAdapter->setFileName($jsonFile);
         $javaObject = $jsonAdapter->getJavaProxiedObject();
-        $this->assertEquals($jsonFile, (string) $javaObject->getFileName());
+        self::assertEquals($jsonFile, (string) $javaObject->getFileName());
     }
 
     public function testSetFileNameThrowsException(): void
