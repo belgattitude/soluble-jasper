@@ -22,7 +22,7 @@ class DefaultFileResolverTest extends TestCase
         $this->ba = \JasperTestsFactories::getJavaBridgeAdapter();
     }
 
-    public function testGetClassLoaderThrowsInvalidArgumentException()
+    public function testGetClassLoaderThrowsInvalidArgumentException(): void
     {
         $this->expectException(InvalidArgumentException::class);
         $classLoader = new DefaultFileResolver($this->ba);

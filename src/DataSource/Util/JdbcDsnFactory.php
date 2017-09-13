@@ -43,7 +43,7 @@ class JdbcDsnFactory
     /**
      * Return a JDBC DSN formatted string from options.
      *
-     * @param string[]|array[] $params associative array with ['driver', 'db', 'host', 'user', 'password'] and optionally ['driverOptions'] as array
+     * @param array $params associative array with ['driver', 'db', 'host', 'user', 'password'] and optionally ['driverOptions'] as array
      *
      * @return string i.e: "jdbc:[driver]://localhost/[database]?user=[user]&password=[password]&serverTimezone=UTC";
      */

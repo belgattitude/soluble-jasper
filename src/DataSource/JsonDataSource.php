@@ -20,7 +20,7 @@ class JsonDataSource implements JRDataSourceFromReportParamsInterface, ReportPar
     public const PARAM_JSON_TIMEZONE_ID = 'net.sf.jasperreports.json.timezone.id';
 
     public const DEFAULT_DATE_PATTERN = 'yyyy-MM-dd';
-    public const DEFAULT_NUMBER_PATTERN = '#,##0.##';
+    public const DEFAULT_NUMBER_PATTERN = '0.####';
     public const DEFAULT_LOCALE_CODE = 'en_US';
     public const DEFAULT_TIMEZONE_ID = 'UTC';
 
