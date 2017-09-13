@@ -28,7 +28,7 @@ class JasperCompileManagerTest extends TestCase
      */
     protected $vfs;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->bridgeAdapter = \JasperTestsFactories::getJavaBridgeAdapter();
         $directory = [
@@ -40,7 +40,7 @@ class JasperCompileManagerTest extends TestCase
         $this->vfs = vfsStream::setup('root', 444, $directory);
     }
 
-    public function testCompileShouldWork()
+    public function testCompileShouldWork(): void
     {
         $reportFile = \JasperTestsFactories::getDefaultReportFile();
         $compileManager = new JasperCompileManager($this->bridgeAdapter);
@@ -48,7 +48,7 @@ class JasperCompileManagerTest extends TestCase
         $this->assertInstanceOf(JavaObject::class, $jasperReport);
     }
 
-    public function testCompileWithMissingFileShouldThrowReportNotFoundException()
+    public function testCompileWithMissingFileShouldThrowReportNotFoundException(): void
     {
         $reportFile = '/tmp/invalid_file_not_exists.jrxml';
 
@@ -62,7 +62,7 @@ class JasperCompileManagerTest extends TestCase
         $compileManager->compileReport($reportFile);
     }
 
-    public function testCompileThrowReportNotFoundExceptionFromJava()
+    public function testCompileThrowReportNotFoundExceptionFromJava(): void
     {
         $this->expectException(ReportFileNotFoundFromJavaException::class);
         $this->expectExceptionMessage(sprintf(
@@ -74,7 +74,7 @@ class JasperCompileManagerTest extends TestCase
         $compileManager->compileReport($this->vfs->url() . '/reports/report.jrxml');
     }
 
-    public function testCompileWithBrokenXmlFileShouldThrowBrokenXMLException()
+    public function testCompileWithBrokenXmlFileShouldThrowBrokenXMLException(): void
     {
         $reportFile = \JasperTestsFactories::getBrokenXMLReportFile();
 
@@ -89,7 +89,7 @@ class JasperCompileManagerTest extends TestCase
         $compileManager->compileReport($reportFile);
     }
 
-    public function testCompileWithNonJasperXmlFileShouldThrowException()
+    public function testCompileWithNonJasperXmlFileShouldThrowException(): void
     {
         $reportFile = \JasperTestsFactories::getNonJasperXMLReportFile();
 
@@ -104,7 +104,7 @@ class JasperCompileManagerTest extends TestCase
         $compileManager->compileReport($reportFile);
     }
 
-    public function testCompileWithExpressionErrorShouldThrowReportCompileException()
+    public function testCompileWithExpressionErrorShouldThrowReportCompileException(): void
     {
         $reportFile = \JasperTestsFactories::getReportBaseDir() . '/04_report_expression_error.jrxml';
 
@@ -119,7 +119,7 @@ class JasperCompileManagerTest extends TestCase
         $compileManager->compileReport($reportFile);
     }
 
-    public function testGetJavaProxiedObject()
+    public function testGetJavaProxiedObject(): void
     {
         $compileManager = new JasperCompileManager($this->bridgeAdapter);
         $this->assertEquals(

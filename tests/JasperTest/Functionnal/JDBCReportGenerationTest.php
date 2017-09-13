@@ -19,7 +19,7 @@ class JDBCReportGenerationTest extends TestCase
      */
     protected $ba;
 
-    public function setUp()
+    public function setUp(): void
     {
         if (\JasperTestsFactories::isJdbcTestsEnabled()) {
             $this->markTestSkipped(
@@ -29,7 +29,7 @@ class JDBCReportGenerationTest extends TestCase
         $this->ba = \JasperTestsFactories::getJavaBridgeAdapter();
     }
 
-    public function testJDBCReport()
+    public function testJDBCReport(): void
     {
         $reportFile = \JasperTestsFactories::getReportBaseDir() . '/08_report_jdbc.jrxml';
 

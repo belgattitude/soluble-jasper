@@ -19,12 +19,12 @@ class ResourceReportGenerationTest extends TestCase
      */
     protected $ba;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->ba = \JasperTestsFactories::getJavaBridgeAdapter();
     }
 
-    public function testWithResourceFR()
+    public function testWithResourceFR(): void
     {
         $reportFile = \JasperTestsFactories::getReportBaseDir() . '/11_report_resource.jrxml';
 
@@ -58,7 +58,7 @@ class ResourceReportGenerationTest extends TestCase
         $this->assertContains('subtitle fr', $text);
     }
 
-    public function testWithResourceMissingZH()
+    public function testWithResourceMissingZH(): void
     {
         $reportFile = \JasperTestsFactories::getReportBaseDir() . '/11_report_resource.jrxml';
 

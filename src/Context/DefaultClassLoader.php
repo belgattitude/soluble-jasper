@@ -32,8 +32,8 @@ class DefaultClassLoader
     }
 
     /**
-     * @param array $paths           paths that will be added to the classLoader
-     * @param bool  $checkPathExists default to true, will throw exception if path does not exists
+     * @param string[] $paths           paths that will be added to the classLoader
+     * @param bool     $checkPathExists default to true, will throw exception if path does not exists
      *
      * @return JavaObject Java('java.lang.ClassLoader')
      */

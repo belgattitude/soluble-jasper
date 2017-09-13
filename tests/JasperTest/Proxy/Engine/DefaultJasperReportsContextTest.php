@@ -15,12 +15,12 @@ class DefaultJasperReportsContextTest extends TestCase
      */
     protected $bridgeAdapter;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->bridgeAdapter = \JasperTestsFactories::getJavaBridgeAdapter();
     }
 
-    public function testGetInstance()
+    public function testGetInstance(): void
     {
         $context = (new DefaultJasperReportsContext($this->bridgeAdapter))->getInstance();
         $this->assertEquals(

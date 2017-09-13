@@ -39,19 +39,23 @@ class JasperReport implements RemoteJavaObjectProxyInterface
 
     /**
      * Return original report.
-     *
-     * @return string
      */
     public function getReport(): Report
     {
         return $this->report;
     }
 
+    /**
+     * @return mixed
+     */
     public function getProperty(string $name)
     {
         return $this->jasperReport->getProperty($name);
     }
 
+    /**
+     * @param mixed $value
+     */
     public function setProperty(string $name, $value): void
     {
         $this->jasperReport->setProperty($name, $value);
@@ -62,6 +66,9 @@ class JasperReport implements RemoteJavaObjectProxyInterface
         $this->jasperReport->removeProperty($name);
     }
 
+    /**
+     * @return string[]
+     */
     public function getPropertyNames(): array
     {
         return $this->ba->values($this->jasperReport->getPropertyNames());

@@ -18,12 +18,12 @@ class LocalJasperReportsContextTest extends TestCase
      */
     protected $bridgeAdapter;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->bridgeAdapter = \JasperTestsFactories::getJavaBridgeAdapter();
     }
 
-    public function testBasic()
+    public function testBasic(): void
     {
         $context = new LocalJasperReportsContext($this->bridgeAdapter);
         $context->setProperty('cool', 'test');
@@ -38,7 +38,7 @@ class LocalJasperReportsContextTest extends TestCase
         $this->assertNull($context->getProperty('cool'));
     }
 
-    public function testGetProxiedObject()
+    public function testGetProxiedObject(): void
     {
         $context = new LocalJasperReportsContext(
             $this->bridgeAdapter,
@@ -49,7 +49,7 @@ class LocalJasperReportsContextTest extends TestCase
         $this->assertEquals('net.sf.jasperreports.engine.util.LocalJasperReportsContext', $this->bridgeAdapter->getClassName($proxied));
     }
 
-    public function testSetClassLoader()
+    public function testSetClassLoader(): void
     {
         $context = new LocalJasperReportsContext($this->bridgeAdapter);
         $context->setClassLoader(
@@ -61,7 +61,7 @@ class LocalJasperReportsContextTest extends TestCase
         $this->assertTrue(true);
     }
 
-    public function testSetFileResolver()
+    public function testSetFileResolver(): void
     {
         $context = new LocalJasperReportsContext($this->bridgeAdapter);
         $context->setFileResolver(

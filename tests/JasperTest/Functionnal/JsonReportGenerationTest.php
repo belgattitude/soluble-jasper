@@ -21,12 +21,12 @@ class JsonReportGenerationTest extends TestCase
      */
     protected $ba;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->ba = \JasperTestsFactories::getJavaBridgeAdapter();
     }
 
-    public function testJsonReport()
+    public function testJsonReport(): void
     {
         $reportFile = \JasperTestsFactories::getReportBaseDir() . '/10_report_json_northwind.jrxml';
         $jsonFile = \JasperTestsFactories::getDataBaseDir() . '/northwind.json';

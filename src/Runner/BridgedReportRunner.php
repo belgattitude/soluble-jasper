@@ -14,6 +14,7 @@ use Soluble\Jasper\DataSource\Contract\JRDataSourceFromDataSourceInterface;
 use Soluble\Jasper\DataSource\Contract\JRDataSourceFromReportParamsInterface;
 use Soluble\Jasper\DataSource\EmptyDataSource;
 use Soluble\Jasper\Exporter\BridgedExportManager;
+use Soluble\Jasper\Exporter\ExportManagerInterface;
 use Soluble\Jasper\JRParameter;
 use Soluble\Jasper\Proxy\Engine\JasperReport;
 use Soluble\Jasper\Proxy\Engine\JasperPrint;
@@ -157,7 +158,10 @@ class BridgedReportRunner implements ReportRunnerInterface
         }
     }
 
-    public function getExportManager(Report $report): BridgedExportManager
+    /**
+     * @return BridgedExportManager
+     */
+    public function getExportManager(Report $report): ExportManagerInterface
     {
         return new BridgedExportManager($this, $report);
     }

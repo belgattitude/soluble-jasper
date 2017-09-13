@@ -32,9 +32,9 @@ class DefaultFileResolver
     }
 
     /**
-     * @param array $paths               paths that will be added to the FileResolver
-     * @param bool  $resolveAbsolutePath Resolve absolute paths
-     * @param bool  $checkPathExists     default to true, will throw exception if path does not exists
+     * @param string[] $paths               paths that will be added to the FileResolver
+     * @param bool     $resolveAbsolutePath Resolve absolute paths
+     * @param bool     $checkPathExists     default to true, will throw exception if path does not exists
      *
      * @return JavaObject Java('net.sf.jasperreports.engine.util.FileResolver')
      */

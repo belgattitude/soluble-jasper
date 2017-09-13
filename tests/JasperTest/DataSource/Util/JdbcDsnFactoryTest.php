@@ -10,17 +10,17 @@ use Soluble\Jasper\Exception\InvalidArgumentException;
 
 class JdbcDsnFactoryTest extends TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
     }
 
-    public function testCreateDsn()
+    public function testCreateDsn(): void
     {
         $dsn = JdbcDsnFactory::createDsn('mysql', 'db', 'host', 'user', 'password', []);
         $this->assertEquals('jdbc:mysql://host/db?user=user&password=password', $dsn);
     }
 
-    public function testCreateDsnDriverOptions()
+    public function testCreateDsnDriverOptions(): void
     {
         $driverOptions = [
             'param1' => 'Hello',
@@ -33,7 +33,7 @@ class JdbcDsnFactoryTest extends TestCase
         $this->assertEquals($expected, $dsn);
     }
 
-    public function testCreateDsnFromParamsWithDriverOptions()
+    public function testCreateDsnFromParamsWithDriverOptions(): void
     {
         $params = [
             'driver'        => 'mysql',
@@ -53,7 +53,7 @@ class JdbcDsnFactoryTest extends TestCase
         $this->assertEquals($expected, $dsn);
     }
 
-    public function testCreateDsnFromParamsThrowsExceptionMissingDriver()
+    public function testCreateDsnFromParamsThrowsExceptionMissingDriver(): void
     {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Missing required "driver" option.');
@@ -65,7 +65,7 @@ class JdbcDsnFactoryTest extends TestCase
         JdbcDsnFactory::createDsnFromParams($params);
     }
 
-    public function testCreateDsnFromParamsThrowsInvalidArgumentException()
+    public function testCreateDsnFromParamsThrowsInvalidArgumentException(): void
     {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Invalid type, "driverOptions" must be an array.');
@@ -81,7 +81,7 @@ class JdbcDsnFactoryTest extends TestCase
         JdbcDsnFactory::createDsnFromParams($params);
     }
 
-    public function testCreateDsnFromParamsThrowsExceptionMissingDb()
+    public function testCreateDsnFromParamsThrowsExceptionMissingDb(): void
     {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Missing required "db" option.');
@@ -93,7 +93,7 @@ class JdbcDsnFactoryTest extends TestCase
         JdbcDsnFactory::createDsnFromParams($params);
     }
 
-    public function testCreateDsnFromParamsThrowsExceptionMissingHost()
+    public function testCreateDsnFromParamsThrowsExceptionMissingHost(): void
     {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Missing required "host" option.');

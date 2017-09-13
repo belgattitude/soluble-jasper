@@ -27,20 +27,20 @@ class BridgedJasperReportRunnerTest extends TestCase
      */
     protected $report;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->bridgeAdapter = \JasperTestsFactories::getJavaBridgeAdapter();
         $this->report = new Report(\JasperTestsFactories::getDefaultReportFile());
     }
 
-    public function testCompile()
+    public function testCompile(): void
     {
         $jasperRunner = new BridgedReportRunner($this->bridgeAdapter);
         $jasperReport = $jasperRunner->compileReport($this->report);
         $this->assertInstanceOf(JasperReport::class, $jasperReport);
     }
 
-    public function testCompileThrowsBrokenXmlException()
+    public function testCompileThrowsBrokenXmlException(): void
     {
         $reportFile = \JasperTestsFactories::getBrokenXMLReportFile();
 
@@ -58,7 +58,7 @@ class BridgedJasperReportRunnerTest extends TestCase
         $jasperRunner->compileReport($report);
     }
 
-    public function testFillWithInvalidJsonDataShouldThrowException()
+    public function testFillWithInvalidJsonDataShouldThrowException(): void
     {
         $reportFile = \JasperTestsFactories::getReportBaseDir() . '/10_report_json_northwind.jrxml';
         $jsonFile = \JasperTestsFactories::getDataBaseDir() . '/invalid_json.json';

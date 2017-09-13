@@ -10,24 +10,24 @@ use Soluble\Jasper\ReportParams;
 
 class ReportParamsTest extends TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
     }
 
-    public function testContructorThrowsInvalidArgumentException()
+    public function testContructorThrowsInvalidArgumentException(): void
     {
         $this->expectException(InvalidArgumentException::class);
         new ReportParams(['cool', 'hello', 'test' => 'help']);
     }
 
-    public function testPut()
+    public function testPut(): void
     {
         $p = new ReportParams();
         $p->put('REPORT_DATE', 'cool');
         $this->assertEquals('cool', $p['REPORT_DATE']);
     }
 
-    public function testGetArray()
+    public function testGetArray(): void
     {
         $params = [
             'Title'    => 'cool',
@@ -41,7 +41,7 @@ class ReportParamsTest extends TestCase
         $this->assertEquals('cool', $array['Title']);
     }
 
-    public function testWithParams()
+    public function testWithParams(): void
     {
         $p1 = new ReportParams([
             'Title'    => 'cool',
@@ -58,7 +58,7 @@ class ReportParamsTest extends TestCase
         $this->assertEquals('test', $p2['SubTitle']);
     }
 
-    public function testIterable()
+    public function testIterable(): void
     {
         $data = [
             'param1' => 0,
@@ -75,7 +75,7 @@ class ReportParamsTest extends TestCase
         $this->assertEquals($data, $newData);
     }
 
-    public function testConstructorIterable()
+    public function testConstructorIterable(): void
     {
         $p = new ReportParams(['test' => 'cool']);
         $p2 = new ReportParams($p);
@@ -83,7 +83,7 @@ class ReportParamsTest extends TestCase
         $this->assertEquals('cool', $p2->offsetGet('test'));
     }
 
-    public function testArrayAccess()
+    public function testArrayAccess(): void
     {
         $p = new ReportParams();
         $p['cool'] = 'test';

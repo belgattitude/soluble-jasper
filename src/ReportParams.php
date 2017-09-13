@@ -20,7 +20,7 @@ class ReportParams implements \ArrayAccess, \IteratorAggregate
      *
      * @param iterable $params Report parameters as array or any traversable type (IteratorAggregate, Iterator, ArrayObject...)
      *
-     * @throws \Soluble\Jasper\Exception\InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function __construct(iterable $params = [])
     {
@@ -35,7 +35,7 @@ class ReportParams implements \ArrayAccess, \IteratorAggregate
             throw new InvalidArgumentException(sprintf(
                 'Cannot construct ReportParams from provided $params, all keys must be non-empty strings (key: %s)',
                 $current_key
-            ));
+            ), $e->getCode(), $e);
         }
     }
 
@@ -107,13 +107,16 @@ class ReportParams implements \ArrayAccess, \IteratorAggregate
         }
     }
 
+    /**
+     * @return mixed[]
+     */
     public function toArray(): array
     {
         return (array) $this->params;
     }
 
     /**
-     * @param mixed $offset
+     * @param string|mixed $offset
      *
      * @throws \Soluble\Jasper\Exception\InvalidArgumentException
      */

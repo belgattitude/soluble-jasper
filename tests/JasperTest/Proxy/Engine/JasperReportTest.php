@@ -17,12 +17,12 @@ class JasperReportTest extends TestCase
      */
     protected $bridgeAdapter;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->bridgeAdapter = \JasperTestsFactories::getJavaBridgeAdapter();
     }
 
-    public function testGetResourceBundle()
+    public function testGetResourceBundle(): void
     {
         $report = new Report(JasperTestsFactories::getDefaultReportFile());
 
@@ -32,7 +32,7 @@ class JasperReportTest extends TestCase
         $this->assertNull($jasperReport->getResourceBundle());
     }
 
-    public function testProperties()
+    public function testProperties(): void
     {
         $report = new Report(JasperTestsFactories::getDefaultReportFile());
         $reportRunner = ReportRunnerFactory::getBridgedReportRunner($this->bridgeAdapter);

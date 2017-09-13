@@ -23,12 +23,12 @@ class JavaProxiedExceptionTest extends TestCase
      */
     protected $report;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->bridgeAdapter = \JasperTestsFactories::getJavaBridgeAdapter();
     }
 
-    public function testGetJavaException()
+    public function testGetJavaException(): void
     {
         // Create a JavaException
 

@@ -17,12 +17,12 @@ class JsonDataAdapterImplTest extends TestCase
      */
     protected $ba;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->ba = \JasperTestsFactories::getJavaBridgeAdapter();
     }
 
-    public function testProperties()
+    public function testProperties(): void
     {
         $jsonAdapter = new JsonDataAdapterImpl($this->ba);
         $jsonAdapter->setLocale('en_GB');
@@ -43,7 +43,7 @@ class JsonDataAdapterImplTest extends TestCase
         $this->assertEquals(JsonDataAdapterImpl::LANGUAGE_JSON, (string) $javaObject->getLanguage());
     }
 
-    public function testSetFileName()
+    public function testSetFileName(): void
     {
         $jsonFile = \JasperTestsFactories::getDataBaseDir() . '/northwind.json';
         $jsonAdapter = new JsonDataAdapterImpl($this->ba);
@@ -52,7 +52,7 @@ class JsonDataAdapterImplTest extends TestCase
         $this->assertEquals($jsonFile, (string) $javaObject->getFileName());
     }
 
-    public function testSetFileNameThrowsException()
+    public function testSetFileNameThrowsException(): void
     {
         $this->expectException(FileNotFoundException::class);
         $jsonFile = \JasperTestsFactories::getDataBaseDir() . '/filenotexist.json';
@@ -60,7 +60,7 @@ class JsonDataAdapterImplTest extends TestCase
         $jsonAdapter->setFileName($jsonFile);
     }
 
-    public function testSetLanguageThrowsException()
+    public function testSetLanguageThrowsException(): void
     {
         $this->expectException(InvalidArgumentException::class);
         $jsonAdapter = new JsonDataAdapterImpl($this->ba);

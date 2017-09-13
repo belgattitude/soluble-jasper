@@ -18,12 +18,12 @@ class JasperPrintTest extends TestCase
      */
     protected $bridgeAdapter;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->bridgeAdapter = \JasperTestsFactories::getJavaBridgeAdapter();
     }
 
-    public function testGetStatus()
+    public function testGetStatus(): void
     {
         $report = new Report(JasperTestsFactories::getDefaultReportFile());
         $jasperReport = new JasperPrint(

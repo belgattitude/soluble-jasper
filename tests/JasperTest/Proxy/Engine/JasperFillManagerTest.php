@@ -16,12 +16,12 @@ class JasperFillManagerTest extends TestCase
      */
     protected $bridgeAdapter;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->bridgeAdapter = \JasperTestsFactories::getJavaBridgeAdapter();
     }
 
-    public function testGetJavaProxiedObject()
+    public function testGetJavaProxiedObject(): void
     {
         $fm = new JasperFillManager($this->bridgeAdapter);
         $this->assertEquals(
@@ -30,7 +30,7 @@ class JasperFillManagerTest extends TestCase
         );
     }
 
-    public function testConstructWithContext()
+    public function testConstructWithContext(): void
     {
         $context = new LocalJasperReportsContext($this->bridgeAdapter);
         $fm = new JasperFillManager($this->bridgeAdapter, $context->getJavaProxiedObject());

@@ -59,6 +59,9 @@ class LocalJasperReportsContext implements RemoteJavaObjectProxyInterface
         $this->localContext->setPropertiesMap($properties);
     }
 
+    /**
+     * @param mixed $value
+     */
     public function setProperty(string $name, $value): void
     {
         $this->localContext->setProperty($name, $value);

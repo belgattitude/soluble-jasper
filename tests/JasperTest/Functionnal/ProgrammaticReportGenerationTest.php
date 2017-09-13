@@ -18,7 +18,7 @@ class ProgrammaticReportGenerationTest extends TestCase
      */
     protected $ba;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->ba = \JasperTestsFactories::getJavaBridgeAdapter();
     }
@@ -26,7 +26,7 @@ class ProgrammaticReportGenerationTest extends TestCase
     /**
      * An example of programmatic jasper generation.
      */
-    public function testProgrammaticJsonReport()
+    public function testProgrammaticJsonReport(): void
     {
         $ba = $this->ba;
 
@@ -144,7 +144,7 @@ class ProgrammaticReportGenerationTest extends TestCase
 */
     }
 
-    public function testProgrammaticCSVReport()
+    public function testProgrammaticCSVReport(): void
     {
         /*
          * JRCsvDataSource dataSource = new JRCsvDataSource(JRLoader.getLocationInputStream("data/CsvDataSource.txt"));

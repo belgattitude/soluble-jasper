@@ -16,24 +16,24 @@ class ReportTest extends TestCase
      */
     protected $reportFile;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->reportFile = \JasperTestsFactories::getReportBaseDir() . '/01_report_default.jrxml';
     }
 
-    public function testConstructThrowsMissingReportFileException()
+    public function testConstructThrowsMissingReportFileException(): void
     {
         $this->expectException(ReportFileNotFoundException::class);
         new Report('/sdkfjlksdjf/sdfsdfs.jrxml');
     }
 
-    public function testGetReportFile()
+    public function testGetReportFile(): void
     {
         $report = new Report($this->reportFile);
         $this->assertFileEquals($this->reportFile, $report->getReportFile());
     }
 
-    public function testGetStatus()
+    public function testGetStatus(): void
     {
         $report = new Report($this->reportFile);
         $this->assertEquals(ReportInterface::STATUS_FRESH, $report->getStatus());

@@ -17,7 +17,7 @@ class DefaultFileResolverTest extends TestCase
      */
     private $ba;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->ba = \JasperTestsFactories::getJavaBridgeAdapter();
     }
@@ -29,7 +29,7 @@ class DefaultFileResolverTest extends TestCase
         $classLoader->getFileResolver(['/path/does/no/exists']);
     }
 
-    public function testGetFileResolver()
+    public function testGetFileResolver(): void
     {
         $ba = $this->ba;
         $fileResolver = new DefaultFileResolver($ba);
@@ -43,7 +43,7 @@ class DefaultFileResolverTest extends TestCase
         $this->assertEquals('net.sf.jasperreports.engine.util.SimpleFileResolver', $ba->getClassName($fileResolver));
     }
 
-    public function testGetClassLoaderFromReport()
+    public function testGetClassLoaderFromReport(): void
     {
         $ba = $this->ba;
 

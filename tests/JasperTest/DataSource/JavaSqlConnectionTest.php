@@ -16,12 +16,12 @@ class JavaSqlConnectionTest extends TestCase
      */
     protected $bridgeAdapter;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->bridgeAdapter = \JasperTestsFactories::getJavaBridgeAdapter();
     }
 
-    public function testProperties()
+    public function testProperties(): void
     {
         $dsn = 'jdbc:mysql://host/db?user=user&password=password';
         $driver = 'com.mysql.jdbc.Driver';
@@ -30,7 +30,7 @@ class JavaSqlConnectionTest extends TestCase
         $this->assertEquals($driver, $ds->getDriverClass());
     }
 
-    public function testGetJasperReportSqlConnectionThrowsException()
+    public function testGetJasperReportSqlConnectionThrowsException(): void
     {
         $this->expectException(JavaProxiedException::class);
 

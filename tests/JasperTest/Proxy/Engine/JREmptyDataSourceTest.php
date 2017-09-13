@@ -15,12 +15,12 @@ class JREmptyDataSourceTest extends TestCase
      */
     protected $bridgeAdapter;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->bridgeAdapter = \JasperTestsFactories::getJavaBridgeAdapter();
     }
 
-    public function testGetJavaProxiedObject()
+    public function testGetJavaProxiedObject(): void
     {
         $ds = new JREmptyDataSource($this->bridgeAdapter);
         $this->assertEquals(

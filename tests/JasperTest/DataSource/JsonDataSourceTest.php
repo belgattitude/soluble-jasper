@@ -13,7 +13,7 @@ class JsonDataSourceTest extends TestCase
     {
     }
 
-    public function testOptions()
+    public function testOptions(): void
     {
         $jsonFile = \JasperTestsFactories::getDataBaseDir() . '/northwind.json';
 

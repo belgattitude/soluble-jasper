@@ -36,7 +36,7 @@ class ErrorLoggingReportGenerationTest extends TestCase
      */
     protected $loggerName;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->ba = \JasperTestsFactories::getJavaBridgeAdapter();
 
@@ -46,7 +46,7 @@ class ErrorLoggingReportGenerationTest extends TestCase
         $this->logger->pushHandler($this->loggerTestHandler);
     }
 
-    public function testCompilationLoggingError()
+    public function testCompilationLoggingError(): void
     {
         $reportFile = \JasperTestsFactories::getBrokenXMLReportFile();
 
@@ -74,7 +74,7 @@ class ErrorLoggingReportGenerationTest extends TestCase
         }
     }
 
-    public function testFillLoggingError()
+    public function testFillLoggingError(): void
     {
         $reportFile = \JasperTestsFactories::getReportBaseDir() . '/10_report_json_northwind.jrxml';
         $jsonFile = \JasperTestsFactories::getDataBaseDir() . '/invalid_json.json';

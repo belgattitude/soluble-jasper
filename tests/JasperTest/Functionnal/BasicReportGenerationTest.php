@@ -18,12 +18,12 @@ class BasicReportGenerationTest extends TestCase
      */
     protected $ba;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->ba = \JasperTestsFactories::getJavaBridgeAdapter();
     }
 
-    public function testDefaultReport()
+    public function testDefaultReport(): void
     {
         $reportFile = \JasperTestsFactories::getReportBaseDir() . '/01_report_default.jrxml';
 

@@ -50,7 +50,7 @@ class JasperCompileManager implements RemoteJavaObjectProxyInterface
         } catch (JavaException $e) {
             $this->processCompileJavaException($e, $reportFile);
         } catch (\Throwable $e) {
-            throw new Exception\RuntimeException($e->getMessage());
+            throw new Exception\RuntimeException($e->getMessage(), $e->getCode(), $e);
         }
 
         return $jasperReport;

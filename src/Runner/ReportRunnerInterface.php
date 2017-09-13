@@ -9,10 +9,5 @@ use Soluble\Jasper\Report;
 
 interface ReportRunnerInterface
 {
-    /**
-     * @param Report $report
-     *
-     * @return ExportManagerInterface
-     */
-    public function getExportManager(Report $report);
+    public function getExportManager(Report $report): ExportManagerInterface;
 }

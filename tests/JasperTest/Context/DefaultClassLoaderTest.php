@@ -17,7 +17,7 @@ class DefaultClassLoaderTest extends TestCase
      */
     private $ba;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->ba = \JasperTestsFactories::getJavaBridgeAdapter();
     }
@@ -29,7 +29,7 @@ class DefaultClassLoaderTest extends TestCase
         $classLoader->getClassLoader(['/path/does/no/exists']);
     }
 
-    public function testGetClassLoader()
+    public function testGetClassLoader(): void
     {
         $ba = $this->ba;
         $classLoader = new DefaultClassLoader($ba);
@@ -49,7 +49,7 @@ class DefaultClassLoaderTest extends TestCase
         $this->assertEquals('java.net.URL', $ba->getClassName($javaUrls[0]));
     }
 
-    public function testGetClassLoaderFromReport()
+    public function testGetClassLoaderFromReport(): void
     {
         $ba = $this->ba;
 
