@@ -10,10 +10,15 @@ repo_url: 'https://github.com/belgattitude/soluble-jasper'
 # Copyright
 copyright: 'Copyright &copy; 2017 Sébastien Vanvelthem'
 
-docs_dir: doc
-site_dir: build/doc
+docs_dir: docs
+site_dir: build/docs
+
 pages:
     - { 'Introduction': index.md }
+    - { 'Usage': [
+          { 'Datasources': datasources.md }
+        ]
+      }
 
 
 # Documentation and theme
@@ -21,12 +26,14 @@ theme: 'material'
 
 # Options
 extra:
-  logo: 'images/logo.svg'
+  #logo: 'images/logo.svg'
+  logo:
+    icon: 'thumbs_up_down'
   palette:
-    primary: 'deep-orange'
+    primary: 'pink'
     accent: 'light blue'
   font:
-    text: 'Roboto'
+    text: 'Source Sans Pro'
     code: 'Roboto Mono'
   # If extra_css defined here ->
   # -> WARNING -  Config value: 'extra_css'.
@@ -40,17 +47,19 @@ extra:
       link: 'https://github.com/belgattitude/soluble-jasper'
 
 extra_css:
-  - 'assets/extra.css'
-  - 'assets/monokai.css'
+  - 'assets/css/extra.css'
+  - 'assets/css/monokai.css'
 
 google_analytics:
   - 'UA-92890300-1'
   - 'auto'
 
+
 # Extensions
 markdown_extensions:
   - markdown.extensions.admonition
   - markdown.extensions.codehilite(guess_lang=false)
+  - markdown.extensions.def_list
   - markdown.extensions.footnotes
   - markdown.extensions.meta
   - markdown.extensions.toc(permalink=true)
@@ -58,6 +67,7 @@ markdown_extensions:
   - pymdownx.betterem(smart_enable=all)
   - pymdownx.caret
   - pymdownx.critic
+  - pymdownx.details
   - pymdownx.emoji:
       emoji_generator: !!python/name:pymdownx.emoji.to_svg
   - pymdownx.inlinehilite

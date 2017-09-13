@@ -1,4 +1,4 @@
-# soluble-jasper  
+# Jasper reports for PHP  
 
 [![PHP Version](http://img.shields.io/badge/php-7.1+-ff69b4.svg)](https://packagist.org/packages/soluble/jasper)
 [![Build Status](https://travis-ci.org/belgattitude/soluble-jasper.svg?branch=master)](https://travis-ci.org/belgattitude/soluble-jasper)
@@ -233,7 +233,7 @@ $ sudo cp ./build/libs/JavaBridgeTemplate.war /var/lib/tomcat8/webapps/JasperRep
 Wait few seconds and point your browser to [http://localhost:8080/JasperReports](http://localhost:8080/JasperReports), you
 should see the php-java-bridge dashboard page.
 
-![](docs/assets/images/jasper_bridge_dashboard.png "Jasper bridge dashboard")
+![](./docs/images/jasper_bridge_dashboard.png "Jasper bridge dashboard")
 
 The bridge address can be used in the japha bridge adapter:
 
