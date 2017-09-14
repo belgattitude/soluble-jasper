@@ -9,6 +9,7 @@ matrix:
       env:
         - EXECUTE_TEST_COVERALLS=true
         - SEND_COVERAGE=true
+    - php: nightly
 
 before_script:
   # -------------------------------------------------------------------------
