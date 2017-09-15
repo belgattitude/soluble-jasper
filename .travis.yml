@@ -3,13 +3,17 @@ sudo: required
 dist: trusty
 group: edge
 
+env:
+  - COMPOSER_OPTS=""
+  - COMPOSER_OPTS="--prefer-lowest"
+
 matrix:
   include:
     - php: 7.1
       env:
         - EXECUTE_TEST_COVERALLS=true
         - SEND_COVERAGE=true
-    - php: nightly
+    - php: 7.2
 
 before_script:
   # -------------------------------------------------------------------------
