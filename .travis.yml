@@ -3,10 +3,6 @@ sudo: required
 dist: trusty
 group: edge
 
-env:
-  - COMPOSER_OPTS=""
-  - COMPOSER_OPTS="--prefer-lowest"
-
 matrix:
   include:
     - php: 7.1
@@ -23,7 +19,7 @@ before_script:
   - mkdir -p test/logs
   # -------------------------------------------------------------------------
   # Step 2: Regular composer install
-  - composer install
+  - composer install --ignore-platform-reqs
   #
   # -------------------------------------------------------------------------
   # Step 3: Create and populate the test database
