@@ -18,17 +18,6 @@
             "homepage": "https://github.com/belgattitude"
         }
     ],
-    "autoload": {
-        "psr-4": {
-            "Soluble\\Jasper\\": "src"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "JasperTest\\": "tests/JasperTest"
-        },
-        "files": ["tests/JasperTestsFactories.php"]
-    },
     "require": {
         "php": "^7.1",
         "psr/log": "^1.0",
@@ -51,6 +40,19 @@
         "optimize-autoloader": true,
         "sort-packages": true
     },
+
+    "autoload": {
+        "psr-4": {
+            "Soluble\\Jasper\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "JasperTest\\": "tests/JasperTest"
+        },
+        "files": ["tests/JasperTestsFactories.php"]
+    },
+
     "scripts": {
         "check": [
             "@cs-check",
