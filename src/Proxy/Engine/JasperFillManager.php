@@ -59,8 +59,7 @@ class JasperFillManager implements RemoteJavaObjectProxyInterface
                 $jasperPrint = $this->jasperFillManager->fillReport($jasperReport, $params, $dataSource);
             }
         } catch (JavaException $e) {
-            $this->processFillJavaException($e, $jasperReport, $params, $reportFile);
-            throw $e;
+            $this->throwFillManagerJavaException($e, $jasperReport, $params, $reportFile);
         } catch (\Throwable $e) {
             throw new Exception\RuntimeException($e->getMessage(), $e->getCode(), $e);
         }
@@ -72,7 +71,7 @@ class JasperFillManager implements RemoteJavaObjectProxyInterface
      * @throws Exception\BrokenJsonDataSourceException when the json datasource cannot be parsed
      * @throws Exception\JavaProxiedException          when filling the report has encountered a Java error
      */
-    protected function processFillJavaException(
+    private function throwFillManagerJavaException(
                             JavaException $e,
                             JavaObject $jasperReport,
                             JavaObject $params,

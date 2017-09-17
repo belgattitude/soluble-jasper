@@ -120,7 +120,7 @@ class ReportParams implements \ArrayAccess, \IteratorAggregate
      *
      * @throws \Soluble\Jasper\Exception\InvalidArgumentException
      */
-    protected function checkStringOffset($offset): void
+    private function checkStringOffset($offset): void
     {
         if (!is_string($offset)) {
             throw new Exception\InvalidArgumentException(

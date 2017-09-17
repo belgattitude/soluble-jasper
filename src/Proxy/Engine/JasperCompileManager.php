@@ -48,7 +48,7 @@ class JasperCompileManager implements RemoteJavaObjectProxyInterface
         try {
             $jasperReport = $this->compileManager->compileReport($reportFile);
         } catch (JavaException $e) {
-            $this->processCompileJavaException($e, $reportFile);
+            $this->throwCompileManagerJavaException($e, $reportFile);
         } catch (\Throwable $e) {
             throw new Exception\RuntimeException($e->getMessage(), $e->getCode(), $e);
         }
@@ -63,7 +63,7 @@ class JasperCompileManager implements RemoteJavaObjectProxyInterface
      * @throws Exception\ReportCompileException              when there's an error compiling/evaluating the report
      * @throws Exception\JavaProxiedException                when the compileReport has encountered a Java error
      */
-    protected function processCompileJavaException(JavaException $e, string $reportFile): void
+    private function throwCompileManagerJavaException(JavaException $e, string $reportFile): void
     {
         $className = $e->getJavaClassName();
         if ($className === 'net.sf.jasperreports.engine.JRException') {

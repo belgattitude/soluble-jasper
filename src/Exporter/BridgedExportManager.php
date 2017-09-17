@@ -65,7 +65,7 @@ class BridgedExportManager implements ExportManagerInterface
         $this->exportManager->exportReportToPdfFile($this->getFilledReport()->getJavaProxiedObject(), $outputFile);
     }
 
-    protected function getFilledReport(): JasperPrint
+    private function getFilledReport(): JasperPrint
     {
         if ($this->jasperPrint === null) {
             $jasperReport = $this->runner->compileReport($this->report);
