@@ -57,27 +57,30 @@ class JasperFillManager implements RemoteJavaObjectProxyInterface
                       $this->jasperFillManager->fillReport($jasperReport, $params)
                     : $this->jasperFillManager->fillReport($jasperReport, $params, $dataSource);
         } catch (JavaException $e) {
-            $this->throwFillManagerJavaException($e, $jasperReport, $params, $reportFile);
+            throw $this->getFillManagerJavaException($e, $jasperReport, $params, $reportFile);
         } catch (\Throwable $e) {
             throw new Exception\RuntimeException($e->getMessage(), $e->getCode(), $e);
         }
     }
 
     /**
-     * @throws Exception\BrokenJsonDataSourceException when the json datasource cannot be parsed
-     * @throws Exception\JavaProxiedException          when filling the report has encountered a Java error
+     * Return jasperFillManager mapped exception:.
+     *
+     * Exception\BrokenJsonDataSourceException when the json datasource cannot be parsed
+     * Exception\JavaProxiedException          when filling the report has encountered a Java error
      */
-    private function throwFillManagerJavaException(
+    private function getFillManagerJavaException(
                             JavaException $e,
                             JavaObject $jasperReport,
                             JavaObject $params,
                             ?string $reportFile = null
-    ): void {
+    ): Exception\ExceptionInterface {
+        $exception = null;
         $className = $e->getJavaClassName();
         if ($className === 'net.sf.jasperreports.engine.JRException') {
             $cause = $e->getCause();
             if (stripos($cause, 'JsonParseException') !== false) {
-                throw new Exception\BrokenJsonDataSourceException($e, sprintf(
+                $exception = new Exception\BrokenJsonDataSourceException($e, sprintf(
                     'Fill error, json datasource cannot be parsed "%s" in %s',
                     (string) $params[JsonDataSource::PARAM_JSON_SOURCE],
                     $reportFile ?? $jasperReport->getName()
@@ -85,7 +88,7 @@ class JasperFillManager implements RemoteJavaObjectProxyInterface
             }
         }
 
-        throw new Exception\JavaProxiedException(
+        return $exception ?? new Exception\JavaProxiedException(
             $e,
             sprintf(
                 'Error filling report "%s"',

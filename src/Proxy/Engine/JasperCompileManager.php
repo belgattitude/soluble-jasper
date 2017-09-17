@@ -44,55 +44,60 @@ class JasperCompileManager implements RemoteJavaObjectProxyInterface
         try {
             return $this->compileManager->compileReport($reportFile);
         } catch (JavaException $e) {
-            $this->throwCompileManagerJavaException($e, $reportFile);
+            throw $this->getCompileManagerJavaException($e, $reportFile);
         } catch (\Throwable $e) {
             throw new Exception\RuntimeException($e->getMessage(), $e->getCode(), $e);
         }
     }
 
     /**
-     * @throws Exception\BrokenXMLReportFileException        when cannot parse the xml content or invalid xml file
-     * @throws Exception\ReportFileNotFoundException         when the report file is not found
-     * @throws Exception\ReportFileNotFoundFromJavaException when the report file is not found from the java side
-     * @throws Exception\ReportCompileException              when there's an error compiling/evaluating the report
-     * @throws Exception\JavaProxiedException                when the compileReport has encountered a Java error
+     * Return mapped exception from jasper compile manager java:.
+     *
+     * Exception\BrokenXMLReportFileException        when cannot parse the xml content or invalid xml file
+     * Exception\ReportFileNotFoundException         when the report file is not found
+     * Exception\ReportFileNotFoundFromJavaException when the report file is not found from the java side
+     * Exception\ReportCompileException              when there's an error compiling/evaluating the report
+     * Exception\JavaProxiedException                when the compileReport has encountered a Java error
      */
-    private function throwCompileManagerJavaException(JavaException $e, string $reportFile): void
+    private function getCompileManagerJavaException(JavaException $e, string $reportFile): Exception\ExceptionInterface
     {
+        $exception = null;
+
         $className = $e->getJavaClassName();
         if ($className === 'net.sf.jasperreports.engine.JRException') {
             $cause = $e->getCause();
             if (strpos($cause, 'java.io.FileNotFoundException') !== false) {
                 if (file_exists($reportFile)) {
-                    throw new Exception\ReportFileNotFoundFromJavaException(sprintf(
+                    $exception = new Exception\ReportFileNotFoundFromJavaException(sprintf(
                         'Report file "%s" exists but cannot be located from the java side.',
                         $reportFile
                     ));
                 } else {
-                    throw new Exception\ReportFileNotFoundException(sprintf(
+                    $exception = new Exception\ReportFileNotFoundException(sprintf(
                         'Report file "%s" cannot be found',
                         $reportFile
                     ));
                 }
             } elseif (strpos($cause, 'org.xml.sax.SAXParseException') !== false) {
-                throw new Exception\BrokenXMLReportFileException($e, sprintf(
+                $exception = new Exception\BrokenXMLReportFileException($e, sprintf(
                     'The report file "%s" cannot be parsed or not in jasper format',
                     $reportFile
                 ));
             } elseif (strpos($cause, 'Errors were encountered when compiling report expressions class file') !== false) {
-                throw new Exception\ReportCompileException($e, sprintf(
+                $exception = new Exception\ReportCompileException($e, sprintf(
                     'Report compilation failed for "%s"',
                     $reportFile
                 ));
             }
         }
-        throw new Exception\JavaProxiedException(
-            $e,
-            sprintf(
-                'Error running report "%s"',
-                $reportFile
-            )
-        );
+
+        return $exception ?? new Exception\JavaProxiedException(
+                $e,
+                sprintf(
+                    'Error compiling report "%s"',
+                    $reportFile
+                )
+            );
     }
 
     /**
