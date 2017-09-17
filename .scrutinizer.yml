@@ -18,12 +18,13 @@ checks:
         overriding_parameter: true
 build:
     nodes:
-        tests: false
         analysis:
             project_setup:
                 override: true
             environment:
                 php: 7.1
+        tests:
+            override: ['php-scrutinizer-run']
 
 
 filter:
