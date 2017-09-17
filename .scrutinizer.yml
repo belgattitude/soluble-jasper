@@ -5,8 +5,10 @@ build:
                 override: true
             environment:
                 php: 7.1
-            tests:
-                override: [php-scrutinizer-run]
+
+checks:
+    php : true
+
 filter:
     excluded_paths:
         - "tests/"
@@ -15,7 +17,6 @@ filter:
         - "vendor/"
         # Everything in a root level "vendor" directory will be excluded from analysis
         # but treated as a dependency
-
 
 tools:
     external_code_coverage: 

@@ -7,12 +7,8 @@ matrix:
   include:
     - php: 7.1
       env:
-        - EXECUTE_TEST_COVERALLS=true
         - SEND_COVERAGE=true
-    - php: 7.2
-  allow_failures:
-    # PHP7.2 failure is due to php-code-fixer
-    # can safely be removed when updated to 7.2
+        - CS_CHECK=true
     - php: 7.2
 
 before_script:
@@ -50,7 +46,7 @@ before_script:
 
 script:
   - ./vendor/bin/phpunit -v -c .travis/phpunit.travis.xml --coverage-clover=coverage.xml
-  - ./vendor/bin/php-cs-fixer --diff --dry-run -v fix
+  - if [[ $CS_CHECK == true ]]; then ./vendor/bin/php-cs-fixer --diff --dry-run -v fix; fi
   - composer phpstan
 
 after_script:
