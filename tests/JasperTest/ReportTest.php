@@ -7,7 +7,7 @@ namespace JasperTest;
 use Soluble\Jasper\Exception\ReportFileNotFoundException;
 use Soluble\Jasper\Report;
 use PHPUnit\Framework\TestCase;
-use Soluble\Jasper\Report\ReportInterface;
+use Soluble\Jasper\Report\ReportStatusInterface;
 
 class ReportTest extends TestCase
 {
@@ -36,6 +36,6 @@ class ReportTest extends TestCase
     public function testGetStatus(): void
     {
         $report = new Report($this->reportFile);
-        self::assertEquals(ReportInterface::STATUS_FRESH, $report->getStatus());
+        self::assertEquals(ReportStatusInterface::STATUS_FRESH, $report->getStatus());
     }
 }

@@ -6,9 +6,9 @@ namespace Soluble\Jasper;
 
 use Soluble\Jasper\DataSource\Contract\DataSourceInterface;
 use Soluble\Jasper\Exception\ReportFileNotFoundException;
-use Soluble\Jasper\Report\ReportInterface;
+use Soluble\Jasper\Report\ReportStatusInterface;
 
-class Report implements ReportInterface
+class Report implements ReportStatusInterface
 {
     /**
      * @var string
@@ -82,6 +82,6 @@ class Report implements ReportInterface
 
     public function getStatus(): string
     {
-        return ReportInterface::STATUS_FRESH;
+        return ReportStatusInterface::STATUS_FRESH;
     }
 }

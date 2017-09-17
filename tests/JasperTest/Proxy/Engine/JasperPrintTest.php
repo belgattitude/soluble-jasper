@@ -7,7 +7,7 @@ namespace JasperTest\Proxy\Engine;
 use JasperTestsFactories;
 use PHPUnit\Framework\TestCase;
 use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
-use Soluble\Jasper\Report\ReportInterface;
+use Soluble\Jasper\Report\ReportStatusInterface;
 use Soluble\Jasper\Proxy\Engine\JasperPrint;
 use Soluble\Jasper\Report;
 
@@ -30,6 +30,6 @@ class JasperPrintTest extends TestCase
             $this->bridgeAdapter->java('net.sf.jasperreports.engine.JasperReport'),
             $report
         );
-        self::assertEquals(ReportInterface::STATUS_FILLED, $jasperReport->getStatus());
+        self::assertEquals(ReportStatusInterface::STATUS_FILLED, $jasperReport->getStatus());
     }
 }

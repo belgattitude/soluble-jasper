@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Soluble\Jasper\Report;
 
-interface ReportInterface
+interface ReportStatusInterface
 {
     public const STATUS_FRESH = 'FRESH';
     public const STATUS_COMPILED = 'COMPILED';

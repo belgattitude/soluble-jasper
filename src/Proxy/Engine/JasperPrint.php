@@ -6,10 +6,10 @@ namespace Soluble\Jasper\Proxy\Engine;
 
 use Soluble\Japha\Interfaces\JavaObject;
 use Soluble\Jasper\Report;
-use Soluble\Jasper\Report\ReportInterface;
+use Soluble\Jasper\Report\ReportStatusInterface;
 use Soluble\Jasper\Proxy\RemoteJavaObjectProxyInterface;
 
-class JasperPrint implements RemoteJavaObjectProxyInterface, ReportInterface
+class JasperPrint implements RemoteJavaObjectProxyInterface, ReportStatusInterface
 {
     /**
      * @var JavaObject Java('net.sf.jasperreports.engine.JasperPrint')
@@ -40,6 +40,6 @@ class JasperPrint implements RemoteJavaObjectProxyInterface, ReportInterface
 
     public function getStatus(): string
     {
-        return ReportInterface::STATUS_FILLED;
+        return ReportStatusInterface::STATUS_FILLED;
     }
 }
