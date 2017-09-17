@@ -23,7 +23,9 @@ build:
                 override: true
             environment:
                 php: 7.1
-            tests: false
+            tests:
+                override: ['php-scrutinizer-run']
+
 
 filter:
     excluded_paths:
@@ -36,4 +38,4 @@ filter:
 
 tools:
     external_code_coverage: 
-        timeout: 200
+        timeout: 180
