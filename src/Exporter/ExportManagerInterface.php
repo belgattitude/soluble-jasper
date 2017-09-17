@@ -6,4 +6,5 @@ namespace Soluble\Jasper\Exporter;
 
 interface ExportManagerInterface
 {
+    public function savePdf(string $outputFile): void;
 }

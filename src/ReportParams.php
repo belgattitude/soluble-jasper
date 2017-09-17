@@ -25,7 +25,6 @@ class ReportParams implements \ArrayAccess, \IteratorAggregate
     public function __construct(iterable $params = [])
     {
         $this->params = new ArrayObject();
-        $current_key = '';
         try {
             foreach ($params as $key => $value) {
                 $current_key = $key;
@@ -34,7 +33,7 @@ class ReportParams implements \ArrayAccess, \IteratorAggregate
         } catch (InvalidArgumentException $e) {
             throw new InvalidArgumentException(sprintf(
                 'Cannot construct ReportParams from provided $params, all keys must be non-empty strings (key: %s)',
-                $current_key
+                $current_key ?? ''
             ), $e->getCode(), $e);
         }
     }

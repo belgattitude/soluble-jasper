@@ -158,9 +158,6 @@ class BridgedReportRunner implements ReportRunnerInterface
         }
     }
 
-    /**
-     * @return BridgedExportManager
-     */
     public function getExportManager(Report $report): ExportManagerInterface
     {
         return new BridgedExportManager($this, $report);

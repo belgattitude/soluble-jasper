@@ -12,6 +12,6 @@ trait JRDataSourceFromReportParamsTrait
 
     public function assignDataSourceReportParams(ReportParams $reportParams): void
     {
-        $reportParams->addParams($this->getDataSourceReportParams());
+        $reportParams->addParams($this->getDataSourceReportParams()->getIterator());
     }
 }
