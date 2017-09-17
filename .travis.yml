@@ -11,8 +11,8 @@ matrix:
         - SEND_COVERAGE=true
     - php: 7.2
   allow_failures:
-    # PHP7.2 failure is due to travis using php7.2-dev,
-    # can safely be removed when updated to rc1
+    # PHP7.2 failure is due to php-code-fixer
+    # can safely be removed when updated to 7.2
     - php: 7.2
 
 before_script:

@@ -4,8 +4,8 @@
 # Ignore all test, special files and documentation with "export-ignore".
 # So when someone will install that package through with composer --prefer-dist option, 
 # all the files and directories listed in .gitattributes file will be excluded. 
-/doc                export-ignore
-/test               export-ignore
+/docs                export-ignore
+/tests               export-ignore
 /.apigen.yml        export-ignore
 /.sami.php          export-ignore
 /phpstan.neon      export-ignore
