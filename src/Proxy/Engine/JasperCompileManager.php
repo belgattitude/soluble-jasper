@@ -31,8 +31,6 @@ class JasperCompileManager implements RemoteJavaObjectProxyInterface
     /**
      * Compile the jrxml report file in a blazing fast representation.
      *
-     * @param string $reportFile
-     *
      * @return JavaObject Java('net.sf.jasperreports.engine.JasperReport')
      *
      * @throws Exception\BrokenXMLReportFileException when cannot parse the xml content or invalid xml file
@@ -43,17 +41,13 @@ class JasperCompileManager implements RemoteJavaObjectProxyInterface
      */
     public function compileReport(string $reportFile): JavaObject
     {
-        $jasperReport = null;
-
         try {
-            $jasperReport = $this->compileManager->compileReport($reportFile);
+            return $this->compileManager->compileReport($reportFile);
         } catch (JavaException $e) {
             $this->throwCompileManagerJavaException($e, $reportFile);
         } catch (\Throwable $e) {
             throw new Exception\RuntimeException($e->getMessage(), $e->getCode(), $e);
         }
-
-        return $jasperReport;
     }
 
     /**

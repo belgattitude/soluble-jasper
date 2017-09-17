@@ -36,7 +36,7 @@ class JsonDataSource implements JRDataSourceFromReportParamsInterface, ReportPar
 
     /**
      * @param string $jsonSource  file or url for the json source
-     * @param string $datePattern
+     * @param string $datePattern json date pattern in java style (i.e. 'yyyy-MM-dd')
      */
     public function __construct(
         string $jsonSource,

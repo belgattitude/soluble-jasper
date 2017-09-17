@@ -53,18 +53,14 @@ class JasperFillManager implements RemoteJavaObjectProxyInterface
                             string $reportFile = null
     ): JavaObject {
         try {
-            if ($dataSource === null) {
-                $jasperPrint = $this->jasperFillManager->fillReport($jasperReport, $params);
-            } else {
-                $jasperPrint = $this->jasperFillManager->fillReport($jasperReport, $params, $dataSource);
-            }
+            return ($dataSource === null) ?
+                      $this->jasperFillManager->fillReport($jasperReport, $params)
+                    : $this->jasperFillManager->fillReport($jasperReport, $params, $dataSource);
         } catch (JavaException $e) {
             $this->throwFillManagerJavaException($e, $jasperReport, $params, $reportFile);
         } catch (\Throwable $e) {
             throw new Exception\RuntimeException($e->getMessage(), $e->getCode(), $e);
         }
-
-        return $jasperPrint;
     }
 
     /**

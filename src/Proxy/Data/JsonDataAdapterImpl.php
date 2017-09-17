@@ -62,8 +62,6 @@ class JsonDataAdapterImpl implements RemoteJavaObjectProxyInterface
      *
      * @see self::setDataFile()
      *
-     * @param string $filename
-     *
      * @throws Exception\FileNotFoundException
      */
     public function setFileName(string $filename): void
