@@ -23,8 +23,8 @@ build:
                 override: true
             environment:
                 php: 7.1
-        tests:
-            override: ['php-scrutinizer-run']
+            tests:
+                override: ['php-scrutinizer-run']
 
 
 filter:
