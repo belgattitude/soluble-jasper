@@ -1,13 +1,30 @@
+checks:
+    php:
+        verify_property_names: true
+        verify_access_scope_valid: true
+        variable_existence: true
+        use_statement_alias_conflict: true
+        useless_calls: true
+        unused_variables: true
+        check_method_contracts:
+            verify_interface_like_constraints: true
+            verify_documented_constraints: true
+            verify_parent_constraints: true
+        parameters_in_camelcaps: true
+        no_long_variable_names:
+            maximum: '20'
+        no_goto: true
+        properties_in_camelcaps: true
+        overriding_parameter: true
 build:
     nodes:
+        tests: false
         analysis:
             project_setup:
                 override: true
             environment:
                 php: 7.1
 
-checks:
-    php : true
 
 filter:
     excluded_paths:
@@ -20,4 +37,4 @@ filter:
 
 tools:
     external_code_coverage: 
-        timeout: 120
+        timeout: 180
