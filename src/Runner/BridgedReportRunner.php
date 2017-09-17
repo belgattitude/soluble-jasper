@@ -104,8 +104,9 @@ class BridgedReportRunner implements ReportRunnerInterface
             $fillManager = new JasperFillManager($this->ba);
 
             // Step 2: get the datasource
-
-            $dataSource = ($dataSource === null) ? $jasperReport->getReport()->getDataSource() : new EmptyDataSource();
+            if ($dataSource === null) {
+                $dataSource = $jasperReport->getReport()->getDataSource() ?? new EmptyDataSource();
+            }
 
             // Step 2: Assigning reportParams
 
