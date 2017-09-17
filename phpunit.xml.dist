@@ -46,8 +46,6 @@
         <server name="MYSQL_PASSWORD" value="" />
         <server name="MYSQL_DATABASE" value="phpunit_soluble_test_db" />
 
-
-
     </php>
 
 
