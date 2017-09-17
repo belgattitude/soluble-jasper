@@ -29,7 +29,7 @@ class JasperCompileManager implements RemoteJavaObjectProxyInterface
     }
 
     /**
-     * Compile the jrxml report file in a blazing fast representation.
+     * Compile the jrxml report file in a faster binary format.
      *
      * @return JavaObject Java('net.sf.jasperreports.engine.JasperReport')
      *
