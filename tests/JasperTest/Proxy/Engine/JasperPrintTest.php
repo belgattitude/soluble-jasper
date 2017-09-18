@@ -41,4 +41,14 @@ class JasperPrintTest extends TestCase
         );
         self::assertEquals(ReportStatusInterface::STATUS_FILLED, $jasperReport->getStatus());
     }
+
+    public function testGetReport(): void
+    {
+        $report = new Report(JasperTestsFactories::getDefaultReportFile());
+        $jasperReport = new JasperPrint(
+            $this->bridgeAdapter->java('net.sf.jasperreports.engine.JasperReport'),
+            $report
+        );
+        self::assertSame($report, $jasperReport->getReport());
+    }
 }
