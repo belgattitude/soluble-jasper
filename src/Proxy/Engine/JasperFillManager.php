@@ -32,16 +32,15 @@ class JasperFillManager implements RemoteJavaObjectProxyInterface
      */
     private $jasperFillManager;
 
+    /**
+     * @var JavaObject|null
+     */
+    private $jasperReportsContext;
+
     public function __construct(BridgeAdapter $bridgeAdapter, JavaObject $jasperReportsContext = null)
     {
         $this->ba = $bridgeAdapter;
-        if ($jasperReportsContext === null) {
-            $this->jasperFillManager = $this->ba->javaClass('net.sf.jasperreports.engine.JasperFillManager');
-        } else {
-            $cls = $this->ba->javaClass('net.sf.jasperreports.engine.JasperFillManager');
-
-            $this->jasperFillManager = $cls->getInstance($jasperReportsContext);
-        }
+        $this->jasperReportsContext = $jasperReportsContext;
     }
 
     /**
@@ -63,8 +62,8 @@ class JasperFillManager implements RemoteJavaObjectProxyInterface
     ): JavaObject {
         try {
             return ($dataSource === null) ?
-                      $this->jasperFillManager->fillReport($jasperReport, $params)
-                    : $this->jasperFillManager->fillReport($jasperReport, $params, $dataSource);
+                      $this->getJavaProxiedObject()->fillReport($jasperReport, $params)
+                    : $this->getJavaProxiedObject()->fillReport($jasperReport, $params, $dataSource);
         } catch (JavaException $e) {
             throw $this->getFillManagerJavaException($e, $jasperReport, $params, $reportFile);
         } catch (\Throwable $e) {
@@ -111,6 +110,16 @@ class JasperFillManager implements RemoteJavaObjectProxyInterface
      */
     public function getJavaProxiedObject(): JavaObject
     {
+        if ($this->jasperFillManager === null) {
+            if ($this->jasperReportsContext === null) {
+                $this->jasperFillManager = $this->ba->javaClass('net.sf.jasperreports.engine.JasperFillManager');
+            } else {
+                $cls = $this->ba->javaClass('net.sf.jasperreports.engine.JasperFillManager');
+
+                $this->jasperFillManager = $cls->getInstance($this->jasperReportsContext);
+            }
+        }
+
         return $this->jasperFillManager;
     }
 }

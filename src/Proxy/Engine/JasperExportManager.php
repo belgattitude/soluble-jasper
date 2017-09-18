@@ -32,7 +32,6 @@ class JasperExportManager implements RemoteJavaObjectProxyInterface
     public function __construct(BridgeAdapter $bridgeAdapter)
     {
         $this->ba = $bridgeAdapter;
-        $this->exportManager = $this->ba->javaClass('net.sf.jasperreports.engine.JasperExportManager');
     }
 
     /**
@@ -40,7 +39,7 @@ class JasperExportManager implements RemoteJavaObjectProxyInterface
      */
     public function exportReportToPdfFile(JavaObject $jasperPrint, string $outputFile): void
     {
-        $this->exportManager->exportReportToPdfFile($jasperPrint, $outputFile);
+        $this->getJavaProxiedObject()->exportReportToPdfFile($jasperPrint, $outputFile);
     }
 
     /**
@@ -48,6 +47,10 @@ class JasperExportManager implements RemoteJavaObjectProxyInterface
      */
     public function getJavaProxiedObject(): JavaObject
     {
+        if ($this->exportManager === null) {
+            $this->exportManager = $this->ba->javaClass('net.sf.jasperreports.engine.JasperExportManager');
+        }
+
         return $this->exportManager;
     }
 }

@@ -51,4 +51,9 @@ class JasperPrint implements RemoteJavaObjectProxyInterface, ReportStatusInterfa
     {
         return ReportStatusInterface::STATUS_FILLED;
     }
+
+    public function getReport(): Report
+    {
+        return $this->report;
+    }
 }

@@ -31,6 +31,11 @@ class LocalJasperReportsContext implements RemoteJavaObjectProxyInterface
     private $localContext;
 
     /**
+     * @var JavaObject|null Java('net.sf.jasperreports.engine.JasperReportsContext')
+     */
+    private $parentContext;
+
+    /**
      * Create a local context, if no parentContext is given, assume the DefaultJasperReportsContext.
      *
      * @param BridgeAdapter $bridgeAdapter
@@ -39,15 +44,12 @@ class LocalJasperReportsContext implements RemoteJavaObjectProxyInterface
     public function __construct(BridgeAdapter $bridgeAdapter, ?JavaObject $parentContext = null)
     {
         $this->ba = $bridgeAdapter;
-        $this->localContext = $this->ba->java(
-            'net.sf.jasperreports.engine.util.LocalJasperReportsContext',
-            $parentContext ?? (new DefaultJasperReportsContext($this->ba))->getJavaProxiedObject()
-        );
+        $this->parentContext = $parentContext;
     }
 
     public function setFileResolver(JavaObject $fileResolver): void
     {
-        $this->localContext->setFileResolver($fileResolver);
+        $this->getJavaProxiedObject()->setFileResolver($fileResolver);
     }
 
     /**
@@ -55,17 +57,17 @@ class LocalJasperReportsContext implements RemoteJavaObjectProxyInterface
      */
     public function setClassLoader(JavaObject $classLoader): void
     {
-        $this->localContext->setClassLoader($classLoader);
+        $this->getJavaProxiedObject()->setClassLoader($classLoader);
     }
 
     public function removeProperty(string $name): void
     {
-        $this->localContext->removeProperty($name);
+        $this->getJavaProxiedObject()->removeProperty($name);
     }
 
     public function setPropertiesMap(iterable $properties): void
     {
-        $this->localContext->setPropertiesMap($properties);
+        $this->getJavaProxiedObject()->setPropertiesMap($properties);
     }
 
     /**
@@ -73,7 +75,7 @@ class LocalJasperReportsContext implements RemoteJavaObjectProxyInterface
      */
     public function setProperty(string $name, $value): void
     {
-        $this->localContext->setProperty($name, $value);
+        $this->getJavaProxiedObject()->setProperty($name, $value);
     }
 
     /**
@@ -81,7 +83,7 @@ class LocalJasperReportsContext implements RemoteJavaObjectProxyInterface
      */
     public function getProperty(string $name)
     {
-        return $this->localContext->getProperty($name);
+        return $this->getJavaProxiedObject()->getProperty($name);
     }
 
     /**
@@ -89,6 +91,13 @@ class LocalJasperReportsContext implements RemoteJavaObjectProxyInterface
      */
     public function getJavaProxiedObject(): JavaObject
     {
+        if ($this->localContext === null) {
+            $this->localContext = $this->ba->java(
+                'net.sf.jasperreports.engine.util.LocalJasperReportsContext',
+                $this->parentContext ?? (new DefaultJasperReportsContext($this->ba))->getJavaProxiedObject()
+            );
+        }
+
         return $this->localContext;
     }
 }

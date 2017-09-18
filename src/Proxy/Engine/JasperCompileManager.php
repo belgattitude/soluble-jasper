@@ -15,6 +15,7 @@ namespace Soluble\Jasper\Proxy\Engine;
 
 use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
 use Soluble\Japha\Bridge\Exception\JavaException;
+use Soluble\Japha\Interfaces\JavaClass;
 use Soluble\Japha\Interfaces\JavaObject;
 use Soluble\Jasper\Exception;
 use Soluble\Jasper\Proxy\RemoteJavaObjectProxyInterface;
@@ -27,14 +28,13 @@ class JasperCompileManager implements RemoteJavaObjectProxyInterface
     private $ba;
 
     /**
-     * @var \Soluble\Japha\Interfaces\JavaClass Java('net.sf.jasperreports.engine.JasperCompileManager')
+     * @var JavaClass Java('net.sf.jasperreports.engine.JasperCompileManager')
      */
     private $compileManager;
 
     public function __construct(BridgeAdapter $bridgeAdapter)
     {
         $this->ba = $bridgeAdapter;
-        $this->compileManager = $this->ba->javaClass('net.sf.jasperreports.engine.JasperCompileManager');
     }
 
     /**
@@ -51,7 +51,7 @@ class JasperCompileManager implements RemoteJavaObjectProxyInterface
     public function compileReport(string $reportFile): JavaObject
     {
         try {
-            return $this->compileManager->compileReport($reportFile);
+            return $this->getJavaProxiedObject()->compileReport($reportFile);
         } catch (JavaException $e) {
             throw $this->getCompileManagerJavaException($e, $reportFile);
         } catch (\Throwable $e) {
@@ -114,6 +114,10 @@ class JasperCompileManager implements RemoteJavaObjectProxyInterface
      */
     public function getJavaProxiedObject(): JavaObject
     {
+        if ($this->compileManager === null) {
+            $this->compileManager = $this->ba->javaClass('net.sf.jasperreports.engine.JasperCompileManager');
+        }
+
         return $this->compileManager;
     }
 }

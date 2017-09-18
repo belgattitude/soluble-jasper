@@ -31,7 +31,6 @@ class JREmptyDataSource implements JRDataSourceInterface
     public function __construct(BridgeAdapter $bridgeAdapter)
     {
         $this->ba = $bridgeAdapter;
-        $this->jrEmptyDataSource = $this->ba->java('net.sf.jasperreports.engine.JREmptyDataSource');
     }
 
     /**
@@ -39,6 +38,10 @@ class JREmptyDataSource implements JRDataSourceInterface
      */
     public function getJavaProxiedObject(): JavaObject
     {
+        if ($this->jrEmptyDataSource === null) {
+            $this->jrEmptyDataSource = $this->ba->java('net.sf.jasperreports.engine.JREmptyDataSource');
+        }
+
         return $this->jrEmptyDataSource;
     }
 }
