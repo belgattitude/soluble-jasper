@@ -14,10 +14,10 @@ declare(strict_types=1);
 namespace JasperTest\Functionnal;
 
 use JasperTest\Util\PDFUtils;
-use Soluble\Jasper\JRParameter;
-use Soluble\Jasper\Report;
 use PHPUnit\Framework\TestCase;
 use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
+use Soluble\Jasper\JRParameter;
+use Soluble\Jasper\Report;
 use Soluble\Jasper\ReportProperties;
 
 class ProgrammaticReportGenerationTest extends TestCase

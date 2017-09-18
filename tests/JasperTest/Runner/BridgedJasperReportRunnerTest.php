@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace JasperTest\Runner;
 
 use PHPUnit\Framework\TestCase;
+use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
 use Soluble\Jasper\DataSource\JsonDataSource;
 use Soluble\Jasper\Exception\BrokenJsonDataSourceException;
 use Soluble\Jasper\Exception\BrokenXMLReportFileException;
@@ -22,7 +23,6 @@ use Soluble\Jasper\Report;
 use Soluble\Jasper\ReportParams;
 use Soluble\Jasper\ReportRunnerFactory;
 use Soluble\Jasper\Runner\BridgedReportRunner;
-use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
 
 class BridgedJasperReportRunnerTest extends TestCase
 {

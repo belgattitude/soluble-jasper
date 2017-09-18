@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace Soluble\Jasper\Proxy\Data;
 
-use Soluble\Jasper\Proxy\RemoteJavaObjectProxyInterface;
-use Soluble\Jasper\Exception;
 use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
 use Soluble\Japha\Interfaces\JavaObject;
+use Soluble\Jasper\Exception;
+use Soluble\Jasper\Proxy\RemoteJavaObjectProxyInterface;
 
 class JsonDataAdapterImpl implements RemoteJavaObjectProxyInterface
 {
@@ -87,7 +87,7 @@ class JsonDataAdapterImpl implements RemoteJavaObjectProxyInterface
     public function setLanguage(string $language): void
     {
         $jsonExpressionLanguageEnum = $this->ba->javaClass('net.sf.jasperreports.data.json.JsonExpressionLanguageEnum');
-        switch (strtolower($language)) {
+        switch (mb_strtolower($language)) {
             case 'json':
                 $lang = $jsonExpressionLanguageEnum->JSON;
                 break;

@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Soluble\Jasper\Runner;
 
 use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
 use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
 use Soluble\Jasper\Context\DefaultClassLoader;
 use Soluble\Jasper\Context\DefaultFileResolver;
@@ -22,17 +23,16 @@ use Soluble\Jasper\DataSource\Contract\JavaSqlConnectionInterface;
 use Soluble\Jasper\DataSource\Contract\JRDataSourceFromDataSourceInterface;
 use Soluble\Jasper\DataSource\Contract\JRDataSourceFromReportParamsInterface;
 use Soluble\Jasper\DataSource\EmptyDataSource;
+use Soluble\Jasper\Exception;
 use Soluble\Jasper\Exporter\BridgedExportManager;
 use Soluble\Jasper\Exporter\ExportManagerInterface;
 use Soluble\Jasper\JRParameter;
-use Soluble\Jasper\Proxy\Engine\JasperReport;
-use Soluble\Jasper\Proxy\Engine\JasperPrint;
 use Soluble\Jasper\Proxy\Engine\JasperCompileManager;
 use Soluble\Jasper\Proxy\Engine\JasperFillManager;
+use Soluble\Jasper\Proxy\Engine\JasperPrint;
+use Soluble\Jasper\Proxy\Engine\JasperReport;
 use Soluble\Jasper\Report;
 use Soluble\Jasper\ReportParams;
-use Soluble\Jasper\Exception;
-use Psr\Log\NullLogger;
 
 class BridgedReportRunner implements ReportRunnerInterface
 {

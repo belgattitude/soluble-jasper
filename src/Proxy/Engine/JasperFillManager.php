@@ -13,12 +13,12 @@ declare(strict_types=1);
 
 namespace Soluble\Jasper\Proxy\Engine;
 
+use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
 use Soluble\Japha\Bridge\Exception\JavaException;
 use Soluble\Japha\Interfaces\JavaObject;
-use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
 use Soluble\Jasper\DataSource\JsonDataSource;
-use Soluble\Jasper\Proxy\RemoteJavaObjectProxyInterface;
 use Soluble\Jasper\Exception;
+use Soluble\Jasper\Proxy\RemoteJavaObjectProxyInterface;
 
 class JasperFillManager implements RemoteJavaObjectProxyInterface
 {
@@ -88,7 +88,7 @@ class JasperFillManager implements RemoteJavaObjectProxyInterface
         $className = $e->getJavaClassName();
         if ($className === 'net.sf.jasperreports.engine.JRException') {
             $cause = $e->getCause();
-            if (stripos($cause, 'JsonParseException') !== false) {
+            if (mb_stripos($cause, 'JsonParseException') !== false) {
                 $exception = new Exception\BrokenJsonDataSourceException($e, sprintf(
                     'Fill error, json datasource cannot be parsed "%s" in %s',
                     (string) $params[JsonDataSource::PARAM_JSON_SOURCE],

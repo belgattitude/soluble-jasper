@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace JasperTest;
 
+use PHPUnit\Framework\TestCase;
 use Soluble\Jasper\Exception\ReportFileNotFoundException;
 use Soluble\Jasper\Report;
-use PHPUnit\Framework\TestCase;
 use Soluble\Jasper\Report\ReportStatusInterface;
 
 class ReportTest extends TestCase

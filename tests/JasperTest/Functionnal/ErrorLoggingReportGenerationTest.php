@@ -13,15 +13,15 @@ declare(strict_types=1);
 
 namespace JasperTest\Functionnal;
 
+use Monolog\Handler\TestHandler;
+use Monolog\Logger;
+use PHPUnit\Framework\TestCase;
+use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
 use Soluble\Jasper\DataSource\JsonDataSource;
 use Soluble\Jasper\Report;
 use Soluble\Jasper\ReportParams;
 use Soluble\Jasper\ReportRunnerFactory;
 use Soluble\Jasper\Runner\BridgedReportRunner;
-use PHPUnit\Framework\TestCase;
-use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
-use Monolog\Logger;
-use Monolog\Handler\TestHandler;
 
 class ErrorLoggingReportGenerationTest extends TestCase
 {

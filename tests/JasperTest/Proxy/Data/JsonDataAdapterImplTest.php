@@ -13,11 +13,11 @@ declare(strict_types=1);
 
 namespace JasperTest\Proxy\Data;
 
+use PHPUnit\Framework\TestCase;
+use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
 use Soluble\Jasper\Exception\FileNotFoundException;
 use Soluble\Jasper\Exception\InvalidArgumentException;
 use Soluble\Jasper\Proxy\Data\JsonDataAdapterImpl;
-use PHPUnit\Framework\TestCase;
-use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
 
 class JsonDataAdapterImplTest extends TestCase
 {
@@ -44,7 +44,7 @@ class JsonDataAdapterImplTest extends TestCase
 
         self::assertEquals('#,##0.##', (string) $javaObject->getNumberPattern());
         self::assertEquals('yyyy-MM-dd', (string) $javaObject->getDatePattern());
-        self::assertEquals('en_gb', strtolower((string) $javaObject->getLocale()));
+        self::assertEquals('en_gb', mb_strtolower((string) $javaObject->getLocale()));
         self::assertEquals(JsonDataAdapterImpl::LANGUAGE_JSONQL, (string) $javaObject->getLanguage());
         self::assertEquals(false, $javaObject->isUseConnection());
 

@@ -14,9 +14,9 @@ declare(strict_types=1);
 namespace JasperTest\DataSource;
 
 use PHPUnit\Framework\TestCase;
+use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
 use Soluble\Jasper\DataSource\JavaSqlConnection;
 use Soluble\Jasper\Exception\JavaProxiedException;
-use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
 
 class JavaSqlConnectionTest extends TestCase
 {

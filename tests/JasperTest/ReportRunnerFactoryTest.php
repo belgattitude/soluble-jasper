@@ -14,8 +14,8 @@ declare(strict_types=1);
 namespace JasperTest;
 
 use PHPUnit\Framework\TestCase;
-use Soluble\Jasper\ReportRunnerFactory;
 use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
+use Soluble\Jasper\ReportRunnerFactory;
 use Soluble\Jasper\Runner\BridgedReportRunner;
 
 class ReportRunnerFactoryTest extends TestCase

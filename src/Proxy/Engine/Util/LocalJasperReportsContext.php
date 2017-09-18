@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace Soluble\Jasper\Proxy\Engine\Util;
 
+use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
 use Soluble\Japha\Interfaces\JavaObject;
 use Soluble\Jasper\Proxy\Engine\DefaultJasperReportsContext;
 use Soluble\Jasper\Proxy\RemoteJavaObjectProxyInterface;
-use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
 
 class LocalJasperReportsContext implements RemoteJavaObjectProxyInterface
 {

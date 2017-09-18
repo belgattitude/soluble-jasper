@@ -16,9 +16,9 @@ namespace JasperTest\Proxy\Engine;
 use JasperTestsFactories;
 use PHPUnit\Framework\TestCase;
 use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
-use Soluble\Jasper\Report\ReportStatusInterface;
 use Soluble\Jasper\Proxy\Engine\JasperPrint;
 use Soluble\Jasper\Report;
+use Soluble\Jasper\Report\ReportStatusInterface;
 
 class JasperPrintTest extends TestCase
 {

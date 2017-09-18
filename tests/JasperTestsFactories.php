@@ -15,7 +15,7 @@ use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
 
 class JasperTestsFactories
 {
-    const defaultReportTestFile = '01_report_default.jrxml';
+    public const defaultReportTestFile = '01_report_default.jrxml';
 
     public static function getJavaBridgeAdapter(): BridgeAdapter
     {

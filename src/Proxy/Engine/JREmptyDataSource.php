@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Soluble\Jasper\Proxy\Engine;
 
-use Soluble\Japha\Interfaces\JavaObject;
 use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
+use Soluble\Japha\Interfaces\JavaObject;
 
 class JREmptyDataSource implements JRDataSourceInterface
 {

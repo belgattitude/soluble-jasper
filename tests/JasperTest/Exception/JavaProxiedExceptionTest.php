@@ -14,11 +14,11 @@ declare(strict_types=1);
 namespace JasperTest\Exception;
 
 use PHPUnit\Framework\TestCase;
+use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
 use Soluble\Japha\Bridge\Exception\JavaException;
 use Soluble\Jasper\Exception\JavaProxiedException;
 use Soluble\Jasper\Exception\RuntimeException;
 use Soluble\Jasper\Report;
-use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
 
 class JavaProxiedExceptionTest extends TestCase
 {

@@ -14,10 +14,10 @@ declare(strict_types=1);
 require_once __DIR__ . '/../../vendor/autoload.php';
 
 use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
-use Soluble\Jasper\ReportRunnerFactory;
+use Soluble\Jasper\DataSource\JavaSqlConnection;
 use Soluble\Jasper\Report;
 use Soluble\Jasper\ReportParams;
-use Soluble\Jasper\DataSource\JavaSqlConnection;
+use Soluble\Jasper\ReportRunnerFactory;
 
 ini_set('display_errors', 'true');
 

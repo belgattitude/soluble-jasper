@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace Soluble\Jasper\Proxy\Engine;
 
-use Soluble\Japha\Bridge\Exception\JavaException;
-use Soluble\Jasper\Exception;
 use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
+use Soluble\Japha\Bridge\Exception\JavaException;
 use Soluble\Japha\Interfaces\JavaObject;
+use Soluble\Jasper\Exception;
 use Soluble\Jasper\Proxy\RemoteJavaObjectProxyInterface;
 
 class JasperCompileManager implements RemoteJavaObjectProxyInterface
@@ -75,7 +75,7 @@ class JasperCompileManager implements RemoteJavaObjectProxyInterface
         $className = $e->getJavaClassName();
         if ($className === 'net.sf.jasperreports.engine.JRException') {
             $cause = $e->getCause();
-            if (strpos($cause, 'java.io.FileNotFoundException') !== false) {
+            if (mb_strpos($cause, 'java.io.FileNotFoundException') !== false) {
                 if (file_exists($reportFile)) {
                     $exception = new Exception\ReportFileNotFoundFromJavaException(sprintf(
                         'Report file "%s" exists but cannot be located from the java side.',
@@ -87,12 +87,12 @@ class JasperCompileManager implements RemoteJavaObjectProxyInterface
                         $reportFile
                     ));
                 }
-            } elseif (strpos($cause, 'org.xml.sax.SAXParseException') !== false) {
+            } elseif (mb_strpos($cause, 'org.xml.sax.SAXParseException') !== false) {
                 $exception = new Exception\BrokenXMLReportFileException($e, sprintf(
                     'The report file "%s" cannot be parsed or not in jasper format',
                     $reportFile
                 ));
-            } elseif (strpos($cause, 'Errors were encountered when compiling report expressions class file') !== false) {
+            } elseif (mb_strpos($cause, 'Errors were encountered when compiling report expressions class file') !== false) {
                 $exception = new Exception\ReportCompileException($e, sprintf(
                     'Report compilation failed for "%s"',
                     $reportFile

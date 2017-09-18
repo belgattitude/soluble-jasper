@@ -14,9 +14,9 @@ declare(strict_types=1);
 namespace JasperTest\Context;
 
 use PHPUnit\Framework\TestCase;
+use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
 use Soluble\Jasper\Context\DefaultFileResolver;
 use Soluble\Jasper\Exception\InvalidArgumentException;
-use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
 use Soluble\Jasper\Report;
 
 class DefaultFileResolverTest extends TestCase

@@ -13,12 +13,12 @@ declare(strict_types=1);
 
 namespace Soluble\Jasper\Exporter;
 
-use Soluble\Jasper\Report;
-use Soluble\Jasper\Proxy\Engine\JasperPrint;
-use Soluble\Jasper\Proxy\Engine\JasperExportManager;
-use Soluble\Jasper\Runner\BridgedReportRunner;
 use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
 use Soluble\Jasper\Exception;
+use Soluble\Jasper\Proxy\Engine\JasperExportManager;
+use Soluble\Jasper\Proxy\Engine\JasperPrint;
+use Soluble\Jasper\Report;
+use Soluble\Jasper\Runner\BridgedReportRunner;
 
 class BridgedExportManager implements ExportManagerInterface
 {

@@ -13,17 +13,17 @@ declare(strict_types=1);
 
 namespace JasperTest\Proxy\Engine;
 
+use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamDirectory;
 use PHPUnit\Framework\TestCase;
+use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
 use Soluble\Japha\Interfaces\JavaObject;
 use Soluble\Jasper\Exception\BrokenXMLReportFileException;
 use Soluble\Jasper\Exception\ReportCompileException;
 use Soluble\Jasper\Exception\ReportFileNotFoundException;
 use Soluble\Jasper\Exception\ReportFileNotFoundFromJavaException;
 use Soluble\Jasper\Proxy\Engine\JasperCompileManager;
-use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
 use Soluble\Jasper\Report;
-use org\bovigo\vfs\vfsStream;
 
 class JasperCompileManagerTest extends TestCase
 {

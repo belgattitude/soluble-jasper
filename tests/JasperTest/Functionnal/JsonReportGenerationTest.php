@@ -14,12 +14,12 @@ declare(strict_types=1);
 namespace JasperTest\Functionnal;
 
 use JasperTest\Util\PDFUtils;
+use PHPUnit\Framework\TestCase;
+use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
 use Soluble\Jasper\DataSource\JsonDataSource;
 use Soluble\Jasper\Exception\JavaProxiedException;
 use Soluble\Jasper\Proxy\Engine\JasperExportManager;
 use Soluble\Jasper\Report;
-use PHPUnit\Framework\TestCase;
-use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
 use Soluble\Jasper\ReportParams;
 use Soluble\Jasper\ReportRunnerFactory;
 
