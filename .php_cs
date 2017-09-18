@@ -121,6 +121,7 @@ return PhpCsFixer\Config::create()
 
         'php_unit_construct' => true,
         'php_unit_dedicate_assert' => true,
+        'php_unit_fqcn_annotation' => true,
         'silenced_deprecation_error' => true,
         'declare_strict_types' => true,
 

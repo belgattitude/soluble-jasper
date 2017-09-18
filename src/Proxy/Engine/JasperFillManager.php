@@ -45,9 +45,9 @@ class JasperFillManager implements RemoteJavaObjectProxyInterface
     }
 
     /**
-     * @param JavaObject Java('net.sf.jasperreports.engine.JasperReport')
-     * @param JavaObject Java('java.util.HashMap')
-     * @param JavaObject|null $dataSource Java('net.sf.jasperreports.engine.JRDataSource')
+     * @param JavaObject      $jasperReport Java('net.sf.jasperreports.engine.JasperReport')
+     * @param JavaObject      $params       Java('java.util.HashMap')
+     * @param JavaObject|null $dataSource   Java('net.sf.jasperreports.engine.JRDataSource')
      *
      * @return JavaObject Java('net.sf.jasperreports.engine.JasperPrint')
      *
