@@ -1,11 +1,11 @@
 <?php
 
 $header = <<<'EOF'
-soluble-jasper
+soluble-jasper Jasper report integration for PHP
 
+@link      https://github.com/belgattitude/soluble-jasper
 @author    Vanvelthem Sébastien 
-@link      https://github.com/belgattitude
-@copyright Copyright (c) 2016-2017 Vanvelthem Sébastien
+@copyright Copyright (c) 2017 Vanvelthem Sébastien
 @license   MIT   
 EOF;
 
@@ -18,8 +18,8 @@ return PhpCsFixer\Config::create()
         //'header_comment' => array('header' => $header), // disable when code is okay
         'array_syntax' => ['syntax' => 'short'],
 
-        //'strict_comparison' => true,
-        //'strict_param' => true,
+        'strict_comparison' => true,
+        'strict_param' => true,
 
         /**
          * Extended code rules

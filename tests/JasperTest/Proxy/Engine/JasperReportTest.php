@@ -41,10 +41,10 @@ class JasperReportTest extends TestCase
         self::assertEquals('test', $jasperReport->getJavaProxiedObject()->getProperty('COOL'));
         self::assertEquals('test', $jasperReport->getProperty('COOL'));
 
-        self::assertTrue(in_array('COOL', $jasperReport->getPropertyNames()));
+        self::assertTrue(in_array('COOL', $jasperReport->getPropertyNames(), true));
 
         $jasperReport->removeProperty('COOL');
 
-        self::assertFalse(in_array('COOL', $jasperReport->getPropertyNames()));
+        self::assertFalse(in_array('COOL', $jasperReport->getPropertyNames(), true));
     }
 }
