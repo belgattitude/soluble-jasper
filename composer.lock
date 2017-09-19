@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "0f712859596cb2577b39f8f9d34812e1",
+    "content-hash": "30df0a95b378a3a682c087742633dc0d",
     "packages": [
         {
             "name": "psr/http-message",
@@ -105,16 +105,16 @@
         },
         {
             "name": "soluble/japha",
-            "version": "2.2.4",
+            "version": "2.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/belgattitude/soluble-japha.git",
-                "reference": "08c92c51e3819dd343c471fa0a68a00ec8e8e958"
+                "reference": "c4c1c1422c88ab144c6997e552f4f7387f7c3206"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/belgattitude/soluble-japha/zipball/08c92c51e3819dd343c471fa0a68a00ec8e8e958",
-                "reference": "08c92c51e3819dd343c471fa0a68a00ec8e8e958",
+                "url": "https://api.github.com/repos/belgattitude/soluble-japha/zipball/c4c1c1422c88ab144c6997e552f4f7387f7c3206",
+                "reference": "c4c1c1422c88ab144c6997e552f4f7387f7c3206",
                 "shasum": ""
             },
             "require": {
@@ -123,10 +123,11 @@
                 "psr/log": "^1.0"
             },
             "require-dev": {
-                "friendsofphp/php-cs-fixer": "^2.5.0",
+                "friendsofphp/php-cs-fixer": "^2.6.0",
                 "monolog/monolog": "^1.23.0",
-                "phpstan/phpstan": "^0.8.4",
-                "phpunit/phpunit": "^6.2"
+                "phpstan/phpstan": "^0.8.5",
+                "phpunit/phpunit": "^6.2",
+                "vimeo/psalm": "^0.3.56"
             },
             "suggest": {
                 "monolog/monolog": "PSR-3 comptatible logger"
@@ -148,13 +149,13 @@
                 }
             ],
             "description": "Soluble PHP Java bridge integration",
-            "homepage": "http://soluble.io",
+            "homepage": "https://github.com/belgattitude/soluble-japha",
             "keywords": [
                 "Bridge",
                 "java",
                 "phpjavabridge"
             ],
-            "time": "2017-09-02T21:26:29+00:00"
+            "time": "2017-09-19T09:41:48+00:00"
         }
     ],
     "packages-dev": [
