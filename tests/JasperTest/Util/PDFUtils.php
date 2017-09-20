@@ -40,4 +40,14 @@ class PDFUtils
 
         return $text;
     }
+
+    /**
+     * @return string[]
+     */
+    public function getDetails(string $pdfFile): array
+    {
+        $pdf = $this->parser->parseFile($pdfFile);
+
+        return $pdf->getDetails();
+    }
 }

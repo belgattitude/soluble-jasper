@@ -17,8 +17,8 @@ use JasperTest\Util\PDFUtils;
 use PHPUnit\Framework\TestCase;
 use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
 use Soluble\Jasper\JRParameter;
-use Soluble\Jasper\Report;
-use Soluble\Jasper\ReportProperties;
+use Soluble\Jasper\Proxy\Engine\Export\JRPdfExporter;
+use Soluble\Jasper\Proxy\Export\SimplePdfExporterConfiguration;
 
 class ProgrammaticReportGenerationTest extends TestCase
 {
@@ -88,7 +88,6 @@ class ProgrammaticReportGenerationTest extends TestCase
         // ------------------------------------------------------------------------------------
 
         $fillManager = $ba->javaClass('net.sf.jasperreports.engine.JasperFillManager');
-        //$fillManager = $ba->javaClass('net.sf.jasperreports.engine.JasperFillManager')->getInstance($context);
 
         $params = array_merge($props, [
             'LOGO_FILE'    => \JasperTestsFactories::getReportBaseDir() . '/assets/wave.png',
@@ -103,9 +102,25 @@ class ProgrammaticReportGenerationTest extends TestCase
         // Step 5: Exporting report in pdf
         // -----------------------------------------------------------------------------------
 
+        /*
         $exportManager = $this->ba->javaClass('net.sf.jasperreports.engine.JasperExportManager');
-
         $exportManager->exportReportToPdfFile($jasperPrint, $outputFile);
+        */
+
+        $pdfConfig = new SimplePdfExporterConfiguration($this->ba);
+        $pdfConfig->setCompressed(false); // Otherwise pdfparser fails to decode
+        $pdfConfig->setMetadataAuthor('Sebastien Vanvelthem');
+        $pdfConfig->setMetadataCreator('belgattitude');
+
+        //echo (string) $pdfConfig->getJavaProxiedObject()->getMetadataCreator();
+        //die();
+
+        $jrPdfExporter = new JRPdfExporter($this->ba);
+        $jrPdfExporter->setExporterInput($jasperPrint);
+        $jrPdfExporter->setExporterOutput(new \SplFileInfo($outputFile));
+        $jrPdfExporter->setConfiguration($pdfConfig);
+
+        $jrPdfExporter->exportReport();
 
         // -----------------------------------------------------------------------------------
         // Step 6: Change permissions on outputfile
@@ -135,10 +150,11 @@ class ProgrammaticReportGenerationTest extends TestCase
         // -----------------------------------------------------------------------------------
         $pdfUtils = new PDFUtils();
         $text = $pdfUtils->getPDFText($outputFile);
-
+        $details = $pdfUtils->getDetails($outputFile);
         self::assertContains('Customer Order List', $text);
         self::assertContains('Alfreds Futterkiste', $text);
         self::assertContains('PHPUNIT', $text);
+        self::assertSame('Sebastien Vanvelthem', $details['Author']);
 
         /*
         $queryExecuterFactory = $ba->javaClass('net.sf.jasperreports.engine.query.JsonQueryExecuterFactory');
@@ -150,7 +166,7 @@ class ProgrammaticReportGenerationTest extends TestCase
             //(string) $queryExecuterFactory->JSON_NUMBER_PATTERN => '#,##0.##',
             //(string) $queryExecuterFactory->JSON_LOCALE => $locale->ENGLISH
         ]));
-*/
+        */
     }
 
     public function testProgrammaticCSVReport(): void
