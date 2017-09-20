@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 require_once __DIR__ . '/../../vendor/autoload.php';
 
+use JasperTest\Util\MarkdownBenchmark;
 use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
 use Soluble\Jasper\DataSource\JavaSqlConnection;
 use Soluble\Jasper\Report;
@@ -42,11 +43,14 @@ if ($mysql_password !== '') {
     $reports['jdbc'] = new Report(
         "$reportPath/08_report_jdbc.jrxml",
         null,
-        new JavaSqlConnection("jdbc:mysql://localhost/phpunit_soluble_test_db?user=root&password=$mysql_password&serverTimezone=UTC")
+        new JavaSqlConnection(
+            "jdbc:mysql://localhost/phpunit_soluble_test_db?user=root&password=$mysql_password&serverTimezone=UTC",
+            'com.mysql.jdbc.Driver'
+        )
     );
 }
 
-$bm = new Benchmark();
+$bm = new MarkdownBenchmark();
 
 //#####################
 // Benching connection
@@ -61,7 +65,7 @@ try {
     $ba = new BridgeAdapter([
         'driver'             => 'Pjb62',
         'servlet_address'    => 'http://127.0.0.1:8080/JasperReports/servlet.phpjavabridge',
-        'java_prefer_values' => true
+        //'java_prefer_values' => true
     ]);
     $init = $ba->java('java.lang.String');
 } catch (\Exception $e) {
@@ -133,87 +137,3 @@ echo PHP_EOL;
 echo '- Connection time: ' . $connection_time . PHP_EOL;
 echo '- Total time     : ' . $total_time . PHP_EOL;
 echo PHP_EOL;
-
-class Benchmark
-{
-    /**
-     * @var bool
-     */
-    public $tableHeaderPrinted = false;
-
-    /**
-     * @var array
-     */
-    public $iterations = [1, 5, 10];
-
-    public function __construct()
-    {
-    }
-
-    public function printTableHeader()
-    {
-        echo '| Benchmark name | ' . implode('|', array_map(function ($iter) {
-            return " x$iter ";
-        }, $this->iterations)) . '| Average | Memory |' . PHP_EOL;
-        echo '|----| ' . implode('|', array_map(function ($iter) {
-            return '----:';
-        }, $this->iterations)) . '|-------:|----:| ' . PHP_EOL;
-    }
-
-    /**
-     * @param string   $name
-     * @param callable $fn
-     */
-    public function time($name, callable $fn)
-    {
-        $times = [];
-
-        $start_memory = memory_get_usage(false);
-
-        foreach ($this->iterations as $iteration) {
-            $start_time = microtime(true);
-            $fn($iteration);
-            $total_time        = microtime(true) - $start_time;
-            $times[$iteration] = $total_time;
-        }
-
-        $memory = memory_get_usage(false) - $start_memory;
-
-        $avg = array_sum($times) / array_sum(array_keys($times));
-
-        /*
-        $ttime = array_sum($times);
-        echo number_format($ttime * 1000, 2);
-        */
-        echo  "| $name | " . implode('| ', array_map(function ($time) {
-            return number_format($time * 1000, 2) . 'ms';
-        }, $times)) . '| ' .
-            number_format($avg * 1000, 2) . 'ms| ' .
-            round($memory / 1024, 2) . 'Kb' . '|' . PHP_EOL;
-    }
-
-    /**
-     * Return formatted time .
-     *
-     * @param int $start_time
-     * @param int $end_time
-     */
-    public function getFormattedTimeMs($start_time, $end_time)
-    {
-        $time = $end_time - $start_time;
-
-        return number_format($time, 0, '.', '') . ' ms';
-    }
-
-    /**
-     * Get ms time (only 64bits platform).
-     *
-     * @return int
-     */
-    public function getTimeMs()
-    {
-        $mt = explode(' ', microtime());
-
-        return ((int) $mt[1]) * 1000 + ((int) round($mt[0] * 1000));
-    }
-}

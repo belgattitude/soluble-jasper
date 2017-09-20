@@ -85,6 +85,9 @@ class JasperTestsFactories
             $_SERVER['ENABLE_MYSQL_JDBC_TESTS'] === 'true';
     }
 
+    /**
+     * @return string[]|array
+     */
     public static function getDatabaseConfig(): array
     {
         $mysql_config                   = [];

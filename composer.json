@@ -68,7 +68,7 @@
         "test": "vendor/bin/phpunit",
         "cs-check": "vendor/bin/php-cs-fixer --diff --dry-run -v fix",
         "cs-fix": "vendor/bin/php-cs-fixer -v fix",
-        "phpstan": "vendor/bin/phpstan analyse -l max -c phpstan.neon src tests/JasperTest",
+        "phpstan": "vendor/bin/phpstan analyse -l max -c phpstan.neon src tests",
         "phpds": "vendor/bin/pds-skeleton validate",
         "build-doc": "mkdocs build",
         "serve-doc": "mkdocs serve --dev-addr localhost:8094"

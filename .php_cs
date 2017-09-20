@@ -34,8 +34,6 @@ return PhpCsFixer\Config::create()
         /**
          * Extended code rules
          */
-
-        // Adapted from @Symfony
         'binary_operator_spaces' => [
             'align_double_arrow' => true,
             'align_equals' => true,

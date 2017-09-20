@@ -11,5 +11,6 @@ parameters:
 		- '#Access to an undefined property Soluble\\Japha\\Interfaces\\JavaClass#'
 		# Errors ignored from the codingmachine phpstan-strict-rules extension
 		- '#In method "Soluble\\Jasper\\DataSource\\Util\\JdbcDsnFactory\:\:createDsnFromParams", parameter \$params type is "array#'
+		- '#In method "JasperTestsFactories\:\:getDatabaseConfig", return type is "array"#'
 		- '#In method "Soluble\\Jasper\\ReportParams\:\:toArray", return type is "array".#'
 		- '#Internal error: Could not find item at#'
