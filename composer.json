@@ -48,7 +48,11 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "JasperTest\\": "tests/JasperTest"
+            "JasperTest\\": [
+                "tests/unit",
+                "tests/functional",
+                "tests/util"
+            ]
         },
         "files": ["tests/JasperTestsFactories.php"]
     },

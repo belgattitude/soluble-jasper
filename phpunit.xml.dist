@@ -1,18 +1,25 @@
-<phpunit bootstrap="./vendor/autoload.php"
-             backupGlobals="false"
-             backupStaticAttributes="false"
-             colors="true"
-             verbose="true"
-             convertErrorsToExceptions="true"
-             convertNoticesToExceptions="true"
-             convertWarningsToExceptions="true"
-             processIsolation="false"
-             stopOnFailure="false">
-
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
+         backupGlobals="false"
+         backupStaticAttributes="false"
+         bootstrap="vendor/autoload.php"
+         colors="true"
+         verbose="true"
+         beStrictAboutOutputDuringTests="true"
+         beStrictAboutTestsThatDoNotTestAnything="true"
+         beStrictAboutTodoAnnotatedTests="true"
+         beStrictAboutChangesToGlobalState="true"
+         beStrictAboutCoversAnnotation="true"
+         beStrictAboutResourceUsageDuringSmallTests="true"
+         forceCoversAnnotation="true">
 
     <testsuites>
-        <testsuite name="jasper">
-            <directory>./tests/JasperTest</directory>
+        <testsuite name="unit">
+            <directory>./tests/unit</directory>
+        </testsuite>
+        <testsuite name="functional">
+            <directory>./tests/functional</directory>
         </testsuite>
     </testsuites>
 
