@@ -15,6 +15,7 @@ namespace Soluble\Jasper\Proxy\Engine\Export;
 
 use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
 use Soluble\Japha\Interfaces\JavaObject;
+use Soluble\Jasper\Proxy\Export\SimplePdfExporterConfiguration;
 use Soluble\Jasper\Proxy\RemoteJavaObjectProxyInterface;
 use SplFileInfo;
 
@@ -64,9 +65,12 @@ class JRPdfExporter implements RemoteJavaObjectProxyInterface
         $this->exporter->setExporterOutput($exporterOutput);
     }
 
-    public function setConfiguration(JavaObject $exportConfig): void
+    /**
+     * Set custom pdf configuration (metadata,...).
+     */
+    public function setConfiguration(SimplePdfExporterConfiguration $exportConfig): void
     {
-        $this->exporter->setConfiguration($exportConfig);
+        $this->exporter->setConfiguration($exportConfig->getJavaProxiedObject());
     }
 
     public function exportReport(): void

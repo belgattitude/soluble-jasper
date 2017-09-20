@@ -64,7 +64,7 @@ class BasicPDFExportTest extends TestCase
         $jrPdfExporter = new JRPdfExporter($this->ba);
         $jrPdfExporter->setExporterInput($jasperPrint->getJavaProxiedObject());
         $jrPdfExporter->setExporterOutput(new \SplFileInfo($outputFile));
-        $jrPdfExporter->setConfiguration($pdfConfig->getJavaProxiedObject());
+        $jrPdfExporter->setConfiguration($pdfConfig);
 
         $jrPdfExporter->exportReport();
 

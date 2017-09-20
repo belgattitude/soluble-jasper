@@ -68,13 +68,16 @@ class PDFExporter
         $this->exporter->setExporterOutput(new \SplFileInfo($outputFile));
         if ($pdfConfig !== null) {
             $simplePdfConfig = $this->getPdfExporterConfiguration($pdfConfig);
-            $this->exporter->setConfiguration($simplePdfConfig->getJavaProxiedObject());
+            $this->exporter->setConfiguration($simplePdfConfig);
         }
         $this->exporter->exportReport();
     }
 
     /**
+     * Return a new PSR-7 Response object filled with the PDF content.
+     *
      * @param string[]|null $pdfConfig
+     *
      * @return ResponseInterface
      */
     public function getPsr7Response(array $pdfConfig = null): ResponseInterface
