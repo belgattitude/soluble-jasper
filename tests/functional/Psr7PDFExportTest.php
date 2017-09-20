@@ -16,7 +16,7 @@ namespace JasperTest\Functional;
 use JasperTest\Util\PDFUtils;
 use PHPUnit\Framework\TestCase;
 use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
-use Soluble\Jasper\Exporter\Bridged\PDFExporter;
+use Soluble\Jasper\Exporter\PDFExporter;
 use Soluble\Jasper\Report;
 use Soluble\Jasper\ReportParams;
 use Soluble\Jasper\ReportRunnerFactory;
@@ -47,7 +47,7 @@ class Psr7PDFExportTest extends TestCase
                     ])
         );
 
-        $pdfExporter = new PDFExporter($reportRunner, $report);
+        $pdfExporter = new PDFExporter($report, $reportRunner);
 
         $response = $pdfExporter->getPsr7Response();
 

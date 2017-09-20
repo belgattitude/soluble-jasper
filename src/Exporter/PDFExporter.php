@@ -11,7 +11,7 @@ declare(strict_types=1);
  * @license   MIT
  */
 
-namespace Soluble\Jasper\Exporter\Bridged;
+namespace Soluble\Jasper\Exporter;
 
 use Psr\Http\Message\ResponseInterface;
 use Soluble\Jasper\Exception\IOException;
@@ -46,7 +46,7 @@ class PDFExporter
      */
     private $exporter;
 
-    public function __construct(BridgedReportRunner $runner, Report $report)
+    public function __construct(Report $report, BridgedReportRunner $runner)
     {
         $this->runner   = $runner;
         $this->report   = $report;

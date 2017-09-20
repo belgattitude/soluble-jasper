@@ -35,6 +35,8 @@ Report generation using jasper reports from PHP.
 use Soluble\Japha\Bridge\Adapter as JavaBridgeAdapter;
 use Soluble\Jasper\{ReportRunnerFactory, Report, ReportParams};
 use Soluble\Jasper\DataSource\JavaSqlConnection;
+use Soluble\Jasper\Exporter\PDFExporter;
+
 
 // Step 1: Get the report runner
 // Good practice is to initialize once and get it from a PSR-11 compatible container
@@ -59,13 +61,20 @@ $report = new Report(
      )
 );
 
-// Step 3: Get the export manager and choose exports
+// Step 3: Export the report
 
-$pdfExporter = $reportRunner->getReportExporter('pdf', $report);
+$pdfExporter = new PDFExporter($report, $reportRunner);
 
 $pdfExporter->saveFile('/path/my_report_output.pdf', [
     'author' => 'John Doe',
     'title' => 'My document'
+]);
+
+// Or for PSR7 response
+
+$response = $pdfExporter->getPsr7Response([
+    'author' => 'John Doe',
+    'title' => 'My document'    
 ]);
 
 //$exportManager = $reportRunner->getExportManager($report);
