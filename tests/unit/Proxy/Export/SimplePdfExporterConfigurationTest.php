@@ -37,11 +37,28 @@ class SimplePdfExporterConfigurationTest extends TestCase
 
     public function testConfiguration(): void
     {
-        $this->config->setMetadataCreator('cool');
-        self::assertSame(
-            'cool',
-            (string) $this->config->getJavaProxiedObject()->getMetadataCreator()
-        );
+        $proxy = $this->config->getJavaProxiedObject();
+        $this->config->setCompressed(true);
+        $this->config->setEncrypted(true);
+        $this->config->set128BitKey(true);
+        $this->config->setMetadataCreator('creator');
+        $this->config->setMetadataAuthor('author');
+        $this->config->setMetadataKeywords('keywords');
+        $this->config->setMetadataTitle('title');
+        $this->config->setMetadataSubject('subject');
+        $this->config->setUserPassword('user_password');
+        $this->config->setOwnerPassword('owner_password');
+
+        self::assertSame('creator', (string) $proxy->getMetadataCreator());
+        self::assertSame('author', (string) $proxy->getMetadataAuthor());
+        self::assertSame('subject', (string) $proxy->getMetadataSubject());
+        self::assertSame('keywords', (string) $proxy->getMetadataKeywords());
+        self::assertSame('title', (string) $proxy->getMetadataTitle());
+        self::assertSame('user_password', (string) $proxy->getUserPassword());
+        self::assertSame('owner_password', (string) $proxy->getOwnerPassword());
+        self::assertTrue($this->bridgeAdapter->isTrue($proxy->isCompressed()));
+        self::assertTrue($this->bridgeAdapter->isTrue($proxy->isEncrypted()));
+        self::assertTrue($this->bridgeAdapter->isTrue($proxy->is128BitKey()));
     }
 
     public function testJavaProxiedObject(): void
