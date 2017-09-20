@@ -35,6 +35,15 @@ class SimplePdfExporterConfigurationTest extends TestCase
         $this->config = new SimplePdfExporterConfiguration($this->bridgeAdapter);
     }
 
+    public function testConfiguration(): void
+    {
+        $this->config->setMetadataCreator('cool');
+        self::assertSame(
+            'cool',
+            (string) $this->config->getJavaProxiedObject()->getMetadataCreator()
+        );
+    }
+
     public function testJavaProxiedObject(): void
     {
         $proxy = $this->config->getJavaProxiedObject();

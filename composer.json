@@ -31,10 +31,11 @@
         "pds/skeleton": "@dev",
         "phpstan/phpstan": "^0.8.5",
         "phpunit/phpunit": "^6.2",
-        "roave/better-reflection": "dev-master as 2.0.0",
+        "roave/better-reflection": "2.0.0",
         "roave/security-advisories": "dev-master",
         "smalot/pdfparser": "^0.11.0",
-        "thecodingmachine/phpstan-strict-rules": "^0.8.1"
+        "thecodingmachine/phpstan-strict-rules": "^0.8.2",
+        "zendframework/zend-diactoros": "^1.6"
     },
     "config": {
         "optimize-autoloader": true,
@@ -69,7 +70,8 @@
         "serve-doc": "mkdocs serve --dev-addr localhost:8094"
     },
     "suggest": {
-        "monolog/monolog": "PSR-3 compatible logger"
+        "monolog/monolog": "PSR-3 compatible logger",
+        "zendframework/zend-diactoros": "PSR-7 message interfaces implementation"
     },
     "archive": {
         "exclude": [".sami.php", "phpstan.neon", "tests", "docs", ".travis", ".travis.yml", ".codeclimate.yml", ".coveralls.yml", ".scrutinizer.yml", ".php_cs", ".gitignore", "phpcs.xml"]

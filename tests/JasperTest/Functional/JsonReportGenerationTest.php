@@ -11,7 +11,7 @@ declare(strict_types=1);
  * @license   MIT
  */
 
-namespace JasperTest\Functionnal;
+namespace JasperTest\Functional;
 
 use JasperTest\Util\PDFUtils;
 use PHPUnit\Framework\TestCase;
@@ -80,8 +80,8 @@ class JsonReportGenerationTest extends TestCase
             throw $e;
         }
 
-        $pdfUtils = new PDFUtils();
-        $text = $pdfUtils->getPDFText($output_pdf);
+        $pdfUtils = new PDFUtils($output_pdf);
+        $text = $pdfUtils->getTextContent();
 
         self::assertContains('Customer Order List', $text);
         self::assertContains('PHPUNIT', $text);

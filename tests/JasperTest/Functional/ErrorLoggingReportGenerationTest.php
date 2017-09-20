@@ -11,7 +11,7 @@ declare(strict_types=1);
  * @license   MIT
  */
 
-namespace JasperTest\Functionnal;
+namespace JasperTest\Functional;
 
 use Monolog\Handler\TestHandler;
 use Monolog\Logger;

@@ -22,18 +22,27 @@ class PDFUtils
      */
     protected $parser;
 
-    public function __construct()
+    /**
+     * @var string
+     */
+    protected $pdfFile;
+
+    protected $pdf;
+
+    public function __construct(string $pdfFile)
     {
         $this->parser = new PDFParser();
+        $this->pdfFile = $pdfFile;
+        $this->pdf = $this->parser->parseFile($this->pdfFile);
     }
 
-    public function getPDFText(string $pdfFile): string
+    /**
+     * Get all text content (all pages).
+     */
+    public function getTextContent(): string
     {
         $text = '';
-        $pdf = $this->parser->parseFile($pdfFile);
-
-        $pages = $pdf->getPages();
-
+        $pages = $this->pdf->getPages();
         foreach ($pages as $page) {
             $text .= $page->getText();
         }
@@ -44,10 +53,8 @@ class PDFUtils
     /**
      * @return string[]
      */
-    public function getDetails(string $pdfFile): array
+    public function getDetails(): array
     {
-        $pdf = $this->parser->parseFile($pdfFile);
-
-        return $pdf->getDetails();
+        return $this->pdf->getDetails();
     }
 }

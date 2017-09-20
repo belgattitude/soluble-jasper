@@ -11,14 +11,12 @@ declare(strict_types=1);
  * @license   MIT
  */
 
-namespace JasperTest\Functionnal;
+namespace JasperTest\Functional;
 
 use JasperTest\Util\PDFUtils;
 use PHPUnit\Framework\TestCase;
 use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
 use Soluble\Jasper\JRParameter;
-use Soluble\Jasper\Proxy\Engine\Export\JRPdfExporter;
-use Soluble\Jasper\Proxy\Export\SimplePdfExporterConfiguration;
 
 class ProgrammaticReportGenerationTest extends TestCase
 {
@@ -102,25 +100,8 @@ class ProgrammaticReportGenerationTest extends TestCase
         // Step 5: Exporting report in pdf
         // -----------------------------------------------------------------------------------
 
-        /*
         $exportManager = $this->ba->javaClass('net.sf.jasperreports.engine.JasperExportManager');
         $exportManager->exportReportToPdfFile($jasperPrint, $outputFile);
-        */
-
-        $pdfConfig = new SimplePdfExporterConfiguration($this->ba);
-        $pdfConfig->setCompressed(false); // Otherwise pdfparser fails to decode
-        $pdfConfig->setMetadataAuthor('Sebastien Vanvelthem');
-        $pdfConfig->setMetadataCreator('belgattitude');
-
-        //echo (string) $pdfConfig->getJavaProxiedObject()->getMetadataCreator();
-        //die();
-
-        $jrPdfExporter = new JRPdfExporter($this->ba);
-        $jrPdfExporter->setExporterInput($jasperPrint);
-        $jrPdfExporter->setExporterOutput(new \SplFileInfo($outputFile));
-        $jrPdfExporter->setConfiguration($pdfConfig);
-
-        $jrPdfExporter->exportReport();
 
         // -----------------------------------------------------------------------------------
         // Step 6: Change permissions on outputfile
@@ -148,13 +129,11 @@ class ProgrammaticReportGenerationTest extends TestCase
         // -----------------------------------------------------------------------------------
         // Step 7: Test output
         // -----------------------------------------------------------------------------------
-        $pdfUtils = new PDFUtils();
-        $text = $pdfUtils->getPDFText($outputFile);
-        $details = $pdfUtils->getDetails($outputFile);
+        $pdfUtils = new PDFUtils($outputFile);
+        $text = $pdfUtils->getTextContent();
         self::assertContains('Customer Order List', $text);
         self::assertContains('Alfreds Futterkiste', $text);
         self::assertContains('PHPUNIT', $text);
-        self::assertSame('Sebastien Vanvelthem', $details['Author']);
 
         /*
         $queryExecuterFactory = $ba->javaClass('net.sf.jasperreports.engine.query.JsonQueryExecuterFactory');

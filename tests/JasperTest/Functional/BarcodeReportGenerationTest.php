@@ -11,7 +11,7 @@ declare(strict_types=1);
  * @license   MIT
  */
 
-namespace JasperTest\Functionnal;
+namespace JasperTest\Functional;
 
 use JasperTest\Util\PDFUtils;
 use PHPUnit\Framework\TestCase;
@@ -54,8 +54,8 @@ class BarcodeReportGenerationTest extends TestCase
 
         // open the pdf and check for text
 
-        $pdfUtils = new PDFUtils();
-        $text = $pdfUtils->getPDFText($output_pdf);
+        $pdfUtils = new PDFUtils($output_pdf);
+        $text = $pdfUtils->getTextContent();
 
         self::assertContains('Test with barcodes', $text);
     }
