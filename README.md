@@ -61,8 +61,15 @@ $report = new Report(
 
 // Step 3: Get the export manager and choose exports
 
-$exportManager = $reportRunner->getExportManager($report);
-$exportManager->savePdf('/path/my_report_output.pdf');
+$pdfExporter = $reportRunner->getReportExporter('pdf', $report);
+
+$pdfExporter->saveFile('/path/my_report_output.pdf', [
+    'author' => 'John Doe',
+    'title' => 'My document'
+]);
+
+//$exportManager = $reportRunner->getExportManager($report);
+//$exportManager->savePdf('/path/my_report_output.pdf');
 
 
 /*

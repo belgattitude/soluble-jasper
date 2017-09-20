@@ -11,7 +11,7 @@ declare(strict_types=1);
  * @license   MIT
  */
 
-namespace Soluble\Jasper\Exporter;
+namespace Soluble\Jasper\Exporter\Bridged;
 
 use Psr\Http\Message\ResponseInterface;
 use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
@@ -22,6 +22,7 @@ use Soluble\Jasper\Proxy\Engine\JasperPrint;
 use Soluble\Jasper\Proxy\Export\SimplePdfExporterConfiguration;
 use Soluble\Jasper\Report;
 use Soluble\Jasper\Runner\BridgedReportRunner;
+use SplFileInfo;
 use Zend\Diactoros\Response;
 use Zend\Diactoros\Stream;
 
@@ -81,34 +82,57 @@ class PDFExporter
      *
      * @param string[]|null $pdfConfig
      *
-     * @return ResponseInterface
+     * @throws IOException
+     * @throws IOPermissionException
+     *
      */
     public function getPsr7Response(array $pdfConfig = null): ResponseInterface
     {
-        $tmpDir  = sys_get_temp_dir();
-        $tmpFile = tempnam(sys_get_temp_dir(), 'soluble-jasper');
+        $tmpFile = $this->createTempFile();
+
+        try {
+            $this->saveFile($tmpFile, $pdfConfig);
+        } catch (\Throwable $e) {
+            @unlink($tmpFile);
+            throw $e;
+        }
+
+        $response = new Response();
+        $response = $response->withBody(new Stream($tmpFile));
+        $response = $response->withHeader('Content-type', 'application/pdf');
+
+        if (@unlink($tmpFile) === false) {
+            // do nothing for now
+        }
+
+        return $response;
+    }
+
+    /**
+     * @param null|string $tmpDir if null use sys_get_temp_dir()
+     * @param int|null    $mode   default to '0666'
+     * @throws IOException
+     * @throws IOPermissionException
+     */
+    protected function createTempFile(?string $tmpDir=null, ?int $mode=0666): string
+    {
+        $tmpDir  = $tmpDir ?? sys_get_temp_dir();
+        $tmpFile = tempnam($tmpDir, 'soluble-jasper');
         if ($tmpFile === false) {
             throw new IOException(sprintf(
                 'Cannot create temporary file in %s',
                 $tmpDir
             ));
         }
-        if (chmod($tmpFile, 0666) === false) {
+        if (chmod($tmpFile, $mode) === false) {
+            unlink($tmpFile);
             throw new IOPermissionException(sprintf(
                 'Cannot set file permission of file %s.',
                 $tmpFile
             ));
         }
 
-        $this->saveFile($tmpFile, $pdfConfig);
-
-        $response = new Response();
-        $response = $response->withBody(new Stream($tmpFile));
-        $response = $response->withHeader('Content-type', 'application/pdf');
-
-        unlink($tmpFile);
-
-        return $response;
+        return $tmpFile;
     }
 
     /**
