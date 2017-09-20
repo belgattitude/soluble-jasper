@@ -60,6 +60,9 @@ class BasicPDFExportTest extends TestCase
         $pdfConfig->setCompressed(false); // Otherwise pdfparser fails to decode
         $pdfConfig->setMetadataAuthor('Sebastien Vanvelthem');
         $pdfConfig->setMetadataCreator('belgattitude');
+        $pdfConfig->setMetadataTitle('title');
+        $pdfConfig->setMetadataKeywords('keywords');
+        $pdfConfig->setMetadataSubject('subject');
 
         $jrPdfExporter = new JRPdfExporter($this->ba);
         $jrPdfExporter->setExporterInput($jasperPrint->getJavaProxiedObject());
@@ -79,5 +82,8 @@ class BasicPDFExportTest extends TestCase
         $details = $pdfUtils->getDetails();
         self::assertSame('Sebastien Vanvelthem', $details['Author']);
         self::assertSame('belgattitude', $details['Creator']);
+        self::assertSame('keywords', $details['Keywords']);
+        self::assertSame('subject', $details['Subject']);
+        self::assertSame('title', $details['Title']);
     }
 }

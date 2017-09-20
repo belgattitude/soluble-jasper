@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace JasperTest\Util;
 
+use Smalot\PdfParser\Document;
 use Smalot\PdfParser\Parser as PDFParser;
 
 class PDFUtils
@@ -27,6 +28,9 @@ class PDFUtils
      */
     protected $pdfFile;
 
+    /**
+     * @var Document
+     */
     protected $pdf;
 
     public function __construct(string $pdfFile)
@@ -56,5 +60,22 @@ class PDFUtils
     public function getDetails(): array
     {
         return $this->pdf->getDetails();
+    }
+
+    public static function getParsedDocument(string $pdfContent): Document
+    {
+        return (new PDFParser())->parseContent($pdfContent);
+    }
+
+    public static function getParsedDocumentText(string $pdfContent): string
+    {
+        $document = self::getParsedDocument($pdfContent);
+        $text     = '';
+        $pages    = $document->getPages();
+        foreach ($pages as $page) {
+            $text .= $page->getText();
+        }
+
+        return $text;
     }
 }

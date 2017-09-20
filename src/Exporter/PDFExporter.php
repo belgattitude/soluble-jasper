@@ -15,12 +15,15 @@ namespace Soluble\Jasper\Exporter;
 
 use Psr\Http\Message\ResponseInterface;
 use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
+use Soluble\Jasper\Exception\IOException;
+use Soluble\Jasper\Exception\IOPermissionException;
 use Soluble\Jasper\Proxy\Engine\Export\JRPdfExporter;
 use Soluble\Jasper\Proxy\Engine\JasperPrint;
 use Soluble\Jasper\Proxy\Export\SimplePdfExporterConfiguration;
 use Soluble\Jasper\Report;
 use Soluble\Jasper\Runner\BridgedReportRunner;
 use Zend\Diactoros\Response;
+use Zend\Diactoros\Stream;
 
 class PDFExporter
 {
@@ -82,7 +85,28 @@ class PDFExporter
      */
     public function getPsr7Response(array $pdfConfig = null): ResponseInterface
     {
+        $tmpDir  = sys_get_temp_dir();
+        $tmpFile = tempnam(sys_get_temp_dir(), 'soluble-jasper');
+        if ($tmpFile === false) {
+            throw new IOException(sprintf(
+                'Cannot create temporary file in %s',
+                $tmpDir
+            ));
+        }
+        if (chmod($tmpFile, 0666) === false) {
+            throw new IOPermissionException(sprintf(
+                'Cannot set file permission of file %s.',
+                $tmpFile
+            ));
+        }
+
+        $this->saveFile($tmpFile, $pdfConfig);
+
         $response = new Response();
+        $response = $response->withBody(new Stream($tmpFile));
+        $response = $response->withHeader('Content-type', 'application/pdf');
+
+        unlink($tmpFile);
 
         return $response;
     }
