@@ -74,7 +74,7 @@ class JdbcDsnFactory
         }
 
         // use and password can be optional for sqlite
-        $user = $params['user'] ?? '';
+        $user     = $params['user'] ?? '';
         $password = $params['password'] ?? ''; // can be cleartext
 
         $driverOptions = $params['driverOptions'] ?? [];

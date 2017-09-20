@@ -47,7 +47,7 @@ class BasicReportGenerationTest extends TestCase
         );
 
         $jasperReport = $reportRunner->compileReport($report);
-        $filled = $reportRunner->fillReport($jasperReport);
+        $filled       = $reportRunner->fillReport($jasperReport);
 
         $exportManager = $reportRunner->getExportManager($report);
 
@@ -61,7 +61,7 @@ class BasicReportGenerationTest extends TestCase
         // open the pdf and check for text
 
         $pdfUtils = new PDFUtils($output_pdf);
-        $text = $pdfUtils->getTextContent();
+        $text     = $pdfUtils->getTextContent();
 
         self::assertContains('Soluble Jasper', $text);
         self::assertContains('Generated from unit tests', $text);

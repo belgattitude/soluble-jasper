@@ -22,7 +22,7 @@ use Soluble\Jasper\ReportRunnerFactory;
 ini_set('display_errors', 'true');
 
 $reportPath = __DIR__ . '/../reports';
-$reports = [
+$reports    = [
     'text-only' => new Report(
         "$reportPath/00_report_mini.jrxml",
         new ReportParams([
@@ -68,12 +68,12 @@ try {
     die('Error connecting: ' . $e->getMessage());
 }
 $end_connection_time = $bm->getTimeMs();
-$connection_time = $bm->getFormattedTimeMs($start_connection_time, $end_connection_time);
+$connection_time     = $bm->getFormattedTimeMs($start_connection_time, $end_connection_time);
 // END OF BENCHING CONNECTION
 
 $reportRunner = ReportRunnerFactory::getBridgedReportRunner($ba);
 
-$miniReport = $reports['text-only'];
+$miniReport    = $reports['text-only'];
 $imgMiniReport = $reports['text+png'];
 
 //#####################
@@ -127,7 +127,7 @@ foreach ($reports as $key => $report) {
 }
 
 $end_total_time = $bm->getTimeMs();
-$total_time = $bm->getFormattedTimeMs($start_total_time, $end_total_time);
+$total_time     = $bm->getFormattedTimeMs($start_total_time, $end_total_time);
 
 echo PHP_EOL;
 echo '- Connection time: ' . $connection_time . PHP_EOL;
@@ -173,7 +173,7 @@ class Benchmark
         foreach ($this->iterations as $iteration) {
             $start_time = microtime(true);
             $fn($iteration);
-            $total_time = microtime(true) - $start_time;
+            $total_time        = microtime(true) - $start_time;
             $times[$iteration] = $total_time;
         }
 

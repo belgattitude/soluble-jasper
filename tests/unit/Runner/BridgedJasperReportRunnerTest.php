@@ -39,7 +39,7 @@ class BridgedJasperReportRunnerTest extends TestCase
     public function setUp(): void
     {
         $this->bridgeAdapter = \JasperTestsFactories::getJavaBridgeAdapter();
-        $this->report = new Report(\JasperTestsFactories::getDefaultReportFile());
+        $this->report        = new Report(\JasperTestsFactories::getDefaultReportFile());
     }
 
     public function testCompile(): void
@@ -70,7 +70,7 @@ class BridgedJasperReportRunnerTest extends TestCase
     public function testFillWithInvalidJsonDataShouldThrowException(): void
     {
         $reportFile = \JasperTestsFactories::getReportBaseDir() . '/10_report_json_northwind.jrxml';
-        $jsonFile = \JasperTestsFactories::getDataBaseDir() . '/invalid_json.json';
+        $jsonFile   = \JasperTestsFactories::getDataBaseDir() . '/invalid_json.json';
 
         $this->expectException(BrokenJsonDataSourceException::class);
         $this->expectExceptionMessage(sprintf(
@@ -94,7 +94,7 @@ class BridgedJasperReportRunnerTest extends TestCase
 
         $reportRunner = ReportRunnerFactory::getBridgedReportRunner($this->bridgeAdapter);
 
-        $report = new Report($reportFile, $reportParams, $jsonDataSource);
+        $report       = new Report($reportFile, $reportParams, $jsonDataSource);
         $jasperReport = $reportRunner->compileReport($report);
         $reportRunner->fillReport($jasperReport);
     }

@@ -43,7 +43,7 @@ class JasperReportTest extends TestCase
 
     public function testProperties(): void
     {
-        $report = new Report(JasperTestsFactories::getDefaultReportFile());
+        $report       = new Report(JasperTestsFactories::getDefaultReportFile());
         $reportRunner = ReportRunnerFactory::getBridgedReportRunner($this->bridgeAdapter);
         $jasperReport = $reportRunner->compileReport($report);
         $jasperReport->setProperty('COOL', 'test');

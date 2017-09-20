@@ -65,7 +65,7 @@ class JDBCReportGenerationTest extends TestCase
         // open the pdf and check for text
 
         $pdfUtils = new PDFUtils($output_pdf);
-        $text = $pdfUtils->getTextContent();
+        $text     = $pdfUtils->getTextContent();
 
         self::assertContains('JDBC mysql report test', $text);
         self::assertContains('Congas', $text);

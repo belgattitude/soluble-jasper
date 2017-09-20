@@ -32,7 +32,7 @@ class SimplePdfExporterConfigurationTest extends TestCase
     public function setUp(): void
     {
         $this->bridgeAdapter = \JasperTestsFactories::getJavaBridgeAdapter();
-        $this->config = new SimplePdfExporterConfiguration($this->bridgeAdapter);
+        $this->config        = new SimplePdfExporterConfiguration($this->bridgeAdapter);
     }
 
     public function testConfiguration(): void

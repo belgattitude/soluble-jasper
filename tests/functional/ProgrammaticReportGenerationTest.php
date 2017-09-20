@@ -38,9 +38,9 @@ class ProgrammaticReportGenerationTest extends TestCase
         $ba = $this->ba;
 
         // Variables
-        $reportFile = \JasperTestsFactories::getReportBaseDir() . '/10_report_json_northwind.jrxml';
+        $reportFile   = \JasperTestsFactories::getReportBaseDir() . '/10_report_json_northwind.jrxml';
         $jsonDataFile = \JasperTestsFactories::getDataBaseDir() . '/northwind.json';
-        $outputFile = \JasperTestsFactories::getOutputDir() . '/programmatic.pdf';
+        $outputFile   = \JasperTestsFactories::getOutputDir() . '/programmatic.pdf';
 
         // Clean up
         if (file_exists($outputFile)) {
@@ -51,7 +51,7 @@ class ProgrammaticReportGenerationTest extends TestCase
         // STEP 1 - compile report
         // --------------------------------------------------------------------------------------
         $compileManager = $ba->javaClass('net.sf.jasperreports.engine.JasperCompileManager');
-        $jasperPrint = $compileManager->compileReport($reportFile);
+        $jasperPrint    = $compileManager->compileReport($reportFile);
 
         // ---------------------------------------------------------------------------------------
         // STEP 2 - getting fileResolver and classLoader
@@ -121,7 +121,7 @@ class ProgrammaticReportGenerationTest extends TestCase
 
             $nioFiles = $ba->javaClass('java.nio.file.Files');
             $nioPaths = $ba->javaClass('java.nio.file.Paths');
-            $paths = $nioPaths->get($file->toURI());
+            $paths    = $nioPaths->get($file->toURI());
 
             $nioFiles->setPosixFilePermissions($paths, $perms);
         }
@@ -130,7 +130,7 @@ class ProgrammaticReportGenerationTest extends TestCase
         // Step 7: Test output
         // -----------------------------------------------------------------------------------
         $pdfUtils = new PDFUtils($outputFile);
-        $text = $pdfUtils->getTextContent();
+        $text     = $pdfUtils->getTextContent();
         self::assertContains('Customer Order List', $text);
         self::assertContains('Alfreds Futterkiste', $text);
         self::assertContains('PHPUNIT', $text);

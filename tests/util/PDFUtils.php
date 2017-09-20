@@ -31,9 +31,9 @@ class PDFUtils
 
     public function __construct(string $pdfFile)
     {
-        $this->parser = new PDFParser();
+        $this->parser  = new PDFParser();
         $this->pdfFile = $pdfFile;
-        $this->pdf = $this->parser->parseFile($this->pdfFile);
+        $this->pdf     = $this->parser->parseFile($this->pdfFile);
     }
 
     /**
@@ -41,7 +41,7 @@ class PDFUtils
      */
     public function getTextContent(): string
     {
-        $text = '';
+        $text  = '';
         $pages = $this->pdf->getPages();
         foreach ($pages as $page) {
             $text .= $page->getText();

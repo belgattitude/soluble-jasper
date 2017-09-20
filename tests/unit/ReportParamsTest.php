@@ -44,7 +44,7 @@ class ReportParamsTest extends TestCase
         ];
 
         $reportParams = new ReportParams($params);
-        $array = $reportParams->toArray();
+        $array        = $reportParams->toArray();
 
         self::assertEquals($params, $array);
         self::assertEquals('cool', $array['Title']);
@@ -76,7 +76,7 @@ class ReportParamsTest extends TestCase
             'param4' => 'hello',
             'param5' => PHP_INT_MAX
         ];
-        $p = new ReportParams($data);
+        $p       = new ReportParams($data);
         $newData = [];
         foreach ($p as $key => $value) {
             $newData[$key] = $value;
@@ -86,7 +86,7 @@ class ReportParamsTest extends TestCase
 
     public function testConstructorIterable(): void
     {
-        $p = new ReportParams(['test' => 'cool']);
+        $p  = new ReportParams(['test' => 'cool']);
         $p2 = new ReportParams($p);
 
         self::assertEquals('cool', $p2->offsetGet('test'));
@@ -94,7 +94,7 @@ class ReportParamsTest extends TestCase
 
     public function testArrayAccess(): void
     {
-        $p = new ReportParams();
+        $p         = new ReportParams();
         $p['cool'] = 'test';
         self::assertEquals('test', $p['cool']);
         unset($p['cool']);

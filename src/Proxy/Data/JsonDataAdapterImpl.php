@@ -20,7 +20,7 @@ use Soluble\Jasper\Proxy\RemoteJavaObjectProxyInterface;
 
 class JsonDataAdapterImpl implements RemoteJavaObjectProxyInterface
 {
-    public const LANGUAGE_JSON = 'JSON';
+    public const LANGUAGE_JSON   = 'JSON';
     public const LANGUAGE_JSONQL = 'JSONQL';
 
     /**
@@ -35,7 +35,7 @@ class JsonDataAdapterImpl implements RemoteJavaObjectProxyInterface
 
     public function __construct(BridgeAdapter $bridgeAdapter)
     {
-        $this->ba = $bridgeAdapter;
+        $this->ba          = $bridgeAdapter;
         $this->jsonAdapter = $this->ba->java('net.sf.jasperreports.data.json.JsonDataAdapterImpl');
     }
 

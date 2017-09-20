@@ -49,8 +49,8 @@ class ErrorLoggingReportGenerationTest extends TestCase
     {
         $this->ba = \JasperTestsFactories::getJavaBridgeAdapter();
 
-        $this->loggerName = '[soluble-jasper]';
-        $this->logger = new Logger($this->loggerName);
+        $this->loggerName        = '[soluble-jasper]';
+        $this->logger            = new Logger($this->loggerName);
         $this->loggerTestHandler = new TestHandler(Logger::DEBUG);
         $this->logger->pushHandler($this->loggerTestHandler);
     }
@@ -67,7 +67,7 @@ class ErrorLoggingReportGenerationTest extends TestCase
             $jasperRunner = new BridgedReportRunner($this->ba, $this->logger);
             $jasperRunner->compileReport($report);
         } catch (\Exception $e) {
-            $logged = true;
+            $logged  = true;
             $logMsgs = $this->loggerTestHandler->getRecords() ?? [];
             self::assertCount(1, $logMsgs);
             $logMsg = $logMsgs[0]['message'] ?? '<nothing in the log>';
@@ -86,7 +86,7 @@ class ErrorLoggingReportGenerationTest extends TestCase
     public function testFillLoggingError(): void
     {
         $reportFile = \JasperTestsFactories::getReportBaseDir() . '/10_report_json_northwind.jrxml';
-        $jsonFile = \JasperTestsFactories::getDataBaseDir() . '/invalid_json.json';
+        $jsonFile   = \JasperTestsFactories::getDataBaseDir() . '/invalid_json.json';
 
         $jsonDataSource = new JsonDataSource($jsonFile);
         $jsonDataSource->setOptions([
@@ -104,13 +104,13 @@ class ErrorLoggingReportGenerationTest extends TestCase
         $logged = false;
 
         $reportRunner = ReportRunnerFactory::getBridgedReportRunner($this->ba, $this->logger);
-        $report = new Report($reportFile, $reportParams, $jsonDataSource);
+        $report       = new Report($reportFile, $reportParams, $jsonDataSource);
         $jasperReport = $reportRunner->compileReport($report);
 
         try {
             $reportRunner->fillReport($jasperReport);
         } catch (\Exception $e) {
-            $logged = true;
+            $logged  = true;
             $logMsgs = $this->loggerTestHandler->getRecords() ?? [];
             self::assertCount(1, $logMsgs);
             $logMsg = $logMsgs[0]['message'] ?? '<nothing in the log>';

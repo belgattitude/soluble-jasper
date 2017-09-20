@@ -120,13 +120,13 @@ class BridgedReportRunner implements ReportRunnerInterface
             // Step 2: Assigning reportParams
 
             $originalReportParams = $jasperReport->getReport()->getReportParams() ?? new ReportParams();
-            $reportParams = $originalReportParams->withMergedParams($reportParams ?? new ReportParams());
+            $reportParams         = $originalReportParams->withMergedParams($reportParams ?? new ReportParams());
 
             // Step 3: Getting some defaults
 
-            $reportPath = $jasperReport->getReport()->getReportPath();
+            $reportPath   = $jasperReport->getReport()->getReportPath();
             $fileResolver = (new DefaultFileResolver($this->ba))->getFileResolver([$reportPath]);
-            $classLoader = (new DefaultClassLoader($this->ba))->getClassLoader([$reportPath]);
+            $classLoader  = (new DefaultClassLoader($this->ba))->getClassLoader([$reportPath]);
             //$resourceBundle = (new DefaultResourceBundle($this->>ba))->getResourceBundle();
             $reportParams->addParams([
                 JRParameter::REPORT_FILE_RESOLVER => $fileResolver,

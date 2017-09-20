@@ -25,7 +25,7 @@ class JavaProxiedException extends RuntimeException implements JavaProxiedExcept
     public function __construct(JavaException $javaException, ?string $msg = null, ?int $code = null)
     {
         $this->javaException = $javaException;
-        $message = sprintf(
+        $message             = sprintf(
             '%s[%s]: %s (%s)',
             $msg !== null ? "$msg. " : '',
             $javaException->getJavaClassName(),

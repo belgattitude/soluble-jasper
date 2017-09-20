@@ -40,7 +40,7 @@ class JasperCompileManagerTest extends TestCase
     public function setUp(): void
     {
         $this->bridgeAdapter = \JasperTestsFactories::getJavaBridgeAdapter();
-        $directory = [
+        $directory           = [
             'reports' => [
                 'report.jrxml' => '<xml></xml>'
             ]
@@ -51,9 +51,9 @@ class JasperCompileManagerTest extends TestCase
 
     public function testCompileShouldWork(): void
     {
-        $reportFile = \JasperTestsFactories::getDefaultReportFile();
+        $reportFile     = \JasperTestsFactories::getDefaultReportFile();
         $compileManager = new JasperCompileManager($this->bridgeAdapter);
-        $jasperReport = $compileManager->compileReport($reportFile);
+        $jasperReport   = $compileManager->compileReport($reportFile);
         self::assertInstanceOf(JavaObject::class, $jasperReport);
     }
 

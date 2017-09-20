@@ -49,9 +49,9 @@ class BridgedExportManager implements ExportManagerInterface
 
     public function __construct(BridgedReportRunner $runner, Report $report)
     {
-        $this->runner = $runner;
-        $this->report = $report;
-        $this->ba = $runner->getBridgeAdapter();
+        $this->runner        = $runner;
+        $this->report        = $report;
+        $this->ba            = $runner->getBridgeAdapter();
         $this->exportManager = new JasperExportManager($this->ba);
     }
 
@@ -69,7 +69,7 @@ class BridgedExportManager implements ExportManagerInterface
     private function getFilledReport(): JasperPrint
     {
         if ($this->jasperPrint === null) {
-            $jasperReport = $this->runner->compileReport($this->report);
+            $jasperReport      = $this->runner->compileReport($this->report);
             $this->jasperPrint = $this->runner->fillReport(
                                                     $jasperReport,
                                                     $this->report->getReportParams(),

@@ -54,7 +54,7 @@ class JsonDataAdapterImplTest extends TestCase
 
     public function testSetFileName(): void
     {
-        $jsonFile = \JasperTestsFactories::getDataBaseDir() . '/northwind.json';
+        $jsonFile    = \JasperTestsFactories::getDataBaseDir() . '/northwind.json';
         $jsonAdapter = new JsonDataAdapterImpl($this->ba);
         $jsonAdapter->setFileName($jsonFile);
         $javaObject = $jsonAdapter->getJavaProxiedObject();
@@ -64,7 +64,7 @@ class JsonDataAdapterImplTest extends TestCase
     public function testSetFileNameThrowsException(): void
     {
         $this->expectException(FileNotFoundException::class);
-        $jsonFile = \JasperTestsFactories::getDataBaseDir() . '/filenotexist.json';
+        $jsonFile    = \JasperTestsFactories::getDataBaseDir() . '/filenotexist.json';
         $jsonAdapter = new JsonDataAdapterImpl($this->ba);
         $jsonAdapter->setFileName($jsonFile);
     }

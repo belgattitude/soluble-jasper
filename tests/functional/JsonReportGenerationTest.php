@@ -38,7 +38,7 @@ class JsonReportGenerationTest extends TestCase
     public function testJsonReport(): void
     {
         $reportFile = \JasperTestsFactories::getReportBaseDir() . '/10_report_json_northwind.jrxml';
-        $jsonFile = \JasperTestsFactories::getDataBaseDir() . '/northwind.json';
+        $jsonFile   = \JasperTestsFactories::getDataBaseDir() . '/northwind.json';
 
         $jsonDataSource = new JsonDataSource($jsonFile);
         $jsonDataSource->setOptions([
@@ -81,7 +81,7 @@ class JsonReportGenerationTest extends TestCase
         }
 
         $pdfUtils = new PDFUtils($output_pdf);
-        $text = $pdfUtils->getTextContent();
+        $text     = $pdfUtils->getTextContent();
 
         self::assertContains('Customer Order List', $text);
         self::assertContains('PHPUNIT', $text);

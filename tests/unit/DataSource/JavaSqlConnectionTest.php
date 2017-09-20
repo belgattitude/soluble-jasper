@@ -32,9 +32,9 @@ class JavaSqlConnectionTest extends TestCase
 
     public function testProperties(): void
     {
-        $dsn = 'jdbc:mysql://host/db?user=user&password=password';
+        $dsn    = 'jdbc:mysql://host/db?user=user&password=password';
         $driver = 'com.mysql.jdbc.Driver';
-        $ds = new JavaSqlConnection($dsn, $driver);
+        $ds     = new JavaSqlConnection($dsn, $driver);
         self::assertEquals($dsn, $ds->getJdbcDsn());
         self::assertEquals($driver, $ds->getDriverClass());
     }
@@ -43,9 +43,9 @@ class JavaSqlConnectionTest extends TestCase
     {
         $this->expectException(JavaProxiedException::class);
 
-        $dsn = 'jdbc:mysql://host/db?user=notauser&password=notapassword';
+        $dsn    = 'jdbc:mysql://host/db?user=notauser&password=notapassword';
         $driver = 'com.mysql.jdbc.Driver';
-        $ds = new JavaSqlConnection($dsn, $driver);
+        $ds     = new JavaSqlConnection($dsn, $driver);
         $ds->getJasperReportSqlConnection($this->bridgeAdapter);
     }
 }

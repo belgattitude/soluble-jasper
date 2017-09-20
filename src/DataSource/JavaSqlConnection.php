@@ -40,7 +40,7 @@ class JavaSqlConnection implements JavaSqlConnectionInterface
      */
     public function __construct(string $jdbcDsn, string $driverClass)
     {
-        $this->dsn = $jdbcDsn;
+        $this->dsn         = $jdbcDsn;
         $this->driverClass = $driverClass;
     }
 

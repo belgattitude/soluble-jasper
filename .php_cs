@@ -38,7 +38,7 @@ return PhpCsFixer\Config::create()
         // Adapted from @Symfony
         'binary_operator_spaces' => [
             'align_double_arrow' => true,
-            'align_equals' => false,
+            'align_equals' => true,
         ],
         'blank_line_after_opening_tag' => true,
         'blank_line_before_return' => true,

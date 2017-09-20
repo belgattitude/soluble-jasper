@@ -38,7 +38,7 @@ class JRPdfExporter implements RemoteJavaObjectProxyInterface
      */
     public function __construct(BridgeAdapter $bridgeAdapter)
     {
-        $this->ba = $bridgeAdapter;
+        $this->ba       = $bridgeAdapter;
         $this->exporter = $this->ba->java(
             'net.sf.jasperreports.engine.export.JRPdfExporter'
         );

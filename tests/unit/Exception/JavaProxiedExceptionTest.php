@@ -45,7 +45,7 @@ class JavaProxiedExceptionTest extends TestCase
             $this->bridgeAdapter->java('java.math.BigInteger', 'cool');
             self::assertTrue(false, 'Error, this must throw an exception !');
         } catch (JavaException $e) {
-            $pe = new JavaProxiedException($e, 'coucou', 10);
+            $pe  = new JavaProxiedException($e, 'coucou', 10);
             $msg = $pe->getMessage();
             self::assertContains('coucou', $msg);
             self::assertContains('java.lang.NumberFormatException', $msg);

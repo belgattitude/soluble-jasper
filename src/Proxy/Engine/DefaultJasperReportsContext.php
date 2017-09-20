@@ -37,7 +37,7 @@ class DefaultJasperReportsContext implements RemoteJavaObjectProxyInterface
 
     public function __construct(BridgeAdapter $bridgeAdapter)
     {
-        $this->ba = $bridgeAdapter;
+        $this->ba                  = $bridgeAdapter;
         $this->defaultContextClass = $this->ba->javaClass('net.sf.jasperreports.engine.DefaultJasperReportsContext');
     }
 

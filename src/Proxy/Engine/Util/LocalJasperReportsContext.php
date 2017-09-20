@@ -43,7 +43,7 @@ class LocalJasperReportsContext implements RemoteJavaObjectProxyInterface
      */
     public function __construct(BridgeAdapter $bridgeAdapter, ?JavaObject $parentContext = null)
     {
-        $this->ba = $bridgeAdapter;
+        $this->ba            = $bridgeAdapter;
         $this->parentContext = $parentContext;
     }
 

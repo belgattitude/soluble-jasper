@@ -34,7 +34,7 @@ class JasperPrintTest extends TestCase
 
     public function testGetStatus(): void
     {
-        $report = new Report(JasperTestsFactories::getDefaultReportFile());
+        $report       = new Report(JasperTestsFactories::getDefaultReportFile());
         $jasperReport = new JasperPrint(
             $this->bridgeAdapter->java('net.sf.jasperreports.engine.JasperReport'),
             $report
@@ -44,7 +44,7 @@ class JasperPrintTest extends TestCase
 
     public function testGetReport(): void
     {
-        $report = new Report(JasperTestsFactories::getDefaultReportFile());
+        $report       = new Report(JasperTestsFactories::getDefaultReportFile());
         $jasperReport = new JasperPrint(
             $this->bridgeAdapter->java('net.sf.jasperreports.engine.JasperReport'),
             $report

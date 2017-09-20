@@ -36,7 +36,7 @@ class JasperPrint implements RemoteJavaObjectProxyInterface, ReportStatusInterfa
     public function __construct(JavaObject $jasperPrint, Report $report)
     {
         $this->jasperPrint = $jasperPrint;
-        $this->report = $report;
+        $this->report      = $report;
     }
 
     /**

@@ -40,7 +40,7 @@ class DefaultClassLoaderTest extends TestCase
 
     public function testGetClassLoader(): void
     {
-        $ba = $this->ba;
+        $ba          = $this->ba;
         $classLoader = new DefaultClassLoader($ba);
 
         $paths = [
@@ -62,7 +62,7 @@ class DefaultClassLoaderTest extends TestCase
     {
         $ba = $this->ba;
 
-        $file = \JasperTestsFactories::getReportBaseDir() . '/01_report_default.jrxml';
+        $file   = \JasperTestsFactories::getReportBaseDir() . '/01_report_default.jrxml';
         $report = new Report($file);
 
         $classLoader = new DefaultClassLoader($ba);

@@ -32,7 +32,7 @@ class JRPdfExporterTest extends TestCase
     public function setUp(): void
     {
         $this->bridgeAdapter = \JasperTestsFactories::getJavaBridgeAdapter();
-        $this->exporter = new JRPdfExporter($this->bridgeAdapter);
+        $this->exporter      = new JRPdfExporter($this->bridgeAdapter);
     }
 
     public function testJavaProxiedObject(): void

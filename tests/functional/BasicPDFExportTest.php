@@ -49,7 +49,7 @@ class BasicPDFExportTest extends TestCase
         );
 
         $jasperReport = $reportRunner->compileReport($report);
-        $jasperPrint = $reportRunner->fillReport($jasperReport);
+        $jasperPrint  = $reportRunner->fillReport($jasperReport);
 
         $outputFile = \JasperTestsFactories::getOutputDir() . '/basic_pdf_export_test.pdf';
         if (file_exists($outputFile)) {
@@ -71,7 +71,7 @@ class BasicPDFExportTest extends TestCase
         // open the pdf and check for text
 
         $pdfUtils = new PDFUtils($outputFile);
-        $text = $pdfUtils->getTextContent();
+        $text     = $pdfUtils->getTextContent();
 
         self::assertContains('Soluble Jasper', $text);
         self::assertContains('Generated from unit tests', $text);

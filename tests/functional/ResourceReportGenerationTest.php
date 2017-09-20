@@ -47,7 +47,7 @@ class ResourceReportGenerationTest extends TestCase
         );
 
         $jasperReport = $reportRunner->compileReport($report);
-        $filled = $reportRunner->fillReport($jasperReport);
+        $filled       = $reportRunner->fillReport($jasperReport);
 
         $exportManager = $reportRunner->getExportManager($report);
 
@@ -61,7 +61,7 @@ class ResourceReportGenerationTest extends TestCase
         // open the pdf and check for text
 
         $pdfUtils = new PDFUtils($output_pdf);
-        $text = $pdfUtils->getTextContent();
+        $text     = $pdfUtils->getTextContent();
 
         self::assertContains('TestResources.fr', $text);
         self::assertContains('subtitle fr', $text);
@@ -81,7 +81,7 @@ class ResourceReportGenerationTest extends TestCase
         );
 
         $jasperReport = $reportRunner->compileReport($report);
-        $filled = $reportRunner->fillReport($jasperReport);
+        $filled       = $reportRunner->fillReport($jasperReport);
 
         $exportManager = $reportRunner->getExportManager($report);
 
@@ -95,7 +95,7 @@ class ResourceReportGenerationTest extends TestCase
         // open the pdf and check for text
 
         $pdfUtils = new PDFUtils($output_pdf);
-        $text = $pdfUtils->getTextContent();
+        $text     = $pdfUtils->getTextContent();
 
         self::assertContains('TestResources.default', $text);
         self::assertContains('Subtitle default', $text);

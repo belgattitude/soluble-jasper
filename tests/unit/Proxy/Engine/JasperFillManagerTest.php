@@ -42,7 +42,7 @@ class JasperFillManagerTest extends TestCase
     public function testConstructWithContext(): void
     {
         $context = new LocalJasperReportsContext($this->bridgeAdapter);
-        $fm = new JasperFillManager($this->bridgeAdapter, $context->getJavaProxiedObject());
+        $fm      = new JasperFillManager($this->bridgeAdapter, $context->getJavaProxiedObject());
         self::assertEquals(
             'net.sf.jasperreports.engine.JasperFillManager',
             $this->bridgeAdapter->getClassName($fm->getJavaProxiedObject())
