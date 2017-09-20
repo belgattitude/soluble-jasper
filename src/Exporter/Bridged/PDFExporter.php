@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Soluble\Jasper\Exporter\Bridged;
 
 use Psr\Http\Message\ResponseInterface;
-use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
 use Soluble\Jasper\Exception\IOException;
 use Soluble\Jasper\Exception\IOPermissionException;
 use Soluble\Jasper\Proxy\Engine\Export\JRPdfExporter;
@@ -22,7 +21,6 @@ use Soluble\Jasper\Proxy\Engine\JasperPrint;
 use Soluble\Jasper\Proxy\Export\SimplePdfExporterConfiguration;
 use Soluble\Jasper\Report;
 use Soluble\Jasper\Runner\BridgedReportRunner;
-use SplFileInfo;
 use Zend\Diactoros\Response;
 use Zend\Diactoros\Stream;
 
@@ -44,11 +42,6 @@ class PDFExporter
     private $jasperPrint;
 
     /**
-     * @var BridgeAdapter
-     */
-    private $ba;
-
-    /**
      * @var JRPdfExporter
      */
     private $exporter;
@@ -57,8 +50,7 @@ class PDFExporter
     {
         $this->runner   = $runner;
         $this->report   = $report;
-        $this->ba       = $runner->getBridgeAdapter();
-        $this->exporter = new JRPdfExporter($this->ba);
+        $this->exporter = new JRPdfExporter($runner->getBridgeAdapter());
     }
 
     /**
@@ -84,7 +76,6 @@ class PDFExporter
      *
      * @throws IOException
      * @throws IOPermissionException
-     *
      */
     public function getPsr7Response(array $pdfConfig = null): ResponseInterface
     {
@@ -93,7 +84,9 @@ class PDFExporter
         try {
             $this->saveFile($tmpFile, $pdfConfig);
         } catch (\Throwable $e) {
-            @unlink($tmpFile);
+            if (file_exists($tmpFile)) {
+                unlink($tmpFile);
+            }
             throw $e;
         }
 
@@ -102,7 +95,13 @@ class PDFExporter
         $response = $response->withHeader('Content-type', 'application/pdf');
 
         if (@unlink($tmpFile) === false) {
-            // do nothing for now
+            $this->runner->getLogger()->warning(
+                sprintf(
+                    "Could not delete temp file '%s' after PSR7 response generation: %s.",
+                    $tmpFile,
+                    file_exists($tmpFile) ? 'File exists, cannot unlink' : 'File does not exists'
+                )
+            );
         }
 
         return $response;
@@ -111,6 +110,7 @@ class PDFExporter
     /**
      * @param null|string $tmpDir if null use sys_get_temp_dir()
      * @param int|null    $mode   default to '0666'
+     *
      * @throws IOException
      * @throws IOPermissionException
      */
@@ -140,7 +140,7 @@ class PDFExporter
      */
     private function getPdfExporterConfiguration(array $config): SimplePdfExporterConfiguration
     {
-        $pdfConfig = new SimplePdfExporterConfiguration($this->ba);
+        $pdfConfig = new SimplePdfExporterConfiguration($this->runner->getBridgeAdapter());
 
         return $pdfConfig;
     }

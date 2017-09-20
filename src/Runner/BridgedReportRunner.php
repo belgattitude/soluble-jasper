@@ -172,6 +172,11 @@ class BridgedReportRunner implements ReportRunnerInterface
         return new BridgedExportManager($this, $report);
     }
 
+    public function getLogger(): LoggerInterface
+    {
+        return $this->logger;
+    }
+
     public function getBridgeAdapter(): BridgeAdapter
     {
         return $this->ba;

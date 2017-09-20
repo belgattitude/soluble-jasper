@@ -8,7 +8,7 @@ matrix:
     - php: 7.1
       env:
         - SEND_COVERAGE=true
-        - CS_CHECK=true
+        - CHECK=true
     - php: 7.2
 
 before_script:
@@ -46,8 +46,7 @@ before_script:
 
 script:
   - ./vendor/bin/phpunit -v -c .travis/phpunit.travis.xml --coverage-clover=coverage.xml
-  - if [[ $CS_CHECK == true ]]; then ./vendor/bin/php-cs-fixer --diff --dry-run -v fix; fi
-  - composer phpstan
+  - if [[ $CHECK == true ]]; then composer check; fi
 
 after_script:
   - if [[ $SEND_COVERAGE == true ]]; then wget https://scrutinizer-ci.com/ocular.phar; fi

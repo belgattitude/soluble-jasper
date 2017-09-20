@@ -59,6 +59,7 @@
 
     "scripts": {
         "check": [
+            "@phpds",
             "@cs-check",
             "@phpstan"
         ],
