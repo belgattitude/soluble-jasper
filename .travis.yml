@@ -16,7 +16,7 @@ before_script:
   # Step 1: Some needed directories
   # -------------------------------------------------------------------------
   - mkdir -p build/logs
-  - mkdir -p test/logs
+  - mkdir -p tests/logs
   # -------------------------------------------------------------------------
   # Step 2: Regular composer install
   - composer install --ignore-platform-reqs
