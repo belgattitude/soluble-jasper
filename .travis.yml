@@ -13,34 +13,28 @@ matrix:
 
 before_script:
   # -------------------------------------------------------------------------
-  # Step 1: Some needed directories
-  # -------------------------------------------------------------------------
-  - mkdir -p build/logs
-  - mkdir -p tests/logs
-  # -------------------------------------------------------------------------
-  # Step 2: Regular composer install
+  # Step 1: Regular composer install
   - composer install --ignore-platform-reqs
   #
   # -------------------------------------------------------------------------
-  # Step 3: Create and populate the test database
+  # Step 2: Create and populate the test database
   # -------------------------------------------------------------------------
   - mysql -e "DROP DATABASE IF EXISTS phpunit_soluble_test_db;" -uroot
   - mysql -e "create database phpunit_soluble_test_db;" -uroot
   - zcat tests/data/mysql/schema.sql.gz | mysql -uroot phpunit_soluble_test_db
   - zcat tests/data/mysql/data.sql.gz | mysql -uroot phpunit_soluble_test_db
-  # - mysql -u root phpunit_soluble_test_db -e "select * from product_translation"
   # -------------------------------------------------------------------------
-  # Step 4: Create and launch the javabridge server
+  # Step 3: Create and launch the javabridge server
   #         with jasper report dependencies.
   # -------------------------------------------------------------------------
-  # Step 4.1: Build a servlet (war) with jasper/mysql/javabridge...
+  # Step 3.1: Build a servlet (war) with jasper/mysql/javabridge...
   - .travis/build_javabridge_jasper_war.sh
-  # Step 4.2: Run the servlet
+  # Step 3.2: Run the servlet
   - .travis/run_javabridge_jasper.sh
-  # Step 4.3: sleep a bit to let the server starts
+  # Step 3.3: sleep a bit to let the server starts
   - sleep 5
   - ls -la .travis/
-  # Step 4.4: some log for debugging travis in case
+  # Step 3.4: some log for debugging travis in case
   - cat .travis/*.log
   - cat .travis/*.pid
 
