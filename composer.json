@@ -25,16 +25,15 @@
         "soluble/japha": "^2.3.0"
     },
     "require-dev" : {
-        "friendsofphp/php-cs-fixer": "^2.6.0",
+        "friendsofphp/php-cs-fixer": "^2.7.1",
         "mikey179/vfsStream": "^1.6",
         "monolog/monolog": "^1.23.0",
         "pds/skeleton": "@dev",
         "phpstan/phpstan": "^0.8.5",
-        "phpunit/phpunit": "^6.2",
-        "roave/better-reflection": "2.0.0",
+        "phpunit/phpunit": "^6.3",
         "roave/security-advisories": "dev-master",
         "smalot/pdfparser": "^0.11.0",
-        "thecodingmachine/phpstan-strict-rules": "^0.8.2",
+        "thecodingmachine/phpstan-strict-rules": "^0.8.3",
         "zendframework/zend-diactoros": "^1.6"
     },
     "config": {
