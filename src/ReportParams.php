@@ -56,9 +56,7 @@ class ReportParams implements \ArrayAccess, \IteratorAggregate
 
     public function withMergedParams(ReportParams $params): ReportParams
     {
-        $newParams = array_merge($this->toArray(), $params->toArray());
-
-        return new self($newParams);
+        return new self(array_merge($this->toArray(), $params->toArray()));
     }
 
     /**
@@ -81,7 +79,6 @@ class ReportParams implements \ArrayAccess, \IteratorAggregate
     public function offsetExists($offset): bool
     {
         $this->checkStringOffset($offset);
-
         return $this->params->offsetExists($offset);
     }
 
@@ -91,7 +88,6 @@ class ReportParams implements \ArrayAccess, \IteratorAggregate
     public function offsetGet($offset)
     {
         $this->checkStringOffset($offset);
-
         return $this->params->offsetGet($offset);
     }
 
