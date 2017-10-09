@@ -10,7 +10,7 @@
         "phpjavabridge",
         "japha"
     ],
-    "homepage": "http://soluble.io",
+    "homepage": "https://github.com/belgattitude/soluble-jasper",
     "type": "library",
     "authors": [
         {
@@ -22,7 +22,7 @@
         "php": "^7.1",
         "psr/log": "^1.0",
         "psr/http-message": "^1.0.1",
-        "soluble/japha": "^2.3.0"
+        "soluble/japha": "^2.4.0"
     },
     "require-dev" : {
         "friendsofphp/php-cs-fixer": "^2.7.1",
@@ -30,7 +30,7 @@
         "monolog/monolog": "^1.23.0",
         "pds/skeleton": "@dev",
         "phpstan/phpstan": "^0.8.5",
-        "phpunit/phpunit": "^6.3",
+        "phpunit/phpunit": "^6.4.1",
         "roave/security-advisories": "dev-master",
         "smalot/pdfparser": "^0.11.0",
         "thecodingmachine/phpstan-strict-rules": "^0.8.3",

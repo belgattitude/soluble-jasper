@@ -79,6 +79,7 @@ class ReportParams implements \ArrayAccess, \IteratorAggregate
     public function offsetExists($offset): bool
     {
         $this->checkStringOffset($offset);
+
         return $this->params->offsetExists($offset);
     }
 
@@ -88,6 +89,7 @@ class ReportParams implements \ArrayAccess, \IteratorAggregate
     public function offsetGet($offset)
     {
         $this->checkStringOffset($offset);
+
         return $this->params->offsetGet($offset);
     }
 
