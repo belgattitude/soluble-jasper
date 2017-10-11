@@ -22,7 +22,7 @@
         "php": "^7.1",
         "psr/log": "^1.0",
         "psr/http-message": "^1.0.1",
-        "soluble/japha": "^2.4.0"
+        "soluble/japha": "^2.4.1"
     },
     "require-dev" : {
         "friendsofphp/php-cs-fixer": "^2.7.1",
