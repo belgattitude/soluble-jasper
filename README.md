@@ -10,10 +10,11 @@
 
 Report generation using jasper reports from PHP.  
 
-> EARLY ALPHA WORK !!! DO NOT USE YET
-
 ## Features
 
+- Report generation in PDF (other formats will come soon) 
+- Support for PSR-7 responses (stream)
+- JDBC and JSON datasources (xml will come soon)
 
 ## Requirements
 
