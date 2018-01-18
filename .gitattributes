@@ -21,4 +21,5 @@
 /phpcs.yml          export-ignore
 /phpunit.xml.dist   export-ignore
 /infection.local.json export-ignore
+/.travis            export-ignore
 

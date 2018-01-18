@@ -82,6 +82,6 @@
         "zendframework/zend-diactoros": "PSR-7 message interfaces implementation"
     },
     "archive": {
-        "exclude": ["infection.local.json", ".sami.php", "phpstan.neon", "tests", "docs", ".travis", ".travis.yml", ".codeclimate.yml", ".coveralls.yml", ".scrutinizer.yml", ".php_cs", ".gitignore", "phpcs.xml"]
+        "exclude": [".travis", "infection.local.json", ".sami.php", "phpstan.neon", "tests", "docs", ".travis", ".travis.yml", ".codeclimate.yml", ".coveralls.yml", ".scrutinizer.yml", ".php_cs", ".gitignore", "phpcs.xml"]
     }
 }
