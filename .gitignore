@@ -24,4 +24,5 @@ composer.lock
 .travis/*.war
 .travis/*.log
 .travis/*.pid
+infection-log.txt
 

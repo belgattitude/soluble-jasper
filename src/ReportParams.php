@@ -54,7 +54,7 @@ class ReportParams implements \ArrayAccess, \IteratorAggregate
         }
     }
 
-    public function withMergedParams(ReportParams $params): ReportParams
+    public function withMergedParams(self $params): self
     {
         return new self(array_merge($this->toArray(), $params->toArray()));
     }

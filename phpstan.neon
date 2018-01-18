@@ -1,15 +1,14 @@
 includes:
-    - vendor/thecodingmachine/phpstan-strict-rules/phpstan-strict-rules.neon
+	- vendor/phpstan/phpstan-strict-rules/rules.neon
+	- vendor/phpstan/phpstan-phpunit/extension.neon
+	- vendor/phpstan/phpstan-phpunit/rules.neon
 parameters:
 	fileExtensions:
 		- php
 		- dist
 	reportUnmatchedIgnoredErrors: true
 	ignoreErrors:
+		# Thoses errors are 'normal' as the bridge proxies java objects/methods (runtime)
 		- '#Call to an undefined method Soluble\\Japha\\Interfaces\\JavaClass#'
 		- '#Call to an undefined method Soluble\\Japha\\Interfaces\\JavaObject#'
 		- '#Access to an undefined property Soluble\\Japha\\Interfaces\\JavaClass#'
-		# Errors ignored from the codingmachine phpstan-strict-rules extension
-		- '#In method "Soluble\\Jasper\\DataSource\\Util\\JdbcDsnFactory\:\:createDsnFromParams", parameter \$params type is "array#'
-		- '#In method "JasperTestsFactories\:\:getDatabaseConfig", return type is "array"#'
-		- '#Internal error: Could not find item at#'

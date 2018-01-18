@@ -44,6 +44,7 @@ before_script:
 script:
   - ./vendor/bin/phpunit -v -c .travis/phpunit.travis.xml --coverage-clover=coverage.xml
   - if [[ $CHECK == true ]]; then composer check; fi
+  - if [[ $CHECK == true ]]; then ./vendor/bin/infection --test-framework=phpunit --min-msi=80; fi
 
 after_script:
   - if [[ $SEND_COVERAGE == true ]]; then wget https://scrutinizer-ci.com/ocular.phar; fi
