@@ -12,7 +12,7 @@ composer.lock
 /nbproject
 # For PHPUnit
 /build
-/phpunit*.xml
+/phpunit.xml
 # For Tests
 /tests/output/*
 !/tests/output/.gitkeep

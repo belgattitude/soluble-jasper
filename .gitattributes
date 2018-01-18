@@ -20,5 +20,5 @@
 /mkdocs.yml         export-ignore
 /phpcs.yml          export-ignore
 /phpunit.xml.dist   export-ignore
-/infection.json.dist export-ignore
+/infection.local.json export-ignore
 

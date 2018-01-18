@@ -69,7 +69,7 @@
             "@cs-fix"
         ],
         "test": "vendor/bin/phpunit",
-        "test:mutation": "vendor/bin/infection --test-framework=phpunit --verbose --min-msi=85 --min-covered-msi=90 --threads=4",
+        "test:mutation": "vendor/bin/infection --configuration=infection.local.json --test-framework=phpunit --verbose --min-msi=85 --min-covered-msi=90 --threads=4",
         "cs-check": "vendor/bin/php-cs-fixer --diff --dry-run -v fix",
         "cs-fix": "vendor/bin/php-cs-fixer -v fix",
         "phpstan": "vendor/bin/phpstan analyse -l max -c phpstan.neon src tests",
@@ -82,6 +82,6 @@
         "zendframework/zend-diactoros": "PSR-7 message interfaces implementation"
     },
     "archive": {
-        "exclude": ["infection.json.dist", ".sami.php", "phpstan.neon", "tests", "docs", ".travis", ".travis.yml", ".codeclimate.yml", ".coveralls.yml", ".scrutinizer.yml", ".php_cs", ".gitignore", "phpcs.xml"]
+        "exclude": ["infection.local.json", ".sami.php", "phpstan.neon", "tests", "docs", ".travis", ".travis.yml", ".codeclimate.yml", ".coveralls.yml", ".scrutinizer.yml", ".php_cs", ".gitignore", "phpcs.xml"]
     }
 }
