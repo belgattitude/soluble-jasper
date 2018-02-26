@@ -7,7 +7,7 @@ PROJECT_DIR="${SCRIPT_DIR}/.."
 
 
 # Webapp runner properties
-WEBAPP_RUNNER_VERSION="8.5.20.1";
+WEBAPP_RUNNER_VERSION="8.5.28.0";
 WEBAPP_RUNNER_URL="http://central.maven.org/maven2/com/github/jsimone/webapp-runner/${WEBAPP_RUNNER_VERSION}/webapp-runner-${WEBAPP_RUNNER_VERSION}.jar"
 WEBAPP_RUNNER_JAR="${SCRIPT_DIR}/downloads/webapp-runner.jar"
 WEBAPP_RUNNER_PORT=8083
