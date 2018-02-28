@@ -33,10 +33,7 @@
         <!--
         PHPJavaBridge servlet url
         -->
-        <server name="JAVABRIDGE_URL" value="http://admin:lemmings@127.0.0.1:8080/JasperReports/servlet.phpjavabridge" />
-        <!--
-        <server name="JAVABRIDGE_URL" value="http://127.0.0.1:8083/servlet.phpjavabridge" />
-        -->
+        <server name="JAVABRIDGE_URL" value="http://127.0.0.1:8888/jasper-bridge/servlet.phpjavabridge" />
 
         <server name="ENABLE_MYSQL_JDBC_TESTS" value="true" />
 
