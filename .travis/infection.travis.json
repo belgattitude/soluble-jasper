@@ -11,7 +11,7 @@
     "text": "infection-log.txt"
   },
   "phpUnit": {
-    "configDir": ".travis",
-    "customPath": "./vendor/bin/phpunit"
+    "configDir": ".",
+    "customPath": "../vendor/bin/phpunit"
   }
 }
