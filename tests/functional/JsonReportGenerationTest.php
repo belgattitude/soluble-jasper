@@ -95,7 +95,7 @@ class JsonReportGenerationTest extends TestCase
             'http://%s:%s/%s',
             EXPRESSIVE_SERVER_HOST,
             EXPRESSIVE_SERVER_PORT,
-            'data/northwind-json'
+            'data/northwind.json'
         );
 
         return [

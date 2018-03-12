@@ -87,7 +87,7 @@ class XmlReportGenerationTest extends TestCase
             'http://%s:%s/%s',
             EXPRESSIVE_SERVER_HOST,
             EXPRESSIVE_SERVER_PORT,
-            'data/northwind-xml'
+            'data/northwind.xml'
         );
 
         return [
