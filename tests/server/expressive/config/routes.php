@@ -15,7 +15,6 @@ use Zend\Expressive\MiddlewareFactory;
 
 return function (Application $app, MiddlewareFactory $factory, ContainerInterface $container): void {
     // Test for ping action
-
     $app->get('/', new class() implements RequestHandlerInterface {
         public function handle(ServerRequestInterface $request): ResponseInterface
         {
@@ -27,6 +26,7 @@ return function (Application $app, MiddlewareFactory $factory, ContainerInterfac
     $app->get('/data/northwind.{format:json|xml}', new class() implements RequestHandlerInterface {
         public function handle(ServerRequestInterface $request): ResponseInterface
         {
+            // hardcoded for smoke tests is okay
             $dataPath = realpath(dirname(dirname(getcwd())) . '/data');
             switch ($request->getAttribute('format')) {
                 case 'xml':
