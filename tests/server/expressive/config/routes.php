@@ -6,9 +6,9 @@ use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
+use Zend\Diactoros\Response;
 use Zend\Diactoros\Response\JsonResponse;
 use Zend\Diactoros\Response\TextResponse;
-use Zend\Diactoros\Response\XmlResponse;
 use Zend\Diactoros\Stream;
 use Zend\Expressive\Application;
 use Zend\Expressive\MiddlewareFactory;
@@ -30,13 +30,15 @@ return function (Application $app, MiddlewareFactory $factory, ContainerInterfac
             $dataPath = realpath(dirname(dirname(getcwd())) . '/data');
             switch ($request->getAttribute('format')) {
                 case 'xml':
-                    $response = (new XmlResponse(''))
+                    $response = (new Response())
                         ->withBody(new Stream("$dataPath/northwind.xml"))
+                        ->withHeader('content-type', 'application/xml')
                         ->withStatus(200);
                     break;
                 case 'json':
-                    $response = (new JsonResponse([]))
+                    $response = (new Response())
                         ->withBody(new Stream("$dataPath/northwind.json"))
+                        ->withHeader('content-type', 'application/json')
                         ->withStatus(200);
                     break;
                 default:
