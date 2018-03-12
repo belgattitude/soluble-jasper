@@ -13,7 +13,6 @@ $cacheConfig = [
 ];
 
 $aggregator = new ConfigAggregator([
-
     \Zend\HttpHandlerRunner\ConfigProvider::class,
     \Zend\Expressive\Twig\ConfigProvider::class,
     \Zend\Expressive\Router\FastRouteRouter\ConfigProvider::class,
@@ -23,7 +22,6 @@ $aggregator = new ConfigAggregator([
     \Zend\Expressive\Helper\ConfigProvider::class,
     \Zend\Expressive\ConfigProvider::class,
     \Zend\Expressive\Router\ConfigProvider::class,
-
 
     // Smoke-tests server
     \App\ConfigProvider::class,
