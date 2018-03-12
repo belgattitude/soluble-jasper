@@ -26,7 +26,9 @@
         "zendframework/zend-diactoros": "^1.6"
     },
     "require-dev" : {
+        "fig/http-message-util": "^1.1.2",
         "friendsofphp/php-cs-fixer": "^2.10.0",
+        "guzzlehttp/guzzle": "^6.2.3",
         "infection/infection": "^0.8.0",
         "mikey179/vfsStream": "^1.6",
         "monolog/monolog": "^1.23.0",
@@ -52,7 +54,8 @@
             "JasperTest\\": [
                 "tests/unit",
                 "tests/functional",
-                "tests/util"
+                "tests/util",
+                "tests/smoke"
             ]
         },
         "files": ["tests/JasperTestsFactories.php"]
