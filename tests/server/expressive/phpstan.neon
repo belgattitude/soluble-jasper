@@ -1,0 +1,10 @@
+includes:
+	- vendor/phpstan/phpstan-strict-rules/rules.neon
+parameters:
+	fileExtensions:
+		- php
+		- dist
+	reportUnmatchedIgnoredErrors: true
+	ignoreErrors:
+		#- '#Class Zend\\Expressive\\Middleware\\RouteMiddleware not found#'
+		#- '#Class Zend\\Expressive\\Middleware\\DispatchMiddleware not found#'

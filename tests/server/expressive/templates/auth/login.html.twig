@@ -1,0 +1,38 @@
+{% extends '@layout/default.html.twig' %}
+
+{% block title %}Login page{% endblock %}
+
+{% block content %}
+
+    <div class="container">
+        <form method="POST" action="/auth">
+            <div class="form-group row">
+                <label for="inputEmail3" class="col-sm-2 col-form-label">Login / email</label>
+                <div class="col-sm-10">
+                    <input type="login" name="login" class="form-control" id="inputEmail3" placeholder="Email" value="demo">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
+                <div class="col-sm-10">
+                    <input type="password" name="password" class="form-control" id="inputPassword3" placeholder="Password" value="demo">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2"></label>
+                <div class="col-sm-10">
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" name="remember_me" type="checkbox"> Remember me
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="offset-sm-2 col-sm-10">
+                    <button type="submit" class="btn btn-primary">Sign in</button>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}
