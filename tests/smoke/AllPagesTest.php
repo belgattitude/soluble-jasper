@@ -21,7 +21,7 @@ class AllPagesTest extends TestCase
     }
 
     /**
-     * @group        functional
+     * @group        smoke
      * @dataProvider urlProvider
      */
     public function testAllRoutes(string $method, string $url, string $status_code): void

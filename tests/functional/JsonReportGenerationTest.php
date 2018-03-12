@@ -35,12 +35,14 @@ class JsonReportGenerationTest extends TestCase
         $this->ba = \JasperTestsFactories::getJavaBridgeAdapter();
     }
 
-    public function testJsonReport(): void
+    /**
+     * @dataProvider jsonSourceProvider
+     */
+    public function testJsonReport(string $jsonSource): void
     {
         $reportFile = \JasperTestsFactories::getReportBaseDir() . '/10_report_json_northwind.jrxml';
-        $jsonFile   = \JasperTestsFactories::getDataBaseDir() . '/northwind.json';
 
-        $jsonDataSource = new JsonDataSource($jsonFile);
+        $jsonDataSource = new JsonDataSource($jsonSource);
         $jsonDataSource->setOptions([
             JsonDataSource::PARAM_JSON_DATE_PATTERN   => 'yyyy-MM-dd',
             JsonDataSource::PARAM_JSON_NUMBER_PATTERN => '#,##0.##',
@@ -86,5 +88,21 @@ class JsonReportGenerationTest extends TestCase
         self::assertContains('Customer Order List', $text);
         self::assertContains('PHPUNIT', $text);
         self::assertContains('Alfreds Futterkiste', $text);
+    }
+
+    public function jsonSourceProvider(): array {
+
+        $jsonFileSource   = \JasperTestsFactories::getDataBaseDir() . '/northwind.json';
+        $jsonUrlSource   = sprintf(
+            'http://%s:%s/%s',
+            EXPRESSIVE_SERVER_HOST,
+            EXPRESSIVE_SERVER_PORT,
+            'data/northwind-json'
+        );
+
+        return [
+            [$jsonFileSource], [$jsonUrlSource]
+        ];
+
     }
 }
