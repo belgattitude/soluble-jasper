@@ -59,7 +59,7 @@ class JsonReportGenerationTest extends TestCase
 
         $report = new Report($reportFile, $reportParams, $jsonDataSource);
 
-        $output_pdf = \JasperTestsFactories::getOutputDir() . '/test_json.pdf';
+        $output_pdf = \JasperTestsFactories::getOutputDir() . '/' . basename($reportFile, '.jrxml') . '.pdf';
         if (file_exists($output_pdf)) {
             unlink($output_pdf);
         }
@@ -72,8 +72,6 @@ class JsonReportGenerationTest extends TestCase
 */
 
         $exportManager = $reportRunner->getExportManager($report);
-
-        $output_pdf = \JasperTestsFactories::getOutputDir() . '/test_json.pdf';
 
         try {
             $exportManager->savePdf($output_pdf);

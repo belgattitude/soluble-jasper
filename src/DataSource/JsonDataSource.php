@@ -51,8 +51,8 @@ class JsonDataSource implements JRDataSourceFromReportParamsInterface, ReportPar
         string $jsonSource,
                                 string $datePattern = self::DEFAULT_DATE_PATTERN,
                                 string $numberPattern = self::DEFAULT_NUMBER_PATTERN,
-                                string $timezoneId = self::PARAM_JSON_TIMEZONE_ID,
-                                string $localeCode = self::PARAM_JSON_LOCALE_CODE
+                                string $timezoneId = self::DEFAULT_TIMEZONE_ID,
+                                string $localeCode = self::DEFAULT_LOCALE_CODE
     ) {
         $this->jsonSource = $jsonSource;
         $this->setOptions([
