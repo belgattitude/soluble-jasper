@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="NorthwindOrdersReport" pageWidth="595" pageHeight="842" columnWidth="515" leftMargin="40" rightMargin="40" topMargin="50" bottomMargin="50" whenResourceMissingType="Error" uuid="bbe115b5-a5a0-4b39-9b73-7092dc59ab6d">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SolubleJasperNorthwindXml"/>
+	<style name="Sans_Normal" isDefault="true" fontName="DejaVu Sans" fontSize="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+	<style name="Sans_Normal_8" style="Sans_Normal" fontSize="8"/>
+	<style name="Sans_Bold" fontName="DejaVu Sans" fontSize="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+	<style name="Sans_Bold_8" style="Sans_Bold" fontSize="8"/>
+	<parameter name="LOGO_FILE" class="java.lang.String">
+		<parameterDescription><![CDATA[Report logo header]]></parameterDescription>
+		<defaultValueExpression><![CDATA["/web/www/soluble-jasper/tests/reports/assets/wave.png"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="REPORT_TITLE" class="java.lang.String">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA["ERROR"]]></defaultValueExpression>
+	</parameter>
+	<queryString language="XPath">
+		<![CDATA[/Northwind/Customers]]>
+	</queryString>
+	<field name="CustomerID" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="CustomerID"/>
+		<fieldDescription><![CDATA[CustomerID]]></fieldDescription>
+	</field>
+	<field name="CompanyName" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="CompanyName"/>
+		<fieldDescription><![CDATA[CompanyName]]></fieldDescription>
+	</field>
+	<field name="ContactName" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="ContactName"/>
+		<fieldDescription><![CDATA[ContactName]]></fieldDescription>
+	</field>
+	<field name="ContactTitle" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="ContactTitle"/>
+		<fieldDescription><![CDATA[ContactTitle]]></fieldDescription>
+	</field>
+	<field name="Address" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="Address"/>
+		<fieldDescription><![CDATA[Address]]></fieldDescription>
+	</field>
+	<field name="City" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="City"/>
+		<fieldDescription><![CDATA[City]]></fieldDescription>
+	</field>
+	<field name="PostalCode_1" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="PostalCode"/>
+		<fieldDescription><![CDATA[PostalCode]]></fieldDescription>
+	</field>
+	<field name="Country" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="Country"/>
+		<fieldDescription><![CDATA[Country]]></fieldDescription>
+	</field>
+	<field name="Phone" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="Phone"/>
+		<fieldDescription><![CDATA[Phone]]></fieldDescription>
+	</field>
+	<field name="Fax" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="Fax"/>
+		<fieldDescription><![CDATA[Fax]]></fieldDescription>
+	</field>
+	<field name="Region" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="Region"/>
+		<fieldDescription><![CDATA[Region]]></fieldDescription>
+	</field>
+	<group name="CustomerIdGroup" minHeightToStartNewPage="60">
+		<groupExpression><![CDATA[$F{CustomerID}]]></groupExpression>
+		<groupHeader>
+			<band height="21">
+				<line>
+					<reportElement x="0" y="20" width="515" height="1" isPrintWhenDetailOverflows="true" uuid="6d76c22c-329f-4e77-a886-8580d3cb6bc1"/>
+				</line>
+			</band>
+			<band height="14">
+				<frame>
+					<reportElement mode="Opaque" x="0" y="2" width="356" height="10" forecolor="#CCFFFF" backcolor="#CCFFFF" uuid="e9af134f-31eb-48be-bd9b-292188f2554f"/>
+					<staticText>
+						<reportElement style="Sans_Bold_8" mode="Opaque" x="0" y="0" width="48" height="10" backcolor="#CCFFFF" uuid="62e5e770-7b05-4ecd-a254-ab0c7f643a37"/>
+						<textElement textAlignment="Right"/>
+						<text><![CDATA[ID]]></text>
+					</staticText>
+				</frame>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="14">
+				<frame>
+					<reportElement mode="Opaque" x="0" y="2" width="356" height="10" forecolor="#33CCCC" backcolor="#33CCCC" uuid="084cfbb4-f390-4302-8bf5-2e65b34829b8"/>
+				</frame>
+			</band>
+		</groupFooter>
+	</group>
+	<title>
+		<band height="68">
+			<line>
+				<reportElement x="0" y="0" width="515" height="1" uuid="fc148b4e-50df-4a12-aa14-8505a4cfa6e1"/>
+			</line>
+			<staticText>
+				<reportElement style="Sans_Normal" x="0" y="10" width="515" height="30" uuid="5bf7651c-cd6b-4eaf-b65a-1413d60faab0"/>
+				<textElement textAlignment="Center">
+					<font size="22"/>
+				</textElement>
+				<text><![CDATA[Customer Report From XML]]></text>
+			</staticText>
+			<image>
+				<reportElement x="12" y="14" width="50" height="50" uuid="74234558-7510-4f2f-a992-3a00c1264c95"/>
+				<imageExpression><![CDATA[$P{LOGO_FILE}]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="142" y="38" width="100" height="30" uuid="ec7202d2-a3e7-4117-8b35-f5c606f4e728"/>
+				<textFieldExpression><![CDATA["Hello" + $P{REPORT_TITLE}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="21">
+			<staticText>
+				<reportElement style="Sans_Bold" mode="Opaque" x="0" y="5" width="515" height="15" forecolor="#FFFFFF" backcolor="#333333" uuid="da0f1cad-f552-424b-bf19-b41cabbfa4ac"/>
+				<text><![CDATA[Customers]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="30">
+			<textField>
+				<reportElement x="0" y="0" width="100" height="30" uuid="38090f80-4dac-4abb-ab25-6c6ee738fac8"/>
+				<textFieldExpression><![CDATA[$F{ContactName}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="40">
+			<line>
+				<reportElement x="0" y="10" width="515" height="1" uuid="1371178a-a590-4616-affe-a4e1a24bcc84"/>
+			</line>
+			<textField>
+				<reportElement x="200" y="20" width="80" height="15" uuid="3eb302d8-0855-4f82-a666-3c9628dce372"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page " + String.valueOf($V{PAGE_NUMBER}) + " of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="280" y="20" width="75" height="15" uuid="86f46fca-dbcb-4a60-b2f7-f8da6a4224f7"/>
+				<textFieldExpression><![CDATA[" " + String.valueOf($V{PAGE_NUMBER})]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>
