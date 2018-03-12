@@ -19,7 +19,7 @@ before_script:
   # -------------------------------------------------------------------------
   # Step 1: Regular composer install
   - composer install --no-interaction --ignore-platform-reqs
-  - composer install-expressive-testapp
+  - composer install -d ./tests/server/expressive --ignore-platform-reqs
 
   #
   # -------------------------------------------------------------------------
