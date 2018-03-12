@@ -20,10 +20,10 @@ trait SmokeContainerTrait
 
     public function getContainer(): ContainerInterface
     {
-        $config = require __DIR__ . '/../server/expressive/config/autoload/soluble-jasper.global.php';
+        $config    = require __DIR__ . '/../server/expressive/config/autoload/soluble-jasper.global.php';
         $container = new ServiceManager();
         $container->setService('config', $config);
+
         return $container;
     }
-
 }

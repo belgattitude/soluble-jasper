@@ -23,7 +23,6 @@ $aggregator = new ConfigAggregator([
     \Zend\Expressive\ConfigProvider::class,
     \Zend\Expressive\Router\ConfigProvider::class,
 
-
     // Smoke-tests server
     \App\ConfigProvider::class,
 

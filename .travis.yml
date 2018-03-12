@@ -18,8 +18,8 @@ matrix:
 before_script:
   # -------------------------------------------------------------------------
   # Step 1: Regular composer install
-  - composer install --no-interaction
-  - composer install-expressive-testapp --no-interaction
+  - composer install --no-interaction --ignore-platform-reqs
+  - composer install-expressive-testapp --no-interaction --ignore-platform-reqs
 
   #
   # -------------------------------------------------------------------------

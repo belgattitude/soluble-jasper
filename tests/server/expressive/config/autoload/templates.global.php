@@ -1,5 +1,6 @@
 <?php
 
+declare(strict_types=1);
 use Zend\Expressive\Template\TemplateRendererInterface;
 use Zend\Expressive\Twig\TwigEnvironmentFactory;
 use Zend\Expressive\Twig\TwigRendererFactory;

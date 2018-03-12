@@ -1,8 +1,6 @@
 <?php
 
-use Soluble\Wallit\Token\Jwt\SignatureAlgos;
-use Soluble\Wallit\Token\Jwt\JwtClaims;
-use Soluble\Wallit\Token\Provider as TokenProvider;
+declare(strict_types=1);
 
 return [
     'soluble-jasper' => [

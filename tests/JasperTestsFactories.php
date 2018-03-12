@@ -81,7 +81,6 @@ class JasperTestsFactories
 
     public static function isJdbcTestsEnabled(): bool
     {
-
         return isset($_SERVER['ENABLE_MYSQL_JDBC_TESTS']) &&
             $_SERVER['ENABLE_MYSQL_JDBC_TESTS'] === true;
     }
