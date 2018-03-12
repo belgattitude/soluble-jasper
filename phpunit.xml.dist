@@ -3,7 +3,7 @@
          xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
          backupGlobals="false"
          backupStaticAttributes="false"
-         bootstrap="vendor/autoload.php"
+         bootstrap="tests/bootstrap.php"
          colors="true"
          verbose="true"
          beStrictAboutOutputDuringTests="true"
@@ -20,6 +20,10 @@
         <testsuite name="functional">
             <directory>./tests/functional</directory>
         </testsuite>
+        <testsuite name="smoke">
+            <directory>./tests/smoke</directory>
+        </testsuite>
+
     </testsuites>
 
     <filter>
@@ -51,6 +55,11 @@
         <server name="MYSQL_USERNAME" value="root" />
         <server name="MYSQL_PASSWORD" value="" />
         <server name="MYSQL_DATABASE" value="phpunit_soluble_test_db" />
+
+
+        <const name="EXPRESSIVE_SERVER_HOST" value="localhost" />
+        <const name="EXPRESSIVE_SERVER_PORT" value="1353" />
+        <const name="EXPRESSIVE_SERVER_PATH" value="public" />
 
     </php>
 
