@@ -15,11 +15,14 @@ namespace JasperTest\Functional;
 
 use JasperTest\Util\PDFUtils;
 use PHPUnit\Framework\TestCase;
+use Psr\Http\Message\ResponseInterface;
 use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
 use Soluble\Jasper\Exporter\PDFExporter;
 use Soluble\Jasper\Report;
 use Soluble\Jasper\ReportParams;
 use Soluble\Jasper\ReportRunnerFactory;
+use Zend\Diactoros\Response;
+use Zend\Diactoros\Response\JsonResponse;
 
 class Psr7PDFExportTest extends TestCase
 {
@@ -33,7 +36,19 @@ class Psr7PDFExportTest extends TestCase
         $this->ba = \JasperTestsFactories::getJavaBridgeAdapter();
     }
 
-    public function testJRPdfExporterSimple(): void
+    public function psr7Responses(): array
+    {
+        return [
+            [null, null],
+            [(new Response())->withHeader('cool', 'hello'), ['cool' => 'hello']],
+            [(new JsonResponse([]))->withHeader('cool', 'hello'), ['cool' => 'hello']]
+        ];
+    }
+
+    /**
+     * @dataProvider psr7Responses
+     */
+    public function testPdfExporterPsr7(ResponseInterface $initialResponse=null, array $expectedHeaders=null): void
     {
         $reportFile = \JasperTestsFactories::getReportBaseDir() . '/01_report_default.jrxml';
 
@@ -49,7 +64,15 @@ class Psr7PDFExportTest extends TestCase
 
         $pdfExporter = new PDFExporter($report, $reportRunner);
 
-        $response = $pdfExporter->getPsr7Response();
+        $pdfConfig = [];
+        $response  = $pdfExporter->getPsr7Response($pdfConfig, $initialResponse);
+
+        if ($expectedHeaders !== null) {
+            foreach ($expectedHeaders as $name => $value) {
+                self::assertTrue($response->hasHeader($name));
+                self::assertSame($value, $response->getHeader($name)[0]);
+            }
+        }
 
         self::assertSame('application/pdf', $response->getHeader('content-type')['0']);
         $body = $response->getBody()->getContents();

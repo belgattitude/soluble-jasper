@@ -72,12 +72,13 @@ class PDFExporter
     /**
      * Return a new PSR-7 Response object filled with the PDF content.
      *
-     * @param string[]|null $pdfConfig
+     * @param string[]|null     $pdfConfig
+     * @param ResponseInterface $response  initial response
      *
      * @throws IOException
      * @throws IOPermissionException
      */
-    public function getPsr7Response(array $pdfConfig = null): ResponseInterface
+    public function getPsr7Response(array $pdfConfig = null, ResponseInterface $response=null): ResponseInterface
     {
         $tmpFile = $this->createTempFile();
 
@@ -90,7 +91,10 @@ class PDFExporter
             throw $e;
         }
 
-        $response = new Response();
+        if ($response === null) {
+            $response = new Response();
+        }
+
         $response = $response->withBody(new Stream($tmpFile));
         $response = $response->withHeader('Content-type', 'application/pdf');
 
