@@ -7,6 +7,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Zend\Diactoros\Response\JsonResponse;
+use Zend\Diactoros\Response\TextResponse;
 use Zend\Diactoros\Response\XmlResponse;
 use Zend\Diactoros\Stream;
 use Zend\Expressive\Application;
@@ -22,21 +23,27 @@ return function (Application $app, MiddlewareFactory $factory, ContainerInterfac
         }
     });
 
-    $app->get('/data/northwind-json', new class() implements RequestHandlerInterface {
+    // For smoke tests
+    $app->get('/data/northwind.{format:json|xml}', new class() implements RequestHandlerInterface {
         public function handle(ServerRequestInterface $request): ResponseInterface
         {
-            $file = realpath(dirname(dirname(getcwd())) . '/data') . '/northwind.json';
+            $dataPath = realpath(dirname(dirname(getcwd())) . '/data');
+            switch ($request->getAttribute('format')) {
+                case 'xml':
+                    $response = (new XmlResponse(''))
+                        ->withBody(new Stream("$dataPath/northwind.xml"))
+                        ->withStatus(200);
+                    break;
+                case 'json':
+                    $response = (new JsonResponse([]))
+                        ->withBody(new Stream("$dataPath/northwind.json"))
+                        ->withStatus(200);
+                    break;
+                default:
+                    $response = (new TextResponse('Error'))->withStatus(500);
+            }
 
-            return (new JsonResponse([]))->withBody(new Stream($file))->withStatus(200);
-        }
-    });
-
-    $app->get('/data/northwind-xml', new class() implements RequestHandlerInterface {
-        public function handle(ServerRequestInterface $request): ResponseInterface
-        {
-            $file = realpath(dirname(dirname(getcwd())) . '/data') . '/northwind.xml';
-
-            return (new XMLResponse(''))->withBody(new Stream($file))->withStatus(200);
+            return $response;
         }
     });
 };

@@ -14,10 +14,11 @@ $testServers = [
 foreach ($testServers as $serverName => $params) {
     // Command that starts the built-in web server
     $command = sprintf(
-        'php -S %s:%d -t %s >/dev/null 2>&1 & echo $!',
+        'php -S %s:%d -t %s %s >/dev/null 2>&1 & echo $!',
         $params['host'],
         $params['port'],
-        $params['path'] . DIRECTORY_SEPARATOR . $params['docroot']
+        $params['path'] . DIRECTORY_SEPARATOR . $params['docroot'],
+        $params['path'] . '/public/index.php'
     );
 
     // Execute the command and store the process ID
