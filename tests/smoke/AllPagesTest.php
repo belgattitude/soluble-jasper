@@ -40,7 +40,9 @@ class AllPagesTest extends TestCase
     public function urlProvider(): array
     {
         return [
-            ['GET', '/',        StatusCode::STATUS_OK]
+            ['GET', '/',                StatusCode::STATUS_OK],
+            ['GET', '/data/northwind-json',  StatusCode::STATUS_OK],
+            ['GET', '/data/northwind-xml',   StatusCode::STATUS_OK]
         ];
     }
 }

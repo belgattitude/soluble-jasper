@@ -18,7 +18,9 @@ matrix:
 before_script:
   # -------------------------------------------------------------------------
   # Step 1: Regular composer install
-  - composer install --ignore-platform-reqs
+  - composer install --no-interaction
+  - composer install-expressive-testapp --no-interaction
+
   #
   # -------------------------------------------------------------------------
   # Step 2: Create and populate the test database
