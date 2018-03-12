@@ -11,6 +11,5 @@
   "phpUnit": {
     "configDir": "./",
     "customPath": "./vendor/bin/hack_for_travis_and_infection_0_8_replace_filename_by_phpunit_when_fixed"
-
   }
 }
