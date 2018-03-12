@@ -90,10 +90,10 @@ class JsonReportGenerationTest extends TestCase
         self::assertContains('Alfreds Futterkiste', $text);
     }
 
-    public function jsonSourceProvider(): array {
-
+    public function jsonSourceProvider(): array
+    {
         $jsonFileSource   = \JasperTestsFactories::getDataBaseDir() . '/northwind.json';
-        $jsonUrlSource   = sprintf(
+        $jsonUrlSource    = sprintf(
             'http://%s:%s/%s',
             EXPRESSIVE_SERVER_HOST,
             EXPRESSIVE_SERVER_PORT,
@@ -103,6 +103,5 @@ class JsonReportGenerationTest extends TestCase
         return [
             [$jsonFileSource], [$jsonUrlSource]
         ];
-
     }
 }
