@@ -60,6 +60,46 @@ class JasperCompileManager implements RemoteJavaObjectProxyInterface
     }
 
     /**
+     * Compile the jrxml report file in a file.
+     *
+     * @throws Exception\InvalidArgumentException     when the source and dest are the same file
+     * @throws Exception\BrokenXMLReportFileException when cannot parse the xml content or invalid xml file
+     * @throws Exception\ReportFileNotFoundException  when the report file cannot be located (both php and java sides)
+     * @throws Exception\ReportCompileException       when there's an error compiling/evaluating the report
+     * @throws Exception\JavaProxiedException         when the compileReport has encountered a Java error
+     * @throws Exception\RuntimeException             when an unexpected problem have been encountered
+     */
+    public function compileReportToFile(string $sourceFile, string $destFile): void
+    {
+        if (!file_exists($sourceFile)) {
+            throw new Exception\ReportFileNotFoundException(
+                sprintf(
+                    'Report file %s does not exists',
+                    $sourceFile
+                )
+            );
+        }
+
+        if (basename($sourceFile) === basename($destFile)) {
+            throw new Exception\InvalidArgumentException(
+                sprintf(
+                    'Source and destination file names must be different (source: %s, dest: %s)',
+                    $sourceFile,
+                    $destFile
+                    )
+            );
+        }
+
+        try {
+            $this->getJavaProxiedObject()->compileReportToFile($sourceFile, $destFile);
+        } catch (JavaException $e) {
+            throw $this->getCompileManagerJavaException($e, $sourceFile);
+        } catch (\Throwable $e) {
+            throw new Exception\RuntimeException($e->getMessage(), $e->getCode(), $e);
+        }
+    }
+
+    /**
      * Return mapped exception from jasper compile manager java:.
      *
      * Exception\BrokenXMLReportFileException        when cannot parse the xml content or invalid xml file
@@ -96,6 +136,11 @@ class JasperCompileManager implements RemoteJavaObjectProxyInterface
                 $exception = new Exception\ReportCompileException($e, sprintf(
                     'Report compilation failed for "%s"',
                     $reportFile
+                ));
+            } elseif (mb_strpos($cause, 'Error saving file:') !== false) {
+                $exception = new Exception\JavaIOPermissionException($e, sprintf(
+                    'Cannot save file, %s',
+                    $cause
                 ));
             }
         }

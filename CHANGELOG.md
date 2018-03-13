@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## Added
 
 - XmlDataSource added
+- Added `JavaCompileManager::compileReportToFile()` method
 
 ## Fixed
 

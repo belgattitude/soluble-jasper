@@ -47,7 +47,7 @@ class ResourceReportGenerationTest extends TestCase
         );
 
         $jasperReport = $reportRunner->compileReport($report);
-        $filled       = $reportRunner->fillReport($jasperReport);
+        //$filled       = $reportRunner->fillReport($jasperReport);
 
         $exportManager = $reportRunner->getExportManager($report);
 

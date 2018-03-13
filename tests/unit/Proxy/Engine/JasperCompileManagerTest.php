@@ -19,11 +19,11 @@ use PHPUnit\Framework\TestCase;
 use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
 use Soluble\Japha\Interfaces\JavaObject;
 use Soluble\Jasper\Exception\BrokenXMLReportFileException;
+use Soluble\Jasper\Exception\InvalidArgumentException;
 use Soluble\Jasper\Exception\ReportCompileException;
 use Soluble\Jasper\Exception\ReportFileNotFoundException;
 use Soluble\Jasper\Exception\ReportFileNotFoundFromJavaException;
 use Soluble\Jasper\Proxy\Engine\JasperCompileManager;
-use Soluble\Jasper\Report;
 
 class JasperCompileManagerTest extends TestCase
 {
@@ -126,6 +126,23 @@ class JasperCompileManagerTest extends TestCase
         );
         $compileManager = new JasperCompileManager($this->bridgeAdapter);
         $compileManager->compileReport($reportFile);
+    }
+
+    public function testCompileToFileWithSameFilesShouldThrowInvalidArgumentException(): void
+    {
+        $srcFile = \JasperTestsFactories::getReportBaseDir() . '/04_report_expression_error.jrxml';
+        $this->expectException(InvalidArgumentException::class);
+        $compileManager = new JasperCompileManager($this->bridgeAdapter);
+        $compileManager->compileReportToFile($srcFile, $srcFile);
+    }
+
+    public function testCompileToFileWithSameFilesShouldThrowReportFileNotFoundException(): void
+    {
+        $srcFile  = \JasperTestsFactories::getReportBaseDir() . '/non-existent-report.jrxml';
+        $destFile = \JasperTestsFactories::getReportBaseDir() . '/non-existent-report-compiled.jasper';
+        $this->expectException(ReportFileNotFoundException::class);
+        $compileManager = new JasperCompileManager($this->bridgeAdapter);
+        $compileManager->compileReportToFile($srcFile, $destFile);
     }
 
     public function testGetJavaProxiedObject(): void
