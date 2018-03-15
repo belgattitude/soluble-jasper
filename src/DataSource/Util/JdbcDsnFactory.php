@@ -46,7 +46,15 @@ class JdbcDsnFactory
             $extras = '&' . implode('&', $tmp);
         }
 
-        return "jdbc:$driver://$host/$db?user=$user&password=$password" . $extras;
+        return sprintf(
+            'jdbc:%s://%s/%s?user=%s&password=%s%s',
+                $driver,
+                $host,
+                $db,
+                $user,
+                $password,
+                $extras
+            );
     }
 
     /**
