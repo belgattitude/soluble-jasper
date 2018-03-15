@@ -66,8 +66,8 @@ class XmlDataSource implements JRDataSourceFromReportParamsInterface, ReportPara
 
     public function setOptions(array $options)
     {
-        $options[self::PARAM_XML_SOURCE]  = $this->xmlSource;
-        $this->options                    = $options;
+        $options[self::PARAM_XML_SOURCE] = $this->xmlSource;
+        $this->options                   = $options;
     }
 
     public function getOptions(): array
