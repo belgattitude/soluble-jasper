@@ -12,7 +12,7 @@ use Zend\Expressive\Router\Middleware\DispatchMiddleware;
 use Zend\Expressive\Router\Middleware\ImplicitHeadMiddleware;
 use Zend\Expressive\Router\Middleware\ImplicitOptionsMiddleware;
 use Zend\Expressive\Router\Middleware\MethodNotAllowedMiddleware;
-use Zend\Expressive\Router\Middleware\PathBasedRoutingMiddleware;
+use Zend\Expressive\Router\Middleware\RouteMiddleware;
 use Zend\Stratigility\Middleware\ErrorHandler;
 
 /*
@@ -40,7 +40,7 @@ return function (Application $app, MiddlewareFactory $factory, ContainerInterfac
     // - $app->pipe('/docs', $apiDocMiddleware);
     // - $app->pipe('/files', $filesMiddleware);
     // Register the routing middleware in the middleware pipeline
-    $app->pipe(PathBasedRoutingMiddleware::class);
+    $app->pipe(RouteMiddleware::class);
     // The following handle routing failures for common conditions:
     // - method not allowed
     // - HEAD request but no routes answer that method
