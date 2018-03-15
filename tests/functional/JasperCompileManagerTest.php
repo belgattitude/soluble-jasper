@@ -64,13 +64,14 @@ class JasperCompileManagerTest extends TestCase
         }
 
         touch($outputFile);
-        chmod($outputFile, 0600);
+        chmod($outputFile, 0400);
 
         try {
             $compileManager->compileReportToFile($reportFile, $outputFile);
             unlink($outputFile);
             self::assertTrue(false, "Compiled report was saved, it's not expected !!!");
         } catch (JavaIOPermissionException $e) {
+            chmod($outputFile, 0600);
             unlink($outputFile);
             self::assertTrue(true, "Compiled file can't be saved as expected");
         }
