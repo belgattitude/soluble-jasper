@@ -152,14 +152,15 @@ Example using `JsonDataSource`:
 use Soluble\Jasper\{ReportRunnerFactory, Report, ReportParams};
 use Soluble\Jasper\DataSource\JsonDataSource;
  
-$jsonDataSource = new JsonDataSource('/path/northwind.json');
+$jsonDataSource = new JsonDataSource('<url_or_path>/northwind.json');
+/*
 $jsonDataSource->setOptions([
     JsonDataSource::PARAM_JSON_DATE_PATTERN   => 'yyyy-MM-dd',
     JsonDataSource::PARAM_JSON_NUMBER_PATTERN => '#,##0.##',
     JsonDataSource::PARAM_JSON_TIMEZONE_ID    => 'Europe/Brussels',
     JsonDataSource::PARAM_JSON_LOCALE_CODE    => 'en_US'
 ]);
-
+*/
 
 $report = new Report(
                 '/path/myreport.jrxml',
@@ -168,6 +169,41 @@ $report = new Report(
                     'TITLE'     => 'My Title'            
                 ]),  
                 $jsonDataSource);
+
+$reportRunner = ReportRunnerFactory::getBridgedReportRunner($this->ba);
+$exportManager = $reportRunner->getExportManager($report);
+
+$exportManager->savePdf('/path/my_output.pdf');
+
+```
+
+### JsonDataSource
+
+Example using `XmkDataSource`:
+
+```php
+<?php declare(strict_types=1);
+
+use Soluble\Jasper\{ReportRunnerFactory, Report, ReportParams};
+use Soluble\Jasper\DataSource\XmlDataSource;
+ 
+$xmlDataSource = new XmlDataSource('<url_or_path>/northwind.xml');
+/*
+$xmlDataSource->setOptions([
+    XmlDataSource::PARAM_XML_DATE_PATTERN   => 'yyyy-MM-dd',
+    XmlDataSource::PARAM_XML_NUMBER_PATTERN => '#,##0.##',
+    XmlDataSource::PARAM_XML_TIMEZONE_ID    => 'Europe/Brussels',
+    XmlDataSource::PARAM_XML_LOCALE_CODE    => 'en_US'
+]);
+*/
+
+$report = new Report(
+                '/path/myreport.jrxml',
+                new ReportParams([
+                    'LOGO_FILE' => '/path/assets/wave.png',
+                    'TITLE'     => 'My Title'            
+                ]),  
+                $xmlDataSource);
 
 $reportRunner = ReportRunnerFactory::getBridgedReportRunner($this->ba);
 $exportManager = $reportRunner->getExportManager($report);
