@@ -325,17 +325,9 @@ Early benchmarks for common operation (run on a laptop for now, will do soon on 
 |----| ----:|----:|----:|-------:|----:| 
 | 00_report_mini.jrxml (text-only) | 38.74ms| 3.76ms| 8.58ms| 3.19ms| 0.79Kb|
 | 01_report_default.jrxml (text+png) | 318.68ms| 1,365.02ms| 2,709.56ms| 274.58ms| 0.75Kb|
-| 12_report_jpg.jrxml (text+jpg) | 35.17ms| 6.75ms| 8.89ms| 3.18ms| 0.75Kb|
 | 06_report_barcodes.jrxml (barcodes) | 123.81ms| 323.71ms| 630.51ms| 67.38ms| 0.75Kb|
 
 - Connection time: 3 ms
-- Total time     : 6860 ms
-
-!!! tip
-    For best performances: when exporting in PDF, *PNG images* in PDF are much slower than equivalent *JPG*.
-    
-     
-     
 
   
 ## Coding standards and interop
