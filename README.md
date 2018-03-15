@@ -12,9 +12,9 @@ Report generation using jasper reports from PHP.
 
 ## Features
 
-- Report generation in PDF (other formats will come soon) 
+- Report generation in PDF (other formats can be supported, open an issue) 
+- Datasources for JDBC, JSON and XML (url or filesystem) 
 - Support for PSR-7 responses (stream)
-- JDBC and JSON datasources (xml will come soon)
 
 ## Requirements
 
