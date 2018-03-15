@@ -68,9 +68,9 @@ class ReportParams implements \ArrayAccess, \IteratorAggregate
         $this->params->offsetSet($param, $value);
     }
 
-    public function getIterator()
+    public function getIterator(): ArrayIterator
     {
-        return new ArrayIterator($this->params);
+        return new ArrayIterator((array) $this->params);
     }
 
     /**
