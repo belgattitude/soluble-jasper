@@ -46,7 +46,7 @@ class JsonDataAdapterImplTest extends TestCase
         self::assertEquals('yyyy-MM-dd', (string) $javaObject->getDatePattern());
         self::assertEquals('en_gb', mb_strtolower((string) $javaObject->getLocale()));
         self::assertEquals(JsonDataAdapterImpl::LANGUAGE_JSONQL, (string) $javaObject->getLanguage());
-        self::assertEquals(false, $javaObject->isUseConnection());
+        self::assertFalse($javaObject->isUseConnection());
 
         $jsonAdapter->setLanguage(JsonDataAdapterImpl::LANGUAGE_JSON);
         self::assertEquals(JsonDataAdapterImpl::LANGUAGE_JSON, (string) $javaObject->getLanguage());
