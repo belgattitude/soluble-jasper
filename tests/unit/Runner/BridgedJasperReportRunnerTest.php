@@ -18,7 +18,6 @@ use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
 use Soluble\Jasper\DataSource\JsonDataSource;
 use Soluble\Jasper\Exception\BrokenJsonDataSourceException;
 use Soluble\Jasper\Exception\BrokenXMLReportFileException;
-use Soluble\Jasper\Proxy\Engine\JasperReport;
 use Soluble\Jasper\Report;
 use Soluble\Jasper\ReportParams;
 use Soluble\Jasper\ReportRunnerFactory;
