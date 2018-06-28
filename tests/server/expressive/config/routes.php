@@ -27,7 +27,7 @@ return function (Application $app, MiddlewareFactory $factory, ContainerInterfac
         public function handle(ServerRequestInterface $request): ResponseInterface
         {
             // hardcoded for smoke tests is okay
-            $dataPath = realpath(dirname(dirname(getcwd())) . '/data');
+            $dataPath = realpath(dirname(getcwd() ?: '', 2) . '/data');
             switch ($request->getAttribute('format')) {
                 case 'xml':
                     $response = (new Response())

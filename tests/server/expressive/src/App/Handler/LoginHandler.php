@@ -34,7 +34,7 @@ class LoginHandler implements RequestHandlerInterface
 
     public function authenticate(ServerRequestInterface $request): ResponseInterface
     {
-        $params = $request->getParsedBody();
+        $params = (array) $request->getParsedBody();
 
         if (empty($params['username'])) {
             return new HtmlResponse($this->template->render('auth::login', [
@@ -49,13 +49,11 @@ class LoginHandler implements RequestHandlerInterface
             ]));
         }
 
-        if (true) {
-            return new HtmlResponse($this->template->render('auth::login', [
-                'username' => $params['username'],
-                'error'    => 'The credentials provided are not valid',
-            ]));
-        }
+        return new HtmlResponse($this->template->render('auth::login', [
+            'username' => $params['username'],
+            'error'    => 'The credentials provided are not valid',
+        ]));
 
-        return new RedirectResponse('/admin');
+        //return new RedirectResponse('/admin');
     }
 }
