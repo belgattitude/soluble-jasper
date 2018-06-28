@@ -11,8 +11,8 @@ declare(strict_types=1);
  * @license   MIT
  */
 
-namespace Soluble\Jasper\Exception;
+namespace Soluble\Jasper\Io\Exception;
 
-class JavaIOPermissionException extends JavaProxiedException implements IOPermissionExceptionInterface
+class InvalidDirectoryException extends InvalidArgumentException
 {
 }

@@ -13,4 +13,6 @@ declare(strict_types=1);
 
 namespace Soluble\Jasper\Exception;
 
-interface IOExceptionInterface extends \Throwable {};
+interface IOExceptionInterface extends \Throwable
+{
+}

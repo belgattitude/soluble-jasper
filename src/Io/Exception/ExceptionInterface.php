@@ -11,8 +11,8 @@ declare(strict_types=1);
  * @license   MIT
  */
 
-namespace Soluble\Jasper\Exception;
+namespace Soluble\Jasper\Io\Exception;
 
-interface IOPermissionExceptionInterface extends IOExceptionInterface
+interface ExceptionInterface extends \Throwable
 {
 }
