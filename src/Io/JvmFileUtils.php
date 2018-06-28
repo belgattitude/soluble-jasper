@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Soluble\Jasper\Io;
 
 use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
+use Soluble\Japha\Bridge\Exception\JavaException;
 
 class JvmFileUtils
 {
