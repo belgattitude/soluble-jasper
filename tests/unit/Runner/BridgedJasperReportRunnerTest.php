@@ -44,9 +44,9 @@ class BridgedJasperReportRunnerTest extends TestCase
 
     public function testCompile(): void
     {
+        self::doesNotPerformAssertions();
         $jasperRunner = new BridgedReportRunner($this->bridgeAdapter);
         $jasperReport = $jasperRunner->compileReport($this->report);
-        self::assertInstanceOf(JasperReport::class, $jasperReport);
     }
 
     public function testCompileThrowsBrokenXmlException(): void
