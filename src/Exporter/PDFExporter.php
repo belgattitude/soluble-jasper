@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Soluble\Jasper\Exporter;
 
 use Psr\Http\Message\ResponseInterface;
+use Soluble\Japha\Bridge\Exception\JavaException;
 use Soluble\Jasper\Exception\IOException;
 use Soluble\Jasper\Exception\IOPermissionException;
 use Soluble\Jasper\Proxy\Engine\Export\JRPdfExporter;
@@ -56,6 +57,8 @@ class PDFExporter
     /**
      * @param string   $outputFile
      * @param string[] $pdfConfig
+     *
+     * @throws JavaException
      */
     public function saveFile(string $outputFile, array $pdfConfig = null): void
     {
@@ -77,6 +80,7 @@ class PDFExporter
      *
      * @throws IOException
      * @throws IOPermissionException
+     * @throws JavaException
      */
     public function getPsr7Response(array $pdfConfig = null, ResponseInterface $response=null): ResponseInterface
     {
@@ -113,12 +117,12 @@ class PDFExporter
 
     /**
      * @param null|string $tmpDir if null use sys_get_temp_dir()
-     * @param int|null    $mode   default to '0666'
+     * @param int         $mode   default to '0666'
      *
      * @throws IOException
      * @throws IOPermissionException
      */
-    protected function createTempFile(?string $tmpDir=null, ?int $mode=0666): string
+    protected function createTempFile(?string $tmpDir=null, int $mode=0666): string
     {
         $tmpDir  = $tmpDir ?? sys_get_temp_dir();
         $tmpFile = tempnam($tmpDir, 'soluble-jasper');
@@ -139,9 +143,6 @@ class PDFExporter
         return $tmpFile;
     }
 
-    /**
-     * @param string[] $config
-     */
     private function getPdfExporterConfiguration(array $config): SimplePdfExporterConfiguration
     {
         $pdfConfig = new SimplePdfExporterConfiguration($this->runner->getBridgeAdapter());
