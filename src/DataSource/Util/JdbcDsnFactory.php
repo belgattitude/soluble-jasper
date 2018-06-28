@@ -38,7 +38,7 @@ class JdbcDsnFactory
                                     array $driverOptions = []
     ): string {
         $extras = '';
-        if (!empty($driverOptions)) {
+        if (count($driverOptions) > 0) {
             $tmp = [];
             foreach ($driverOptions as $key => $value) {
                 $tmp[] = urlencode($key) . '=' . urlencode($value);
