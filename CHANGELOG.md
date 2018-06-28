@@ -7,13 +7,22 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## 0.7.1 (unreleased)
 
-### Imroved
 
+
+### Improved
+
+- Improved permission errors (`IOPermissionException`...) when saving the report fails.
+
+### Changed
+
+- Refactor exception hierachy
 - Minor, use `sprintf()` instead for string concat in `JdbcDsnFactory`.
+- Added automatic installation of expressive smoke test server (composer)
 
 ### Fixed
 
-- Minor, enforce strict return type to `ReportParams::getIterator() : ArrayIterator`. 
+- Minor, enforce strict return type to `ReportParams::getIterator() : ArrayIterator`.
+- JasperFillManager better detects `BrokenJsonException`. 
 
 ## 0.7.0 (2018-03-15)
 
