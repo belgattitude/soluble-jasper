@@ -11,19 +11,18 @@ declare(strict_types=1);
  * @license   MIT
  */
 
-namespace JasperTest\Functional;
+namespace JasperTest\Functional\Recipes;
 
 use JasperTest\Util\PDFUtils;
 use PHPUnit\Framework\TestCase;
 use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
-use Soluble\Jasper\DataSource\JsonDataSource;
+use Soluble\Jasper\DataSource\XmlDataSource;
 use Soluble\Jasper\Exception\JavaProxiedException;
-use Soluble\Jasper\Proxy\Engine\JasperExportManager;
 use Soluble\Jasper\Report;
 use Soluble\Jasper\ReportParams;
 use Soluble\Jasper\ReportRunnerFactory;
 
-class JsonReportGenerationTest extends TestCase
+class XmlReportGenerationTest extends TestCase
 {
     /**
      * @var BridgeAdapter
@@ -36,18 +35,18 @@ class JsonReportGenerationTest extends TestCase
     }
 
     /**
-     * @dataProvider jsonSourceProvider
+     * @dataProvider xmlSourceProvider
      */
-    public function testJsonReport(string $jsonSource): void
+    public function testXmlReport(string $xmlSource): void
     {
-        $reportFile = \JasperTestsFactories::getReportBaseDir() . '/10_report_json_northwind.jrxml';
+        $reportFile = \JasperTestsFactories::getReportBaseDir() . '/13_report_xml_northwind.jrxml';
 
-        $jsonDataSource = new JsonDataSource($jsonSource);
+        $jsonDataSource = new XmlDataSource($xmlSource);
         $jsonDataSource->setOptions([
-            JsonDataSource::PARAM_JSON_DATE_PATTERN   => 'yyyy-MM-dd',
-            JsonDataSource::PARAM_JSON_NUMBER_PATTERN => '#,##0.##',
-            JsonDataSource::PARAM_JSON_TIMEZONE_ID    => 'Europe/Brussels',
-            JsonDataSource::PARAM_JSON_LOCALE_CODE    => 'en_US'
+            XmlDataSource::PARAM_XML_DATE_PATTERN   => 'yyyy-MM-dd',
+            XmlDataSource::PARAM_XML_NUMBER_PATTERN => '#,##0.##',
+            XmlDataSource::PARAM_XML_TIMEZONE_ID    => 'Europe/Brussels',
+            XmlDataSource::PARAM_XML_LOCALE_CODE    => 'en_US'
         ]);
 
         $reportParams = new ReportParams([
@@ -64,13 +63,6 @@ class JsonReportGenerationTest extends TestCase
             unlink($output_pdf);
         }
 
-        /*
-        $jasperReport = $reportRunner->compileReport($report);
-        $jasperPrint = $reportRunner->fillReport($jasperReport);
-        $exportManager = new JasperExportManager($this->ba);
-        $exportManager->exportReportToPdfFile($jasperPrint->getJavaProxiedObject(), $output_pdf);
-*/
-
         $exportManager = $reportRunner->getExportManager($report);
 
         try {
@@ -83,23 +75,23 @@ class JsonReportGenerationTest extends TestCase
         $pdfUtils = new PDFUtils($output_pdf);
         $text     = $pdfUtils->getTextContent();
 
-        self::assertContains('Customer Order List', $text);
+        self::assertContains('Customer Report From XML', $text);
         self::assertContains('PHPUNIT', $text);
-        self::assertContains('Alfreds Futterkiste', $text);
+        self::assertContains('Maria Anders', $text);
     }
 
-    public function jsonSourceProvider(): array
+    public function xmlSourceProvider(): array
     {
-        $jsonFileSource   = \JasperTestsFactories::getDataBaseDir() . '/northwind.json';
-        $jsonUrlSource    = sprintf(
+        $xmlFileSource   = \JasperTestsFactories::getDataBaseDir() . '/northwind.xml';
+        $xmlUrlSource    = sprintf(
             'http://%s:%s/%s',
             EXPRESSIVE_SERVER_HOST,
             EXPRESSIVE_SERVER_PORT,
-            'data/northwind.json'
+            'data/northwind.xml'
         );
 
         return [
-            [$jsonFileSource], [$jsonUrlSource]
+            [$xmlFileSource], [$xmlUrlSource]
         ];
     }
 }

@@ -11,7 +11,7 @@ declare(strict_types=1);
  * @license   MIT
  */
 
-namespace JasperTest\Functional;
+namespace JasperTest\Functional\Recipes;
 
 use PHPUnit\Framework\TestCase;
 use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
