@@ -13,6 +13,4 @@ declare(strict_types=1);
 
 namespace Soluble\Jasper\Exception;
 
-class JavaIOPermissionException extends JavaProxiedException implements IOPermissionExceptionInterface
-{
-}
+interface IOPermissionExceptionInterface extends IOExceptionInterface {};

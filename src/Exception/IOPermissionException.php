@@ -13,6 +13,6 @@ declare(strict_types=1);
 
 namespace Soluble\Jasper\Exception;
 
-class IOPermissionException extends IOException
+class IOPermissionException extends IOException implements IOPermissionExceptionInterface
 {
 }
