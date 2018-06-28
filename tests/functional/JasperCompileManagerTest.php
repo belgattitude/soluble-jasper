@@ -15,7 +15,7 @@ namespace JasperTest\Functional;
 
 use PHPUnit\Framework\TestCase;
 use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
-use Soluble\Jasper\Exception\JavaIOPermissionException;
+use Soluble\Jasper\Exception\JavaSaveProxiedException;
 use Soluble\Jasper\Proxy\Engine\JasperCompileManager;
 
 class JasperCompileManagerTest extends TestCase
@@ -70,7 +70,7 @@ class JasperCompileManagerTest extends TestCase
             $compileManager->compileReportToFile($reportFile, $outputFile);
             unlink($outputFile);
             self::assertTrue(false, "Compiled report was saved, it's not expected !!!");
-        } catch (JavaIOPermissionException $e) {
+        } catch (JavaSaveProxiedException $e) {
             chmod($outputFile, 0600);
             unlink($outputFile);
             self::assertTrue(true, "Compiled file can't be saved as expected");

@@ -138,7 +138,7 @@ class JasperCompileManager implements RemoteJavaObjectProxyInterface
                     $reportFile
                 ));
             } elseif (mb_strpos($cause, 'Error saving file:') !== false) {
-                $exception = new Exception\JavaIOPermissionException($e, sprintf(
+                $exception = new Exception\JavaSaveProxiedException($e, sprintf(
                     'Cannot save file, %s',
                     $cause
                 ));
