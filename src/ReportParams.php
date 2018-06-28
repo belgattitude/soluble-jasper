@@ -75,6 +75,7 @@ class ReportParams implements \ArrayAccess, \IteratorAggregate
 
     /**
      * @param string|int $offset
+     *
      * @throws \Soluble\Jasper\Exception\InvalidArgumentException
      */
     public function offsetExists($offset): bool
@@ -86,7 +87,9 @@ class ReportParams implements \ArrayAccess, \IteratorAggregate
 
     /**
      * @param string|int $offset
+     *
      * @return mixed
+     *
      * @throws \Soluble\Jasper\Exception\InvalidArgumentException
      */
     public function offsetGet($offset)
@@ -98,7 +101,8 @@ class ReportParams implements \ArrayAccess, \IteratorAggregate
 
     /**
      * @param string|int $offset
-     * @param mixed $value
+     * @param mixed      $value
+     *
      * @throws \Soluble\Jasper\Exception\InvalidArgumentException
      */
     public function offsetSet($offset, $value): void
@@ -109,6 +113,7 @@ class ReportParams implements \ArrayAccess, \IteratorAggregate
 
     /**
      * @param string|int $offset
+     *
      * @throws \Soluble\Jasper\Exception\InvalidArgumentException
      */
     public function offsetUnset($offset): void

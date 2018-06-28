@@ -18,7 +18,7 @@ use Soluble\Jasper\DataSource\JsonDataSource;
 
 class JsonDataSourceTest extends TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
     }
 

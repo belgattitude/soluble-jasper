@@ -16,7 +16,6 @@ namespace JasperTest;
 use PHPUnit\Framework\TestCase;
 use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
 use Soluble\Jasper\ReportRunnerFactory;
-use Soluble\Jasper\Runner\BridgedReportRunner;
 
 class ReportRunnerFactoryTest extends TestCase
 {
@@ -30,10 +29,11 @@ class ReportRunnerFactoryTest extends TestCase
         $this->bridgeAdapter = \JasperTestsFactories::getJavaBridgeAdapter();
     }
 
+    /**
+     * @doesNotPerformAssertions
+     */
     public function testGetJasperReportRunner(): void
     {
-        $jasperRunner = ReportRunnerFactory::getBridgedReportRunner($this->bridgeAdapter);
-
-        self::assertInstanceOf(BridgedReportRunner::class, $jasperRunner);
+        ReportRunnerFactory::getBridgedReportRunner($this->bridgeAdapter);
     }
 }

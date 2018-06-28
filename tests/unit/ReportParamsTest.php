@@ -102,35 +102,35 @@ class ReportParamsTest extends TestCase
 
         try {
             $p->offsetSet(1, 'cool');
-            self::assertTrue(false, 'Should reject non-string offsets');
+            self::fail('Should reject non-string offsets');
         } catch (InvalidArgumentException $e) {
             self::assertTrue(true);
         }
 
         try {
             $p->offsetSet('   ', 'cool');
-            self::assertTrue(false, 'Should reject blank string offsets');
+            self::fail('Should reject blank string offsets');
         } catch (InvalidArgumentException $e) {
             self::assertTrue(true);
         }
 
         try {
             $p->offsetUnset(1);
-            self::assertTrue(false, 'Should reject non-string offsets');
+            self::fail('Should reject non-string offsets');
         } catch (InvalidArgumentException $e) {
             self::assertTrue(true);
         }
 
         try {
             $p->offsetGet(1);
-            self::assertTrue(false, 'Should reject non-string offsets');
+            self::fail('Should reject non-string offsets');
         } catch (InvalidArgumentException $e) {
             self::assertTrue(true);
         }
 
         try {
             $p->offsetExists(1);
-            self::assertTrue(false, 'Should reject non-string offsets');
+            self::fail('Should reject non-string offsets');
         } catch (InvalidArgumentException $e) {
             self::assertTrue(true);
         }

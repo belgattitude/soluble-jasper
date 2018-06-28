@@ -17,7 +17,6 @@ use PHPUnit\Framework\TestCase;
 use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
 use Soluble\Japha\Bridge\Exception\JavaException;
 use Soluble\Jasper\Exception\JavaProxiedException;
-use Soluble\Jasper\Exception\RuntimeException;
 use Soluble\Jasper\Report;
 
 class JavaProxiedExceptionTest extends TestCase
@@ -43,17 +42,14 @@ class JavaProxiedExceptionTest extends TestCase
 
         try {
             $this->bridgeAdapter->java('java.math.BigInteger', 'cool');
-            self::assertTrue(false, 'Error, this must throw an exception !');
+            self::fail('Error, this must throw an exception !');
         } catch (JavaException $e) {
             $pe  = new JavaProxiedException($e, 'coucou', 10);
             $msg = $pe->getMessage();
             self::assertContains('coucou', $msg);
             self::assertContains('java.lang.NumberFormatException', $msg);
             self::assertEquals(10, $pe->getCode());
-            self::assertInstanceOf(RuntimeException::class, $pe);
             $je = $pe->getJavaException();
-            self::assertInstanceOf(JavaException::class, $je);
-
             self::assertEquals($pe->getJvmStackTrace(), $je->getStackTrace());
         }
     }

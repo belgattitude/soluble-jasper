@@ -47,7 +47,7 @@ class MarkdownBenchmark
         $ttime = array_sum($times);
         echo number_format($ttime * 1000, 2);
         */
-        echo  "| $name | " . implode('| ', array_map(function ($time) {
+        echo  "| $name | " . implode('| ', array_map(function (float $time) {
             return number_format($time * 1000, 2) . 'ms';
         }, $times)) . '| ' .
             number_format($avg * 1000, 2) . 'ms| ' .
@@ -68,6 +68,6 @@ class MarkdownBenchmark
     {
         $mt = explode(' ', microtime());
 
-        return ((int) $mt[1]) * 1000 + ((int) round($mt[0] * 1000));
+        return ((int) $mt[1]) * 1000 + ((int) round(((int) $mt[0]) * 1000));
     }
 }

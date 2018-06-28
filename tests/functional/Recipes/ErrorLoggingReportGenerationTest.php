@@ -107,8 +107,11 @@ class ErrorLoggingReportGenerationTest extends TestCase
 
         try {
             $reportRunner->fillReport($jasperReport);
-        } catch (\Exception $e) {
-            $logged  = true;
+            self::fail(sprintf(
+                'Logger should log filling error, found: %s',
+                $this->loggerTestHandler->getRecords()[0]['message'] ?? '<nothing in the log>'
+            ));
+        } catch (\Throwable $e) {
             $logMsgs = $this->loggerTestHandler->getRecords() ?? [];
             self::assertCount(1, $logMsgs);
             $logMsg = $logMsgs[0]['message'] ?? '<nothing in the log>';
@@ -116,10 +119,5 @@ class ErrorLoggingReportGenerationTest extends TestCase
             self::assertContains('JasperFillManager', $logMsg);
             self::assertContains(basename($reportFile), $logMsg);
         }
-        self::assertFalse($logged, sprintf(
-            'Logger should log filling error, found: %s',
-            $this->loggerTestHandler->getRecords()[0]['message'] ?? '<nothing in the log>'
-        ));
-
     }
 }

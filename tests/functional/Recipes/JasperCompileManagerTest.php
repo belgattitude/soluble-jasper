@@ -79,7 +79,5 @@ class JasperCompileManagerTest extends TestCase
         } finally {
             self::assertFalse($saved, "Compiled file can't be saved as expected");
         }
-
-
     }
 }

@@ -17,7 +17,6 @@ use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamDirectory;
 use PHPUnit\Framework\TestCase;
 use Soluble\Japha\Bridge\Adapter as BridgeAdapter;
-use Soluble\Japha\Interfaces\JavaObject;
 use Soluble\Jasper\Exception\BrokenXMLReportFileException;
 use Soluble\Jasper\Exception\InvalidArgumentException;
 use Soluble\Jasper\Exception\ReportCompileException;
@@ -49,12 +48,14 @@ class JasperCompileManagerTest extends TestCase
         $this->vfs = vfsStream::setup('root', 444, $directory);
     }
 
+    /**
+     * @doesNotPerformAssertions
+     */
     public function testCompileShouldWork(): void
     {
         $reportFile     = \JasperTestsFactories::getDefaultReportFile();
         $compileManager = new JasperCompileManager($this->bridgeAdapter);
         $jasperReport   = $compileManager->compileReport($reportFile);
-        self::assertInstanceOf(JavaObject::class, $jasperReport);
     }
 
     public function testCompileWithMissingFileShouldThrowReportNotFoundException(): void

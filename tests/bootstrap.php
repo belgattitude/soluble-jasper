@@ -6,10 +6,10 @@ declare(strict_types=1);
 
 $testServers = [
     'expressive' => [
-        'path' 		               => __DIR__ . '/server/expressive',
-        'host' 		               => EXPRESSIVE_SERVER_HOST,
-        'port' 		               => EXPRESSIVE_SERVER_PORT,
-        'docroot' 	               => 'public',
+        'path' 		                  => __DIR__ . '/server/expressive',
+        'host' 		                  => EXPRESSIVE_SERVER_HOST,
+        'port' 		                  => EXPRESSIVE_SERVER_PORT,
+        'docroot' 	                => 'public',
         'auto_composer_install'    => true
     ]
 ];

@@ -157,6 +157,5 @@ class ProgrammaticReportGenerationTest extends TestCase
         dataSource.setColumnNames(columnNames);
          */
         self::markTestIncomplete('CVS tests not yet inmplemented');
-
     }
 }
