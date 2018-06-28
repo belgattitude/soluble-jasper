@@ -15,7 +15,7 @@ class AllPagesTest extends TestCase
     /** @var Client */
     private $client;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->client = $this->getClient();
     }
@@ -30,8 +30,8 @@ class AllPagesTest extends TestCase
             'exceptions' => false
         ]);
 
-        $this->assertEquals($status_code, $response->getStatusCode());
-        $this->assertNotEmpty($response->getBody()->getContents());
+        self::assertEquals($status_code, $response->getStatusCode());
+        self::assertNotEmpty($response->getBody()->getContents());
     }
 
     /**
