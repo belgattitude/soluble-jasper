@@ -13,7 +13,12 @@ declare(strict_types=1);
 
 namespace Soluble\Jasper\Exporter;
 
+use Soluble\Japha\Bridge\Exception\JavaException;
+
 interface ExportManagerInterface
 {
+    /**
+     * @throws JavaException i.e java.io.FileNotFoundException
+     */
     public function savePdf(string $outputFile): void;
 }
