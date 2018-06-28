@@ -6,15 +6,21 @@ declare(strict_types=1);
 
 $testServers = [
     'expressive' => [
-        'path' 		  => __DIR__ . '/server/expressive',
-        'host' 		  => EXPRESSIVE_SERVER_HOST,
-        'port' 		  => EXPRESSIVE_SERVER_PORT,
-        'docroot' 	=> 'public'
+        'path' 		               => __DIR__ . '/server/expressive',
+        'host' 		               => EXPRESSIVE_SERVER_HOST,
+        'port' 		               => EXPRESSIVE_SERVER_PORT,
+        'docroot' 	             => 'public',
+        'auto_composer_install' => true
     ]
 ];
 
 foreach ($testServers as $serverName => $params) {
-    $publicPath = $params['path'] . DIRECTORY_SEPARATOR . $params['docroot'];
+    $serverPath = $params['path'];
+    if ($params['auto_composer_install'] && !is_dir($serverPath . DIRECTORY_SEPARATOR . 'vendor')) {
+        exec('composer install-expressive-testapp');
+    }
+
+    $publicPath = $serverPath . DIRECTORY_SEPARATOR . $params['docroot'];
 
     // Command that starts the built-in web server
     $command = sprintf(
