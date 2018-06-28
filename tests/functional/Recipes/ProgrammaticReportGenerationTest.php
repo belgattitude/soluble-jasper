@@ -156,6 +156,7 @@ class ProgrammaticReportGenerationTest extends TestCase
         //				dataSource.setUseFirstRowAsHeader(true);
         dataSource.setColumnNames(columnNames);
          */
-        self::assertTrue(true);
+        self::markTestIncomplete('CVS tests not yet inmplemented');
+
     }
 }

@@ -66,16 +66,20 @@ class JasperCompileManagerTest extends TestCase
         touch($outputFile);
         chmod($outputFile, 0400);
 
+        $saved = false;
         try {
             $compileManager->compileReportToFile($reportFile, $outputFile);
+            // Must throw exception, this code cannot be reached !!!
+            $saved = true;
             unlink($outputFile);
-            self::assertTrue(false, "Compiled report was saved, it's not expected !!!");
         } catch (JavaSaveProxiedException $e) {
             chmod($outputFile, 0600);
             unlink($outputFile);
-            self::assertTrue(true, "Compiled file can't be saved as expected");
+            $saved = false;
+        } finally {
+            self::assertFalse($saved, "Compiled file can't be saved as expected");
         }
 
-        self::assertTrue(true, "Compiled file can't be saved as expected");
+
     }
 }

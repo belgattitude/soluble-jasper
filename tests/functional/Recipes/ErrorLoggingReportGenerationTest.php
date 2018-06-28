@@ -75,12 +75,10 @@ class ErrorLoggingReportGenerationTest extends TestCase
             self::assertContains('JasperCompileManager', $logMsg);
             self::assertContains(basename($reportFile), $logMsg);
         }
-        if (!$logged) {
-            self::assertFalse(true, sprintf(
-                'Logger should log compilation error, found: %s',
-                $this->loggerTestHandler->getRecords()[0]['message'] ?? '<nothing in the log>'
-            ));
-        }
+        self::assertTrue($logged, sprintf(
+            'Logger should log compilation error, found: %s',
+            $this->loggerTestHandler->getRecords()[0]['message'] ?? '<nothing in the log>'
+        ));
     }
 
     public function testFillLoggingError(): void
@@ -118,11 +116,10 @@ class ErrorLoggingReportGenerationTest extends TestCase
             self::assertContains('JasperFillManager', $logMsg);
             self::assertContains(basename($reportFile), $logMsg);
         }
-        if (!$logged) {
-            self::assertFalse(true, sprintf(
-                'Logger should log filling error, found: %s',
-                $this->loggerTestHandler->getRecords()[0]['message'] ?? '<nothing in the log>'
-            ));
-        }
+        self::assertFalse($logged, sprintf(
+            'Logger should log filling error, found: %s',
+            $this->loggerTestHandler->getRecords()[0]['message'] ?? '<nothing in the log>'
+        ));
+
     }
 }

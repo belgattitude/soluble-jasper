@@ -31,7 +31,7 @@ class JDBCReportGenerationTest extends TestCase
     public function setUp(): void
     {
         if (!\JasperTestsFactories::isJdbcTestsEnabled()) {
-            $this->markTestSkipped(
+            self::markTestSkipped(
                 'Skipping JDBCReportGeneration tests, enable option in phpunit.xml '
             );
         }
