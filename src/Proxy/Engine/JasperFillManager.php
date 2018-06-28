@@ -87,8 +87,8 @@ class JasperFillManager implements RemoteJavaObjectProxyInterface
         $className = $e->getJavaClassName();
         if ($className === 'net.sf.jasperreports.engine.JRException') {
             $cause = $e->getCause();
-            if (mb_stripos($cause, 'JsonParseException') !== false ||
-                preg_match('/Json([A-Z])+Exception/i', $cause)) {
+            $jsonParseMatch = preg_match('/Json([A-Z])+Exception/i', $cause);
+            if ($jsonParseMatch > 0) {
                 $exception = new Exception\BrokenJsonDataSourceException($e, sprintf(
                     'Fill error, json datasource cannot be parsed "%s" in %s',
                     (string) $params[JsonDataSource::PARAM_JSON_SOURCE],
