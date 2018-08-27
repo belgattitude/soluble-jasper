@@ -305,6 +305,13 @@ echo $ba->javaClass('java.lang.System')->getProperty('java.version');
 
 ```
 
+If you encounter permissions problems (i.e. the pdf are created under tomcat8 user), just add your user 
+to the tomcat group:
+
+```shell
+$ sudo usermod -a -G <tomcat group name> <username>
+``` 
+
 ## Benchmarks
 
 Early benchmarks for common operation (run on a laptop for now, will do soon on digitalocean). See `tests/bench/simple_benchmarks.php`.

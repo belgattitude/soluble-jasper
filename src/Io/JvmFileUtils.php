@@ -20,10 +20,9 @@ class JvmFileUtils
     }
 
     /**
-     * @param string $directory
-     *
      * @throws \Soluble\Japha\Bridge\Exception\ClassNotFoundException
      * @throws \Soluble\Japha\Bridge\Exception\JavaException
+     * @throws Exception\InvalidDirectoryException
      */
     public function isDirectoryWritable(string $directory): bool
     {

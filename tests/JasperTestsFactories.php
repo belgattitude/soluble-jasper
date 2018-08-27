@@ -86,7 +86,7 @@ class JasperTestsFactories
     }
 
     /**
-     * @return string[]|array
+     * @return array<string, mixed>
      */
     public static function getDatabaseConfig(): array
     {
