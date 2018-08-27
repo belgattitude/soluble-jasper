@@ -37,6 +37,7 @@ allprojects {
         runtime 'net.sourceforge.barbecue:barbecue:1.5-beta1'
         runtime 'net.sf.barcode4j:barcode4j:2.1'
         runtime 'xalan:xalan:2.7.+'
+        runtime  group: 'com.google.zxing', name: 'core', version: '3.3.3'
         runtime 'org.apache.poi:poi:3.+'
         runtime 'org.apache.poi:poi-ooxml:3.+'
         runtime 'org.apache.xmlgraphics:batik-bridge:1.9.+'
