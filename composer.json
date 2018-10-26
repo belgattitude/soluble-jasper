@@ -23,7 +23,7 @@
         "psr/log": "^1.0",
         "psr/http-message": "^1.0.1",
         "soluble/japha": "^2.5.1",
-        "zendframework/zend-diactoros": "^1.6"
+        "zendframework/zend-diactoros": "^1.6 || ^2.0"
     },
     "require-dev" : {
         "fig/http-message-util": "^1.1.2",
@@ -35,7 +35,7 @@
         "phpstan/phpstan-strict-rules": "^0.10",
         "phpstan/phpstan": "^0.10",
         "phpstan/phpstan-phpunit": "^0.10",
-        "phpunit/phpunit": "^7.3",
+        "phpunit/phpunit": "^7.4",
         "roave/security-advisories": "dev-master",
         "smalot/pdfparser": "^0.13.2",
         "zendframework/zend-servicemanager": "^3.3",
