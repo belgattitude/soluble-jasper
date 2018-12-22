@@ -11,6 +11,7 @@ matrix:
         - CHECK=true
         - INFECTION=true
     - php: 7.2
+    - php: 7.3
     - php: nightly
   allow_failures:
     - php: nightly

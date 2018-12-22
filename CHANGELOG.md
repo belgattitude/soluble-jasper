@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/) 
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## 0.7.x (xxx)
+
+### Added
+
+- Q&A travis php 7.3
+
 ## 0.7.3 (2018-10-26)
 
 ### Added
