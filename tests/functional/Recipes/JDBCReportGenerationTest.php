@@ -48,8 +48,8 @@ class JDBCReportGenerationTest extends TestCase
             $reportFile,
             new ReportParams(),
             new JavaSqlConnection(
-                    \JasperTestsFactories::getJdbcDsn(),
-                    'com.mysql.jdbc.Driver'
+                \JasperTestsFactories::getJdbcDsn(),
+                'com.mysql.jdbc.Driver'
                 )
             );
 
