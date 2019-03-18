@@ -45,10 +45,10 @@ class JDBCReportGenerationTest extends TestCase
         $reportRunner = ReportRunnerFactory::getBridgedReportRunner($this->ba);
 
         $report = new Report(
-                $reportFile,
-                new ReportParams(),
-                new JavaSqlConnection(
-                        \JasperTestsFactories::getJdbcDsn(),
+            $reportFile,
+            new ReportParams(),
+            new JavaSqlConnection(
+                    \JasperTestsFactories::getJdbcDsn(),
                     'com.mysql.jdbc.Driver'
                 )
             );

@@ -74,7 +74,7 @@ class ReportParams implements \ArrayAccess, \IteratorAggregate
     }
 
     /**
-     * @param string|int $offset
+     * @param mixed $offset
      *
      * @throws \Soluble\Jasper\Exception\InvalidArgumentException
      */
@@ -86,7 +86,7 @@ class ReportParams implements \ArrayAccess, \IteratorAggregate
     }
 
     /**
-     * @param string|int $offset
+     * @param mixed $offset
      *
      * @return mixed
      *
@@ -100,8 +100,8 @@ class ReportParams implements \ArrayAccess, \IteratorAggregate
     }
 
     /**
-     * @param string|int $offset
-     * @param mixed      $value
+     * @param mixed $offset
+     * @param mixed $value
      *
      * @throws \Soluble\Jasper\Exception\InvalidArgumentException
      */
@@ -112,7 +112,7 @@ class ReportParams implements \ArrayAccess, \IteratorAggregate
     }
 
     /**
-     * @param string|int $offset
+     * @param mixed $offset
      *
      * @throws \Soluble\Jasper\Exception\InvalidArgumentException
      */

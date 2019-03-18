@@ -64,7 +64,7 @@ class JasperCompileManagerTest extends TestCase
 
         $this->expectException(ReportFileNotFoundException::class);
         $this->expectExceptionMessage(sprintf(
-           'Report file "%s" cannot be found',
+            'Report file "%s" cannot be found',
             $reportFile
         ));
 

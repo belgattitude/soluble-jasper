@@ -146,8 +146,8 @@ class JasperCompileManager implements RemoteJavaObjectProxyInterface
         }
 
         return $exception ?? new Exception\JavaProxiedException(
-                $e,
-                sprintf(
+            $e,
+            sprintf(
                     'Error compiling report "%s"',
                     $reportFile
                 )

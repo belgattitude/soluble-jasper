@@ -81,7 +81,7 @@ class BridgedReportRunner implements ReportRunnerInterface
         } catch (\Throwable $e) {
             $this->logger->error(
                 sprintf(
-                "Compilation of report '%s' failed with '%s' (%s)",
+                    "Compilation of report '%s' failed with '%s' (%s)",
                     basename($report->getReportFile()),
                     (new \ReflectionClass($e))->getShortName(),
                     $e->getMessage()
@@ -104,9 +104,9 @@ class BridgedReportRunner implements ReportRunnerInterface
      * @throws Exception\BrokenJsonDataSourceException
      */
     public function fillReport(
-            JasperReport $jasperReport,
-            ReportParams $reportParams = null,
-            DataSourceInterface $dataSource = null
+        JasperReport $jasperReport,
+        ReportParams $reportParams = null,
+        DataSourceInterface $dataSource = null
     ): JasperPrint {
         try {
             // Step 1: Get the fill manager

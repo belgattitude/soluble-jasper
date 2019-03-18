@@ -30,12 +30,12 @@ class JdbcDsnFactory
      * @return string i.e: "jdbc:[driver]://localhost/[database]?user=[user]&password=[password]&serverTimezone=UTC";
      */
     public static function createDsn(
-                                    string $driver,
-                                    string $db,
-                                    string $host,
-                                    string $user,
-                                    string $password,
-                                    array $driverOptions = []
+        string $driver,
+        string $db,
+        string $host,
+        string $user,
+        string $password,
+        array $driverOptions = []
     ): string {
         $extras = '';
         if (count($driverOptions) > 0) {
@@ -48,12 +48,12 @@ class JdbcDsnFactory
 
         return sprintf(
             'jdbc:%s://%s/%s?user=%s&password=%s%s',
-                $driver,
-                $host,
-                $db,
-                $user,
-                $password,
-                $extras
+            $driver,
+            $host,
+            $db,
+            $user,
+            $password,
+            $extras
             );
     }
 

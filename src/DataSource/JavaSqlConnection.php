@@ -70,8 +70,8 @@ class JavaSqlConnection implements JavaSqlConnectionInterface
             throw new JavaProxiedException(
                 $e,
                 sprintf(
-                'Error getting sql connection: %s',
-                $e->getMessage()
+                    'Error getting sql connection: %s',
+                    $e->getMessage()
             )
             );
         }

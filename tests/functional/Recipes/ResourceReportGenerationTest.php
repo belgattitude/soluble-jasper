@@ -40,8 +40,8 @@ class ResourceReportGenerationTest extends TestCase
         $reportRunner = ReportRunnerFactory::getBridgedReportRunner($this->ba);
 
         $report = new Report(
-                    $reportFile,
-                    new ReportParams([
+            $reportFile,
+            new ReportParams([
                         JRParameter::REPORT_LOCALE => $this->ba->java('java.util.Locale', 'fr')
                     ])
         );

@@ -39,8 +39,8 @@ class BasicReportGenerationTest extends TestCase
         $reportRunner = ReportRunnerFactory::getBridgedReportRunner($this->ba);
 
         $report = new Report(
-                    $reportFile,
-                    new ReportParams([
+            $reportFile,
+            new ReportParams([
                         'BookTitle'    => 'Soluble Jasper',
                         'BookSubTitle' => 'Generated from unit tests'
                     ])

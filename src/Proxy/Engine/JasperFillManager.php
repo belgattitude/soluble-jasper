@@ -55,10 +55,10 @@ class JasperFillManager implements RemoteJavaObjectProxyInterface
      * @throws Exception\RuntimeException              An unexpected error happened
      */
     public function fillReport(
-                            JavaObject $jasperReport,
-                            JavaObject $params,
-                            JavaObject $dataSource = null,
-                            string $reportFile = null
+        JavaObject $jasperReport,
+        JavaObject $params,
+        JavaObject $dataSource = null,
+        string $reportFile = null
     ): JavaObject {
         try {
             return ($dataSource === null) ?
@@ -78,10 +78,10 @@ class JasperFillManager implements RemoteJavaObjectProxyInterface
      * Exception\JavaProxiedException          when filling the report has encountered a Java error
      */
     private function getFillManagerJavaException(
-                            JavaException $e,
-                            JavaObject $jasperReport,
-                            JavaObject $params,
-                            ?string $reportFile = null
+        JavaException $e,
+        JavaObject $jasperReport,
+        JavaObject $params,
+        ?string $reportFile = null
     ): Exception\ExceptionInterface {
         $exception = null;
         $className = $e->getJavaClassName();

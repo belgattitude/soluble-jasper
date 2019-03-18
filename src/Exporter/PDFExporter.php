@@ -155,9 +155,9 @@ class PDFExporter
         if ($this->jasperPrint === null) {
             $jasperReport      = $this->runner->compileReport($this->report);
             $this->jasperPrint = $this->runner->fillReport(
-                                                    $jasperReport,
-                                                    $this->report->getReportParams(),
-                                                    $this->report->getDataSource()
+                $jasperReport,
+                $this->report->getReportParams(),
+                $this->report->getDataSource()
             );
         }
 
