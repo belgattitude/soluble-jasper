@@ -38,14 +38,13 @@ allprojects {
         runtime 'net.sf.barcode4j:barcode4j:2.1'
         runtime 'xalan:xalan:2.7.+'
         runtime  group: 'com.google.zxing', name: 'core', version: '3.3.3'
-        runtime 'org.apache.poi:poi:3.+'
-        runtime 'org.apache.poi:poi-ooxml:3.+'
-        runtime 'org.apache.xmlgraphics:batik-bridge:1.9.+'
-        runtime 'org.apache.xmlgraphics:batik-svggen:1.9.+'
+        runtime 'org.apache.poi:poi:4.+'
+        runtime 'org.apache.poi:poi-ooxml:4.+'
+        runtime 'org.apache.xmlgraphics:batik-bridge:1.11.+'
+        runtime 'org.apache.xmlgraphics:batik-svggen:1.11.+'
         runtime 'org.apache.ant:ant:1.7.1'
         runtime 'antlr:antlr:2.7.+'
         runtime 'jaxen:jaxen:1.1.+'
-        runtime 'org.apache-extras.beanshell:bsh:2.0b6'
 
 
         /**
