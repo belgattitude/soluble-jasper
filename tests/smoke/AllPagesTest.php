@@ -24,7 +24,7 @@ class AllPagesTest extends TestCase
      * @group        smoke
      * @dataProvider urlProvider
      */
-    public function testAllRoutes(string $method, string $url, string $status_code): void
+    public function testAllRoutes(string $method, string $url, int $status_code): void
     {
         $response = $this->client->request($method, $url, [
             'exceptions' => false
