@@ -25,11 +25,12 @@ PDF report generation with jasper reports for PHP.
 > The drawback, and yes there's one big: it requires to install a java server (tomcat)
 > that is reachable from the PHP side (a bridge - see [soluble-japha](https://github.com/belgattitude/soluble-japha))
 >
-> For now I'm a bit gathering comments or ideas on a [reddit thread](https://www.reddit.com/r/PHP/comments/btos0h/is_there_any_interest_in_pdf_reporting_with/).
+> For now I'm trying to gather comments or ideas on a [reddit thread](https://www.reddit.com/r/PHP/comments/btos0h/is_there_any_interest_in_pdf_reporting_with/).
 > 
-> Please share your thoughts...
+> Please share your thoughts... I'll read and reply if you have any question. Consider this as
+> an experiment ;)
 >
-> In case of interest I would gladly provide a proper documentation. In the meantime
+> If there's enough interest I will provide a proper documentation. In the meantime
 > check the examples below to get a glimpse of how it works.  
 >
 > Some interesting link(s):
