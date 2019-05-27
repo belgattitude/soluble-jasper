@@ -17,7 +17,7 @@ PDF report generation with jasper reports for PHP.
 > This project relies on [soluble-japha](https://github.com/belgattitude/soluble-japha) to
 > allow direct use of jasper reports within regular PHP code. 
 >
-> Jasper reports are xml-based, their official visual editor  
+> Jasper reports are xml-based, their official visual editor
 > [jasper studio](https://community.jaspersoft.com/project/jaspersoft-studio) 
 > is quite easy to grasp. Simply design, save the file, pass the parameters from PHP
 > and voilà !
