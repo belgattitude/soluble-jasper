@@ -8,7 +8,18 @@
 [![Total Downloads](https://poser.pugx.org/soluble/jasper/downloads.png)](https://packagist.org/packages/soluble/jasper)
 [![License](https://poser.pugx.org/soluble/jasper/license.png)](https://packagist.org/packages/soluble/jasper)
 
-Report generation using jasper reports from PHP.  
+PDF report generation with jasper reports for PHP.
+
+> Generating PDF reports with PHP is still a pain. Especially complex ones with barcodes
+> or complex layouts, page numberings, images insertions, webfonts...
+>  
+> This project relies on [soluble-japha](https://github.com/belgattitude/soluble-japha) to
+> allow direct use of jasper reports within regular PHP code. 
+>
+> Jasper reports are xml-based, their official visual editor  
+> [jasper studio](https://community.jaspersoft.com/project/jaspersoft-studio) 
+> is quite easy to grasp. Simply design, save the file, and use it and voilà !
+  
 
 ## Features
 
