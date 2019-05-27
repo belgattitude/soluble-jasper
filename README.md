@@ -35,8 +35,9 @@ PDF report generation with jasper reports for PHP.
 > If there's enough interest I will provide a proper documentation. In the meantime
 > check the examples below to get a glimpse of how it works.  
 >
-> Some interesting link(s):
+> Some interesting link:
 > - [jasper studio](https://community.jaspersoft.com/project/jaspersoft-studio)
+> - [e2e/functional tests examples](https://github.com/belgattitude/soluble-jasper/tree/master/tests/functional/Recipes)
 >
   
 
