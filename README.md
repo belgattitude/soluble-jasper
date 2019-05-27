@@ -297,6 +297,11 @@ At filling time:
 
 ## Installation
 
+This project requires a java server (or service) running on the same machine
+that will expose the jasper API to the php side (network bridge). 
+
+Check the installation example below or a more [complex doc here](https://docs.soluble.io/soluble-japha/install_server/).  
+
 ### JasperBridge
 
 Build a war file
@@ -308,7 +313,7 @@ $ cd php-java-bridge
 $ ./gradlew war -I init-scripts/init.jasperreports.gradle -I init-scripts/init.mysql.gradle 
 ```
 
-Deploy on Tomcat (example on ubuntu)
+Deploy on Tomcat (example on ubuntu `sudo apt install tomcat8`)
 
 ```shell
 $ sudo cp ./build/libs/JavaBridgeTemplate.war /var/lib/tomcat8/webapps/JasperReports.war
