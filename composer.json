@@ -29,7 +29,7 @@
         "fig/http-message-util": "^1.1.2",
         "friendsofphp/php-cs-fixer": "^2.13",
         "guzzlehttp/guzzle": "^6.2.3",
-        "infection/infection": "^0.12",
+        "infection/infection": "^0.13",
         "mikey179/vfsstream": "^1.6",
         "monolog/monolog": "^1.23.0",
         "phpstan/phpstan-strict-rules": "^0.11",

@@ -1,56 +1,110 @@
 language: php
-sudo: required
-dist: trusty
-group: edge
 
-matrix:
-  include:
-    - php: 7.1
-      env:
-        - SEND_COVERAGE=true
-        - CHECK=true
-        - INFECTION=true
-    - php: 7.2
-    - php: 7.3
-    - php: nightly
-  allow_failures:
-    - php: nightly
+cache:
+  directories:
+    - vendor
+    - $HOME/.composer/cache
+    - .travis/downloads
 
-before_script:
-  # -------------------------------------------------------------------------
-  # Step 1: Regular composer install
-  - composer install --no-interaction --ignore-platform-reqs
+before_install:
+  - |
+    if [ "x$REMOVE_QA" = "xyes" ]; then
+      composer remove infection/infection friendsofphp/php-cs-fixer phpstan/phpstan phpstan/phpstan-phpunit phpstan/phpstan-strict-rules --dev --no-interaction $COMPOSER_ARGS;
+    fi
+  - |
+    if [ "x$XDEBUG" != "xyes" ]; then
+      phpenv config-rm xdebug.ini || true
+    fi
+  - |
+    if [ "x$INSTALL_JASPER" == "xyes" ]; then
+      # Build a servlet (war) with jasper/mysql/javabridge...
+      - .travis/build_javabridge_jasper_war.sh
+      # Run the servlet
+      - .travis/run_javabridge_jasper.sh
+      # sleep a bit to let the server starts
+      - sleep 5
+      - ls -la .travis/
+      # Some log for debugging travis in case
+      - cat .travis/*.log
+      - cat .travis/*.pid
+    fi
+
+install:
+  - |
+    if [[ "x$DEPS" == "xlowest" ]]; then
+      travis_retry composer -n update --prefer-dist --prefer-lowest --prefer-stable --no-interaction $COMPOSER_ARGS;
+    else
+      travis_retry composer -n update --prefer-dist --no-interaction $COMPOSER_ARGS;
+    fi
+
+  # Smoke test server install
   - composer install -d ./tests/server/expressive --ignore-platform-reqs
 
-  #
-  # -------------------------------------------------------------------------
-  # Step 2: Create and populate the test database
-  # -------------------------------------------------------------------------
+  # Create and populate the test database
   - mysql -e "DROP DATABASE IF EXISTS phpunit_soluble_test_db;" -uroot
   - mysql -e "create database phpunit_soluble_test_db;" -uroot
   - zcat tests/data/mysql/schema.sql.gz | mysql -uroot phpunit_soluble_test_db
   - zcat tests/data/mysql/data.sql.gz | mysql -uroot phpunit_soluble_test_db
-  # -------------------------------------------------------------------------
-  # Step 3: Create and launch the javabridge server
-  #         with jasper report dependencies.
-  # -------------------------------------------------------------------------
-  # Step 3.1: Build a servlet (war) with jasper/mysql/javabridge...
-  - .travis/build_javabridge_jasper_war.sh
-  # Step 3.2: Run the servlet
-  - .travis/run_javabridge_jasper.sh
-  # Step 3.3: sleep a bit to let the server starts
-  - sleep 5
-  - ls -la .travis/
-  # Step 3.4: some log for debugging travis in case
-  - cat .travis/*.log
-  - cat .travis/*.pid
 
 script:
-  - ./vendor/bin/phpunit -v -c .travis/phpunit.xml --coverage-clover=coverage.xml
-  - if [[ $CHECK == true ]]; then composer check; fi
-  - if [[ $INFECTION == true ]]; then ./vendor/bin/infection --configuration=.travis/infection.travis.json --test-framework=phpunit --min-msi=70 --min-covered-msi=75 --threads=4; fi
+  - ./vendor/bin/phpunit -v -c .travis/phpunit.xml
 
-after_script:
-  - if [[ $SEND_COVERAGE == true ]]; then wget https://scrutinizer-ci.com/ocular.phar; fi
-  - if [[ $SEND_COVERAGE == true ]]; then php ocular.phar code-coverage:upload --format=php-clover coverage.xml; fi
-  - if [[ $SEND_COVERAGE == true ]]; then bash <(curl -s https://codecov.io/bash); fi
+jobs:
+  allow_failures:
+    - php: nightly
+    - stage: No-leaks
+
+  include:
+    - stage: Tests
+      php: 7.3
+      env: XDEBUG=yes INSTALL_JASPER=yes REMOVE_QA=yes
+      script:
+        - ./vendor/bin/phpunit -v -c .travis/phpunit.xml --coverage-clover=coverage.xml
+        - wget https://scrutinizer-ci.com/ocular.phar
+        - php ocular.phar code-coverage:upload --format=php-clover coverage.xml
+        - bash <(curl -s https://codecov.io/bash)
+
+    - stage: Tests
+      php: 7.2
+      env: INSTALL_JASPER=yes REMOVE_QA=yes
+
+    - stage: Tests
+      php: 7.1
+      env: INSTALL_JASPER=yes REMOVE_QA=yes
+
+    - stage: Tests
+      php: 7.1
+      env: INSTALL_JASPER=yes DEPS=lowest REMOVE_QA=yes
+      script:
+        - composer remove phpunit/phpunit
+        - composer require --dev phpunit/phpunit
+        - ./vendor/bin/phpunit -v -c .travis/phpunit.xml
+
+    - stage: Tests
+      php: nightly
+      env: COMPOSER_ARGS=--ignore-platform-reqs REMOVE_QA=yes
+      script:
+        - ./vendor/bin/phpunit --testsuite unit -v -c .travis/phpunit.xml
+
+    - stage: PHPStan and Code style
+      php: 7.3
+      env: XDEBUG=false INSTALL_JASPER=no REMOVE_QA=no
+      script:
+        - composer phpstan
+        - composer cs-check
+
+    - stage: Mutation (unit tests only)
+      php: 7.3
+      env: XDEBUG=yes INSTALL_JASPER=no
+      script:
+        - if [[ $INFECTION == true ]]; then ./vendor/bin/infection --configuration=.travis/infection.travis.json --test-framework=phpunit --min-msi=70 --min-covered-msi=75 --threads=4; fi
+
+    - stage: No-leaks
+      php: 7.3
+      env: XDEBUG=yes INSTALL_JASPER=yes
+      script:
+        - composer require --dev roave/no-leaks
+        - ./vendor/bin/roave-no-leaks
+
+
+
