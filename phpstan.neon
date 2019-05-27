@@ -3,6 +3,7 @@ includes:
 	- vendor/phpstan/phpstan-phpunit/extension.neon
 	- vendor/phpstan/phpstan-phpunit/rules.neon
 parameters:
+	level: 7
 	fileExtensions:
 		- php
 		- dist
@@ -20,6 +21,4 @@ parameters:
 		# Those constants are in phpunit, no way phpstan will find them ;)
 		- '#Constant EXPRESSIVE_SERVER_HOST not found#'
 		- '#Constant EXPRESSIVE_SERVER_PORT not found#'
-		# In tests,
-		- '#Call to static method PHPUnit\\Framework\\Assert::assertFalse\(\) with#'
 
