@@ -40,8 +40,8 @@ allprojects {
         runtime  group: 'com.google.zxing', name: 'core', version: '3.3.3'
         runtime 'org.apache.poi:poi:4.+'
         runtime 'org.apache.poi:poi-ooxml:4.+'
-        runtime 'org.apache.xmlgraphics:batik-bridge:1.11.+'
-        runtime 'org.apache.xmlgraphics:batik-svggen:1.11.+'
+        runtime 'org.apache.xmlgraphics:batik-bridge:1.11'
+        runtime 'org.apache.xmlgraphics:batik-svggen:1.11'
         runtime 'org.apache.ant:ant:1.7.1'
         runtime 'antlr:antlr:2.7.+'
         runtime 'jaxen:jaxen:1.1.+'
@@ -52,7 +52,7 @@ allprojects {
          *   Note that groovy is a must for jasper... where javascript
          *   (rhino) can be removed if not used
          */
-        runtime 'org.codehaus.groovy:groovy-all:2.4.+'
+        runtime 'org.codehaus.groovy:groovy-all:2.5.+'
         runtime 'org.mozilla:rhino:1.7.+'
 
         /**
