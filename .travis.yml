@@ -17,16 +17,12 @@ before_install:
     fi
   - |
     if [ "x$INSTALL_JASPER" == "xyes" ]; then
-      # Build a servlet (war) with jasper/mysql/javabridge...
-      - .travis/build_javabridge_jasper_war.sh
-      # Run the servlet
-      - .travis/run_javabridge_jasper.sh
-      # sleep a bit to let the server starts
-      - sleep 5
-      - ls -la .travis/
-      # Some log for debugging travis in case
-      - cat .travis/*.log
-      - cat .travis/*.pid
+      .travis/build_javabridge_jasper_war.sh
+      .travis/run_javabridge_jasper.sh
+      sleep 5
+      ls -la .travis/
+      cat .travis/*.log
+      cat .travis/*.pid
     fi
 
 install:
