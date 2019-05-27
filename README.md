@@ -11,16 +11,30 @@
 
 PDF report generation with jasper reports for PHP.
 
-> Generating PDF reports with PHP is still a pain. Especially complex ones with barcodes
-> or complex layouts, page numberings, images insertions, webfonts...
->  
-> This project relies on [soluble-japha](https://github.com/belgattitude/soluble-japha) to
-> allow direct use of jasper reports within regular PHP code. 
+> **Note:**
+> 
+> PDF generation from pure-PHP or even chrome based approaches
+> works great. They are the way to go but for some specific reports, I could
+> not find a proper solution...  
 >
-> Jasper reports are xml-based, their official visual editor
-> [jasper studio](https://community.jaspersoft.com/project/jaspersoft-studio) 
-> is quite easy to grasp. Simply design, save the file, pass the parameters from PHP
-> and voilà !
+> The jasper way is quite popular amongst Java developers and I used in few
+> situations like complex invoices, barcode track labels or product specs 
+> with success both in terms of reliability and speed.   
+>
+> Consider this library as one more alternative for pdf reporting from PHP.
+> The drawback, and yes there's one big: it requires to install a java server (tomcat)
+> that is reachable from the PHP side (a bridge - see [soluble-japha](https://github.com/belgattitude/soluble-japha))
+>
+> For now I'm a bit gathering comments or ideas on a [reddit thread](https://www.reddit.com/r/PHP/comments/btos0h/is_there_any_interest_in_pdf_reporting_with/).
+> 
+> Please share your thoughts...
+>
+> In case of interest I would gladly provide a proper documentation. In the meantime
+> check the examples below to get a glimpse of how it works.  
+>
+> Some interesting link(s):
+> - [jasper studio](https://community.jaspersoft.com/project/jaspersoft-studio)
+>
   
 
 ## Features
