@@ -18,7 +18,8 @@ PDF report generation with jasper reports for PHP.
 >
 > Jasper reports are xml-based, their official visual editor  
 > [jasper studio](https://community.jaspersoft.com/project/jaspersoft-studio) 
-> is quite easy to grasp. Simply design, save the file, and use it and voilà !
+> is quite easy to grasp. Simply design, save the file, pass the parameters from PHP
+> and voilà !
   
 
 ## Features
