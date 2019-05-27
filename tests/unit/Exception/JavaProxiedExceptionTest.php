@@ -46,8 +46,8 @@ class JavaProxiedExceptionTest extends TestCase
         } catch (JavaException $e) {
             $pe  = new JavaProxiedException($e, 'coucou', 10);
             $msg = $pe->getMessage();
-            self::assertContains('coucou', $msg);
-            self::assertContains('java.lang.NumberFormatException', $msg);
+            self::assertStringContainsString('coucou', $msg);
+            self::assertStringContainsString('java.lang.NumberFormatException', $msg);
             self::assertEquals(10, $pe->getCode());
             $je = $pe->getJavaException();
             self::assertEquals($pe->getJvmStackTrace(), $je->getStackTrace());

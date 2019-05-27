@@ -57,6 +57,6 @@ class BarcodeReportGenerationTest extends TestCase
         $pdfUtils = new PDFUtils($output_pdf);
         $text     = $pdfUtils->getTextContent();
 
-        self::assertContains('Test with barcodes', $text);
+        self::assertStringContainsString('Test with barcodes', $text);
     }
 }

@@ -71,9 +71,9 @@ class ErrorLoggingReportGenerationTest extends TestCase
             $logMsgs = $this->loggerTestHandler->getRecords() ?? [];
             self::assertCount(1, $logMsgs);
             $logMsg = $logMsgs[0]['message'] ?? '<nothing in the log>';
-            self::assertContains('BrokenXMLReportFileException', $logMsg);
-            self::assertContains('JasperCompileManager', $logMsg);
-            self::assertContains(basename($reportFile), $logMsg);
+            self::assertStringContainsString('BrokenXMLReportFileException', $logMsg);
+            self::assertStringContainsString('JasperCompileManager', $logMsg);
+            self::assertStringContainsString(basename($reportFile), $logMsg);
         }
         self::assertTrue($logged, sprintf(
             'Logger should log compilation error, found: %s',
@@ -115,9 +115,9 @@ class ErrorLoggingReportGenerationTest extends TestCase
             $logMsgs = $this->loggerTestHandler->getRecords() ?? [];
             self::assertCount(1, $logMsgs);
             $logMsg = $logMsgs[0]['message'] ?? '<nothing in the log>';
-            self::assertContains('BrokenJsonDataSourceException', $logMsg);
-            self::assertContains('JasperFillManager', $logMsg);
-            self::assertContains(basename($reportFile), $logMsg);
+            self::assertStringContainsString('BrokenJsonDataSourceException', $logMsg);
+            self::assertStringContainsString('JasperFillManager', $logMsg);
+            self::assertStringContainsString(basename($reportFile), $logMsg);
         }
     }
 }

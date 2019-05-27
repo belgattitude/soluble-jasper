@@ -131,9 +131,9 @@ class ProgrammaticReportGenerationTest extends TestCase
         // -----------------------------------------------------------------------------------
         $pdfUtils = new PDFUtils($outputFile);
         $text     = $pdfUtils->getTextContent();
-        self::assertContains('Customer Order List', $text);
-        self::assertContains('Alfreds Futterkiste', $text);
-        self::assertContains('PHPUNIT', $text);
+        self::assertStringContainsString('Customer Order List', $text);
+        self::assertStringContainsString('Alfreds Futterkiste', $text);
+        self::assertStringContainsString('PHPUNIT', $text);
 
         /*
         $queryExecuterFactory = $ba->javaClass('net.sf.jasperreports.engine.query.JsonQueryExecuterFactory');

@@ -53,8 +53,8 @@ class DefaultClassLoaderTest extends TestCase
 
         $javaUrls = $javaClassLoader->getUrls();
 
-        self::assertContains($paths[0], (string) $javaUrls[0]);
-        self::assertContains('class [Ljava', $ba->getDriver()->inspect($javaUrls));
+        self::assertStringContainsString($paths[0], (string) $javaUrls[0]);
+        self::assertStringContainsString('class [Ljava', $ba->getDriver()->inspect($javaUrls));
         self::assertEquals('java.net.URL', $ba->getClassName($javaUrls[0]));
     }
 
@@ -73,7 +73,7 @@ class DefaultClassLoaderTest extends TestCase
 
         $javaUrls = $javaClassLoader->getUrls();
 
-        self::assertContains(dirname($file), (string) $javaUrls[0]);
+        self::assertStringContainsString(dirname($file), (string) $javaUrls[0]);
         self::assertEquals('java.net.URL', $ba->getClassName($javaUrls[0]));
     }
 }

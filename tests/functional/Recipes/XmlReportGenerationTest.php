@@ -75,9 +75,9 @@ class XmlReportGenerationTest extends TestCase
         $pdfUtils = new PDFUtils($output_pdf);
         $text     = $pdfUtils->getTextContent();
 
-        self::assertContains('Customer Report From XML', $text);
-        self::assertContains('PHPUNIT', $text);
-        self::assertContains('Maria Anders', $text);
+        self::assertStringContainsString('Customer Report From XML', $text);
+        self::assertStringContainsString('PHPUNIT', $text);
+        self::assertStringContainsString('Maria Anders', $text);
     }
 
     public function xmlSourceProvider(): array

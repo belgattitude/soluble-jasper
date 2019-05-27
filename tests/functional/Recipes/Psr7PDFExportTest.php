@@ -79,7 +79,7 @@ class Psr7PDFExportTest extends TestCase
 
         $text     = PDFUtils::getParsedDocumentText($body);
 
-        self::assertContains('Soluble Jasper', $text);
-        self::assertContains('Generated from unit tests', $text);
+        self::assertStringContainsString('Soluble Jasper', $text);
+        self::assertStringContainsString('Generated from unit tests', $text);
     }
 }

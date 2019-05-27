@@ -83,9 +83,9 @@ class JsonReportGenerationTest extends TestCase
         $pdfUtils = new PDFUtils($output_pdf);
         $text     = $pdfUtils->getTextContent();
 
-        self::assertContains('Customer Order List', $text);
-        self::assertContains('PHPUNIT', $text);
-        self::assertContains('Alfreds Futterkiste', $text);
+        self::assertStringContainsString('Customer Order List', $text);
+        self::assertStringContainsString('PHPUNIT', $text);
+        self::assertStringContainsString('Alfreds Futterkiste', $text);
     }
 
     public function jsonSourceProvider(): array
