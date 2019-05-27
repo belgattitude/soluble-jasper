@@ -53,7 +53,7 @@ jobs:
   include:
     - stage: Tests
       php: 7.3
-      env: XDEBUG=yes INSTALL_JASPER=yes REMOVE_QA=yes
+      env: XDEBUG=yes INSTALL_JASPER=yes
       script:
         - ./vendor/bin/phpunit -v -c .travis/phpunit.xml --coverage-clover=coverage.xml
         - wget https://scrutinizer-ci.com/ocular.phar
@@ -62,15 +62,15 @@ jobs:
 
     - stage: Tests
       php: 7.2
-      env: INSTALL_JASPER=yes REMOVE_QA=yes
+      env: REMOVE_QA=yes INSTALL_JASPER=yes
 
     - stage: Tests
       php: 7.1
-      env: INSTALL_JASPER=yes REMOVE_QA=yes
+      env: REMOVE_QA=yes INSTALL_JASPER=yes
 
     - stage: Tests
       php: 7.1
-      env: INSTALL_JASPER=yes DEPS=lowest REMOVE_QA=yes
+      env: DEPS=lowest REMOVE_QA=yes INSTALL_JASPER=yes
       script:
         - composer remove phpunit/phpunit
         - composer require --dev phpunit/phpunit
@@ -78,7 +78,7 @@ jobs:
 
     - stage: Tests
       php: nightly
-      env: COMPOSER_ARGS=--ignore-platform-reqs REMOVE_QA=yes
+      env: INSTALL_JASPER=yes COMPOSER_ARGS=--ignore-platform-reqs REMOVE_QA=yes
       script:
         - ./vendor/bin/phpunit --testsuite unit -v -c .travis/phpunit.xml
 
@@ -89,11 +89,11 @@ jobs:
         - composer phpstan
         - composer cs-check
 
-    - stage: Mutation (unit tests only)
+    - stage: Mutation
       php: 7.3
-      env: XDEBUG=yes INSTALL_JASPER=no
+      env: XDEBUG=yes INSTALL_JASPER=yes
       script:
-        - if [[ $INFECTION == true ]]; then ./vendor/bin/infection --configuration=.travis/infection.travis.json --test-framework=phpunit --min-msi=70 --min-covered-msi=75 --threads=4; fi
+        - ./vendor/bin/infection --configuration=.travis/infection.travis.json --test-framework=phpunit --test-framework-options='--testsuite=unit' --min-msi=70 --min-covered-msi=75 --threads=4;
 
     - stage: No-leaks
       php: 7.3
