@@ -27,9 +27,9 @@ allprojects {
         /**
          * Jasper report base (required)
          */
-        compile 'net.sf.jasperreports:jasperreports:6.5.+'
+        compile 'net.sf.jasperreports:jasperreports:6.8.+'
         runtime 'net.sf.jasperreports:jasperreports-fonts:6.+'
-        runtime 'net.sf.jasperreports:jasperreports-functions:6.5.+'
+        runtime 'net.sf.jasperreports:jasperreports-functions:6.8.+'
 
         /**
          * Jasper report complements (feel free to comment)
