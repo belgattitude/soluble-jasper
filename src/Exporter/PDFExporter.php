@@ -92,6 +92,7 @@ class PDFExporter
             if (file_exists($tmpFile)) {
                 unlink($tmpFile);
             }
+
             throw $e;
         }
 
@@ -134,6 +135,7 @@ class PDFExporter
         }
         if (chmod($tmpFile, $mode) === false) {
             unlink($tmpFile);
+
             throw new IOPermissionException(sprintf(
                 'Cannot set file permission of file %s.',
                 $tmpFile

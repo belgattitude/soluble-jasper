@@ -4,9 +4,9 @@ $header = <<<'EOF'
 Jasper report integration for PHP
 
 @link      https://github.com/belgattitude/soluble-jasper
-@author    Vanvelthem Sébastien 
+@author    Vanvelthem Sébastien
 @copyright Copyright (c) 2017 Vanvelthem Sébastien
-@license   MIT   
+@license   MIT
 EOF;
 
 return PhpCsFixer\Config::create()
@@ -39,15 +39,16 @@ return PhpCsFixer\Config::create()
             'align_equals' => true,
         ],
         'blank_line_after_opening_tag' => true,
-        'blank_line_before_return' => true,
+        'blank_line_before_statement' => true,
         'cast_spaces' => true,
         'class_definition' => ['singleLine' => true],
         'concat_space' => ['spacing' => 'one'], // Different from symfony (none)
         'declare_equal_normalize' => true,
+        'error_suppression' => true,
         'function_typehint_space' => true,
-        'hash_to_slash_comment' => true,
         'heredoc_to_nowdoc' => true,
         'include' => true,
+        'increment_style' => true,
         'lowercase_cast' => true,
         'mb_str_functions' => true,
         'method_separation' => true,
@@ -59,13 +60,15 @@ return PhpCsFixer\Config::create()
         'no_empty_comment' => true,
         'no_empty_phpdoc' => true,
         'no_empty_statement' => true,
-        'no_extra_consecutive_blank_lines' => [
-            'curly_brace_block',
-            'extra',
-            'parenthesis_brace_block',
-            'square_brace_block',
-            'throw',
-            'use',
+        'no_extra_blank_lines' => [ 'tokens' =>
+            [
+                'curly_brace_block',
+                'extra',
+                'parenthesis_brace_block',
+                'square_brace_block',
+                'throw',
+                'use',
+            ]
         ],
         'no_leading_import_slash' => true,
         'no_leading_namespace_whitespace' => true,
@@ -100,12 +103,12 @@ return PhpCsFixer\Config::create()
         'phpdoc_trim' => true,
         'phpdoc_types' => true,
         'phpdoc_var_without_name' => true,
-        'pre_increment' => true,
         'return_type_declaration' => true,
         'self_accessor' => true,
         'short_scalar_cast' => true,
         'single_blank_line_before_namespace' => true,
         'single_class_element_per_statement' => true,
+        'single_line_comment_style' => true,
         'single_quote' => true,
         'space_after_semicolon' => true,
         'standardize_not_equals' => true,
@@ -120,7 +123,6 @@ return PhpCsFixer\Config::create()
         'php_unit_construct' => true,
         'php_unit_dedicate_assert' => true,
         'php_unit_fqcn_annotation' => true,
-        'silenced_deprecation_error' => true,
         'declare_strict_types' => true,
 
     ])
@@ -130,4 +132,3 @@ return PhpCsFixer\Config::create()
             ->in(['src', 'tests'])
     )
 ;
-

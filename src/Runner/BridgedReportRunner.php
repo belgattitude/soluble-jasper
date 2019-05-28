@@ -87,6 +87,7 @@ class BridgedReportRunner implements ReportRunnerInterface
                     $e->getMessage()
                 )
             );
+
             throw $e;
         }
 
@@ -163,6 +164,7 @@ class BridgedReportRunner implements ReportRunnerInterface
                     $e->getMessage()
                 )
             );
+
             throw $e;
         }
     }

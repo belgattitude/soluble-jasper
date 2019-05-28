@@ -34,6 +34,7 @@ class ReportParams implements \ArrayAccess, \IteratorAggregate
     public function __construct(iterable $params = [])
     {
         $this->params = new ArrayObject();
+
         try {
             foreach ($params as $key => $value) {
                 $current_key = $key;
