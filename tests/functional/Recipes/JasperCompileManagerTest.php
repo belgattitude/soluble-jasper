@@ -67,6 +67,7 @@ class JasperCompileManagerTest extends TestCase
         chmod($outputFile, 0400);
 
         $saved = false;
+
         try {
             $compileManager->compileReportToFile($reportFile, $outputFile);
             // Must throw exception, this code cannot be reached !!!

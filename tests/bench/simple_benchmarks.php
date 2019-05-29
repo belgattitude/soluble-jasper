@@ -61,6 +61,7 @@ echo '<pre>' . PHP_EOL;
 
 // BENCHING CONNECTION
 $start_connection_time = $bm->getTimeMs();
+
 try {
     $ba = new BridgeAdapter([
         'driver'             => 'Pjb62',

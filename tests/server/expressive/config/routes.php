@@ -34,12 +34,14 @@ return function (Application $app, MiddlewareFactory $factory, ContainerInterfac
                         ->withBody(new Stream("$dataPath/northwind.xml"))
                         ->withHeader('content-type', 'application/xml')
                         ->withStatus(200);
+
                     break;
                 case 'json':
                     $response = (new Response())
                         ->withBody(new Stream("$dataPath/northwind.json"))
                         ->withHeader('content-type', 'application/json')
                         ->withStatus(200);
+
                     break;
                 default:
                     $response = (new TextResponse('Error'))->withStatus(500);
