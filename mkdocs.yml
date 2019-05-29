@@ -34,7 +34,7 @@ theme:
     text: 'Lato'
     code: 'Roboto Mono'
   logo:
-    icon: 'play_circle_outline'
+    icon: 'picture_as_pdf'
   feature:
     tabs: false
 
