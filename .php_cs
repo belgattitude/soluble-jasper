@@ -39,7 +39,7 @@ return PhpCsFixer\Config::create()
             'align_equals' => true,
         ],
         'blank_line_after_opening_tag' => true,
-        'blank_line_before_statement' => true,
+        'blank_line_before_statement' => [ 'statements' => ['continue', 'declare', 'return', 'try'] ],
         'cast_spaces' => true,
         'class_definition' => ['singleLine' => true],
         'concat_space' => ['spacing' => 'one'], // Different from symfony (none)
@@ -67,6 +67,7 @@ return PhpCsFixer\Config::create()
                 'parenthesis_brace_block',
                 'square_brace_block',
                 'throw',
+                'break',
                 'use',
             ]
         ],
