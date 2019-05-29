@@ -12,7 +12,8 @@ EOF;
 return PhpCsFixer\Config::create()
     ->setRiskyAllowed(true)
     ->setRules([
-        //'header_comment' => array('header' => $header), // disable when code is okay
+        // re-enable if you want to update headers
+        //'header_comment' => ['header' => $header, 'comment_type' => 'PHPDoc'] ,
         '@PSR2' => true,
         '@PHP71Migration' => true,
         'psr4' => true,
@@ -103,7 +104,7 @@ return PhpCsFixer\Config::create()
         'phpdoc_to_comment' => true,
         'phpdoc_trim' => true,
         'phpdoc_types' => true,
-        'phpdoc_var_without_name' => true,
+        'phpdoc_var_without_name' => false,
         'return_type_declaration' => true,
         'self_accessor' => true,
         'short_scalar_cast' => true,
