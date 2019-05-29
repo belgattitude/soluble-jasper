@@ -8,7 +8,7 @@ repo_name: 'soluble-jasper'
 repo_url: 'https://github.com/belgattitude/soluble-jasper'
 
 # Copyright
-copyright: 'Copyright &copy; 2017 Sébastien Vanvelthem'
+copyright: 'Copyright &copy; 2017-2019 Sébastien Vanvelthem'
 
 docs_dir: docs
 site_dir: build/docs
@@ -23,50 +23,46 @@ pages:
 
 
 # Documentation and theme
-theme: 'material'
 
-# Options
-extra:
-  #logo: 'images/logo.svg'
-  logo:
-    icon: 'thumbs_up_down'
+theme:
+  name: 'material'
+  language: 'en'
   palette:
-    primary: 'pink'
-    accent: 'light blue'
+    primary: 'white'
+    accent: 'orange'
   font:
-    #text: 'Source Sans Pro'
-    text: 'Roboto'
+    text: 'Lato'
     code: 'Roboto Mono'
-  # If extra_css defined here ->
-  # -> WARNING -  Config value: 'extra_css'.
-  #    This behavior is deprecated. In version 1.0 and later they will need to be explicitly listed in the 'extra_css' config setting.
-  #extra_css:
-  #  - 'stylesheets/extra.css'
-  #  - 'stylesheets/monokai.css'
-  # Has been modev out of 'extra' section, see extra_css below
+  logo:
+    icon: 'play_circle_outline'
+  feature:
+    tabs: false
+
+# Customization
+extra:
   social:
     - type: 'github'
-      link: 'https://github.com/belgattitude/soluble-jasper'
+      link: 'https://github.com/soluble-io/soluble-mediatools'
+
 
 extra_css:
   - 'assets/css/extra.css'
   - 'assets/css/monokai.css'
 
-google_analytics:
-  - 'UA-92890300-1'
-  - 'auto'
-
 
 # Extensions
 markdown_extensions:
   - markdown.extensions.admonition
-  - markdown.extensions.codehilite(guess_lang=false)
+  - markdown.extensions.codehilite:
+      guess_lang: false
   - markdown.extensions.def_list
   - markdown.extensions.footnotes
   - markdown.extensions.meta
-  - markdown.extensions.toc(permalink=true)
+  - markdown.extensions.toc:
+      permalink: true
   - pymdownx.arithmatex
-  - pymdownx.betterem(smart_enable=all)
+  - pymdownx.betterem
+  #      smart_enable: all
   - pymdownx.caret
   - pymdownx.critic
   - pymdownx.details
@@ -77,5 +73,5 @@ markdown_extensions:
   - pymdownx.mark
   - pymdownx.smartsymbols
   - pymdownx.superfences
-  - pymdownx.tasklist(custom_checkbox=true)
+  - pymdownx.tasklist
   - pymdownx.tilde
