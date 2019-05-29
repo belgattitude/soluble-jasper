@@ -1,7 +1,7 @@
 site_name: 'soluble-jasper'
 site_description: 'Jasper reports in PHP'
 site_author: 'Sébastien Vanvelthem'
-site_url: http://docs.soluble.io/soluble-jasper/
+site_url: http://docs.soluble.io/soluble-jasper
 
 # Repository
 repo_name: 'soluble-jasper'
