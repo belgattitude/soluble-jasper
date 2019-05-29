@@ -90,12 +90,9 @@ class JsonDataAdapterImpl implements RemoteJavaObjectProxyInterface
         switch (mb_strtolower($language)) {
             case 'json':
                 $lang = $jsonExpressionLanguageEnum->JSON;
-
                 break;
-
             case 'jsonql':
                 $lang = $jsonExpressionLanguageEnum->JSONQL;
-
                 break;
             default:
                 throw new Exception\InvalidArgumentException(sprintf(
