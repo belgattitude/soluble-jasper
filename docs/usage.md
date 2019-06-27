@@ -62,3 +62,12 @@ $stream       = $pdfExporter->getStream();
 */
 
 ```
+
+
+### Examples
+
+
+See the test directory:
+
+- [e2e/functional tests examples](https://github.com/belgattitude/soluble-jasper/tree/master/tests/functional/Recipes)
+
