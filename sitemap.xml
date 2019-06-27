@@ -2,17 +2,37 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
      <loc>https://belgattitude.github.io/soluble-jasper/</loc>
-     <lastmod>2019-05-29</lastmod>
+     <lastmod>2019-06-27</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://belgattitude.github.io/soluble-jasper/install/</loc>
-     <lastmod>2019-05-29</lastmod>
+     <loc>https://belgattitude.github.io/soluble-jasper/getting_started/</loc>
+     <lastmod>2019-06-27</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://belgattitude.github.io/soluble-jasper/connection/</loc>
+     <lastmod>2019-06-27</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://belgattitude.github.io/soluble-jasper/usage/</loc>
+     <lastmod>2019-06-27</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://belgattitude.github.io/soluble-jasper/datasources/</loc>
-     <lastmod>2019-05-29</lastmod>
+     <lastmod>2019-06-27</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://belgattitude.github.io/soluble-jasper/error_management/</loc>
+     <lastmod>2019-06-27</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://belgattitude.github.io/soluble-jasper/benchmarks/</loc>
+     <lastmod>2019-06-27</lastmod>
      <changefreq>daily</changefreq>
     </url>
 </urlset>
