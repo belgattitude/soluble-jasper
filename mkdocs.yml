@@ -15,9 +15,13 @@ site_dir: build/docs
 
 pages:
     - { 'Introduction': index.md }
-    - { 'Installation': install.md }
-    - { 'Usage': [
-          { 'Datasources': datasources.md }
+    - { 'Installation': getting_started.md }
+    - { 'Connecting': connection.md }
+    - { 'Basic usage': usage.md }
+    - { 'Datasources': datasources.md }
+    - { 'Errors & Logging': error_management.md }
+    - { 'Notes': [
+          { 'Benchmarks': benchmarks.md }
         ]
       }
 
